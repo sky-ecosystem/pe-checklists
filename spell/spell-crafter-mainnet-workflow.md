@@ -158,16 +158,16 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Run `make exec-hash date=YYYY-MM-DD` and update spell code accordingly
   * [ ] Make sure generated hash matches with the hash provided from Governance Facilitator, OTHERWISE notify Responsible Governance Facilitator
   * [ ] Ensure that executive vote file name and date is correct
-  * [ ] [community](https://github.com/makerdao/community) repo commit hash corresponds to latest change
+  * [ ] [community](https://github.com/makerdao/executive-votes) repo commit hash corresponds to latest change
   * [ ] Raw GitHub URL is correct
-  * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`makerdao/community` GitHub repo](https://github.com/makerdao/community)), run:
+  * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit
+    * [ ] IF there is no local copy of [`makerdao/executive-votes` GitHub repo](https://github.com/makerdao/executive-votes)), run:
       ```
-      git clone https://github.com/makerdao/community
+      git clone https://github.com/makerdao/executive-votes
       ```
-    * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
+    * [ ] OTHERWISE, ensure it is pointing to the latest commit on main:
       ```
-      git switch master && git pull origin master
+      git switch main && git pull origin main
       ```
     * [ ] Get the latest commit hash for the exec doc:
       ```

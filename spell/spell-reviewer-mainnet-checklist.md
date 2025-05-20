@@ -308,18 +308,18 @@ _Insert your local test logs here_
 
 * [ ] Wait till the Exec Doc is merged
 * Exec Doc checks
-  * [ ] Exec Doc for the specified date is found in the [`makerdao/community` GitHub repo](https://github.com/makerdao/community/tree/master/governance/votes)
+  * [ ] Exec Doc for the specified date is found in the [`makerdao/executive-votes` GitHub repo](https://github.com/makerdao/executive-votes/tree/main/2025)
   * [ ] Exec Doc file name follows the format `Executive vote - Month DD, YYYY.md`
   * [ ] Extract _permanent_ URL to the raw markdown file and paste it below
     _Insert your Raw Exec Doc URL here_
-  * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`makerdao/community` GitHub repo](https://github.com/makerdao/community)), run:
+  * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit
+    * [ ] IF there is no local copy of [`makerdao/executive-votes` GitHub repo](https://github.com/makerdao/executive-votes)), run:
       ```
-      git clone https://github.com/makerdao/community
+      git clone https://github.com/makerdao/executive-votes
       ```
-    * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
+    * [ ] OTHERWISE, ensure it is pointing to the latest commit on main:
       ```
-      git switch master && git pull origin master
+      git switch main && git pull origin main
       ```
     * [ ] Get the latest commit hash for the exec doc:
       ```
@@ -335,7 +335,7 @@ _Insert your local test logs here_
   * [ ] Office hours value in the Exec Doc matches the spell
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
-  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/makerdao/community](https://github.com/makerdao/community/tree/master/governance/votes) repository
+  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/makerdao/executive-votes](https://github.com/makerdao/executive-votes/tree/main/2025) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
 * IF new commits are present in the spell
