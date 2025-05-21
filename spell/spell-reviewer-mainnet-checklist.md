@@ -308,7 +308,7 @@ _Insert your local test logs here_
 
 * [ ] Wait till the Exec Doc is merged
 * Exec Doc checks
-  * [ ] Exec Doc for the specified date is found in the [`makerdao/executive-votes` GitHub repo](https://github.com/makerdao/executive-votes/tree/main/2025)
+  * [ ] Exec Doc for the specified date is found in the [`makerdao/executive-votes` GitHub repo](https://github.com/makerdao/executive-votes/tree/main/{year})
   * [ ] Exec Doc file name follows the format `Executive vote - Month DD, YYYY.md`
   * [ ] Extract _permanent_ URL to the raw markdown file and paste it below
     _Insert your Raw Exec Doc URL here_
@@ -335,7 +335,7 @@ _Insert your local test logs here_
   * [ ] Office hours value in the Exec Doc matches the spell
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
-  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/makerdao/executive-votes](https://github.com/makerdao/executive-votes/tree/main/2025) repository
+  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/makerdao/executive-votes](https://github.com/makerdao/executive-votes/tree/main/{year}) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
 * IF new commits are present in the spell
