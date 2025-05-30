@@ -272,6 +272,13 @@
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
+* IF bug bounty registry updates are present
+  * [ ] Run `make update-bug-bounty` command independently to verify required updates
+  * [ ] Ensure ALL hex encoded calls from the command output are present in the spell
+  * [ ] Verify each call uses the correct pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
+  * [ ] Cross-check that each `<encodedDATA>` exactly matches the script output
+  * [ ] Confirm proper error handling is implemented for each call
+  * [ ] Verify the bug bounty section has appropriate comments/documentation
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -383,6 +390,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
+  * [ ] Confirm `make update-bug-bounty` returns empty
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
