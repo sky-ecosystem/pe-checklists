@@ -10,6 +10,7 @@ Crafter
 Crafter's
 CUs
 DAI
+Daiwanese
 DAO
 DSS
 DssExecLib
