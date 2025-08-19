@@ -211,7 +211,8 @@ This section outlines the review process, divided into several stages from devel
 
 ### Handover and Merge Stage
 - [ ] All review comments have been addressed.
-- [ ] At least 1 explicit approval review has been added to the PR.
-- [ ] The PR has been merged.
-- [ ] The spell address has been handed over to the responsible governance facilitator in the appropriate channel on Discord.
-- [ ] The Core spell crafter acknowledged the handover in the appropriate channel on Discord.
+* [ ] Check that the spell address posted by the crafter in the appropriate channel is correct
+* [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits)
+  * [ ] Wait until responsible governance facilitator confirms handover in `new-spells`
+* [ ] Ensure that no changes were made to the code since the spell was deployed and archived
+* [ ] Approve spell PR for merge via 'Approve' review option
