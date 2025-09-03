@@ -3,9 +3,7 @@
 ## Development Stage
 
 * Install stable Foundry version
-  * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
-    * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --version git_tag_name`
+  * [ ] Install the stable version via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
