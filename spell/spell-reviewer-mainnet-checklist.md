@@ -273,10 +273,13 @@
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
 * IF bug bounty registry updates are present
-  * [ ] Run `make update-bug-bounty` command independently to verify required updates
-  * [ ] Ensure ALL hex encoded calls from the command output are present in the spell
-  * [ ] Verify each call uses the correct pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
-  * [ ] Cross-check that each `<encodedDATA>` exactly matches the script output
+  * [ ] Update safeharbor script
+    ```bash
+    cd scripts/safeharbor
+    npm install
+    ```
+  * [ ] Run `npm run verify` command in the `spells-mainnet` repo, passing the calldata in the spell to check for it's validity.
+  * [ ] Verify the call uses the correct pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
   * [ ] Confirm proper error handling is implemented for each call
   * [ ] Verify the bug bounty section has appropriate comments/documentation
 * IF spell interacts with ChainLog

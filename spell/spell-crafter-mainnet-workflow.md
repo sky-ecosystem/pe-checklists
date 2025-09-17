@@ -126,11 +126,16 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Run `make update-bug-bounty` command in the `spells-mainnet` repo to check for bug bounty updates
-    * [ ] IF the command outputs hex encoded calls:
-      * [ ] Add ALL output calls to the spell using low-level Solidity calls
-      * [ ] Each call MUST use the pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
-      * [ ] Ensure proper error handling after each call (e.g., `require(succ, "Bug bounty update failed");`)
+    * [ ] Update safeharbor script
+      ```bash
+      cd scripts/safeharbor
+      npm install
+      ```
+    * [ ] Run `npm run generate` command in the `spells-mainnet` repo to check for bug bounty updates
+    * [ ] IF the command outputs hex encoded call:
+      * [ ] Add ALL output call to the spell using low-level Solidity call.
+      * [ ] The call MUST use the pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
+      * [ ] Ensure proper error handling after the call (e.g., `require(succ, "Bug bounty update failed");`)
       * [ ] Add comment above the bug bounty section: `// ----- Bug Bounty Registry Updates -----`
       * [ ] Include note: `// Note: Updates to bug bounty registry identified by make generate command`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
