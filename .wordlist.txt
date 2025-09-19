@@ -129,6 +129,11 @@ precomputed
 prepended
 redemptions
 repos
+RPC
+RWA
+RWAXXX
+RWAXYZ
+safeharbor
 setIlkAutoLineDebtCeiling
 setIlkAutoLineParameters
 setIlkDebtCeiling
