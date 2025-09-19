@@ -87,6 +87,9 @@ auth
 authed
 authing
 bytecode
+Calc
+CalcFab
+calldata
 casted
 checksummed
 collateralization
