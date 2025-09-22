@@ -129,7 +129,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Run `make safeharbor-generate` command in the `spells-mainnet` repo to check for bug bounty updates
     * [ ] IF the command outputs hex encoded call:
       * [ ] Add the output hex encoded call to the spell using low-level Solidity call.
-      * [ ] The call MUST use the pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
+      * [ ] The call MUST use the pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
       * [ ] Ensure proper error handling after the call (e.g., `require(succ, "Bug bounty update failed");`)
       * [ ] Add comment above the bug bounty section: `// ----- Bug Bounty Registry Updates -----`
       * [ ] Include note: `// Note: Updates to bug bounty registry identified by make generate command`
@@ -149,7 +149,6 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] End-to-end "happy path" interaction with the module
   * IF bug bounty updates are present
     * [ ] Test that all bug bounty registry calls execute successfully
-    * [ ] Verify `make update-bug-bounty` returns empty diff in test environment after spell execution
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/makerdao/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -228,6 +227,7 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
+* [ ] Verify `make safeharbor-generate` returns empty diff in the casted environment after spell execution.
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS

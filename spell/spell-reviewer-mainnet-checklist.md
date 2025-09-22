@@ -273,8 +273,8 @@
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
 * IF bug bounty registry updates are present
-  * [ ] Run `make safeharbor-verify calldata=0xhexEncodedData` command in the `spells-mainnet` repo, passing the calldata in the spell to check for it's validity.
-  * [ ] Verify the call uses the correct pattern: `(bool succ, bytes memory err) = AGREEMENT.call(<encodedDATA>);`
+  * [ ] Run `make safeharbor-verify calldata=<encodedDATA>` command passing the calldata in the spell to check for it's validity.
+  * [ ] Verify the call uses the correct pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
   * [ ] Confirm proper error handling is implemented for each call
   * [ ] Verify the bug bounty section has appropriate comments/documentation
 * IF spell interacts with ChainLog
