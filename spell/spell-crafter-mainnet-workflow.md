@@ -131,8 +131,6 @@ Repo: https://github.com/makerdao/spells-mainnet
       * [ ] Add the output hex encoded call to the spell using low-level Solidity call.
       * [ ] The call MUST use the pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
       * [ ] Ensure proper error handling after the call (e.g., `require(succ, "Bug bounty update failed");`)
-      * [ ] Add comment above the bug bounty section: `// ----- Bug Bounty Registry Updates -----`
-      * [ ] Include note: `// Note: Updates to bug bounty registry identified by make generate command`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values

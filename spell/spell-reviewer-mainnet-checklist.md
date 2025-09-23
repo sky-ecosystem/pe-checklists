@@ -275,7 +275,7 @@
 * IF bug bounty registry updates are present
   * [ ] Run `make safeharbor-verify calldata=<encodedDATA>` command passing the calldata in the spell to check for it's validity.
   * [ ] Verify the call uses the correct pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
-  * [ ] Confirm proper error handling is implemented for each call
+  * [ ] Confirm proper error handling is implemented for the call
   * [ ] Verify the bug bounty section has appropriate comments/documentation
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
