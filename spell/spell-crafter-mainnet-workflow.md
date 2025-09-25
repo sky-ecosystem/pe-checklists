@@ -214,6 +214,9 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Ensure local tests PASS against deployed spell run via the deploy script
   * [ ] Push auto-generated `add deployed spell info` commit
 * Cast spell on a newly created Tenderly Testnet
+  * [ ] `export TENDERLY_USER='<ORG_SLUG>'` (e.g.: dewiz-xyz)
+  * [ ] `export TENDERLY_PROJECT='makerdao'`
+  * [ ] `export TENDERLY_ACCESS_KEY='<ACCESS_KEY>'` (from the **account level**, not from the organization level) 
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
