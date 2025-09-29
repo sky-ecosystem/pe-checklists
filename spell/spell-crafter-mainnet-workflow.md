@@ -2,7 +2,7 @@
 
 ## Mainnet
 
-Repo: https://github.com/makerdao/spells-mainnet
+Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ### Spell coordination schedule
 
@@ -66,6 +66,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Remove unused interface declarations
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
+  * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -73,18 +74,19 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Add newline above every _Instruction text_
   * [ ] Copy every `Reasoning URL` and `Authority URL` from the Exec Sheet as a comment under relevant section or instruction in the spell code (depending on the row the link is present)
   * [ ] For every `Reasoning URL` and `Authority URL`, add prefix derived from the url itself:
-    * `// Executive Vote:` IF URL starts with `https://vote.makerdao.com/executive/`
-    * `// Poll:` IF URL starts with `https://vote.makerdao.com/polling/`
-    * `// Forum:` IF URL starts with `https://forum.makerdao.com/t/`
-    * `// MIP:` IF URL starts with `https://mips.makerdao.com/mips/details/`
+    * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
+    * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
+    * `// Forum:` if URL starts with `https://forum.sky.money/t/`
+    * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
+    * `// Atlas:` if URL starts with `https://sky-atlas.powerhouse.io/`
   * [ ] IF an action in the spell doesn't have relevant instruction (e.g.: ChainLog version bump), add the explanation below prefixed with `// Note:`
   * [ ] IF an instruction can not be directly taken, add a comment below prefixed with `// Note:` (e.g.: `// Note: see dao_resolutions variable declared above`)
 * Open draft PR
   * [ ] Local tests PASS via `make test`
-  * [ ] Commit & push the cleanup (e.g. `git commit -am "Base spell"`)
-  * [ ] CI tests PASS
+  * [ ] Push the local changes
   * [ ] Open draft PR on `spells-mainnet` titled `Mainnet spell YYYY-MM-DD` where `YYYY-MM-DD` is the expected target date of the spell
   * [ ] Assign PR to yourself
+  * [ ] CI tests PASS
 * Add content based on the provided Exec Sheet
   * [ ] Ensure solc version is `0.8.16`
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding), OTHERWISE explicitly set to `false`
@@ -93,27 +95,27 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Ensure spell actions match linked sources (forum posts, polls, MIPs, etc)
   * IF some actions require using interfaces
     * [ ] Prefer using `DssExecLib` actions where possible (to avoid adding interfaces where not required)
-    * [ ] Avoid multi-import layout / importing from `Interfaces.sol` (see [issue #69](https://github.com/makerdao/dss-interfaces/issues/69))
+    * [ ] Avoid multi-import layout / importing from `Interfaces.sol` (see [issue #69](https://github.com/sky-ecosystem/dss-interfaces/issues/69))
     * [ ] Prefer single import layout (e.g. `import { VatAbstract } from "dss-interfaces/dss/VatAbstract.sol";`)
     * [ ] Use static interfaces IF not present in `dss-interfaces` OR present in `dss-interfaces` but outdated OR only a few function interfaces are needed
   * IF new collateral is onboarded
     * Deploy `Join` contract (check which one is required)
-      * [ ] Use [JoinFab](https://github.com/makerdao/JoinFab) to deploy
+      * [ ] Use [JoinFab](https://github.com/sky-ecosystem/JoinFab) to deploy
       * [ ] Ensure Etherscan Verification
         * [ ] Make sure AGPLv3 is specified and used
         * [ ] IF flatten, consider removing `HEVM` interface artifacts
     * Deploy `Clip` contract
-      * [ ] Use [ClipFab](https://github.com/makerdao/dss-deploy) to deploy
+      * [ ] Use [ClipFab](https://github.com/sky-ecosystem/dss-deploy) to deploy
       * [ ] Ensure Etherscan Verification
         * [ ] Make sure AGPLv3 is specified and used
     * Deploy `Calc` contract (check which one is required)
-      * [ ] Use [CalcFab](https://github.com/makerdao/dss-deploy) to deploy
+      * [ ] Use [CalcFab](https://github.com/sky-ecosystem/dss-deploy) to deploy
       * [ ] Note: automatically verified on etherscan
     * [ ] Check if oracle deployment is required (e.g. univ3-lp-oracle, new ilk pip, ...) with responsible ecosystem actor
   * IF addresses are used in the spell
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
     * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT `MKR` and vesting contracts
-    * [ ] Use the [DssExecLib address helpers](https://github.com/makerdao/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
+    * [ ] Use the [DssExecLib address helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
     * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern (e.g. `MKR`)
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
@@ -129,8 +131,8 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
-  * [ ] Test DAI/MKR streams and payments, lerps
-  * [ ] Test the sum of all DAI/MKR payments matches the Exec Sheet
+  * [ ] Test DAI/MKR/USDS/SKY/SPK streams and payments, lerps
+  * [ ] Test the sum of all DAI/MKR/USDS/SKY/SPK payments matches the Exec Sheet
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`
@@ -140,7 +142,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Tests PASS via `make test`
-* [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/makerdao/dss-exec-lib/releases/latest)
+* [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
 * [ ] Mark PR as "ready for review" and add reviewers
@@ -148,7 +150,7 @@ Repo: https://github.com/makerdao/spells-mainnet
 
 ## Pre-Deployment Stage
 
-* [ ] Wait till the Exec Doc is merged
+* [ ] Wait until the Exec Doc is merged
 * Exec Doc checks
   * [ ] Check that every action in the spell code is present in the Exec Doc
   * [ ] Check that every action in the Exec Doc is present in the spell code
@@ -158,16 +160,16 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Run `make exec-hash date=YYYY-MM-DD` and update spell code accordingly
   * [ ] Make sure generated hash matches with the hash provided from Governance Facilitator, OTHERWISE notify Responsible Governance Facilitator
   * [ ] Ensure that executive vote file name and date is correct
-  * [ ] [community](https://github.com/makerdao/community) repo commit hash corresponds to latest change
+  * [ ] [executive-votes](https://github.com/sky-ecosystem/executive-votes) repo commit hash corresponds to the latest change
   * [ ] Raw GitHub URL is correct
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`makerdao/community` GitHub repo](https://github.com/makerdao/community)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)), run:
       ```
-      git clone https://github.com/makerdao/community
+      git clone https://github.com/sky-ecosystem/executive-votes
       ```
     * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
       ```
-      git switch master && git pull origin master
+      git switch main && git pull origin main
       ```
     * [ ] Get the latest commit hash for the exec doc:
       ```
@@ -252,7 +254,7 @@ Repo: https://github.com/makerdao/spells-mainnet
   * Collect any problems noticed during the spell, propose concrete improvements to make it constructive
   * Prefix your message with `Initiating retro:` for clarity
   * IF there is nothing to discuss, post `Initiating retro: nothing to discuss from my side`
-* IF [`MegaPoker`-related](https://github.com/makerdao/megapoker/blob/master/src/MegaPoker.sol) updates are present in the spell (oracles are replaced, collaterals are onboarded or offboarded, etc)
+* IF [`MegaPoker`-related](https://github.com/sky-ecosystem/megapoker/blob/master/src/MegaPoker.sol) updates are present in the spell (oracles are replaced, collaterals are onboarded or offboarded, etc)
   * [ ] Inform EA responsible for maintaining `MegaPoker` contract
   * Ensure `MegaPoker` contract is updated
     * [ ] Coordinate with EA responsible for maintaining `MegaPoker` and TechOps
@@ -265,4 +267,4 @@ Repo: https://github.com/makerdao/spells-mainnet
 * IF new collateral is onboarded
   * [ ] Ensure keeper support for new onboarded collateral with TechOps
 * IF new Lerp is added
-  * [ ] Ensure keeper support (to call `tall` daily) via [dss-cron](https://github.com/makerdao/dss-cron)
+  * [ ] Ensure keeper support (to call `tall` daily) via [dss-cron](https://github.com/sky-ecosystem/dss-cron)
