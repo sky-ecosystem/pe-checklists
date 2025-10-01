@@ -81,7 +81,7 @@
     * [ ] Rate variable name conforms to `X_PT_Y_Z_PCT_RATE` (e.g. `ZERO_PT_SEVEN_FIVE_PCT_RATE` for 0.75%)
     * [ ] Rate variable visibility declared as `internal`
     * [ ] Rate variable state mutability declared as `constant`
-    * [ ] Rates are defined in the ascending order (smallest to biggest)
+    * [ ] Rates are defined in the ascending order (from smallest to largest)
   * IF timestamps are present
     * [ ] Comment above timestamp states full date including `UTC` timezone
     * [ ] Timestamp [converts](https://www.epochconverter.com/) back to the correct date
