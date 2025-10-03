@@ -113,9 +113,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Check if oracle deployment is required (e.g. univ3-lp-oracle, new ilk pip, ...) with responsible ecosystem actor
   * IF addresses are used in the spell
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
-    * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT `MKR` and vesting contracts
     * [ ] Use the [DssExecLib address helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
-    * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern (e.g. `MKR`)
+    * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
     * [ ] Increment ChainLog version, according to the update type
@@ -123,7 +122,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
-    * [ ] Changes are tested via `testNewOrUpdatedChainlogValues`
     * [ ] Additions are tested via `testAddedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
@@ -131,9 +129,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
-  * [ ] Test DAI/MKR streams and payments, lerps
+  * [ ] Test USDS/SKY streams and payments, lerps
   * [ ] Test SKY streams and payments
-  * [ ] Test the sum of all DAI/MKR payments matches the Exec Sheet
+  * [ ] Test the sum of all USDS/SKY payments matches the Exec Sheet
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`
@@ -161,22 +159,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Run `make exec-hash date=YYYY-MM-DD` and update spell code accordingly
   * [ ] Make sure generated hash matches with the hash provided from Governance Facilitator, OTHERWISE notify Responsible Governance Facilitator
   * [ ] Ensure that executive vote file name and date is correct
-  * [ ] [community](https://github.com/sky-ecosystem/community) repo commit hash corresponds to latest change
   * [ ] [executive-votes](https://github.com/sky-ecosystem/executive-votes) repo commit hash corresponds to latest change
   * [ ] Raw GitHub URL is correct
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`sky-ecosystem/community` GitHub repo](https://github.com/sky-ecosystem/community), run:
-      ```
-      git clone https://github.com/sky-ecosystem/community
-      ```
-    * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
-      ```
-      git switch master && git pull origin master
-      ```
-    * [ ] Get the latest commit hash for the exec doc:
-      ```
-      git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
-      ```
     * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes), run:
       ```
       git clone https://github.com/sky-ecosystem/executive-votes
