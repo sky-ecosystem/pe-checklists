@@ -2,7 +2,7 @@
 
 ## Mainnet
 
-Repo: https://github.com/makerdao/spells-mainnet
+Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ### Spell coordination schedule
 
@@ -37,7 +37,7 @@ Repo: https://github.com/makerdao/spells-mainnet
 * Install stable Foundry version
   * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
     * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --version git_tag_name`
+  * [ ] Install the specified version via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -73,9 +73,9 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Add newline above every _Instruction text_
   * [ ] Copy every `Reasoning URL` and `Authority URL` from the Exec Sheet as a comment under relevant section or instruction in the spell code (depending on the row the link is present)
   * [ ] For every `Reasoning URL` and `Authority URL`, add prefix derived from the url itself:
-    * `// Executive Vote:` IF URL starts with `https://vote.makerdao.com/executive/`
-    * `// Poll:` IF URL starts with `https://vote.makerdao.com/polling/`
-    * `// Forum:` IF URL starts with `https://forum.makerdao.com/t/`
+    * `// Executive Vote:` IF URL starts with `https://vote.sky.money/executive/`
+    * `// Poll:` IF URL starts with `https://vote.sky.money/polling/`
+    * `// Forum:` IF URL starts with `https://forum.sky.money/t/`
     * `// MIP:` IF URL starts with `https://mips.makerdao.com/mips/details/`
   * [ ] IF an action in the spell doesn't have relevant instruction (e.g.: ChainLog version bump), add the explanation below prefixed with `// Note:`
   * [ ] IF an instruction can not be directly taken, add a comment below prefixed with `// Note:` (e.g.: `// Note: see dao_resolutions variable declared above`)
@@ -93,27 +93,27 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Ensure spell actions match linked sources (forum posts, polls, MIPs, etc)
   * IF some actions require using interfaces
     * [ ] Prefer using `DssExecLib` actions where possible (to avoid adding interfaces where not required)
-    * [ ] Avoid multi-import layout / importing from `Interfaces.sol` (see [issue #69](https://github.com/makerdao/dss-interfaces/issues/69))
+    * [ ] Avoid multi-import layout / importing from `Interfaces.sol` (see [issue #69](https://github.com/sky-ecosystem/dss-interfaces/issues/69))
     * [ ] Prefer single import layout (e.g. `import { VatAbstract } from "dss-interfaces/dss/VatAbstract.sol";`)
     * [ ] Use static interfaces IF not present in `dss-interfaces` OR present in `dss-interfaces` but outdated OR only a few function interfaces are needed
   * IF new collateral is onboarded
     * Deploy `Join` contract (check which one is required)
-      * [ ] Use [JoinFab](https://github.com/makerdao/JoinFab) to deploy
+      * [ ] Use [JoinFab](https://github.com/sky-ecosystem/JoinFab) to deploy
       * [ ] Ensure Etherscan Verification
         * [ ] Make sure AGPLv3 is specified and used
         * [ ] IF flatten, consider removing `HEVM` interface artifacts
     * Deploy `Clip` contract
-      * [ ] Use [ClipFab](https://github.com/makerdao/dss-deploy) to deploy
+      * [ ] Use [ClipFab](https://github.com/sky-ecosystem/dss-deploy) to deploy
       * [ ] Ensure Etherscan Verification
         * [ ] Make sure AGPLv3 is specified and used
     * Deploy `Calc` contract (check which one is required)
-      * [ ] Use [CalcFab](https://github.com/makerdao/dss-deploy) to deploy
+      * [ ] Use [CalcFab](https://github.com/sky-ecosystem/dss-deploy) to deploy
       * [ ] Note: automatically verified on etherscan
     * [ ] Check if oracle deployment is required (e.g. univ3-lp-oracle, new ilk pip, ...) with responsible ecosystem actor
   * IF addresses are used in the spell
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
     * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT `MKR` and vesting contracts
-    * [ ] Use the [DssExecLib address helpers](https://github.com/makerdao/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
+    * [ ] Use the [DssExecLib address helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
     * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern (e.g. `MKR`)
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
@@ -140,7 +140,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Tests PASS via `make test`
-* [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/makerdao/dss-exec-lib/releases/latest)
+* [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
 * [ ] Mark PR as "ready for review" and add reviewers
@@ -158,18 +158,31 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Run `make exec-hash date=YYYY-MM-DD` and update spell code accordingly
   * [ ] Make sure generated hash matches with the hash provided from Governance Facilitator, OTHERWISE notify Responsible Governance Facilitator
   * [ ] Ensure that executive vote file name and date is correct
-  * [ ] [community](https://github.com/makerdao/community) repo commit hash corresponds to latest change
+  * [ ] [community](https://github.com/sky-ecosystem/community) repo commit hash corresponds to latest change
+  * [ ] [executive-votes](https://github.com/sky-ecosystem/executive-votes) repo commit hash corresponds to latest change
   * [ ] Raw GitHub URL is correct
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`makerdao/community` GitHub repo](https://github.com/makerdao/community)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/community` GitHub repo](https://github.com/sky-ecosystem/community)), run:
       ```
-      git clone https://github.com/makerdao/community
+      git clone https://github.com/sky-ecosystem/community
       ```
     * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
       ```
       git switch master && git pull origin master
       ```
     * [ ] Get the latest commit hash for the exec doc:
+      ```
+      git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
+      ```
+    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)), run:
+      ```
+      git clone https://github.com/sky-ecosystem/executive-votes
+      ```
+    * [] OTHERWISE, ensure it is pointing to the latest commit on master:
+      ```
+      git switch main && git pull origin main
+      ```
+    * [] Get the latest commit hash for the exec doc:
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
@@ -184,7 +197,7 @@ Repo: https://github.com/makerdao/spells-mainnet
 * [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
 * Pre-deploy setup and checks (currently via `dapptools`)
   * Set local environment variables (`.sethrc`)
-    * Deployer
+  * Deployer
       * [ ] Avoid using the same deployer for mainnet and testnet (to avoid deploying contracts with the same address but different sources)
       * [ ] `export ETH_PASSWORD=~/.env/password.txt`
       * [ ] `export ETH_KEYSTORE=~/.ethereum/keystore`
@@ -252,7 +265,7 @@ Repo: https://github.com/makerdao/spells-mainnet
   * Collect any problems noticed during the spell, propose concrete improvements to make it constructive
   * Prefix your message with `Initiating retro:` for clarity
   * IF there is nothing to discuss, post `Initiating retro: nothing to discuss from my side`
-* IF [`MegaPoker`-related](https://github.com/makerdao/megapoker/blob/master/src/MegaPoker.sol) updates are present in the spell (oracles are replaced, collaterals are onboarded or offboarded, etc)
+* IF [`MegaPoker`-related](https://github.com/sky-ecosystem/megapoker/blob/master/src/MegaPoker.sol) updates are present in the spell (oracles are replaced, collaterals are onboarded or offboarded, etc)
   * [ ] Inform EA responsible for maintaining `MegaPoker` contract
   * Ensure `MegaPoker` contract is updated
     * [ ] Coordinate with EA responsible for maintaining `MegaPoker` and TechOps
@@ -265,4 +278,4 @@ Repo: https://github.com/makerdao/spells-mainnet
 * IF new collateral is onboarded
   * [ ] Ensure keeper support for new onboarded collateral with TechOps
 * IF new Lerp is added
-  * [ ] Ensure keeper support (to call `tall` daily) via [dss-cron](https://github.com/makerdao/dss-cron)
+  * [ ] Ensure keeper support (to call `tall` daily) via [dss-cron](https://github.com/sky-ecosystem/dss-cron)
