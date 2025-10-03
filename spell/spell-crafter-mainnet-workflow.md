@@ -165,7 +165,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] [executive-votes](https://github.com/sky-ecosystem/executive-votes) repo commit hash corresponds to latest change
   * [ ] Raw GitHub URL is correct
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`sky-ecosystem/community` GitHub repo](https://github.com/sky-ecosystem/community)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/community` GitHub repo](https://github.com/sky-ecosystem/community), run:
       ```
       git clone https://github.com/sky-ecosystem/community
       ```
@@ -177,7 +177,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
-    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes), run:
       ```
       git clone https://github.com/sky-ecosystem/executive-votes
       ```
