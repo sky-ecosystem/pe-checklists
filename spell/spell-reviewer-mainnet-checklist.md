@@ -1,11 +1,13 @@
 # Mainnet Executive Spell Review Checklist
 
+Repo: https://github.com/sky-ecosystem/spells-mainnet
+
 ## Development Stage
 
 * Install stable Foundry version
   * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
     * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --version git_tag_name`
+  * [ ] Install the specified version via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -31,17 +33,18 @@
   * [ ] IF action in the spell doesn't have relevant instruction (e.g.: `chainlog` version bump), the necessity of it is explained in the comment above prefixed with `// Note:`
   * [ ] Every proof url from the Exec Sheet, such as `Reasoning URL` and `Authority URL` is present in the spell code under relevant section or instruction (depending on which row the url is present)
   * [ ] Every proof url from the Exec Sheet, such as `Reasoning URL` and `Authority URL` have prefix derived from the url itself
-      * `// Executive Vote:` if URL starts with `https://vote.makerdao.com/executive/`
-      * `// Poll:` if URL starts with `https://vote.makerdao.com/polling/`
-      * `// Forum:` if URL starts with `https://forum.makerdao.com/t/`
+      * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
+      * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
+      * `// Forum:` if URL starts with `https://forum.sky.money/t/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
+      * `// Atlas:` IF URL starts with `https://sky-atlas.powerhouse.io/`
 * Dependency checks
   * [ ] Reinstall libraries by running `rm -rf ./lib && git submodule update --init --recursive`
     ```bash
     Insert checked out submodule paths here
     ```
   * [ ] IF submodule upgrades are present, make sure `dss-exec-lib` is synced as well
-  * [ ] git submodule hash of `dss-exec-lib` (run `git submodule status`) matches the [latest release version](https://github.com/makerdao/dss-exec-lib/releases) or newer
+  * [ ] git submodule hash of `dss-exec-lib` (run `git submodule status`) matches the [latest release version](https://github.com/sky-ecosystem/dss-exec-lib/releases) or newer
   * [ ] `dss-interfaces` library used inside `lib/dss-exec-lib` matches submodule used inside `lib/dss-test`
 * IF interfaces are present in the spell
   * Interfaces imported from `dss-interfaces`
@@ -52,7 +55,7 @@
     * [ ] Declared static interface not present in the `dss-interfaces`, OTHERWISE should be imported from there
     * [ ] Interface matches deployed contract using `cast interface <contract_address>` command
     * [ ] Interface naming style should match with `Like` suffix (e.g. `VatLike`)
-      * EXCEPTION: [known interface naming exceptions](https://github.com/makerdao/dss-exec-lib/blob/master/src/DssExecLib.sol#L24-L52)
+      * EXCEPTION: [known interface naming exceptions](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L24-L52)
     * [ ] Each static interface declare only functions actually used in the spell code
 * IF variable declarations are present in the spell
   * IF precision units are present
@@ -60,7 +63,7 @@
       * `WAD = 10 ** 18`
       * `RAY = 10 ** 27`
       * `RAD = 10 ** 45`
-    * [ ] Precision units match with [Numerical Ranges](https://github.com/makerdao/dss/wiki/Numerical-Ranges#notation)
+    * [ ] Precision units match with [Numerical Ranges](https://github.com/sky-ecosystem/dss/wiki/Numerical-Ranges#notation)
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
   * IF math units are present
@@ -69,7 +72,7 @@
       * `THOUSAND = 10 ** 3`
       * `MILLION  = 10 ** 6`
       * `BILLION  = 10 ** 9`
-    * [ ] Match with [config](https://github.com/makerdao/spells-mainnet/blob/master/src/test/config.sol)
+    * [ ] Match with [config](https://github.com/sky-ecosystem/spells-mainnet/blob/master/src/test/config.sol)
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
   * IF rates are present
@@ -99,47 +102,47 @@
   * [ ] Deployer address is included into `addresses_deployers.sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
-    * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L792)) is used
+    * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L792)) is used
     * [ ] Comment matches pattern `// Increase ILK-A Stability Fee by X.XX% from X.XX% to X.XX%`
   * IF Dai Savings Rate (`pot.dsr`) is updated
-    * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L455)) is used
+    * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L455)) is used
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
-  * [ ] IF `spotter.ilk.mat` is updated, ([`DssExecLib.setIlkLiquidationRatio(ilk, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L709)) is used
-  * [ ] IF `dog.ilk.hole` is updated, ([`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699)) is used
-  * [ ] IF `vat.ilk.dust` is updated, ([`DssExecLib.setIlkMinVaultAmount(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L676)) is used
-  * [ ] IF `dog.ilk.chop` is updated, ([`DssExecLib.setIlkLiquidationPenalty(ilk, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L689)) is used
-  * [ ] IF `clip.buf` is updated, ([`DssExecLib.setStartingPriceMultiplicativeFactor(ilk, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L720)) is used
-  * [ ] IF `clipperMom.clip.tolerance` is updated, ([`DssExecLib.setLiquidationBreakerPriceTolerance(clip, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L772)) is used
-  * [ ] IF `clip.tail` is updated, ([`DssExecLib.setAuctionTimeBeforeReset(ilk, duration)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L731)) is used
-  * [ ] IF `clip.cusp` is updated, ([`DssExecLib.setAuctionPermittedDrop(ilk, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L740)) is used
-  * [ ] IF `clip.chip` is updated, ([`DssExecLib.setKeeperIncentivePercent(ilk, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L750)) is used
-  * [ ] IF `clip.tip` is updated, ([`DssExecLib.setKeeperIncentiveFlatRate(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L760)) is used
-  * [ ] IF `calc.tau` is updated, ([`DssExecLib.setLinearDecrease(calc, duration)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L811)) is used
-  * [ ] IF `calc.cut` or `calc.step` are updated, [`DssExecLib.setStairstepExponentialDecrease(calc, duration, pct_bps)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L822) is used
+  * [ ] IF `spotter.ilk.mat` is updated, ([`DssExecLib.setIlkLiquidationRatio(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L709)) is used
+  * [ ] IF `dog.ilk.hole` is updated, ([`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699)) is used
+  * [ ] IF `vat.ilk.dust` is updated, ([`DssExecLib.setIlkMinVaultAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L676)) is used
+  * [ ] IF `dog.ilk.chop` is updated, ([`DssExecLib.setIlkLiquidationPenalty(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L689)) is used
+  * [ ] IF `clip.buf` is updated, ([`DssExecLib.setStartingPriceMultiplicativeFactor(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L720)) is used
+  * [ ] IF `clipperMom.clip.tolerance` is updated, ([`DssExecLib.setLiquidationBreakerPriceTolerance(clip, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L772)) is used
+  * [ ] IF `clip.tail` is updated, ([`DssExecLib.setAuctionTimeBeforeReset(ilk, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L731)) is used
+  * [ ] IF `clip.cusp` is updated, ([`DssExecLib.setAuctionPermittedDrop(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L740)) is used
+  * [ ] IF `clip.chip` is updated, ([`DssExecLib.setKeeperIncentivePercent(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L750)) is used
+  * [ ] IF `clip.tip` is updated, ([`DssExecLib.setKeeperIncentiveFlatRate(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L760)) is used
+  * [ ] IF `calc.tau` is updated, ([`DssExecLib.setLinearDecrease(calc, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L811)) is used
+  * [ ] IF `calc.cut` or `calc.step` are updated, [`DssExecLib.setStairstepExponentialDecrease(calc, duration, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L822) is used
 * IF debt ceiling changes are present in the instructions
-  * IF adjusted collateral type (`ilk`) have [AutoLine](https://github.com/makerdao/dss-auto-line/tree/master) enabled (`MCD_IAM_AUTO_LINE`)
+  * IF adjusted collateral type (`ilk`) have [AutoLine](https://github.com/sky-ecosystem/dss-auto-line/tree/master) enabled (`MCD_IAM_AUTO_LINE`)
     * IF collateral debt ceiling requested to be `0`
-      * [ ] Collateral is removed from AutoLine (`MCD_IAM_AUTO_LINE`) via [`DssExecLib.removeIlkFromAutoLine(ilk)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L668)
+      * [ ] Collateral is removed from AutoLine (`MCD_IAM_AUTO_LINE`) via [`DssExecLib.removeIlkFromAutoLine(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L668)
       * [ ] The instruction to remove from AutoLine (`MCD_IAM_AUTO_LINE`) is present in the Exec Sheet
-      * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
+      * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
     * IF `AutoLine` parameters are updated
       * [ ] EITHER is used, depending on the instruction:
-        * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
-        * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648)
+        * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
+        * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648)
   * IF collateral debt ceiling (`vat.ilk.line`) is updated
-    * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/makerdao/dss-auto-line/tree/master) disabled previously or in the spell
+    * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/sky-ecosystem/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] EITHER is used, depending on the instruction:
-        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L621C14-L621C36)
-        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L634)
-        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
+        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L621C14-L621C36)
+        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L634)
+        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
     * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to, via EITHER:
         * `global` set to `true` in `increaseIlkDebtCeiling`/`decreaseIlkDebtCeiling`
-        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L428)
-        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L436)
-        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
+        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L428)
+        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L436)
+        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
 * IF additional dependencies (i.e. `./src/dependencies/` directory) are present:
   * [ ] IF the dependencies contracts/libraries have been audited
     * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
@@ -164,11 +167,11 @@
     * [ ] Collateral liquidation penalty (`chop`) is set to `0` IF requested by governance
     * [ ] Flat keeper incentive (`tip`) is set to `0` IF requested by governance
     * [ ] Relative keeper incentive (`chip`) is set to `0` IF requested by governance
-    * [ ] Max liquidation amount (`hole`) is adjusted via [`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699) IF requested by governance
-    * [ ] Relevant clipper contract (`MCD_CLIP_`) is active (i.e. [`stopped`](https://github.com/makerdao/dss/blob/fa4f6630afb0624d04a003e920b0d71a00331d98/src/clip.sol#L97) is `0`)
+    * [ ] Max liquidation amount (`hole`) is adjusted via [`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699) IF requested by governance
+    * [ ] Relevant clipper contract (`MCD_CLIP_`) is active (i.e. [`stopped`](https://github.com/sky-ecosystem/dss/blob/fa4f6630afb0624d04a003e920b0d71a00331d98/src/clip.sol#L97) is `0`)
     * [ ] Liquidations are triggered via (depending on governance instruction):
       * EITHER liquidation ratio (`spotter.ilk.mat`) being set very high in the spell (using `DssExecLib.setValue(DssExecLib.spotter(), ilk, "mat", ratio)`)
-      * OR via enabling linear interpolation ([`DssExecLib.linearInterpolation(name, target, ilk, what, startTime, start, end, duration)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L1096-L1112))
+      * OR via enabling linear interpolation ([`DssExecLib.linearInterpolation(name, target, ilk, what, startTime, start, end, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L1096-L1112))
         * [ ] Ensure `name` format matches "XXX-X Offboarding"
         * [ ] Ensure `target` matches `DssExecLib.spotter()` address
         * [ ] Ensure `ilk` format matches collateral type (`ilk`) name (`"XXX-X"`)
@@ -180,9 +183,9 @@
         * [ ] Ensure `end` value matches the instruction
         * [ ] Ensure `end` allows liquidation of all remaining vaults (`end` is bigger than `collateral_type_collateralization_ratio * risk_multiplier_factor`)
         * [ ] Ensure `duration` matches the instruction
-    * [ ] Spotter price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L374) IF collateral have no running oracle (i.e. relevant `PIP_` contract have outdated `zzz` value)
+    * [ ] Spotter price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L374) IF collateral have no running oracle (i.e. relevant `PIP_` contract have outdated `zzz` value)
     * [ ] Spotter price is updated after all other actions
-    * [ ] Offboarding is tested at least via [`_checkIlkClipper` helper](https://github.com/makerdao/spells-mainnet/blob/7400e91c4f211fc24bd4d3a95a86416afc4df9d1/src/DssSpell.t.base.sol#L856)
+    * [ ] Offboarding is tested at least via [`_checkIlkClipper` helper](https://github.com/sky-ecosystem/spells-mainnet/blob/7400e91c4f211fc24bd4d3a95a86416afc4df9d1/src/DssSpell.t.base.sol#L856)
 * IF RWA updates are present
   * [ ] Insert and follow the relevant checklists below:
     * [RWA Update](./rwa-checklists.md#rwa-update-checklist)
@@ -190,30 +193,30 @@
   * [ ] Insert and follow the relevant checklists below:
     * [RWA Offboarding](./rwa-checklists.md#rwa-offboarding-checklist)
 * IF payments are present in the spell
-  * IF `MKR` transfers are present
+  * IF `SKY` transfers are present
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
     * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
     * [ ] Transfer amount matches Exec Sheet
     * [ ] Transfer amount is specified with (at least) 2 decimals using `ether` keyword
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only MKR is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only SKY is transferred here`
     * [ ] The transfers are tested via `testMKRPayments` test
-    * [ ] Sum of all MKR transfers tested in `testMKRPayments` matches number in the Exec Sheet
-  * IF `DAI` surplus buffer transfers are present
+    * [ ] Sum of all SKY transfers tested in `testMKRPayments` matches number in the Exec Sheet
+  * IF `USDS` surplus buffer transfers are present
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
     * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testDAIPayments` test
-    * [ ] Sum of all DAI transfers tested in `testDAIPayments` matches number in the Exec Sheet
-  * IF `MKR` or `DAI` streams (`DssVest`) are created
+    * [ ] Sum of all USDS transfers tested in `testDAIPayments` matches number in the Exec Sheet
+  * IF `SKY` or `USDS` streams (`DssVest`) are created
     * [ ] `VestAbstract` interface is imported from `dss-interfaces/dss/VestAbstract.sol`
     * [ ] `restrict` is used for each stream, UNLESS otherwise explicitly stated in the Exec Sheet
     * [ ] `usr` (Vest recipient address) matches Exec Sheet
     * [ ] `usr` address in the instruction is in the checksummed format
     * [ ] `usr` address variable name match one found in `addresses_wallets.sol`
     * [ ] `tot` (Total stream amount) matches Exec Sheet
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only MKR is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only SKY is transferred here`
     * [ ] IF vest amount is expressed in 'per year' or similar in the Exec Sheet, account for leap days
     * [ ] `bgn` (Vest start timestamp) matches Exec Sheet
     * [ ] `tau` is expressed as `bgn - fin` (i.e. `MONTH_DD_YYYY - MONTH_DD_YYYY`)
@@ -232,14 +235,14 @@
       * [ ] Governance facilitators were notified
       * [ ] Exec Sheet contain explicit instruction
       * [ ] Exec Sheet contain explicit instruction
-    * IF MKR stream ([DssVestTransferrable](https://github.com/makerdao/dss-vest/blob/master/src/DssVest.sol#L463)) is present
-      * [ ] Vest contract's MKR allowance increased by the cumulative `total` (the sum of all `tot` values)
+    * IF SKY stream ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) is present
+      * [ ] Vest contract's SKY allowance increased by the cumulative `total` (the sum of all `tot` values)
       * [ ] Ensure allowance increase follows archive patterns
     * [ ] Tested via `testVestDAI` or `testVestMKR`
-  * IF `MKR` or `DAI` vest termination (`Yank`) is present
+  * IF `SKY` or `USDS` vest termination (`Yank`) is present
     * [ ] Yanked stream ID matches Exec Sheet
-    * [ ] `MCD_VEST_MKR_TREASURY` chainlog address is used for MKR stream `yank`
-    * [ ] `MCD_VEST_DAI` chainlog address is used for DAI stream `yank`
+    * [ ] `MCD_VEST_MKR_TREASURY` chainlog address is used for SKY stream `yank`
+    * [ ] `MCD_VEST_DAI` chainlog address is used for USDS stream `yank`
     * [ ] Tested via `testYankDAI` or `testYankMKR`
 * IF SubDAO-related content is present
   * IF SubDAO provides SubProxy spell address
@@ -270,20 +273,19 @@
   * [ ] MCD Pause Proxy doesn't give any approvals
   * [ ] All possible actions of the Target Contract are documented
   * [ ] Target contract is not upgradable
-  * [ ] Target Contract is included in the ChainLog
+  * [ ] Target Contract is included in the chainlog
   * [ ] Test Coverage is comprehensive
-* IF spell interacts with ChainLog
-  * [ ] ChainLog version is incremented based on update type
+* IF spell interacts with the chainlog
+  * [ ] chainlog version is incremented based on update type
     * Major -> New Vat (++.0.0)
     * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
     * Patch -> Collateral addition or addition/modification (0.0.++)
   * [ ] New addresses are added to the `addresses_mainnet.sol`
-  * [ ] Changes are tested via `testChainlogIntegrity` and `testChainlogValues`
+  * [ ] Changes are tested via `testChainlogIntegrity` and `testChainlogValues` and `testAddedChainlogKeys`
 * [ ] Ensure every spell variable is declared as `public`/`internal`
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
-  * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (Such as `MKR`)
-  * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/makerdao/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
-  * [ ] Where addresses are fetched from the `ChainLog`, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), except where the archive pattern differs from this pattern (e.g. MKR)
+  * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
+  * [ ] Where addresses are fetched from the `ChainLog`, the variable name must match the value of the chainlog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * Tests
   * [ ] Ensure that the `DssExecLib.address` file is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit
@@ -308,18 +310,18 @@ _Insert your local test logs here_
 
 * [ ] Wait till the Exec Doc is merged
 * Exec Doc checks
-  * [ ] Exec Doc for the specified date is found in the [`makerdao/community` GitHub repo](https://github.com/makerdao/community/tree/master/governance/votes)
+  * [ ] Exec Doc for the specified date is found in the [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)
   * [ ] Exec Doc file name follows the format `Executive vote - Month DD, YYYY.md`
   * [ ] Extract _permanent_ URL to the raw markdown file and paste it below
     _Insert your Raw Exec Doc URL here_
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`makerdao/community` GitHub repo](https://github.com/makerdao/community)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes), run:
       ```
-      git clone https://github.com/makerdao/community
+      git clone https://github.com/sky-ecosystem/executive-votes
       ```
-    * [ ] OTHERWISE, ensure it is pointing to the latest commit on master:
+    * [ ] OTHERWISE, ensure it is pointing to the latest commit on main:
       ```
-      git switch master && git pull origin master
+      git switch main && git pull origin main
       ```
     * [ ] Get the latest commit hash for the exec doc:
       ```
@@ -335,7 +337,7 @@ _Insert your local test logs here_
   * [ ] Office hours value in the Exec Doc matches the spell
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
-  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/makerdao/community](https://github.com/makerdao/community/tree/master/governance/votes) repository
+  * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes/tree/main) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
 * IF new commits are present in the spell
@@ -370,12 +372,12 @@ _Insert your local test logs here_
     * [ ] `deployed_spell_created` matches deployment timestamp
     * [ ] `deployed_spell_block` matches deployment block number
   * Manual checks
-    * [ ] Ensure `make deploy-info tx=<tx>` matches [config](https://github.com/makerdao/spells-mainnet/blob/master/src/test/config.sol)
+    * [ ] Ensure `make deploy-info tx=<tx>` matches [config](https://github.com/sky-ecosystem/spells-mainnet/blob/master/src/test/config.sol)
       * [ ] `deployed_spell_created` timestamp
       * [ ] `deployed_spell_block` block number
     * [ ] Check again that the PR did not modify the `DssExecLib.address` file (e.g. look under the 'Files Changed' PR tab, etc.)
-    * [ ] Ensure Etherscan `Libraries Used` matches DssExecLib [Latest Release](https://github.com/makerdao/dss-exec-lib/releases/latest)
-    * [ ] (For your tests to be accurate) git submodule hash matches [dss-exec-lib](https://github.com/makerdao/dss-exec-lib/releases/latest) latest release's tag commit and inspect diffs if doesn't match to ensure expected behaviour (Currently Non-Critical pending the next DssExecLib release, double check that the ExecLib used by the contract matches the latest release)
+    * [ ] Ensure Etherscan `Libraries Used` matches DssExecLib [Latest Release](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
+    * [ ] (For your tests to be accurate) git submodule hash matches [dss-exec-lib](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest) latest release's tag commit and inspect diffs if doesn't match to ensure expected behaviour (Currently Non-Critical pending the next DssExecLib release, double check that the ExecLib used by the contract matches the latest release)
 * Tenderly Testnet checks
   * [ ] A testnet with the name matching spell description is found at [maker dashboard](https://dashboard.tenderly.co/maker/virtual-networks)
   * [ ] The testnet name is unique (previous testnets does not have the same name)
