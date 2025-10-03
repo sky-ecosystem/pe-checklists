@@ -77,6 +77,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * `// Poll:` IF URL starts with `https://vote.sky.money/polling/`
     * `// Forum:` IF URL starts with `https://forum.sky.money/t/`
     * `// MIP:` IF URL starts with `https://mips.makerdao.com/mips/details/`
+    * `// Atlas:` IF URL starts with `https://sky-atlas.powerhouse.io/`
   * [ ] IF an action in the spell doesn't have relevant instruction (e.g.: ChainLog version bump), add the explanation below prefixed with `// Note:`
   * [ ] IF an instruction can not be directly taken, add a comment below prefixed with `// Note:` (e.g.: `// Note: see dao_resolutions variable declared above`)
 * Open draft PR
@@ -123,6 +124,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
     * [ ] Changes are tested via `testNewOrUpdatedChainlogValues`
+    * [ ] Additions are tested via `testAddedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
@@ -130,6 +132,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
   * [ ] Test DAI/MKR streams and payments, lerps
+  * [ ] Test SKY streams and payments
   * [ ] Test the sum of all DAI/MKR payments matches the Exec Sheet
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
