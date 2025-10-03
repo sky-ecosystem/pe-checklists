@@ -178,11 +178,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
       git clone https://github.com/sky-ecosystem/executive-votes
       ```
-    * [] OTHERWISE, ensure it is pointing to the latest commit on master:
+    * [ ] OTHERWISE, ensure it is pointing to the latest commit on main:
       ```
       git switch main && git pull origin main
       ```
-    * [] Get the latest commit hash for the exec doc:
+    * [ ] Get the latest commit hash for the exec doc:
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
@@ -197,7 +197,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
 * Pre-deploy setup and checks (currently via `dapptools`)
   * Set local environment variables (`.sethrc`)
-  * Deployer
+    * Deployer
       * [ ] Avoid using the same deployer for mainnet and testnet (to avoid deploying contracts with the same address but different sources)
       * [ ] `export ETH_PASSWORD=~/.env/password.txt`
       * [ ] `export ETH_KEYSTORE=~/.ethereum/keystore`
