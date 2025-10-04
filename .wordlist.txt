@@ -150,5 +150,6 @@ unaudited
 untrusted
 upgradability
 upgradable
+USDS
 vscode
 whitespace
