@@ -130,7 +130,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
   * [ ] Test USDS/SKY streams and payments, lerps
-  * [ ] Test SKY streams and payments
   * [ ] Test the sum of all USDS/SKY payments matches the Exec Sheet
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
