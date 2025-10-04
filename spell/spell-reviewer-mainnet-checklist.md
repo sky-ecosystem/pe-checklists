@@ -199,7 +199,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
     * [ ] Transfer amount matches Exec Sheet
     * [ ] Transfer amount is specified with (at least) 2 decimals using `ether` keyword
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only SKY is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token`
     * [ ] The transfers are tested via `testMKRPayments` test
     * [ ] Sum of all SKY transfers tested in `testMKRPayments` matches number in the Exec Sheet
   * IF `USDS` surplus buffer transfers are present
@@ -216,7 +216,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `usr` address in the instruction is in the checksummed format
     * [ ] `usr` address variable name match one found in `addresses_wallets.sol`
     * [ ] `tot` (Total stream amount) matches Exec Sheet
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only SKY is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token` 
     * [ ] IF vest amount is expressed in 'per year' or similar in the Exec Sheet, account for leap days
     * [ ] `bgn` (Vest start timestamp) matches Exec Sheet
     * [ ] `tau` is expressed as `bgn - fin` (i.e. `MONTH_DD_YYYY - MONTH_DD_YYYY`)
