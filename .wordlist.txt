@@ -120,6 +120,7 @@ liquidationRatio
 makerdao
 medianizer
 multisig
+onchain
 params
 permalink
 permissioned
@@ -150,5 +151,6 @@ unaudited
 untrusted
 upgradability
 upgradable
+vnet
 vscode
 whitespace

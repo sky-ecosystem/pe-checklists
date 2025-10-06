@@ -122,7 +122,7 @@ This section outlines the review process, divided into several stages from devel
     - [ ] No security-related changes are present in this commit.
 - [ ] Verify solc version matches the Star protocol standard based on prior Star contracts.
 - [ ] Verify forum posts proposing the changes follow [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
-- [ ] Verify forum posts contains all new addresses, their constuctor arguments and rate limits used in the spell.
+- [ ] Verify forum posts contains all new addresses, their constructor arguments and rate limits used in the spell.
 - [ ] Verify spell instructions match the forum posts with the proposals.
 - [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`
 
@@ -167,10 +167,10 @@ This section outlines the review process, divided into several stages from devel
 - LIST every submodule or any other imported code used in this spell:
   - `DEPENDENCY_NAME` imported at commit `COMMIT_HASH` COMMIT_URL
     - [ ] Match audited commit for this dependency.
-    - [ ] IF imported dependency doesn't match any auditted commit, LIST:
+    - [ ] IF imported dependency doesn't match any audited commit, LIST:
       - Imported `PATH_TO_IMPORTED_FILE` in `PATH_TO_THE_FILE_WHERE_IT_WAS_USED`, diff: GITHUB_COMPARE_URL
-        - [ ] Applied changes looks safe, does not introduce malicious actions.
-        - [ ] Applied changes does not introduce diff between imported and onchain interfaces.
+        - [ ] Applied changes look safe, do not introduce malicious actions.
+        - [ ] Applied changes do not introduce diff between imported and onchain interfaces.
 
 #### Interfaces
 - [ ] No unused static interfaces.
@@ -212,7 +212,7 @@ This section outlines the review process, divided into several stages from devel
 #### Testing
 - LIST all tests and explain their coverage
   - `TEST_FUNCTION_NAME` ensures EXPLANATION_OF_WHAT_IT_ENSURES
-    - [ ] The test is sufficient to ensure correctness and sufficientness of the high-level goal behind spell action
+    - [ ] The test is sufficient to ensure correctness the high-level goal behind tested spell action
 - [ ] All actions are covered by tests.
 - [ ] Integration tests verify the end-to-end execution flow.
 - [ ] Gas tests ensure execution is possible within the existing block gas limit.
@@ -257,7 +257,7 @@ EXECUTED_TESTS_LOGS
 
 #### Confirmed Handover
 - [ ] All review comments have been addressed.
-- [ ] The spell address posted by the crafter in the `#govops` thead matches evaluated above.
+- [ ] The spell address posted by the crafter in the `#govops` thread matches evaluated above.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits)
 - [ ] Ensure that no changes were made to the code since the spell was deployed and archived
 - [ ] Approve spell PR for merge via 'Approve' review option
