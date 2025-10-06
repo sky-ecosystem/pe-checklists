@@ -116,7 +116,7 @@ This section outlines the review process, divided into several stages from devel
 ### Development Stage
 
 #### Preparation
-- [ ] LIST all commits since the last externally reviewed spell.
+- LIST all commits since the last externally reviewed spell.
   - `COMMIT_TITLE`, URL_TO_THE_PR_OR_THE_COMMIT
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
@@ -141,30 +141,30 @@ This section outlines the review process, divided into several stages from devel
 - [ ] All function visibility modifiers are explicitly declared.
 - [ ] No redundant code or commented-out functionality.
 - [ ] Addresses must be fetched from the relevant protocol's address registry (e.g., `spark-address-registry`, `bloom-address-registry`) IF they are present, OTHERWISE defined as `constant` when sourced from a trusted source (i.e., new contracts onboarding).
-- [ ] LIST all addresses used in the spell (defined as `constant` or fetched from the registry repo)
+- LIST all addresses used in the spell (defined as `constant` or fetched from the registry repo)
   - [CHAIN_NAME] `0xADDRESS`, EXTERNAL_SOURCE_URL
     - [ ] Matches valid external source (previously approved forum post, external docs, etc)
 
 #### On-boarding New Contracts
-- [ ] LIST every new contract present in the spell:
+- LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
     - [ ] Source code is verified on etherscan.
     - [ ] Source code matches corresponding audited GitHub source code.
       - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect.)
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
-    - [ ] LIST every constructor argument:
+    - LIST every constructor argument:
       - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
         - [ ] The value has valid external source.
     - [ ] IF the contract have a concept of access control or `wards`:
       - [ ] Ensure correct admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
       - [ ] Ensure that contract deployer address has no access (e.g. `wards(deployer)` is `0`).
-      - [ ] LIST any other addresses that has access to this contract:
+      - LIST any other addresses that has access to this contract:
         - `0xADDRESS_WITH_ACCESS` has `ROLE_NAME`, EXTERNAL_URL_WITH_REASONING
           - [ ] This address is expected to have access.
 
 #### Dependency checks
-- [ ] LIST every submodule or any other imported code used in this spell:
+- LIST every submodule or any other imported code used in this spell:
   - `DEPENDENCY_NAME` imported at commit `COMMIT_HASH` COMMIT_URL
     - [ ] Match audited commit for this dependency.
     - [ ] IF imported dependency doesn't match any auditted commit, LIST:
@@ -180,7 +180,7 @@ This section outlines the review process, divided into several stages from devel
 
 #### Variable Declarations
 - [ ] All contract variables declared as either `constant` or `immutable`.
-- [ ] LIST all variables declaring or using precision (`WAD`, `RAY`, `RAD`, `e18`, `e6`, `e...`)
+- LIST all variables declaring or using precision (`WAD`, `RAY`, `RAD`, `e18`, `e6`, `e...`)
   - `VARIABLE_NAME` with precision `E_PRECISION_UNIT`, PREVIOUS_OCCASION_OR_PRECISION_SOURCE_URL
     - [ ] Precision match provided source url.
 - [ ] Rates are expressed correctly (e.g. per `1 days`).
@@ -210,7 +210,7 @@ This section outlines the review process, divided into several stages from devel
 - [ ] Proper error handling for all external interactions.
 
 #### Testing
-- [ ] LIST all tests and explain their coverage
+- LIST all tests and explain their coverage
   - `TEST_FUNCTION_NAME` ensures EXPLANATION_OF_WHAT_IT_ENSURES
     - [ ] The test is sufficient to ensure correctness and sufficientness of the high-level goal behind spell action
 - [ ] All actions are covered by tests.
