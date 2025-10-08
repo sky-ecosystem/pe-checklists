@@ -37,7 +37,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Install stable Foundry version
   * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
     * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --version git_tag_name`
+  * [ ] Install the specified version via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -96,7 +96,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF some actions require using interfaces
     * [ ] Prefer using `DssExecLib` actions where possible (to avoid adding interfaces where not required)
     * [ ] Avoid multi-import layout / importing from `Interfaces.sol` (see [issue #69](https://github.com/sky-ecosystem/dss-interfaces/issues/69))
-    * [ ] Prefer single import layout (e.g. `import { VatAbstract } from "dss-interfaces/dss/VatAbstract.sol";`)
+    * [ ] Prefer single import layout (e.g. `import {VatAbstract} from "dss-interfaces/dss/VatAbstract.sol";`)
     * [ ] Use static interfaces IF not present in `dss-interfaces` OR present in `dss-interfaces` but outdated OR only a few function interfaces are needed
   * IF new collateral is onboarded
     * Deploy `Join` contract (check which one is required)
@@ -124,7 +124,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
-    * [ ] Changes are tested via `testNewOrUpdatedChainlogValues`
+    * [ ] Additions are tested via `testAddedChainlogKeys`
+    * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action

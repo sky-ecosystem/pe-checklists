@@ -1,11 +1,13 @@
 # Mainnet Executive Spell Review Checklist
 
+Repo: https://github.com/sky-ecosystem/spells-mainnet
+
 ## Development Stage
 
 * Install stable Foundry version
   * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
     * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --version git_tag_name`
+  * [ ] Install the specified version via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -49,7 +51,7 @@
 * IF interfaces are present in the spell
   * Interfaces imported from `dss-interfaces`
     * [ ] No unused `dss-interfaces`
-    * [ ] Only single import layout is used (e.g. `import { VatAbstract } from "dss-interfaces/dss/VatAbstract.sol";`)
+    * [ ] Only single import layout is used (e.g. `import {VatAbstract} from "dss-interfaces/dss/VatAbstract.sol";`)
   * Static Interfaces
     * [ ] No unused static interfaces
     * [ ] Declared static interface not present in the `dss-interfaces`, OTHERWISE should be imported from there
@@ -200,7 +202,7 @@
     * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
     * [ ] Transfer amount matches Exec Sheet
     * [ ] Transfer amount is specified with (at least) 2 decimals using `ether` keyword
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only MKR is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token`
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all MKR transfers tested in `testPayments` matches number in the Exec Sheet
   * IF `SKY` transfers are present
@@ -231,7 +233,7 @@
     * [ ] `usr` address in the instruction is in the checksummed format
     * [ ] `usr` address variable name match one found in `addresses_wallets.sol`
     * [ ] `tot` (Total stream amount) matches Exec Sheet
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword helper, only MKR is transferred here`
+    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token`
     * [ ] IF vest amount is expressed in 'per year' or similar in the Exec Sheet, account for leap days
     * [ ] `bgn` (Vest start timestamp) matches Exec Sheet
     * [ ] `tau` is expressed as `fin - bgn` (i.e. `MONTH_DD_YYYY - MONTH_DD_YYYY`)
@@ -274,12 +276,12 @@
     * [ ] `MCD_VEST_DAI` chainlog address is used for DAI stream `yank`
     * [ ] `MCD_VEST_USDS` chainlog address is used for USDS stream `yank`
     * [ ] Tested via:
-      * `testYankDAI`
-      * `testYankMKR`
-      * `testYankSky`
-      * `testYankSkyMint`
-      * `testYankUsds`
-      * `testYankSpk`
+      * `testVestDai`
+      * `testVestMkr`
+      * `testVestSky`
+      * `testVestSkyMint`
+      * `testVestUsds`
+      * `testVestSpk`
 * IF SubDAO-related content is present
   * IF SubDAO provides SubProxy spell address
     * [ ] SubDAO spell address matches Exec Sheet
@@ -317,7 +319,7 @@
     * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
     * Patch -> Collateral addition or addition/modification (0.0.++)
   * [ ] New addresses are added to the `addresses_mainnet.sol`
-  * [ ] Changes are tested via `testChainlogIntegrity` and `testChainlogValues`
+  * [ ] Changes are tested via `testChainlogIntegrity`, `testChainlogValues`, `testAddedChainlogKeys` and `testRemovedChainlogKeys`
 * [ ] Ensure every spell variable is declared as `public`/`internal`
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (Such as `MKR`)
