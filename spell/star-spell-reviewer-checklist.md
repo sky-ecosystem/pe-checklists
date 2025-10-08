@@ -132,7 +132,7 @@ This section outlines the review process and provides concrete action items for 
 #### Proposed changes
 - LIST every forum post proposing changes for this particular Star, particular target date:
   - FORUM_POST_TITLE, FORUM_POST_URL
-    - [ ] Forum post follow the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
+    - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
 - [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`
@@ -200,7 +200,6 @@ This section outlines the review process and provides concrete action items for 
 #### Access Control
 - [ ] Spell execution cannot be front-run by malicious actors.
 - [ ] No privileged functions accessible by unauthorized users.
-- [ ] For new contracts with access control (e.g. `wards`), Star SubProxy is `relied` and the deployer is `denied`.
 
 #### Parameter Changes & Protocol Integration
 - [ ] Star Protocol invariants are maintained after spell execution.
@@ -225,14 +224,14 @@ EXECUTED_TESTS_LOGS
 ```
 
 #### Pre-Deployment checks
-- [ ] Final Executive Sheet matches the spell code.
+- [ ] Actions listed in the [Executive Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw/edit) for this Star match the spell scope.
 - [ ] Every _Instruction text_ from the Executive Sheet is copied to the spell code as a comment.
 - [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
 - [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
 - [ ] All actions present in the spell code are present in the final Executive Sheet.
 - [ ] All actions in the final Executive Sheet are present in the spell code.
 - [ ] IF new commits were added after the initial review, the relevant checklist items have been re-verified.
-- [ ] IF no blockers were found, post the completed checklist stage with the explicit "Good to deploy" note on top.
+- [ ] IF no blockers were found, post the completed "Development Stage" checklist stage with the explicit "Good to deploy" note on top.
 
 
 ### Deployment Stage
@@ -257,14 +256,15 @@ EXECUTED_TESTS_LOGS
 - [ ] The Tenderly simulation shows all actions are executed successfully.
 - [ ] The Tenderly simulation shows no extra actions not present in the spell are executed.
 - [ ] The Tenderly simulation shows no reverts or out-of-gas errors.
-- [ ] IF no blockers were found, post the completed checklist stage with the explicit "Good to handover" note on top.
+- [ ] IF no blockers were found, post the completed "Deployment Stage" checklist stage with the explicit "Good to handover" note on top.
 
-### Handover and Merge Stage
+### Handover Stage
 
 #### Confirmed Handover
-- [ ] Both reviewers gave explicit "Good to handover"
+- [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
-- [ ] The spell address posted by the crafter in the `#govops` thread matches evaluated above.
-- [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits)
-- [ ] Ensure that no changes were made to the code since the spell was deployed and archived
-- [ ] Approve spell PR for merge via 'Approve' review option
+- [ ] The spell address posted by the crafter in the `#govops` thread matches the spell evaluated above.
+- [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
+- [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
+- [ ] Approve spell PR for merge via 'Approve' review option.
+- [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval.
