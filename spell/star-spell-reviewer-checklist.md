@@ -167,8 +167,8 @@ This section outlines the review process and provides concrete action items for 
 #### Dependency checks
 - LIST every submodule or any other imported code used in this spell:
   - `DEPENDENCY_NAME` imported at commit `COMMIT_HASH` COMMIT_URL
-    - [ ] The dependency commit match audited commit.
-    - [ ] The dependency commit match the version of the deployed contracts. (if ALM contracts are updated, then dependency also needs to be updated and vice-versa: dependency shouldn't be updated unless the ALM contracts are updated)
+    - [ ] The dependency commit matches audited commit.
+    - [ ] The dependency commit matches the version of the deployed contracts. (if ALM contracts are updated, then dependency also needs to be updated and vice-versa: dependency shouldn't be updated unless the ALM contracts are updated)
 
 #### Interfaces
 - [ ] No unused static interfaces.
@@ -177,11 +177,11 @@ This section outlines the review process and provides concrete action items for 
 - [ ] Each static interface declares only functions actually used in the spell code.
 
 #### Variable Declarations
-- [ ] Every contract variable declared as either `constant` or `immutable`.
+- [ ] Every contract variable is declared as either `constant` or `immutable`.
 - [ ] Every precision variable (`WAD`, `RAY`, `RAD`, etc) match their expected value.
 - LIST every variable using precision (`e18`, `e6`, `e...`, `WAD`, `RAY`, `RAD`, etc)
   - `VARIABLE_NAME` with precision `VALUE_WITH_PRECISION`, PREVIOUS_OCCASION_OR_PRECISION_SOURCE_URL
-    - [ ] Precision match provided source url.
+    - [ ] The precision matches provided source url.
 - [ ] Rates are expressed correctly (e.g. per `/ 1 days`).
 - [ ] Rates match their source (e.g., governance poll).
 - [ ] Timestamps are commented with the full UTC date and convert correctly.
