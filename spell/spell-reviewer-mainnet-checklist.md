@@ -273,9 +273,10 @@
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
 * IF bug bounty registry updates are present
-  * [ ] Run `make safeharbor-verify calldata=<encodedDATA>` command passing the calldata in the spell to check for it's validity.
-  * [ ] Verify the call uses the correct pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
-  * [ ] Confirm proper error handling is implemented for the call
+  * [ ] Run `make safeharbor-generate` command passing the calldata in the spell to check for it's validity.
+  * [ ] Verify that the generated code exactly matches the generated code in the spell.
+  * [ ] Ensure that `AGREEMENT_ADDRESS` is imported from the ChainLog.
+  * [ ] Ensure that the helper function to perform the call is present and is implemented correctly.
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -387,7 +388,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] Confirm `make safeharbor-generate` returns empty
+  * [ ] Confirm `make safeharbor-generate` returns "no updates"
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

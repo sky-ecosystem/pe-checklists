@@ -127,10 +127,18 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
     * [ ] Run `make safeharbor-generate` command in the `spells-mainnet` repo to check for bug bounty updates
-    * [ ] IF the command outputs hex encoded call:
-      * [ ] Add the output hex encoded call to the spell using low-level Solidity call.
-      * [ ] The call MUST use the pattern: `(bool succ, bytes memory err) = MULTICALL.call(<encodedDATA>);`
-      * [ ] Ensure proper error handling after the call (e.g., `require(succ, "Bug bounty update failed");`)
+    * [ ] IF the command outputs a solidity snippet:
+      * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting.
+      * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
+      * [ ] If not already present, add the helper function to perform the call:
+```solidity
+function _updateSafeHarbor(bytes[] memory calldatas) public {
+  for (uint256 i = 0; i < calldatas.length; i++) {
+    (bool success, ) = address(AGREEMENT_ADDRESS).call(calldatas[i]);
+    require(success, "SaferHarbor call failed");
+  }
+}
+```
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
