@@ -35,9 +35,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Install stable Foundry version
-  * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
-    * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --install stable`
+  * [ ] Install the stable version of Foundry via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -114,9 +112,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Check if oracle deployment is required (e.g. univ3-lp-oracle, new ilk pip, ...) with responsible ecosystem actor
   * IF addresses are used in the spell
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
-    * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT `MKR` and vesting contracts
+    * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT where the archive pattern differs from this pattern (e.g. SKY)
     * [ ] Use the [DssExecLib address helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L192) where possible (e.g. `DssExecLib.vat()`)
-    * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern (e.g. `MKR`)
+    * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
     * [ ] Increment ChainLog version, according to the update type
@@ -132,8 +130,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
-  * [ ] Test DAI/MKR/USDS/SKY/SPK streams and payments, lerps
-  * [ ] Test the sum of all DAI/MKR/USDS/SKY/SPK payments matches the Exec Sheet
+  * [ ] Test DAI/USDS/SKY/SPK streams and payments, lerps
+  * [ ] Test the sum of all DAI/USDS/SKY/SPK payments matches the Exec Sheet
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`

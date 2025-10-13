@@ -5,9 +5,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Install stable Foundry version
-  * [ ] Find the first [Foundry release](https://github.com/foundry-rs/foundry/releases) that is older than 7 days from now
-    * [ ] Insert the release URL here:
-  * [ ] Install the specified version via `foundryup --install stable`
+  * [ ] Install the stable version of Foundry via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
     ```
@@ -96,7 +94,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Source code is verified on etherscan
   * [ ] Compilation optimizations match deployment settings defined in the source code repo
   * [ ] `GNU AGPLv3` license
-  * [ ] Every maker-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
+  * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
   * IF new contract have concept of `wards` or access control
     * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
     * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
@@ -196,15 +194,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Insert and follow the relevant checklists below:
     * [RWA Offboarding](./rwa-checklists.md#rwa-offboarding-checklist)
 * IF payments are present in the spell
-  * IF `MKR` transfers are present
-    * [ ] Recipient address in the instruction is in the checksummed format
-    * [ ] Recipient address matches Exec Sheet
-    * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
-    * [ ] Transfer amount matches Exec Sheet
-    * [ ] Transfer amount is specified with (at least) 2 decimals using `ether` keyword
-    * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token`
-    * [ ] The transfers are tested via `testPayments` test
-    * [ ] Sum of all MKR transfers tested in `testPayments` matches number in the Exec Sheet
   * IF `SKY` transfers are present
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
@@ -226,7 +215,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all USDS transfers tested in `testPayments` matches number in the Exec Sheet
-  * IF `MKR` / `DAI` / `SKY` / `USDS` / `SPK` streams (`DssVest`) are created
+  * IF `DAI` / `SKY` / `USDS` / `SPK` streams (`DssVest`) are created
     * [ ] `VestAbstract` interface is imported from `dss-interfaces/dss/VestAbstract.sol`
     * [ ] `restrict` is used for each stream, UNLESS otherwise explicitly stated in the Exec Sheet
     * [ ] `usr` (Vest recipient address) matches Exec Sheet
@@ -236,8 +225,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF `ether` keyword is used, comment is present on the same line `// Note: ether is a keyword that represents 10**18, not the ETH token`
     * [ ] IF vest amount is expressed in 'per year' or similar in the Exec Sheet, account for leap days
     * [ ] `bgn` (Vest start timestamp) matches Exec Sheet
-    * [ ] `tau` is expressed as `fin - bgn` (i.e. `MONTH_DD_YYYY - MONTH_DD_YYYY`)
-    * [ ] `fin` (Vest end timestamp) matches Exec Sheet
+    * [ ] `tau` is expressed as EITHER:
+        * `fin - bgn` (i.e. `MONTH_DD_YYYY - MONTH_DD_YYYY`)
+            * [ ] `fin` (Vest end timestamp) matches Exec Sheet
+        * time interval (e.g. `365 days`)
     * [ ] `eta` (Vest cliff duration) matches the following logic
       * IF `eta` is explicitly specified in the Exec Sheet, then the values match
       * IF `eta` and `clf` (Cliff end timestamp) are not specified in the Exec Sheet, then `eta` is `0`
@@ -252,9 +243,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Governance facilitators were notified
       * [ ] Exec Sheet contains explicit instruction
       * [ ] Exec Doc contains explicit instruction
-    * IF MKR stream ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) is present
-      * [ ] Vest contract's MKR allowance increased by the cumulative `total` (the sum of all `tot` values)
-      * [ ] Ensure allowance increase follows archive patterns
     * IF SKY stream ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) is present
       * [ ] Vest contract's SKY allowance increased by the cumulative `total` (the sum of all `tot` values)
       * [ ] Ensure allowance increase follows archive patterns
@@ -263,21 +251,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Ensure allowance increase follows archive patterns
     * [ ] Tested via:
       * `testVestDai`
-      * `testVestMkr`
       * `testVestSky`
       * `testVestSkyMint`
       * `testVestUsds`
       * `testVestSpk`
-  * IF `MKR` / `DAI` / `SKY` / `USDS` / `SPK` vest termination (`Yank`) is present
+  * IF `DAI` / `SKY` / `USDS` / `SPK` vest termination (`Yank`) is present
     * [ ] Yanked stream ID matches Exec Sheet
-    * [ ] `MCD_VEST_MKR_TREASURY` chainlog address is used for MKR stream `yank`
     * [ ] `MCD_VEST_SKY_TREASURY` chainlog address is used for SKY stream `yank`
     * [ ] `MCD_VEST_SPK_TREASURY` chainlog address is used for SPK stream `yank`
     * [ ] `MCD_VEST_DAI` chainlog address is used for DAI stream `yank`
     * [ ] `MCD_VEST_USDS` chainlog address is used for USDS stream `yank`
     * [ ] Tested via:
       * `testVestDai`
-      * `testVestMkr`
       * `testVestSky`
       * `testVestSkyMint`
       * `testVestUsds`
@@ -322,9 +307,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Changes are tested via `testChainlogIntegrity`, `testChainlogValues`, `testAddedChainlogKeys` and `testRemovedChainlogKeys`
 * [ ] Ensure every spell variable is declared as `public`/`internal`
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
-  * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (Such as `MKR`)
+  * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
-  * [ ] Where addresses are fetched from the `ChainLog`, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), except where the archive pattern differs from this pattern (e.g. MKR)
+  * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
 * Tests
   * [ ] Ensure that the `DssExecLib.address` file is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit
