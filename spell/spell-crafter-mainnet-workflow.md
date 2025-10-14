@@ -140,7 +140,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Tests PASS via `make test`
-* [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/makerdao/dss-exec-lib/releases/latest)
+* [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
 * [ ] Mark PR as "ready for review" and add reviewers
@@ -182,27 +182,16 @@ Repo: https://github.com/makerdao/spells-mainnet
 ## Deployment Stage
 
 * [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
-* Pre-deploy setup and checks (currently via `dapptools`)
-  * Set local environment variables (`.sethrc`)
-    * Deployer
-      * [ ] Avoid using the same deployer for mainnet and testnet (to avoid deploying contracts with the same address but different sources)
-      * [ ] `export ETH_PASSWORD=~/.env/password.txt`
-      * [ ] `export ETH_KEYSTORE=~/.ethereum/keystore`
-      * [ ] `export ETH_FROM=<address>`
-    * EIP1559
-      * [ ] Run `make estimate` to estimate gas
-      * [ ] `export ETH_GAS=X` with the output of the command above + a safety margin (e.g. `export ETH_GAS=6_000_000`)
-      * [ ] Check current gas price using `seth gas-price` and set `ETH_GAS_PRICE` accordingly (e.g. `50 gwei`)
-      * [ ] Consider adding margin to account for spikes (e.g. current gas price 25 `gwei`, 50 `gwei` could be set)
-      * [ ] `export ETH_GAS_PRICE=$(seth --to-wei X gwei)` (e.g. `export ETH_GAS_PRICE=25_000_000_000`)
-      * [ ] Check [current gas priority fee](https://etherscan.io/gastracker) and set `ETH_PRIO_FEE` accordingly
-      * [ ] `export ETH_PRIO_FEE=$(seth --to-wei X gwei)` (e.g. `export ETH_PRIO_FEE=2_000_000_000`)
-    * [ ] `export ETH_RPC_URL=<url>` to set mainnet RPC URL
-    * [ ] `export ETHERSCAN_API_KEY=<key>` to set Etherscan API KEY
-    * [ ] `source .sethrc` to make env vars available
+* Pre-deploy setup and checks (currently via Foundry)
+  * Set local environment variables
+    * [ ] Avoid using the same deployer for mainnet and testnet (to avoid deploying contracts with the same address but different sources)
+    * [ ] Avoid saving the values to the shell history (e.g. prefer a script or dynamically provided values `VAR=$(cat var.txt)`)
+    * [ ] `ETH_RPC_URL` - an Ethereum RPC URL
+    * [ ] `ETH_KEYSTORE` - a location to the keystore file, e.g. `~/.foundry/keystores/deploy`
+    * [ ] `ETHERSCAN_API_KEY` - an Etherscan API key for spell verification
   * Check local env
-    * [ ] `seth ls`
-    * [ ] `seth chain`
+    * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
+    * [ ] `cast chain-id` shows `1` for Mainnet
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
@@ -242,7 +231,7 @@ Repo: https://github.com/makerdao/spells-mainnet
       * [ ] Run old test script to ensure results are the same
       * [ ] IF results different, flag with Governance Facilitators
       * [ ] Obtain approval of the safety of the new script from both Spell Reviewers
-    * IF the PR modified `DssExecLib.address` file
+    * IF the PR modified `DssExecLib` address inside `foundry.toml`
       * [ ] Obtain approval of the safety of the new address from Spell Reviewers
       * [ ] Obtain approval of the safety of the new address from Governance Facilitators
 * [ ] Squash & Merge
