@@ -188,7 +188,6 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Avoid saving the values to the shell history (e.g. prefer a script or dynamically provided values `VAR=$(cat var.txt)`)
     * [ ] `ETH_RPC_URL` - an Ethereum RPC URL
     * [ ] `ETH_KEYSTORE` - a location to the keystore file, e.g. `~/.foundry/keystores/deploy`
-    * [ ] `ETH_KEYSTORE_PASSWORD` - a password to the keystore file (or omit setting it to be prompted during deploy)
     * [ ] `ETHERSCAN_API_KEY` - an Etherscan API key for spell verification
   * Check local env
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
