@@ -201,13 +201,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all SKY transfers tested in `testPayments` matches number in the Exec Sheet
-  * IF `DAI` surplus buffer transfers are present
-    * [ ] Recipient address in the instruction is in the checksummed format
-    * [ ] Recipient address matches Exec Sheet
-    * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
-    * [ ] Transfer amount matches Exec Sheet
-    * [ ] The transfers are tested via `testPayments` test
-    * [ ] Sum of all DAI transfers tested in `testPayments` matches number in the Exec Sheet
   * IF `USDS` surplus buffer transfers are present
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
@@ -243,10 +236,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Governance facilitators were notified
       * [ ] Exec Sheet contains explicit instruction
       * [ ] Exec Doc contains explicit instruction
-    * IF SKY stream ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) is present
+    * IF new SKY streams ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) are present
       * [ ] Vest contract's SKY allowance increased by the cumulative `total` (the sum of all `tot` values)
       * [ ] Ensure allowance increase follows archive patterns
-    * IF SPK stream ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) is present
+    * IF new SPK streams ([DssVestTransferrable](https://github.com/sky-ecosystem/dss-vest/blob/master/src/DssVest.sol#L463)) are present
       * [ ] Vest contract's SPK allowance increased by the cumulative `total` (the sum of all `tot` values)
       * [ ] Ensure allowance increase follows archive patterns
     * [ ] Tested via:
@@ -309,7 +302,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
-  * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
+  * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * Tests
   * [ ] Ensure that the `DssExecLib.address` file is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit
@@ -335,7 +328,7 @@ _Insert your local test logs here_
 * [ ] Wait till the Exec Doc is merged
 * Exec Doc checks
   * [ ] Exec Doc for the specified date is found in the [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)
-  * [ ] Exec Doc is located in the directory matching the target spell date year (e.g. `2025/`)
+  * [ ] Exec Doc is located in the directory matching the target spell date year (`YYYY/`)
   * [ ] Exec Doc file name follows the format `executive-vote-YYYY-MM-DD-optional-description.md`
   * [ ] Extract _permanent_ URL to the raw markdown file and paste it below
     _Insert your Raw Exec Doc URL here_
