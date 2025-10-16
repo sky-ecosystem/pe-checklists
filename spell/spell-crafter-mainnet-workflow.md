@@ -130,15 +130,7 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] IF the command outputs a solidity snippet:
       * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting.
       * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
-      * [ ] If not already present, add the helper function to perform the call:
-```solidity
-function _updateSafeHarbor(bytes[] memory calldatas) public {
-  for (uint256 i = 0; i < calldatas.length; i++) {
-    (bool success, ) = address(AGREEMENT_ADDRESS).call(calldatas[i]);
-    require(success, "SaferHarbor call failed");
-  }
-}
-```
+      * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
