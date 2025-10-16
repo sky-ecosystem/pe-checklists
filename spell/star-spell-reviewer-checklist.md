@@ -116,7 +116,7 @@ This section outlines the review process and provides concrete action items for 
 ### Development Stage
 
 #### Preparation
-- LIST every commit since the last externally reviewed spell.
+- LIST every commit since the last externally reviewed spell:
   - `COMMIT_TITLE`, URL_TO_THE_PR_OR_THE_COMMIT
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
@@ -135,7 +135,7 @@ This section outlines the review process and provides concrete action items for 
     - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
-- [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`
+- [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
 
 #### Contract Structure & Code Quality
 - [ ] The only external non-view function in the spell contract is `execute()`.
@@ -144,16 +144,16 @@ This section outlines the review process and provides concrete action items for 
 - [ ] All function visibility modifiers are explicitly declared.
 - [ ] No redundant code or commented-out functionality.
 - [ ] Addresses must be fetched from the relevant protocol's address registry (e.g., `spark-address-registry`, `bloom-address-registry`) IF they are present there, OTHERWISE defined as `constant` and have trusted source (e.g., when onboarding new contracts).
-- LIST all addresses used in the spell (defined as `constant` or fetched from the registry repo)
+- LIST every address used in the spell (defined as `constant` or fetched from the registry repo):
   - [CHAIN_NAME] `0xADDRESS`, EXTERNAL_SOURCE_URL
-    - [ ] Matches valid external source (previously approved forum post, external docs, etc)
+    - [ ] Matches valid external source (previously approved forum post, external docs, etc).
 
 #### On-boarding New Contracts
 - LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
     - [ ] Source code is verified on Etherscan or other primary block explorer for this chain.
     - [ ] Source code matches corresponding audited GitHub source code.
-      - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect.)
+      - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
     - LIST every constructor argument:
@@ -168,7 +168,7 @@ This section outlines the review process and provides concrete action items for 
 - LIST every submodule or any other imported code used in this spell:
   - `DEPENDENCY_NAME` imported at commit `COMMIT_HASH` COMMIT_URL
     - [ ] The dependency commit matches audited commit.
-    - [ ] The dependency commit matches the version of the deployed contracts. (if ALM contracts are updated, then dependency also needs to be updated and vice-versa: dependency shouldn't be updated unless the ALM contracts are updated)
+    - [ ] The dependency commit matches the version of the deployed contracts. (if ALM contracts are updated, then dependency also needs to be updated and vice-versa: dependency shouldn't be updated unless the ALM contracts are updated).
 
 #### Interfaces
 - [ ] No unused static interfaces.
@@ -179,7 +179,7 @@ This section outlines the review process and provides concrete action items for 
 #### Variable Declarations
 - [ ] Every contract variable is declared as either `constant` or `immutable`.
 - [ ] Every precision variable (`WAD`, `RAY`, `RAD`, etc) match their expected value.
-- LIST every variable using precision (`e18`, `e6`, `e...`, `WAD`, `RAY`, `RAD`, etc)
+- LIST every variable using precision (`e18`, `e6`, `e...`, `WAD`, `RAY`, `RAD`, etc):
   - `VARIABLE_NAME` with precision `VALUE_WITH_PRECISION`, PREVIOUS_OCCASION_OR_PRECISION_SOURCE_URL
     - [ ] The precision matches provided source url.
 - [ ] Rates are expressed correctly (e.g. per `/ 1 days`).
@@ -209,9 +209,10 @@ This section outlines the review process and provides concrete action items for 
 - [ ] Proper error handling for all external interactions.
 
 #### Testing
-- LIST all tests and explain their coverage
-  - `TEST_FUNCTION_NAME` ensures EXPLANATION_OF_WHAT_IT_ENSURES
-    - [ ] The test is sufficient to ensure correctness the high-level goal behind tested spell action
+- LIST each spell action (each line of code which changes a storage):
+  - INTENDED_SPELL_ACTION tested via TEST_NAME_1, TEST_NAME_2
+    - [ ] The unit test ensures the new value was changed in the spell.
+    - [ ] The end-to-end test is sufficient to ensure correctness the high-level goal behind this spell action.
 - [ ] All actions are covered by tests.
 - [ ] Integration tests verify the end-to-end execution flow.
 - [ ] Gas tests ensure execution is possible within the existing block gas limit.
@@ -237,8 +238,8 @@ EXECUTED_TESTS_LOGS
 ### Deployment Stage
 
 #### Deployed Contract
-- [ ] Both reviewers gave explicit "Good to deploy"
-- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s)
+- [ ] Both reviewers gave explicit "Good to deploy".
+- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
 - [ ] Every spell code matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
