@@ -111,23 +111,31 @@ graph TB
 
 ## Star Spells Review Process
 
-This section outlines the review process, divided into several stages from development to deployment.
+This section outlines the review process and provides concrete action items for both the crafter and reviewers of the spell. The document is divided into separate stages ("Development", "Deployment", "Handover"). Both reviewers must complete all checks in the relevant stage and publish them as the PR comment at the end of each stage.
 
 ### Development Stage
 
 #### Preparation
-- [ ] Check all commits made after the previous spell was merged to ensure no security-related changes are present.
+- LIST every commit since the last externally reviewed spell:
+  - `COMMIT_TITLE`, URL_TO_THE_PR_OR_THE_COMMIT
+    - [ ] Content matches description: no unrelated changes.
+    - [ ] No security-related changes are present in this commit.
 - [ ] Verify solc version matches the Star protocol standard based on prior Star contracts.
-- [ ] Verify spell instructions match the executive document.
-- [ ] Core Spell office hours is `true` IF the Star Spell introduces a major change that can affect external parties, OTHERWISE explicitly set to `false`.
 
 #### Spell Description & Comments
-- [ ] Spell has a clear description.
-- [ ] All significant actions and parameter changes are clearly commented.
-- [ ] Every _Instruction text_ from the executive document is copied to the spell code as a comment.
-- [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
-- [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
-- [ ] All parameter changes are clearly commented with before/after values.
+- [ ] Spell PR has clear description.
+- [ ] Spell contract has a clear description.
+- [ ] Every significant action and parameter change are clearly commented in the code.
+- [ ] Every significant action has valid source url (forum post, poll, atlas).
+- [ ] Every parameter change is clearly commented with before/after values.
+
+#### Proposed changes
+- LIST every forum post proposing changes for this particular Star, particular target date:
+  - FORUM_POST_TITLE, FORUM_POST_URL
+    - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
+- [ ] Verify spell content matches the combined scope of the forum posts listed above.
+- [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
+- [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
 
 #### Contract Structure & Code Quality
 - [ ] The only external non-view function in the spell contract is `execute()`.
@@ -135,22 +143,33 @@ This section outlines the review process, divided into several stages from devel
 - [ ] No unused imports, interfaces, methods, or variables.
 - [ ] All function visibility modifiers are explicitly declared.
 - [ ] No redundant code or commented-out functionality.
-- [ ] Addresses must be fetched from the relevant protocol's address registry (e.g., `spark-address-registry`, `bloom-address-registry`) IF they are present, OTHERWISE defined as `constant` when sourced from a trusted source (i.e., new contracts onboarding).
-	
-#### On-boarding New Contracts
+- [ ] Addresses must be fetched from the relevant protocol's address registry (e.g., `spark-address-registry`, `bloom-address-registry`) IF they are present there, OTHERWISE defined as `constant` and have trusted source (e.g., when onboarding new contracts).
+- LIST every address used in the spell (defined as `constant` or fetched from the registry repo):
+  - [CHAIN_NAME] `0xADDRESS`, EXTERNAL_SOURCE_URL
+    - [ ] Matches valid external source (previously approved forum post, external docs, etc).
 
-- FOREACH new contract present in the spell:
-  - [ ] Source code is verified on etherscan
-  - [ ] Source code matches corresponding audited GitHub source code
-    - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect.)
-  - [ ] Consistent compilation optimizations match deployment settings defined in the source code repo
-  - [ ] Consistent license
-  - [ ] Every constructor argument is validated
-- FOREACH new contract that have the concept of `wards` or access control:
-  - [ ] Ensure the Star `SubProxy` address was `relied` (`wards(STAR_PROXY)` is `1`)
-  - [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
-  - [ ] Ensure that there are no other `Rely` events except for `STAR_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
-	
+#### On-boarding New Contracts
+- LIST every new contract present in the spell:
+  - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
+    - [ ] Source code is verified on Etherscan or other primary block explorer for this chain.
+    - [ ] Source code matches corresponding audited GitHub source code.
+      - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
+    - [ ] Compilation optimizations match deployment settings defined in the source code repo.
+    - [ ] Consistent license.
+    - LIST every constructor argument:
+      - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
+        - [ ] The value has valid external source.
+    - [ ] IF the contract have a concept of access control or `wards`:
+      - [ ] Expected admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
+      - [ ] Contract deployer address has no access (e.g. `wards(deployer)` is `0`).
+      - [ ] No other addresses has access to this contract.
+
+#### Dependency checks
+- LIST every submodule or any other imported code used in this spell:
+  - `DEPENDENCY_NAME` imported at commit `COMMIT_HASH` COMMIT_URL
+    - [ ] The dependency commit matches audited commit.
+    - [ ] The dependency commit matches the version of the deployed contracts. (if ALM contracts are updated, then dependency also needs to be updated and vice-versa: dependency shouldn't be updated unless the ALM contracts are updated).
+
 #### Interfaces
 - [ ] No unused static interfaces.
 - [ ] Declared static interface is not present in standard libraries, OTHERWISE should be imported from there.
@@ -158,13 +177,17 @@ This section outlines the review process, divided into several stages from devel
 - [ ] Each static interface declares only functions actually used in the spell code.
 
 #### Variable Declarations
-- [ ] All state variables are either `constant` or `immutable`.
-- [ ] Precision units (`WAD`, `RAY`, `RAD`) match their standard defined values.
-- [ ] Rates are calculated correctly and match their source (e.g., governance poll).
+- [ ] Every contract variable is declared as either `constant` or `immutable`.
+- [ ] Every precision variable (`WAD`, `RAY`, `RAD`, etc) match their expected value.
+- LIST every variable using precision (`e18`, `e6`, `e...`, `WAD`, `RAY`, `RAD`, etc):
+  - `VARIABLE_NAME` with precision `VALUE_WITH_PRECISION`, PREVIOUS_OCCASION_OR_PRECISION_SOURCE_URL
+    - [ ] The precision matches provided source url.
+- [ ] Rates are expressed correctly (e.g. per `/ 1 days`).
+- [ ] Rates match their source (e.g., governance poll).
 - [ ] Timestamps are commented with the full UTC date and convert correctly.
+- [ ] Timestamps match their source (e.g., governance poll).
 
 #### Deployment & Execution Security
-- [ ] Spell is deployed using standard `CREATE` (not `CREATE2`).
 - [ ] No `selfdestruct()` operations in the spell.
 - [ ] No `delegatecall()` to untrusted contracts.
 - [ ] No use of `tx.origin` for authorization.
@@ -177,42 +200,72 @@ This section outlines the review process, divided into several stages from devel
 #### Access Control
 - [ ] Spell execution cannot be front-run by malicious actors.
 - [ ] No privileged functions accessible by unauthorized users.
-- [ ] For new contracts with access control (`wards`), ensure `PAUSE_PROXY` is `relied` and the deployer is `denied`.
 
 #### Parameter Changes & Protocol Integration
 - [ ] Star Protocol invariants are maintained after spell execution.
 - [ ] All parameter changes use the appropriate helper functions IF available.
-- [ ] Parameter changes match the executive document exactly.
+- [ ] Parameter changes match the Executive Sheet exactly.
 - [ ] Spell interacts correctly with existing protocol components.
 - [ ] Proper error handling for all external interactions.
 
 #### Testing
+- LIST each spell action (each line of code which changes a storage):
+  - INTENDED_SPELL_ACTION tested via TEST_NAME_1, TEST_NAME_2
+    - [ ] The unit test ensures the new value was changed in the spell.
+    - [ ] The end-to-end test is sufficient to ensure correctness the high-level goal behind this spell action.
 - [ ] All actions are covered by tests.
 - [ ] Integration tests verify the end-to-end execution flow.
 - [ ] Gas tests ensure execution is possible within the existing block gas limit.
-- [ ] Fork tests are used to simulate execution on a mainnet state.
-- [ ] All tests are passing in CI.
-- [ ] All tests are passing locally.
+- [ ] All tests are passing in CI at COMMIT_HASH.
+- [ ] All tests listed above are not `skipped`.
+- [ ] All tests are passing locally at COMMIT_HASH:
 
-### Pre-Deployment Stage
-- [ ] Final review of the executive document to ensure it matches the spell code.
-- [ ] All actions present in the spell code are present in the final executive document.
-- [ ] All actions in the final executive document are present in the spell code.
-- [ ] If new commits were added after the initial review, the relevant checklist items have been re-verified.
-- [ ] An explicit "Good to deploy" comment has been added to the PR by the required reviewers.
+```
+EXECUTED_TESTS_LOGS
+```
 
-### Deployed Stage
-- [ ] Deployed spell is verified on Etherscan.
-- [ ] Deployed spell code matches the source on GitHub.
-- [ ] Etherscan settings (optimizer, EVM version, license) are correct.
-- [ ] A Tenderly simulation has been run and reviewed.
-- [ ] The simulation shows all actions are executed successfully.
-- [ ] The simulation shows no reverts or out-of-gas errors.
+#### Pre-Deployment checks
+- [ ] Actions listed in the [Executive Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw/edit) for this Star match the spell scope.
+- [ ] Every _Instruction text_ from the Executive Sheet is copied to the spell code as a comment.
+- [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
+- [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
+- [ ] All actions present in the spell code are present in the final Executive Sheet.
+- [ ] All actions in the final Executive Sheet are present in the spell code.
+- [ ] IF new commits were added after the initial review, the relevant checklist items have been re-verified.
+- [ ] IF no blockers were found, post the completed "Development Stage" checklist stage with the explicit "Good to deploy" note on top.
 
-### Handover and Merge Stage
-- [ ] All review comments have been addressed.
-* [ ] Check that the spell address posted by the crafter in the appropriate channel is correct
-* [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits)
-  * [ ] Wait until responsible governance facilitator confirms handover in `new-spells`
-* [ ] Ensure that no changes were made to the code since the spell was deployed and archived
-* [ ] Approve spell PR for merge via 'Approve' review option
+
+### Deployment Stage
+
+#### Deployed Contract
+- [ ] Both reviewers gave explicit "Good to deploy".
+- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
+- [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
+- [ ] Every spell code matches local source code at the "good to deploy" commit.
+- [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
+- [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
+- [ ] Tests are updated to execute against the deployed spell(s).
+- [ ] All tests are passing in CI at COMMIT_HASH.
+- [ ] All tests listed above are not `skipped`.
+- [ ] All tests are passing locally at COMMIT_HASH:
+
+```
+EXECUTED_TESTS_LOGS
+```
+
+#### Simulation Checks
+- [ ] The Tenderly simulation shows all actions are executed successfully.
+- [ ] The Tenderly simulation shows no extra actions not present in the spell are executed.
+- [ ] The Tenderly simulation shows no reverts or out-of-gas errors.
+- [ ] IF no blockers were found, post the completed "Deployment Stage" checklist stage with the explicit "Good to handover" note on top.
+
+### Handover Stage
+
+#### Confirmed Handover
+- [ ] Both reviewers gave explicit "Good to handover".
+- [ ] All review comments have been addressed or resolved.
+- [ ] The spell address posted by the crafter in the `#govops` thread matches the spell evaluated above.
+- [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
+- [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
+- [ ] Approve spell PR for merge via 'Approve' review option.
+- [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval.
