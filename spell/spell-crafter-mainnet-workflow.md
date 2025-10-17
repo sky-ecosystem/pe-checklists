@@ -126,11 +126,14 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Run `make safeharbor-generate` command in the `spells-mainnet` repo to check for bug bounty updates
-    * [ ] IF the command outputs a solidity snippet:
-      * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting.
-      * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
-      * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
+    * [ ] Check that output of make safeharbor-generate matches the instructions provided by Governance Facilitators
+      * [ ] If no instructions were provided and script produces "no changes", then no further action is required
+      * [ ] If there is a mismatch, crafter should notify Governance Facilitators
+      * [ ] If the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators.
+      * [ ] If the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
+        * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
+        * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
+        * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
@@ -225,7 +228,7 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* [ ] Verify `make safeharbor-generate` returns empty diff in the casted environment after spell execution.
+* [ ] `make safeharbor-generate` returns empty diff in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
