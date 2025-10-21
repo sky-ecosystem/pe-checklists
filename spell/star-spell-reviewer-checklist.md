@@ -148,6 +148,15 @@ This section outlines the review process and provides concrete action items for 
   - [CHAIN_NAME] `0xADDRESS`, EXTERNAL_SOURCE_URL
     - [ ] Matches valid external source (previously approved forum post, external docs, etc).
 
+### StarGuard execution
+- [ ] IF a [StarGuard module](https://github.com/sky-ecosystem/star-guard) is onboarded for this Star, the following additional checks are done:
+- [ ] The spell exposes view-only interface `function isExecutable() external view returns (bool result)`.
+- [ ] `isExecutable` either simply returns `true` or implements additional logic communicated via the relevant forum post (e.g.: by describing "earliest launch date" or "office hours" logic, etc).
+- [ ] The test is preset to ensure that `isExecutable` outputs `true` before `StarGuard.maxDelay()` exires the spell.
+- [ ] Third-party actors can not take advantage of the fact that Spell will be executed in a later block than the Core spell, otherwise suggest `direct execution`.
+- [ ] IF Prime spell can not be executed in a later block OR have to be executed sequentially to another Prime spell, `direct execution` is clearly proposed in the forum post together with elaborated explanation why it is needed.
+- [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.
+
 #### On-boarding New Contracts
 - LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
@@ -240,6 +249,8 @@ EXECUTED_TESTS_LOGS
 #### Deployed Contract
 - [ ] Both reviewers gave explicit "Good to deploy".
 - [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
+- [ ] The comment also contains codehash of the deployed mainnet spell.
+- [ ] The codehash matches one produced locally from the reviewed source code.
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
 - [ ] Every spell code matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
@@ -264,7 +275,10 @@ EXECUTED_TESTS_LOGS
 #### Confirmed Handover
 - [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
-- [ ] The spell address posted by the crafter in the `#govops` thread matches the spell evaluated above.
+- [ ] The spell address, the codehash and the direct execution are posted by the crafter in the `#govops` in the `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` format.
+- [ ] Posted spell address matches the spell evaluated above.
+- [ ] Posted spell codehash matches the one noted down above.
+- [ ] Posted direct execution matches expected value.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
 - [ ] Approve spell PR for merge via 'Approve' review option.
