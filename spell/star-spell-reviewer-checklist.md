@@ -204,7 +204,7 @@ This section outlines the review process and provides concrete action items for 
 #### Parameter Changes & Protocol Integration
 - [ ] Star Protocol invariants are maintained after spell execution.
 - [ ] All parameter changes use the appropriate helper functions IF available.
-- [ ] Parameter changes match the Executive Sheet exactly.
+- [ ] Parameter changes match the Executive Sheet or the corresponding Atlas edit exactly.
 - [ ] Spell interacts correctly with existing protocol components.
 - [ ] Proper error handling for all external interactions.
 
@@ -226,11 +226,15 @@ EXECUTED_TESTS_LOGS
 
 #### Pre-Deployment checks
 - [ ] Actions listed in the [Executive Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw/edit) for this Star match the spell scope.
+  - [ ] IF Executive Sheet is not yet ready at the time of review, reference [the corresponding Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal)
 - [ ] Every _Instruction text_ from the Executive Sheet is copied to the spell code as a comment.
+  - [ ] IF Executive Sheet is not yet ready at the time of review, reference [the corresponding Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal)
 - [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
 - [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
 - [ ] All actions present in the spell code are present in the final Executive Sheet.
+  - [ ] IF Executive Sheet is not yet ready at the time of review, reference [the corresponding Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal)
 - [ ] All actions in the final Executive Sheet are present in the spell code.
+  - [ ] IF Executive Sheet is not yet ready at the time of review, reference [the corresponding Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal)
 - [ ] IF new commits were added after the initial review, the relevant checklist items have been re-verified.
 - [ ] IF no blockers were found, post the completed "Development Stage" checklist stage with the explicit "Good to deploy" note on top.
 
