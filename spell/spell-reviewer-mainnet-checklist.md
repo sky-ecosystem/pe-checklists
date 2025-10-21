@@ -245,14 +245,15 @@
   * IF Prime spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
-      * [ ] The spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
+      * [ ] The Prime spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
       * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
       * [ ] `XXX_STARGUARD` is fetched from chainlog
-      * [ ] The test ensures the spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] The test ensures the `XXX_SPELL` Prime spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware, already notified
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
-      * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");`
-      * [ ] The spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+      * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
+      * [ ] The Prime spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
     * [ ] Prime spell address (`XXX_SPELL`) matches Exec Sheet
