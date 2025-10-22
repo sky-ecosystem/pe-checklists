@@ -249,8 +249,8 @@ EXECUTED_TESTS_LOGS
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
 - [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
 - [ ] Tests are updated to execute against the deployed spell(s).
+- [ ] No test is skipped after deployment
 - [ ] All tests are passing in CI at COMMIT_HASH.
-- [ ] All tests listed above are not `skipped`.
 - [ ] All tests are passing locally at COMMIT_HASH:
 
 ```
