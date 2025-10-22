@@ -21,6 +21,7 @@ EOA
 EOAs
 ERC
 EVM
+Ethereum
 Etherscan
 EthTx
 ExecLib
@@ -114,6 +115,7 @@ https
 immutable
 immutables
 invariants
+keystore
 kprFlatReward
 kprPctReward
 liquidationPenalty
