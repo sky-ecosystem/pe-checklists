@@ -152,7 +152,7 @@ This section outlines the review process and provides concrete action items for 
 - [ ] IF a [StarGuard module](https://github.com/sky-ecosystem/star-guard) is onboarded for this Star, the following additional checks are done:
 - [ ] The spell exposes view-only interface `function isExecutable() external view returns (bool result)`.
 - [ ] `isExecutable` either simply returns `true` or implements additional logic communicated via the relevant forum post (e.g.: by describing "earliest launch date" or "office hours" logic, etc).
-- [ ] The test is preset to ensure that `isExecutable` outputs `true` before `StarGuard.maxDelay()` exires the spell.
+- [ ] The test is preset to ensure that `isExecutable` outputs `true` before `StarGuard.maxDelay()` expires the spell.
 - [ ] Third-party actors can not take advantage of the fact that Spell will be executed in a later block than the Core spell, otherwise suggest `direct execution`.
 - [ ] IF Prime spell can not be executed in a later block OR have to be executed sequentially to another Prime spell, `direct execution` is clearly proposed in the forum post together with elaborated explanation why it is needed.
 - [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.

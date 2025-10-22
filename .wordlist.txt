@@ -68,6 +68,7 @@ Repo
 Solmate
 SPDX
 StairstepExponentialDecrease
+StarGuard
 Starknet
 SubDAO
 SubDAOs
@@ -90,6 +91,7 @@ authing
 bytecode
 casted
 checksummed
+codehash
 collateralization
 collaterals
 config
