@@ -271,5 +271,4 @@ EXECUTED_TESTS_LOGS
 - [ ] The spell address posted by the crafter in the `#govops` thread matches the spell evaluated above.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
-- [ ] Approve spell PR for merge via 'Approve' review option.
-- [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval.
+- [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
