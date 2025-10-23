@@ -333,7 +333,7 @@ _Insert your local test logs here_
   * [ ] Extract _permanent_ URL to the raw markdown file and paste it below
     _Insert your Raw Exec Doc URL here_
   * [ ] Ensure the URL uses commit hash that introduced last change to the Exec Doc, NOT merge commit 
-    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes)), run:
+    * [ ] IF there is no local copy of [`sky-ecosystem/executive-votes` GitHub repo](https://github.com/sky-ecosystem/executive-votes), run:
       ```
       git clone https://github.com/sky-ecosystem/executive-votes
       ```
