@@ -291,6 +291,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
+* IF bug bounty registry updates are present
+  * [ ] Run `make safeharbor-generate`
+    * [ ] Verify that the generated code exactly matches the code in the spell
+    * [ ] Verify that output matches the instructions provided by Governance Facilitators
+    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
+  * [ ] Ensure that agreement address is fetched from the Chainlog
+  * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -404,6 +411,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
+  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

@@ -90,6 +90,9 @@ auth
 authed
 authing
 bytecode
+Calc
+CalcFab
+calldata
 casted
 checksummed
 collateralization
@@ -133,6 +136,11 @@ precomputed
 prepended
 redemptions
 repos
+RPC
+RWA
+RWAXXX
+RWAXYZ
+safeharbor
 setIlkAutoLineDebtCeiling
 setIlkAutoLineParameters
 setIlkDebtCeiling

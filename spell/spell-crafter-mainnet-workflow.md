@@ -126,6 +126,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
+  * Bug Bounty Registry Updates
+    * [ ] Check that output of make safeharbor-generate matches the instructions provided by Governance Facilitators
+      * [ ] If no instructions were provided and script produces "no changes", then no further action is required
+      * [ ] If there is a mismatch, crafter should notify Governance Facilitators
+      * [ ] If the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators.
+      * [ ] If the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
+        * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
+        * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
+        * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
@@ -140,6 +149,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
+  * IF bug bounty updates are present
+    * [ ] Test that all bug bounty registry calls execute successfully
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -218,6 +229,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
+* [ ] `make safeharbor-generate` returns empty diff in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
