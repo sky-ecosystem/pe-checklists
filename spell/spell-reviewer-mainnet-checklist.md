@@ -19,6 +19,7 @@
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
+  * [ ] `make safeharbor-generate` outputs matches the instructions on the Exec Sheet. If there is a mismatch, notify Governance Facilitators.
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -391,6 +392,7 @@ _Insert your local test logs here_
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
   * [ ] `make safeharbor-generate` against the testnet returns "no updates"
+    * [ ] If the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators.
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

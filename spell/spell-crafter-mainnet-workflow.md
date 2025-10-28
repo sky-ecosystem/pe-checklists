@@ -66,6 +66,8 @@ Repo: https://github.com/makerdao/spells-mainnet
     * [ ] Remove unused interface declarations
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
+* [ ] Run `make safeharbor-generate` to ensure that updates matches the bug bounty updates instructions on the Exec Sheet.
+  * [ ] If there is a mismatch, notify Governance Facilitators.
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -126,13 +128,13 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Check that output of make safeharbor-generate matches the instructions provided by Governance Facilitators
+    * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
       * [ ] If no instructions were provided and script produces "no changes", then no further action is required
       * [ ] If there is a mismatch, crafter should notify Governance Facilitators
       * [ ] If the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators.
       * [ ] If the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
         * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
-        * [ ] Import the `AGREEMENT_ADDRESS` from the `ChainLog`
+        * [ ] Fetch the agreement address from the `ChainLog`
         * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
@@ -228,7 +230,7 @@ Repo: https://github.com/makerdao/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* [ ] `make safeharbor-generate` returns empty diff in the testnet environment after spell was cast
+* [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
