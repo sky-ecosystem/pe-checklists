@@ -1,12 +1,12 @@
-# Star Spells Reviewer Checklist
+# Prime Agent Spells Reviewer Checklist
 
-This checklist provides guidance for crafting and reviewing spells for Star protocols (Spark, Bloom, etc.). It focuses on common practices and should be used alongside protocol-specific knowledge.
+This checklist provides guidance for crafting and reviewing spells for the Prime Agents (Spark, Grove, Keel, etc.). It focuses on common practices and should be used alongside protocol-specific knowledge.
 
 ## Governance Architecture Considerations
 
 ### Spells Contracts Relationships
 
-The diagram below illustrates that, despite the name, `StarSpell` is functionally more similar to `DssSpellAction` than to `DssSpell`. Both `StarSpell` and `DssSpellAction` contain executable logic, whereas `DssSpell` primarily handles scheduling and execution triggering through `MCD_PAUSE`. This architectural similarity is important to understand when reviewing and developing spells for Star protocols.
+The diagram below illustrates that, despite the name, `PrimeAgentSpell` is functionally more similar to `DssSpellAction` than to `DssSpell`. Both `PrimeAgentSpell` and `DssSpellAction` contain executable logic, whereas `DssSpell` primarily handles scheduling and execution triggering through `MCD_PAUSE`. This architectural similarity is important to understand when reviewing and developing spells for the Prime Agent protocols.
 
 <details>
 <summary><b>View Diagram</b></summary>
@@ -26,7 +26,7 @@ classDiagram
     DssSpell ..> DssSpellAction : instantiates
 
     %% Functional similarity
-    DssSpellAction <.. StarSpell : functionally similar
+    DssSpellAction <.. PrimeAgentSpell : functionally similar
 
     %% Reference relationship
     DssExec --> DssAction : references
@@ -36,7 +36,7 @@ classDiagram
 
 ### Execution Flow
 
-The diagram bellow illustrates the execution flow of a spell from the Core up to the Star protocol.
+The diagram bellow illustrates the execution flow of a spell from the Core up to the Prime Agent protocol.
 
 <details>
 <summary><b>View Diagram</b></summary>
@@ -62,9 +62,9 @@ graph TB
             MCD_PAUSE_PROXY[MCD_PAUSE_PROXY]
         end
 
-        subgraph StarCode ["Star Protocol"]
+        subgraph StarCode ["Prime Agent Protocol"]
             STAR_PROXY[STAR_PROXY]
-            StarSpell[StarSpell]
+            PrimeAgentSpell[PrimeAgentSpell]
         end
 
         %% Execution Flow with multi-level numbered steps
@@ -75,7 +75,7 @@ graph TB
         MCD_PAUSE -->|2.2\. exec| MCD_PAUSE_PROXY
         MCD_PAUSE_PROXY -->|2.3\. delegatecall| DssSpellAction
         DssSpellAction -->|2.4\. call| STAR_PROXY
-        STAR_PROXY -->|2.5\. delegatecall| StarSpell
+        STAR_PROXY -->|2.5\. delegatecall| PrimeAgentSpell
     end
 
     %% Legend as a single node with HTML table - one item per row - no borders
@@ -87,7 +87,7 @@ graph TB
             </tr>
             <tr style='background:transparent;'>
                 <td width='20' height='20' bgcolor='#f0e6d1' style='border:none;'></td>
-                <td align='left' style='background:transparent; border:none;'>Star Contracts</td>
+                <td align='left' style='background:transparent; border:none;'>Prime Agent Contracts</td>
             </tr>
             <tr style='background:transparent;'>
                 <td width='20' height='20' bgcolor='#f9e8e8' style='border:none;'></td>
@@ -102,14 +102,14 @@ graph TB
     class DssSpell,DssSpellAction core
     class MCD_PAUSE,MCD_PAUSE_PROXY core
     class Governance governance
-    class STAR_PROXY,StarSpell star
+    class STAR_PROXY,PrimeAgentSpell star
     class MainDiagram transparent
     class CoreCode,StarCode boundary
 ```
 
 </details>
 
-## Star Spells Review Process
+## Prime Agent Spells Review Process
 
 This section outlines the review process and provides concrete action items for both the crafter and reviewers of the spell. The document is divided into separate stages ("Development", "Deployment", "Handover"). Both reviewers must complete all checks in the relevant stage and publish them as the PR comment at the end of each stage.
 
@@ -120,7 +120,7 @@ This section outlines the review process and provides concrete action items for 
   - `COMMIT_TITLE`, URL_TO_THE_PR_OR_THE_COMMIT
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
-- [ ] Verify solc version matches the Star protocol standard based on prior Star contracts.
+- [ ] Verify solc version matches the Prime Agent protocol standard based on prior contracts.
 
 #### Spell Description & Comments
 - [ ] Spell PR has clear description.
@@ -130,12 +130,12 @@ This section outlines the review process and provides concrete action items for 
 - [ ] Every parameter change is clearly commented with before/after values.
 
 #### Proposed changes
-- LIST every forum post proposing changes for this particular Star, particular target date:
+- LIST every forum post proposing changes for this particular Prime Agent, particular target date:
   - FORUM_POST_TITLE, FORUM_POST_URL
     - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
-- [ ] IF the Star Spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
+- [ ] IF the Prime Agent spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
 
 #### Contract Structure & Code Quality
 - [ ] The only external non-view function in the spell contract is `execute()`.
@@ -149,12 +149,12 @@ This section outlines the review process and provides concrete action items for 
     - [ ] Matches valid external source (previously approved forum post, external docs, etc).
 
 ### StarGuard execution
-- [ ] IF a [StarGuard module](https://github.com/sky-ecosystem/star-guard) is onboarded for this Star, the following additional checks are done:
+- [ ] IF a [StarGuard module](https://github.com/sky-ecosystem/star-guard) is onboarded for this Prime Agent, the following additional checks are done:
   - [ ] The spell exposes view-only interface `function isExecutable() external view returns (bool result)`.
   - [ ] `isExecutable` either simply returns `true` or implements additional logic communicated via the relevant forum post (e.g.: by describing "earliest launch date" or "office hours" logic, etc).
   - [ ] The test ensures the spell is executable before expiration (i.e. `isExecutable` outputs `true` before `StarGuard.maxDelay()` is passed).
   - [ ] Third-party actors can not take advantage of the fact that Spell will be executed in a later block than the Core spell, otherwise suggest `direct execution`.
-  - [ ] IF Prime spell can not be executed in a later block OR have to be executed sequentially to another Prime spell, `direct execution` is clearly mentioned in the forum post together with elaborated explanation why it is needed.
+  - [ ] IF Prime Agent spell can not be executed in a later block OR have to be executed sequentially to another Prime Agent spell, `direct execution` is clearly mentioned in the forum post together with elaborated explanation why it is needed.
   - [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.
 
 #### On-boarding New Contracts
@@ -211,7 +211,7 @@ This section outlines the review process and provides concrete action items for 
 - [ ] No privileged functions accessible by unauthorized users.
 
 #### Parameter Changes & Protocol Integration
-- [ ] Star Protocol invariants are maintained after spell execution.
+- [ ] Prime Agent protocol invariants are maintained after spell execution.
 - [ ] All parameter changes use the appropriate helper functions IF available.
 - [ ] Parameter changes match the Executive Sheet exactly.
 - [ ] Spell interacts correctly with existing protocol components.
@@ -276,8 +276,8 @@ EXECUTED_TESTS_LOGS
 - [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
 - [ ] The spell address, the codehash and the direct execution are posted by the crafter in the `#govops` in the `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` format.
-- [ ] Posted spell address matches the spell evaluated above.
-- [ ] Posted spell codehash matches the one noted down above.
+- [ ] Posted spell address matches spell address approved for handover.
+- [ ] Posted spell codehash matches codehash that you verified locally.
 - [ ] Posted direct execution value matches the forum post.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
