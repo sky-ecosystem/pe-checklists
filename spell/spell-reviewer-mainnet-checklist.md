@@ -260,27 +260,24 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * `testVestSkyMint`
       * `testVestUsds`
       * `testVestSpk`
-* IF SubDAO-related content is present
-  * IF SubDAO provides SubProxy spell address
-    * [ ] SubDAO spell address matches Exec Sheet
-    * [ ] Executed via `ProxyLike(SUBDAO_PROXY).exec(SUBDAO_SPELL, abi.encodeWithSignature("execute()"));`
-    * [ ] Execution is NOT delegate call
-    * [ ] IF SubDAO spell deployer is a smart contract (e.g. multisig or factory), ensure the deployer address is in `addresses_deployers.sol` as an entry
-    * [ ] Ensure that SubDAO spell have enough gas and does not revert with "out of gas" error inside simulation. Note: low level call gas estimation is not done by our scripts
-  * IF SubDAO provides instructions to be executed by the main spell (i.e. that will operate within Pause Proxy `DelegateCall` context)
-    * [ ] No SubDAO contract being interacted with is authed on a core contract like `vat`, etc. (Check comprehensively where the risk is high)
-    * [ ] SubDAO contract licensing and optimizations generally do not matter (except where they pose a security risk)
-    * [ ] SubDAO contracts and all libraries / dependencies have verified source code (Blocking)
-    * Upgradable SubDAO contracts
-      * [ ] Upgradable contracts have the `PAUSE_PROXY` as their `admin` (i.e. the party that can upgrade)
-      * [ ] Any upgradable SubDAO contracts with an `admin` that is not `PAUSE_PROXY` are not authed on any core contracts (Blocking)
-    * [ ] All SubDAO content addresses (i.e. provided contract addresses or EOAs) present in the Maker Core spell are present in the Exec Sheet and are correct. SubDAO addresses being authed or given any permissions MUST be in the Exec Sheet. SubDAO addresses being called must be confirmed by the SubDAO spell team.
-    * [ ] IF addresses not PR'ed in by the SubDAO team (use git blame for example), SubDAO content addresses all have inline comment for provenance or source being OKed by SubDAO
-    * [ ] SubDAO actions match Exec Sheet (only where inline with main spell code) and do not affect core contracts
-    * [ ] Core contract knock-on actions (such as offboarding or setting DC to 0) are present in the exec and match the code
-    * [ ] External calls for SubDAO content are NOT delegate call
-    * [ ] Code does not have untoward behavior within the scope of Maker Core Contracts (e.g. up to the SubDAO proxy)
-* IF external contracts calls are present (Not SubDAOs, e.g. Starknet)
+* IF content related to a Prime Agent is present
+  * IF Prime Agent spell is provided
+    * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
+    * [ ] IF `direct execution` is `no`
+      * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
+      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+      * [ ] `XXX_STARGUARD` is fetched from chainlog
+      * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified
+    * [ ] IF `direct execution` is `yes`
+      * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
+      * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
+      * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+      * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
+      * [ ] `XXX_PROXY` is fetched from chainlog
+    * [ ] Prime Agent spell address (`XXX_SPELL`) matches Exec Sheet
+    * [ ] Prime Agent spell hash (`XXX_SPELL_HASH`) matches Exec Sheet
+* IF external contracts calls are present (Not Prime Agents, e.g. Starknet)
   * [ ] Target Contract doesn't block spell execution
   * [ ] External call is NOT `delegatecall`
   * [ ] Target Contract doesn't have permissions on the Vat
