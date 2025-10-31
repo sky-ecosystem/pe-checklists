@@ -67,6 +67,7 @@ RWAXYZ
 Repo
 Solmate
 SPDX
+SPK
 StairstepExponentialDecrease
 StarGuard
 Starknet
@@ -80,6 +81,7 @@ TeleportRouter
 TODO
 TOFIX
 Timestamps
+USDS
 YYYY
 antipattern
 arg
