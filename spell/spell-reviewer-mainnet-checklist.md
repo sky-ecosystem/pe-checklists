@@ -2,6 +2,13 @@
 
 Repo: https://github.com/sky-ecosystem/spells-mainnet
 
+### How to update the checklist
+
+- **Do not remove** any checklist item. If an item does not apply to the current spell, cross it out as `[ ] ~~checklist item~~`.
+- If a checklist item cannot be completed, add a comment explaining why and mark it as either `blocking ❌` or `non-blocking ⚠️`.
+- Only check items that are **fully completed**. If an item was skipped, leave it unchecked.
+- For items marked as `LIST`, copy and complete the relevant checklist for each applicable case.
+
 ## Development Stage
 
 * Install stable Foundry version
@@ -90,17 +97,19 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Time of day makes logical sense in the context of timestamp usage (i.e. `23:59:59 UTC` for the final day of something, `00:00:00 UTC` for the first day of something)
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
-* IF new contract is present in the spell (not yet on chainlog or new to chainlog)
-  * [ ] Source code is verified on etherscan
-  * [ ] Compilation optimizations match deployment settings defined in the source code repo
-  * [ ] `GNU AGPLv3` license
-  * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
-  * IF new contract have concept of `wards` or access control
-    * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
-    * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
-    * [ ] Ensure that there are no other `Rely` events except for `PAUSE_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
-  * [ ] Source code matches corresponding github source code (e.g. diffcheck via vscode `code --diff etherscan.sol github.sol`)
-  * [ ] Deployer address is included into `addresses_deployers.sol`
+* LIST all new contracts present in the spell (not yet on chainlog or new to chainlog):
+  * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
+    * [ ] Source code is verified on etherscan
+    * [ ] Compilation optimizations match deployment settings defined in the source code repo
+    * [ ] `GNU AGPLv3` license
+    * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
+    * IF new contract have concept of `wards` or access control
+      * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
+      * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
+      * [ ] Ensure that there are no other `Rely` events except for `PAUSE_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
+    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via vscode `code --diff etherscan.sol github.sol`)
+      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
+    * [ ] Deployer address is included into `addresses_deployers.sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
     * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L792)) is used
@@ -144,11 +153,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L428)
         * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L436)
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
-* IF additional dependencies (i.e. `./src/dependencies/` directory) are present:
-  * [ ] IF the dependencies contracts/libraries have been audited
-    * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
-  * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (i.e. Gov Facilitators)
-    * [ ] Each contract/library exactly matches (i.e. diff check) the source code from the permalink
+* LIST additional dependencies (i.e. `./src/dependencies/` directory) present in the spell:
+  *  `DEPENDENCY_NAME`, LINK_TO_THE_DEPENDENCY_REPO
+    * [ ] IF the dependencies contracts/libraries have been audited
+      * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
+    * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (i.e. Gov Facilitators)
+      * [ ] Each contract/library exactly matches (i.e. diff check) the source code from the permalink
 * IF onboarding is present
   * [ ] Insert and follow the relevant checklists below:
     * [Collateral Onboarding](./collateral-onboarding-checklist.md)
@@ -261,7 +271,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * `testVestUsds`
       * `testVestSpk`
 * IF content related to a Prime Agent is present
-  * IF Prime Agent spell is provided
+  * LIST Prime Agent spells present in the spell:
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
