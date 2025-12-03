@@ -69,6 +69,7 @@ Solmate
 SPDX
 SPK
 StairstepExponentialDecrease
+StarGuard
 Starknet
 SubDAO
 SubDAOs
@@ -95,6 +96,7 @@ CalcFab
 calldata
 casted
 checksummed
+codehash
 collateralization
 collaterals
 config

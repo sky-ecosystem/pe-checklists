@@ -137,6 +137,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
         * [ ] Fetch the agreement address from the `ChainLog`
         * [ ] If not already present, add the helper function to perform the call, using the established archive pattern.  
+  * IF Prime Agent spell is provided
+    * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
+    * [ ] IF `direct execution` is `no`
+      * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
+    * [ ] IF `direct execution` is `yes`
+      * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
+      * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
