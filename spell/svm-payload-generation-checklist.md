@@ -4,12 +4,12 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 
 ## SVM Spell Payload Generation Review Process
 
-### Development Stage
+### Development
 
 #### Preparation
 
 - LIST every spell action being deployed:
-    - **`SCRIPT_NAME`**, scripts/SCRIPT_NAME/, COMMIT_HASH
+    - `SCRIPT_NAME`, scripts/SCRIPT_NAME/, COMMIT_HASH
         - [ ] Spell directory contains generate-payload.ts, validate.ts, and config.ts.
         - [ ] `SCRIPT_NAME.txt` file generated in the `SCRIPT_NAME` folder.
         - [ ] No unrelated files added in the solana payload generation directory.
@@ -34,32 +34,27 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 
 #### Network Configuration
 
-For each ACTION executed list:
-
-- [ ] `ACTION` in scripts/SCRIPT_NAME
-- IF constants in src/ are used or were modified:
-    - LIST every constant used from src/:
-        - **`CONSTANT_NAME`** in src/FILE_NAME.ts: **`VALUE`** from EXTERNAL_SOURCE_URL
-            - [ ] Value matches valid external source.
-            - [ ] Constant is used correctly in spell config.
-- LIST network configurations from config.ts:
-    - [devnet/mainnet/others] NETWORK_CONFIG_NAME, LIST every target account:
-    - **`ACCOUNT_NAME`**: **`PUBKEY`** from EXTERNAL_SOURCE_URL
-    - Address matches valid external source.
-    - Account exists on target network.
-    - Account owner matches expected program.
+- List for each script:
+    - [ ] `SCRIPT` in `scripts/SCRIPT_NAME`
+    - IF constants in `src/` are used or were modified:
+        - LIST every constant used from `src/`:
+            - `CONSTANT_NAME` in `src/FILE_NAME.ts`: `VALUE` from EXTERNAL_SOURCE_URL
+                - [ ] Value matches valid external source.
+                - [ ] Constant is used correctly in spell config.
+    - LIST network configurations from config.ts:
+        - [devnet/mainnet/others] NETWORK_CONFIG_NAME, LIST every target account:
+        - `ACCOUNT_NAME`: `PUBKEY` from EXTERNAL_SOURCE_URL
+        - Address matches valid external source.
+        - Account exists on target network.
+        - Account owner matches expected program.
 
 #### State Change Verification
 
 - LIST every account:
-    - **`ACCOUNT_ADDRESS`** (ACCOUNT_NAME)
+    - `ACCOUNT_ADDRESS` (ACCOUNT_NAME) ,
         - LIST every field that should change:
-            - **`FIELD_NAME`** from **`OLD_VALUE`** to **`NEW_VALUE`** from EXTERNAL_SOURCE_URL
-                - [ ] Value change matches external source.
-                - [ ] Simulation shows correct state change.
-        - LIST every field that should NOT change:
-            - **`FIELD_NAME`** remains **`VALUE`**
-                - [ ] Simulation confirms field is unchanged.
+            - `FIELD_NAME` from `OLD_VALUE` to `NEW_VALUE`
+                - [ ] Value change matches to forum post.
 
 #### Code Structure & Quality
 
@@ -70,23 +65,23 @@ For each ACTION executed list:
 
 #### Dependency Checks
 
-- LIST every package used in the spell:
-    - **`PACKAGE_NAME@VERSION`**
+- LIST every package changed or added in the spell:
+    - `PACKAGE_NAME@VERSION`
         - [ ] Version matches package.json.
         - [ ] Package is updated or in a safer version
 - [ ] Anchor/SDK version matches program deployment.
 
 #### Payload Generation
 
-- [ ] Run generation script: **`NETWORK=[network] ts-node ./scripts/SCRIPT_NAME/generate-payload.ts --file FILENAME`**
-- [ ] Output file created: **`FILENAME-NETWORK.txt`**
+- [ ] Run generation script: `NETWORK=[network] ts-node ./scripts/SCRIPT_NAME/generate-payload.ts --file FILENAME`
+- [ ] Output file created: `FILENAME-NETWORK.txt`
 - [ ] Payload contains hex-encoded data (no errors in generation).
 
-### Validation Stage
+### Validation
 
 #### Simulation Execution
 
-- [ ] Run validation script: **`NETWORK=[network] ts-node ./scripts/SPELL_NAME/validate.ts --file FILENAME`**
+- [ ] Run validation script: `NETWORK=[network] ts-node ./scripts/SPELL_NAME/validate.ts --file FILENAME`
 - [ ] Simulation completes successfully (no errors).
 - [ ] All expected logs are present.
 - [ ] No unexpected program invocations.
@@ -96,7 +91,7 @@ For each ACTION executed list:
 - LIST each spell action (each instruction in the payload):
     - INTENDED_SPELL_ACTION tested via TEST_NAME in validate.ts
         - [ ] Test ensures the new value was set correctly.
-        - [ ] Test uses **`assertNoAccountChanges`** for accounts that shouldn't change.
+        - [ ] Test uses `assertNoAccountChanges` for accounts that shouldn't change.
         - [ ] Test verifies account state before and after.
 - [ ] All actions are covered by validation tests.
 - [ ] All assertions pass locally at COMMIT_HASH:
