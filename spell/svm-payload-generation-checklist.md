@@ -16,6 +16,14 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
         - [ ] Correct NETWORK_CONFIGS exported for both devnet and mainnet.
         - [ ] Single ACTION per payload scripts
 
+**Proposed Changes**
+
+- LIST every forum post proposing changes for this spell:
+    - FORUM_POST_TITLE, FORUM_POST_URL
+        - [ ] Forum post follows governance template.
+- [ ] Verify spell content matches the combined scope of the forum posts listed above.
+- [ ] Verify forum posts contain all Solana addresses (programs, PDAs, tokens) used in the spell.
+
 **Spell Description & Comments**
 
 - [ ] Spell has clear description of Solana state changes.
@@ -23,13 +31,6 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 - [ ] Every account and parameter has valid source url (forum post, poll).
 - [ ] Every parameter is clearly commented with expected before/after values.
 
-**Proposed changes**
-
-- LIST every forum post proposing changes for this spell:
-    - FORUM_POST_TITLE, FORUM_POST_URL
-        - [ ] Forum post follows governance template.
-- [ ] Verify spell content matches the combined scope of the forum posts listed above.
-- [ ] Verify forum posts contain all Solana addresses (programs, PDAs, tokens) used in the spell.
 
 **Network Configuration**
 
@@ -67,7 +68,7 @@ For each ACTION executed list:
 - [ ] Instruction data encoding matches target program interface.
 - [ ] No hardcoded addresses where config values should be used or constants in source
 
-**Dependency checks**
+**Dependency Checks**
 
 - LIST every package used in the spell:
     - **`PACKAGE_NAME@VERSION`**
