@@ -1,12 +1,12 @@
-# **SVM Spell Payload Generation Checklist**
+# SVM Spell Payload Generation Checklist
 
 This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cross-chain governance payloads that execute on Solana via Bridge.
 
-## **SVM Spell Payload Generation Review Process**
+## SVM Spell Payload Generation Review Process
 
-### **Development Stage**
+### Development Stage
 
-**Preparation**
+#### Preparation
 
 - LIST every spell action being deployed:
     - **`SCRIPT_NAME`**, scripts/SCRIPT_NAME/, COMMIT_HASH
@@ -16,7 +16,7 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
         - [ ] Correct NETWORK_CONFIGS exported for both devnet and mainnet.
         - [ ] Single ACTION per payload scripts
 
-**Proposed Changes**
+#### Proposed Changes
 
 - LIST every forum post proposing changes for this spell:
     - FORUM_POST_TITLE, FORUM_POST_URL
@@ -24,7 +24,7 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all Solana addresses (programs, PDAs, tokens) used in the spell.
 
-**Spell Description & Comments**
+#### Spell Description & Comments
 
 - [ ] Spell has clear description of Solana state changes.
 - [ ] Every significant action is clearly commented in generate-payload.ts.
@@ -32,7 +32,7 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 - [ ] Every parameter is clearly commented with expected before/after values.
 
 
-**Network Configuration**
+#### Network Configuration
 
 For each ACTION executed list:
 
@@ -49,7 +49,7 @@ For each ACTION executed list:
     - Account exists on target network.
     - Account owner matches expected program.
 
-**State Change Verification** 
+#### State Change Verification
 
 - LIST every account:
     - **`ACCOUNT_ADDRESS`** (ACCOUNT_NAME)
@@ -61,14 +61,14 @@ For each ACTION executed list:
             - **`FIELD_NAME`** remains **`VALUE`**
                 - [ ] Simulation confirms field is unchanged.
 
-**Code Structure & Quality**
+#### Code Structure & Quality
 
 - [ ] No unused imports, interfaces, or variables.
 - [ ] All addresses are valid Solana public keys.
 - [ ] Instruction data encoding matches target program interface.
 - [ ] No hardcoded addresses where config values should be used or constants in source
 
-**Dependency Checks**
+#### Dependency Checks
 
 - LIST every package used in the spell:
     - **`PACKAGE_NAME@VERSION`**
@@ -76,22 +76,22 @@ For each ACTION executed list:
         - [ ] Package is updated or in a safer version
 - [ ] Anchor/SDK version matches program deployment.
 
-**Payload Generation**
+#### Payload Generation
 
 - [ ] Run generation script: **`NETWORK=[network] ts-node ./scripts/SCRIPT_NAME/generate-payload.ts --file FILENAME`**
 - [ ] Output file created: **`FILENAME-NETWORK.txt`**
 - [ ] Payload contains hex-encoded data (no errors in generation).
 
-### **Validation Stage**
+### Validation Stage
 
-**Simulation Execution**
+#### Simulation Execution
 
 - [ ] Run validation script: **`NETWORK=[network] ts-node ./scripts/SPELL_NAME/validate.ts --file FILENAME`**
 - [ ] Simulation completes successfully (no errors).
 - [ ] All expected logs are present.
 - [ ] No unexpected program invocations.
 
-**Testing**
+#### Testing
 
 - LIST each spell action (each instruction in the payload):
     - INTENDED_SPELL_ACTION tested via TEST_NAME in validate.ts
@@ -105,7 +105,7 @@ For each ACTION executed list:
 EXECUTED_TESTS_LOGS 
 ```
 
-**Output**
+#### Output
 
 For each `ACTION` list the payload generated:
 
