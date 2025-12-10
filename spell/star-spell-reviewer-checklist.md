@@ -161,7 +161,7 @@ This section outlines the review process and provides concrete action items for 
 
 - [ ] IF the spell triggers Solana actions via bridge:
     - LIST every SVM payload referenced in this spell:
-        - [ ] **`SVM_ACTION_NAME`** from REPOSITORY_URL
+        - [ ] `SVM_ACTION_NAME` from REPOSITORY_URL
             - [ ]  Payload hex data is correctly referenced in the EVM spell contract.
             - [ ]  SVM payload has been reviewed using the SVM Payload Generation Checklist.
             - [ ]  IF multiple SVM payloads are triggered, execution order is correct and documented.
