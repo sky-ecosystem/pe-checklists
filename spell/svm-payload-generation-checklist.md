@@ -36,17 +36,11 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 
 - List for each script:
     - [ ] `SCRIPT` in `scripts/SCRIPT_NAME`
-    - IF constants in `src/` are used or were modified:
-        - LIST every constant used from `src/`:
-            - `CONSTANT_NAME` in `src/FILE_NAME.ts`: `VALUE` from EXTERNAL_SOURCE_URL
-                - [ ] Value matches valid external source.
-                - [ ] Constant is used correctly in spell config.
-    - LIST network configurations from config.ts:
-        - [devnet/mainnet/others] NETWORK_CONFIG_NAME, LIST every target account:
-        - `ACCOUNT_NAME`: `PUBKEY` from EXTERNAL_SOURCE_URL
-        - Address matches valid external source.
-        - Account exists on target network.
-        - Account owner matches expected program.
+    - LIST network configurations from `config.ts`:
+        - `NETWORK_CONFIG_NAME`
+        - LIST every target account:
+            - [ ] `FIELD_NAME`: `PUBKEY`
+            - [ ] Address matches valid external source.
 
 #### State Change Verification
 
