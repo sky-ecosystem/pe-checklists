@@ -73,29 +73,26 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 
 ### Validation
 
-#### Simulation Execution
-
-- [ ] Run validation script: `NETWORK=[network] ts-node ./scripts/SPELL_NAME/validate.ts --file FILENAME`
-- [ ] Simulation completes successfully (no errors).
-- [ ] All expected logs are present.
-- [ ] No unexpected program invocations.
-
 #### Testing
 
 - LIST each spell action (each instruction in the payload):
-    - INTENDED_SPELL_ACTION tested via TEST_NAME in validate.ts
+    - SCRIPT_NAME tested via TEST_NAME in validate.ts
         - [ ] Test ensures the new value was set correctly.
         - [ ] Test uses `assertNoAccountChanges` for accounts that shouldn't change.
         - [ ] Test verifies account state before and after.
-- [ ] All actions are covered by validation tests.
-- [ ] All assertions pass locally at COMMIT_HASH:
+        - [ ] Output log:
+            ```
+            EXECUTED_TESTS_LOGS 
+            ```
 
-```
-EXECUTED_TESTS_LOGS 
-```
+- [ ] All scripts are covered by validation tests.
+- [ ] All assertions pass locally at `COMMIT_HASH`
 
-#### Output
 
-For each `ACTION` list the payload generated:
+#### Simulation Execution and Output
 
-- [ ] `ACTION_NAME`, `payload`
+For each SCRIPT list the payload generated:
+    - `ACTION_NAME`
+        - [ ] Run validation script: `NETWORK=[network] ts-node ./scripts/SPELL_NAME/validate.ts --file FILENAME`
+        - [ ] Simulation completes successfully (no errors).
+        - [ ] `payload_generated` matches to `SCRIPT_NAME.txt`
