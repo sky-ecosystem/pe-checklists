@@ -9,7 +9,7 @@ This checklist complements the EVM Prime Agent Spells Reviewer Checklist for cr
 #### Preparation
 
 - LIST every spell action being deployed:
-    - `SCRIPT_NAME`, scripts/SCRIPT_NAME/, COMMIT_HASH
+    - `SCRIPT_NAME`, `scripts/SCRIPT_NAME/`
         - [ ] Spell directory contains generate-payload.ts, validate.ts, and config.ts.
         - [ ] `SCRIPT_NAME.txt` file generated in the `SCRIPT_NAME` folder.
         - [ ] No unrelated files added in the solana payload generation directory.
