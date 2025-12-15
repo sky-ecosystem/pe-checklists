@@ -132,11 +132,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
       * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
       * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
-      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators.
+      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
       * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
         * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
         * [ ] Fetch the agreement address from the `ChainLog`
-        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern.  
+        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern  
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
