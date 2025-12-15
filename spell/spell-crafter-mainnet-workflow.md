@@ -192,9 +192,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
 * Pre-deploy setup and checks (currently via Foundry)
   * Set local environment variables
-    * [ ] Avoid using the same deployer for mainnet and testnet (to avoid deploying contracts with the same address but different sources)
+    * [ ] Avoid using the same deployer for different chains (to avoid deploying contracts with the same address but different source code)
     * [ ] Avoid saving the values to the shell history (e.g. prefer a script or dynamically provided values `VAR=$(cat var.txt)`)
-    * [ ] `ETH_RPC_URL` - an Ethereum RPC URL
+    * [ ] `ETH_RPC_URL` - an Ethereum Mainnet RPC URL
     * [ ] `ETH_KEYSTORE` - a location to the keystore file, e.g. `~/.foundry/keystores/deploy`
     * [ ] `ETHERSCAN_API_KEY` - an Etherscan API key for spell verification
   * Check local env
