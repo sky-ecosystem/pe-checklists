@@ -64,7 +64,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Remove unused interface declarations
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
-    * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
+  * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
 * [ ] Run `make safeharbor-generate` to ensure that updates match the bug bounty updates instructions on the Exec Sheet
   * [ ] IF there is a mismatch, notify Governance Facilitators
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
@@ -136,7 +136,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
         * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
         * [ ] Fetch the agreement address from the `ChainLog`
-        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern  
+        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
