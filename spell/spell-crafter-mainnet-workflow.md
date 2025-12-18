@@ -65,6 +65,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
+* [ ] Run `make safeharbor-generate` to ensure that updates match the bug bounty updates instructions on the Exec Sheet
+  * [ ] IF there is a mismatch, notify Governance Facilitators
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -126,6 +128,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
+  * Bug Bounty Registry Updates
+    * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
+      * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
+      * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
+      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
+      * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
+        * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
+        * [ ] Fetch the agreement address from the `ChainLog`
+        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
@@ -147,6 +158,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
+  * IF bug bounty updates are present
+    * [ ] Test that all bug bounty registry calls execute successfully
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`DssExecLib.address`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -225,6 +238,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
+* [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS

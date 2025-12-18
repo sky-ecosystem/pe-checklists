@@ -19,6 +19,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
+* [ ] `make safeharbor-generate` output matches the instructions on the Exec Sheet
+  * [ ] IF there is a mismatch, notify Governance Facilitators
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -288,6 +290,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
+* IF bug bounty registry updates are present
+  * [ ] Run `make safeharbor-generate`
+    * [ ] Verify that the generated code exactly matches the code in the spell
+    * [ ] Verify that output matches the instructions provided by Governance Facilitators
+    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
+  * [ ] Ensure that agreement address is fetched from the Chainlog
+  * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -401,6 +410,8 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
+  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
+    * [ ] IF the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
