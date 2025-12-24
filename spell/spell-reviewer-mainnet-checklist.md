@@ -310,7 +310,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
   * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * Tests
-  * [ ] Ensure that the `DssExecLib.address` file is not being modified by the spell PR
+  * [ ] Ensure that the `DssExecLib` address inside `foundry.toml` is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure every test function is declared as `public`
@@ -393,14 +393,14 @@ _Insert your local test logs here_
     * [ ] Valid license
     * [ ] Version matches
     * [ ] Optimizations are disabled
-    * [ ] dss-exec-lib library address used (under 'Libraries Used') matches the hardcoded local `DssExecLib.address` file
+    * [ ] dss-exec-lib library address used (under 'Libraries Used') matches the hardcoded local `DssExecLib` address inside `foundry.toml`
     * [ ] `deployed_spell_created` matches deployment timestamp
     * [ ] `deployed_spell_block` matches deployment block number
   * Manual checks
     * [ ] Ensure `make deploy-info tx=<tx>` matches [config](https://github.com/sky-ecosystem/spells-mainnet/blob/master/src/test/config.sol)
       * [ ] `deployed_spell_created` timestamp
       * [ ] `deployed_spell_block` block number
-    * [ ] Check again that the PR did not modify the `DssExecLib.address` file (e.g. look under the 'Files Changed' PR tab, etc.)
+    * [ ] Check again that the PR did not modify the `DssExecLib` address inside `foundry.toml`
     * [ ] Ensure Etherscan `Libraries Used` matches DssExecLib [Latest Release](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
     * [ ] (For your tests to be accurate) git submodule hash matches [dss-exec-lib](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest) latest release's tag commit and inspect diffs if doesn't match to ensure expected behaviour (Currently Non-Critical pending the next DssExecLib release, double check that the ExecLib used by the contract matches the latest release)
 * Tenderly Testnet checks
@@ -416,7 +416,7 @@ _Insert your local test logs here_
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
 * Tests
-  * [ ] Ensure that the `DssExecLib.address` file is not being modified by the spell PR
+  * [ ] Ensure that the `DssExecLib` address inside `foundry.toml` is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
