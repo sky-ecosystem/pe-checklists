@@ -2,13 +2,7 @@
 
 Repo: https://github.com/sky-ecosystem/spells-mainnet
 
-## How to follow the checklist
-
-* **Do not remove** any checklist item. If an item does not apply to the current spell, cross it out as `[ ] ~~checklist item~~`.
-* If a checklist item cannot be completed, add a comment explaining why and mark it as either `blocking ❌` or `non-blocking ⚠️`.
-* Only tick checklist items that are **fully completed**. If an item is skipped, leave it unchecked.
-* Only checklist items with the `IF` prefix can be crossed out. Otherwise, a relevant comment explaining the reason for skipping should be provided
-* For items marked as `LIST`, copy and fill the relevant checklist for each applicable case.
+[General guidelines](./general-guideline.md)
 
 ## Development Stage
 
@@ -99,7 +93,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
 * LIST all new contracts present in the spell (not yet on chainlog or new to chainlog):
-  * `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
+  * `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
     * [ ] Source code is verified on etherscan
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
@@ -114,7 +108,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     * [ ] Deployer address is included into `addresses_deployers.sol`
 * LIST all new L2 contracts present in the spell:
-  * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
+  * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
     * [ ] Source code is verified on a primary block explorer for this chain
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license

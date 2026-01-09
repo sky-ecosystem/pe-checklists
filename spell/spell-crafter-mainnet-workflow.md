@@ -1,5 +1,7 @@
 # Spell Crafter Mainnet Workflow
 
+[General guidelines](./general-guideline.md)
+
 ## Mainnet
 
 Repo: https://github.com/sky-ecosystem/spells-mainnet

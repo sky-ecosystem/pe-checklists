@@ -2,6 +2,8 @@
 
 This checklist provides guidance for crafting and reviewing spells for the Prime Agents (Spark, Grove, Keel, etc.). It focuses on common practices and should be used alongside protocol-specific knowledge.
 
+[General guidelines](./general-guideline.md)
+
 ## Governance Architecture Considerations
 
 ### Spells Contracts Relationships
