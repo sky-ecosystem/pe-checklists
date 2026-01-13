@@ -121,10 +121,16 @@ This section outlines the review process and provides concrete action items for 
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
 - [ ] Verify solc version matches the Prime Agent protocol standard based on prior contracts.
+- [ ] Specify the correct spell target data:
+  ```
+  YYYY-MM-DD
+  ```
 
 #### Spell Description & Comments
-- [ ] Spell PR has clear description.
+- [ ] Spell PR has a clear description.
+- [ ] Spell PR has a correct spell target date.
 - [ ] Spell contract has a clear description.
+- [ ] Spell contract has a correct spell target date.
 - [ ] Every significant action and parameter change are clearly commented in the code.
 - [ ] Every significant action has valid source url (forum post, poll, atlas).
 - [ ] Every parameter change is clearly commented with before/after values.
@@ -165,6 +171,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
+    - [ ] Deployer address was not used to deploy contracts on other chains UNLESS there is specific reasons for it (i.e. external contract, the same deployer was used to keep the address same across different chains)
     - LIST every constructor argument:
       - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
         - [ ] The value has valid external source.
@@ -172,6 +179,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] Expected admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
       - [ ] Contract deployer address has no access (e.g. `wards(deployer)` is `0`).
       - [ ] No other addresses has access to this contract.
+    - [ ] IF the contract is multisig wallet and has access to assets in the contract, all the signers should be verified. (i.e.: the same signers were used in the previous spell)
 
 #### Dependency checks
 - LIST every submodule or any other imported code used in this spell:
@@ -284,5 +292,5 @@ EXECUTED_TESTS_LOGS
 - [ ] Posted spell codehash matches codehash that you verified locally.
 - [ ] Posted direct execution value matches the forum post.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
-- [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
+- [ ] Ensure that no changes were made to the code since the spell was approved at the `Deployment Stage`.
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
