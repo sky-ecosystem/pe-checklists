@@ -171,7 +171,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
-    - [ ] Deployer address was not used to deploy contracts on other chains UNLESS there is specific reasons for it (i.e. external contract, the same deployer was used to keep the address same across different chains)
+    - [ ] Deployer address was not used on other chains UNLESS there is a valid reason for it (e.g., external contract, the same deployer was used to keep addresses the same across chains, etc).
     - LIST every constructor argument:
       - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
         - [ ] The value has valid external source.
@@ -179,7 +179,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] Expected admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
       - [ ] Contract deployer address has no access (e.g. `wards(deployer)` is `0`).
       - [ ] No other addresses has access to this contract.
-    - [ ] IF the contract is multisig wallet and has access to assets in the contract, all the signers should be verified. (i.e.: the same signers were used in the previous spell)
+    - [ ] IF the contract is a vault, each vault role that can have access to the funds has to be validated against trusted external sources (i.e. docs listing contracts which have that role in the vault) or against other verifiable sources.
 
 #### Dependency checks
 - LIST every submodule or any other imported code used in this spell:
@@ -292,5 +292,5 @@ EXECUTED_TESTS_LOGS
 - [ ] Posted spell codehash matches codehash that you verified locally.
 - [ ] Posted direct execution value matches the forum post.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
-- [ ] Ensure that no changes were made to the code since the spell was approved at the `Deployment Stage`.
+- [ ] Confirm that no changes have been made to the code since the "Good to deploy" comment was posted, EXCEPT for changes related to deployment. (i.e. adding the deployed spell payload, updating test code to use the deployed contract for testing).
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
