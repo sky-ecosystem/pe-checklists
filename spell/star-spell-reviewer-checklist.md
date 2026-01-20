@@ -121,10 +121,7 @@ This section outlines the review process and provides concrete action items for 
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
 - [ ] Verify solc version matches the Prime Agent protocol standard based on prior contracts.
-- [ ] Specify the correct spell target data:
-  ```
-  YYYY-MM-DD
-  ```
+- [ ] Specify the correct spell target data: `YYYY-MM-DD`
 
 #### Spell Description & Comments
 - [ ] Spell PR has a clear description.
@@ -171,7 +168,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
-    - [ ] Deployer address was not used on other chains UNLESS there is a valid reason for it (e.g., external contract, the same deployer was used to keep addresses the same across chains, etc).
+    - [ ] Deployer address was not used on other chains that star is onboarded UNLESS there is a valid reason for it (e.g., external contract, the same deployer was used to keep addresses the same across chains, etc).
     - LIST every constructor argument:
       - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
         - [ ] The value has valid external source.
