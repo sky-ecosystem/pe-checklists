@@ -39,7 +39,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
       * `// Forum:` if URL starts with `https://forum.sky.money/t/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
-      * `// Atlas:` if URL starts with `https://sky-atlas.powerhouse.io/`
+      * `// Atlas:` if URL starts with `https://sky-atlas.io/`
 * Dependency checks
   * [ ] Reinstall libraries by running `rm -rf ./lib && git submodule update --init --recursive`
     ```bash
