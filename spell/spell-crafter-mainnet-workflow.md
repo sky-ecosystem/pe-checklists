@@ -75,7 +75,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Copy every `Reasoning URL` and `Authority URL` from the Exec Sheet as a comment under relevant section or instruction in the spell code (depending on the row the link is present)
   * [ ] For every `Reasoning URL` and `Authority URL`, add prefix derived from the url itself:
     * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
-    * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
+    * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
     * `// Forum:` if URL starts with `https://forum.sky.money/t/`
     * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
     * `// Atlas:` if URL starts with `https://sky-atlas.io/`
