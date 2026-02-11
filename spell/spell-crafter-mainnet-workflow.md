@@ -78,7 +78,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
     * `// Forum:` if URL starts with `https://forum.sky.money/t/`
     * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
-    * `// Atlas:` if URL starts with `https://sky-atlas.powerhouse.io/`
+    * `// Atlas:` if URL starts with `https://sky-atlas.io/`
   * [ ] IF an action in the spell doesn't have relevant instruction (e.g.: ChainLog version bump), add the explanation below prefixed with `// Note:`
   * [ ] IF an instruction can not be directly taken, add a comment below prefixed with `// Note:` (e.g.: `// Note: see dao_resolutions variable declared above`)
 * Open draft PR
