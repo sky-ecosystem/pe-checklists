@@ -20,7 +20,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 | Crafter             | Spell code review is addressed, Exec Hash is added | 12:00 UTC Week 2 Wednesday      |
 | Reviewers           | Spell code is reviewed (against the Exec Doc)      | 16:00 UTC Week 2 Wednesday      |
 | Crafter             | Spell is deployed, Testnet is created              | 12:00 UTC Week 2 Thursday       |
-| Crafter & Reviewers | Spell development team having an sync call         | 14:00 UTC Week 2 Thursday       |
+| Crafter & Reviewers | Spell development team having a sync call          | 14:00-14:30 UTC Week 2 Thursday |
 | Reviewers           | Spell deployment is approved                       | 16:00 UTC Week 2 Thursday       |
 | Crafter             | Spell address is published                         | 16:00-16:30 UTC Week 2 Thursday |
 | Reviewers           | Spell address is confirmed                         | 16:00-16:30 UTC Week 2 Thursday |
