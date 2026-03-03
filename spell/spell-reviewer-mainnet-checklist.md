@@ -264,7 +264,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * `testVestSpk`
   * IF `SKY` / `SPK` vest rewards distribution is present
     * [ ] Rewards distribution contract address matches Exec Sheet
-    * [ ] Call `distribute` only if the vesting stream’s unpaid amount is greater than 0
+    * [ ] To prevent front-running DoS, the `distribute()` call is placed inside `if` block that checks whether the vesting stream’s unpaid amount is greater than 0
     * Tested via:
       * `testVestedRewardsDist`
 * IF content related to a Prime Agent is present
