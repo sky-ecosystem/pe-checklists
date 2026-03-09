@@ -262,6 +262,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * `testVestSkyMint`
       * `testVestUsds`
       * `testVestSpk`
+  * IF `SKY` / `SPK` vest rewards distribution is present
+    * [ ] Rewards distribution contract address matches Exec Sheet
+    * [ ] To prevent front-running DoS, the `distribute()` call is placed inside `if` block that checks whether the vesting stream’s unpaid amount is greater than 0
+    * [ ] Tested via `testVestedRewardsDist`
 * IF content related to a Prime Agent is present
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template

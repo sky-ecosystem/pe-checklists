@@ -20,6 +20,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 | Crafter     | Spell code review is addressed, Exec Hash is added | 12:00 UTC Week 2 Wednesday      |
 | Reviewers   | Spell code is reviewed (against the Exec Doc)      | 16:00 UTC Week 2 Wednesday      |
 | Crafter     | Spell is deployed, Testnet is created              | 12:00 UTC Week 2 Thursday       |
+| Spell team  | Spell development team having a sync call          | 14:00-14:30 UTC Week 2 Thursday |
 | Reviewers   | Spell deployment is approved                       | 16:00 UTC Week 2 Thursday       |
 | Crafter     | Spell address is published                         | 16:00-16:30 UTC Week 2 Thursday |
 | Reviewers   | Spell address is confirmed                         | 16:00-16:30 UTC Week 2 Thursday |
@@ -166,6 +167,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Make sure CI PASS
 * [ ] Mark PR as "ready for review" and add reviewers
 * [ ] Notify reviewers (e.g. "the spell is ready for review")
+* [ ] Schedule sync call for Week 2 Thursday.
 
 ## Pre-Deployment Stage
 
@@ -236,6 +238,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
+* [ ] IF everything is on track, the sync call can be cancelled with agreement from the spell team
 
 ## Handover and Merge Stage
 
