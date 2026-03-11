@@ -157,6 +157,15 @@ This section outlines the review process and provides concrete action items for 
   - [ ] IF Prime Agent spell can not be executed in a later block OR have to be executed sequentially to another Prime Agent spell, `direct execution` is clearly mentioned in the forum post together with elaborated explanation why it is needed.
   - [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.
 
+### Cross-Chain SVM Payload
+
+- [ ] IF the spell triggers Solana actions via bridge:
+    - LIST every SVM payload referenced in this spell:
+        - [ ] `SVM_ACTION_NAME` from REPOSITORY_URL
+            - [ ]  Payload hex data is correctly referenced in the EVM spell contract.
+            - [ ]  SVM payload has been reviewed using the SVM Payload Generation Checklist.
+            - [ ]  IF multiple SVM payloads are triggered, execution order is correct and documented.
+
 #### On-boarding New Contracts
 - LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
