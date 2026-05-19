@@ -132,7 +132,7 @@ This section outlines the review process and provides concrete action items for 
 #### Proposed changes
 - LIST every forum post proposing changes for this particular Prime Agent, particular target date:
   - FORUM_POST_TITLE, FORUM_POST_URL
-    - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
+    - [ ] Forum post follows the [known template](https://github.com/Atlas-Axis/ecosystem-operational-references/blob/main/templates/technical-scope-template.md).
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
 - [ ] IF the Prime Agent spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
