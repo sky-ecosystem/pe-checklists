@@ -35,7 +35,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Install stable Foundry version
+* Install Foundry tooling
+  * [ ] Install the latest version of `foundryup` using one of the methods described in the official [Foundry installation docs](https://www.getfoundry.sh/introduction/installation)
   * [ ] Install the stable version of Foundry via `foundryup --install stable`
     ```
     Document the installation logs containing installed versions below:
