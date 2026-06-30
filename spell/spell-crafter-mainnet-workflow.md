@@ -246,7 +246,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995)
   * [ ] Wait until both spell reviewers confirm the spell address in the thread
-  * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the address
+  * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
   * [ ] Wait until Responsible Governance Facilitator confirms handover in the private GovOps Slack coordination thread
 * [ ] Fill the rest of the Spell Crafter-related boxes in the Exec Sheet
 * Pre-Merge target branch pull attack checks
