@@ -436,7 +436,7 @@ _Insert your local test logs here_
 * [ ] Check that the spell address posted by the crafter in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995) is correct
 * [ ] Confirm the address in the thread – via the forum "Reply" button on the post containing the current spell address, restating the address to make later edits detectable
   * Example: ``Confirming {YYYY-MM-DD} Core Spell at [`{SPELL_ADDRESS}`]({BLOCK_EXPLORER_URL}).``
-  * [ ] Wait until both spell reviewers confirm the spell address in the thread
-  * [ ] Wait until responsible governance facilitator confirms handover in the private GovOps Slack coordination thread
+  * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
+  * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
 * [ ] Ensure that no changes were made to the code since the spell was deployed and archived
 * [ ] Approve spell PR for merge via 'Approve' review option
