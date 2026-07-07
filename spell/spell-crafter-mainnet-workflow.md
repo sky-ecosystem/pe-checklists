@@ -125,6 +125,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
+    * [ ] Deployer address is added to `addresses_deployers.sol`
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
@@ -227,7 +228,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Push auto-generated `add deployed spell info` commit
 * Cast spell on a newly created Tenderly Testnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
-  * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
+  * [ ] Check that returned `public explorer url` is accessible (note: accessible to signed-in Tenderly users only)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
 * [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
