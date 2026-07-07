@@ -151,6 +151,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new ChainLog values
   * [ ] Test DAI/USDS/SKY/SPK streams and payments, lerps
   * [ ] Test the sum of all DAI/USDS/SKY/SPK payments matches the Exec Sheet
+  * IF `SUBPROXY_METHODS` transfers are present
+    * [ ] Test each transfer from `XXX_SUBPROXY` with a pre-cast token balance check and exact `XXX_SUBPROXY`/recipient balance deltas
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`
