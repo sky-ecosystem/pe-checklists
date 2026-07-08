@@ -145,14 +145,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF `direct execution` is `yes`
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
       * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+  * IF `SUBPROXY_METHODS` transfers are present
+    * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT_IN_WAD));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
   * [ ] Test DAI/USDS/SKY/SPK streams and payments, lerps
   * [ ] Test the sum of all DAI/USDS/SKY/SPK payments matches the Exec Sheet
-  * IF `SUBPROXY_METHODS` transfers are present
-    * [ ] Test each transfer from `XXX_SUBPROXY` with a pre-cast token balance check and exact `XXX_SUBPROXY`/recipient balance deltas
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`
