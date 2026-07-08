@@ -37,9 +37,27 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 * Install Foundry tooling
   * [ ] Install the latest version of `foundryup` using one of the methods described in the official [Foundry installation docs](https://www.getfoundry.sh/introduction/installation)
-  * [ ] Install the stable version of Foundry via `foundryup --install stable`
+  * [ ] Install the stable Foundry version via `foundryup --install stable`
     ```
-    Document the installation logs containing installed versions below:
+    Document the installed version below:
+    ```
+    * [ ] Check the `Build Timestamp` shown by `forge --version`
+      ```
+      Document the build timestamp below:
+      ```
+    * [ ] IF the installed stable version is less than 7 days old, install the previous stable version from the official [Foundry releases page](https://github.com/foundry-rs/foundry/releases) via `foundryup --install <version>`
+      ```
+      Document the selected release URL if pinning was needed below:
+      ```
+    * [ ] Do not use `foundryup --force`
+  * [ ] Verify attestations for the final installed Foundry binaries
+    ```bash
+    for bin in forge cast anvil chisel; do
+      gh attestation verify --owner foundry-rs "$(which "$bin")"
+    done
+    ```
+    ```
+    Document the attestation verification output below:
     ```
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
