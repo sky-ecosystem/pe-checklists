@@ -125,7 +125,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
-    * [ ] Deployer addresses are added to `addresses_deployers.sol`
+    * [ ] Deployers addresses are added to `addresses_deployers.sol`
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
