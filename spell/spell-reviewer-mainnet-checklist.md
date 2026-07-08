@@ -215,7 +215,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `XXX_SUBPROXY` is fetched from chainlog
     * [ ] `XXX_SUBPROXY` matches the SubProxy named in the Exec Sheet
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
-      * [ ] `AMOUNT` has `TOKEN.decimals()` precision
+    * [ ] `AMOUNT` has `TOKEN.decimals()` precision
     * [ ] Token transferred matches Exec Sheet
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
