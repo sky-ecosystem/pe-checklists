@@ -210,6 +210,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all USDS transfers tested in `testPayments` matches number in the Exec Sheet
+  * IF `SUBPROXY_METHODS` transfers are present
+    * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
+    * [ ] `SUBPROXY_METHODS` is fetched from chainlog
+    * [ ] `XXX_SUBPROXY` is fetched from chainlog
+    * [ ] `XXX_SUBPROXY` matches the SubProxy named in the Exec Sheet
+    * [ ] `AMOUNT` has `TOKEN.decimals()` precision
+    * [ ] Token transferred matches Exec Sheet
+    * [ ] Recipient address in the instruction is in the checksummed format
+    * [ ] Recipient address matches Exec Sheet
+    * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
+    * [ ] Transfer amount matches Exec Sheet
+    * [ ] Transfers from `XXX_SUBPROXY` are tested via pre-cast token balance checks and exact `XXX_SUBPROXY`/recipient balance deltas
   * IF `DAI` / `SKY` / `USDS` / `SPK` streams (`DssVest`) are created
     * [ ] `VestAbstract` interface is imported from `dss-interfaces/dss/VestAbstract.sol`
     * [ ] `restrict` is used for each stream, UNLESS otherwise explicitly stated in the Exec Sheet
