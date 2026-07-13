@@ -228,7 +228,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Push auto-generated `add deployed spell info` commit
 * Cast spell on a newly created Tenderly Testnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
-  * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode). Note: if Tenderly hides the Testnet page for unauthenticated users, try linking the cast transaction instead.
+  * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
 * [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
