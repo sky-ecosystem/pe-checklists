@@ -4,18 +4,31 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Install Foundry tooling
-  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, install and verify Foundry
+* Verify Foundry tooling
+  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, verify the Foundry binaries currently in PATH
     ```bash
-    make install-foundry
+    make verify-foundry
     ```
-  * [ ] Confirm the installer exit status before continuing
-    * Exit `0`: installation and verification completed successfully
-    * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
-    * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
-  * [ ] Record the installer output as evidence:
+  * [ ] Confirm the verifier exit status before continuing
+    * Exit `0`: verification completed successfully using the newest stable release published at least seven days ago
+    * Any nonzero exit: verification failed. Install the eligible release before continuing
+  * IF verification failed
+    * [ ] Install and verify the eligible Foundry release
+      ```bash
+      make install-foundry
+      ```
+    * [ ] Confirm the installer exit status
+      * Exit `0`: installation and verification completed successfully
+      * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
+      * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
+    * [ ] Record the installer output as evidence
+      ```
+      _Insert the complete installer output here_
+      ```
+    * [ ] Run `make verify-foundry` again and confirm that it exits `0`
+  * [ ] Record the final verifier output as evidence
     ```
-    _Insert the complete installer output here_
+    _Insert the complete verifier output here_
     ```
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
@@ -386,7 +399,7 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains the `spells-mainnet` source commit and installer SHA-256; selected Foundry release tag, publication timestamp, URL, and seven-day policy decision; archive attestation; installed versions; and attestations for `forge`, `cast`, `anvil`, and `chisel` (from above)
+  * [ ] Contains the final verifier output and, IF installation was performed, the installer output including the release asset attestation (from above)
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet

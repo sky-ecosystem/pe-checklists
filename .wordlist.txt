@@ -167,6 +167,7 @@ unaudited
 untrusted
 upgradability
 upgradable
+verifier
 vnet
 vscode
 whitespace
