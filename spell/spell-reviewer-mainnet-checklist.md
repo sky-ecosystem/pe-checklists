@@ -5,29 +5,20 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Install Foundry tooling
-  * [ ] Install the latest version of `foundryup` using one of the methods described in the official [Foundry installation docs](https://www.getfoundry.sh/introduction/installation)
-  * [ ] Install the stable Foundry version via `foundryup --install stable`
-    ```
-    Document the installed version below:
-    ```
-    * [ ] Check the `Build Timestamp` shown by `forge --version`
-      ```
-      Document the build timestamp below:
-      ```
-    * [ ] IF the installed stable version is less than 7 days old, install the previous stable version from the official [Foundry releases page](https://github.com/foundry-rs/foundry/releases) via `foundryup --install <version>`
-      ```
-      Document the selected release URL if pinning was needed below:
-      ```
-    * [ ] Do not use `foundryup --force`
-  * [ ] Verify attestations for the final installed Foundry binaries
+  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, install and verify Foundry
     ```bash
-    for bin in forge cast anvil chisel; do
-      gh attestation verify --owner foundry-rs "$(which "$bin")"
-    done
+    make install-foundry
     ```
-    ```
-    Document the attestation verification output below:
-    ```
+  * [ ] Confirm the installer exit status before continuing
+    * Exit `0`: installation and verification completed successfully
+    * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
+    * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
+  * [ ] Record the installer output as evidence:
+    * `spells-mainnet` source commit and installer SHA-256
+    * Selected Foundry release tag, publication timestamp, URL, and seven-day policy decision
+    * Archive attestation
+    * Installed versions
+    * Attestations for `forge`, `cast`, `anvil`, and `chisel`
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
     _Insert URL to the specific sheet here_
@@ -397,7 +388,7 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains relevant Foundry installation logs
+  * [ ] Contains the `spells-mainnet` source commit and installer SHA-256; selected Foundry release tag, publication timestamp, URL, and seven-day policy decision; archive attestation; installed versions; and attestations for `forge`, `cast`, `anvil`, and `chisel` (from above)
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
