@@ -45,11 +45,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
     * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
   * [ ] Record the installer output as evidence:
-    * `spells-mainnet` source commit and installer SHA-256
-    * Selected Foundry release tag, publication timestamp, URL, and seven-day policy decision
-    * Archive attestation
-    * Installed versions
-    * Attestations for `forge`, `cast`, `anvil`, and `chisel`
+    ```
+    _Insert the complete installer output here_
+    ```
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell

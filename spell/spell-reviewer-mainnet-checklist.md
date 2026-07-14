@@ -14,11 +14,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
     * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
   * [ ] Record the installer output as evidence:
-    * `spells-mainnet` source commit and installer SHA-256
-    * Selected Foundry release tag, publication timestamp, URL, and seven-day policy decision
-    * Archive attestation
-    * Installed versions
-    * Attestations for `forge`, `cast`, `anvil`, and `chisel`
+    ```
+    _Insert the complete installer output here_
+    ```
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
     _Insert URL to the specific sheet here_
