@@ -204,12 +204,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Octane Review
   * [ ] Check if there is an existing Octane analysis on the latest commit on [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23) 
     * [ ] OTHERWISE, trigger new analysis by pressing "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis"
-    * [ ] List every identified issues (split issues into multiple ones when one issue actually contains multiple issues):
-      1. Issue title [Octane URL]
-        * Link to the relevant code block: [GitHub link or file]
+    * [ ] List every reported findings (split into separate items when one findings contains multiple issues):
+      1. Title [Octane URL]
+        * Link to the relevant code block: [GitHub permalink]
         * Is this issue blocking spell deployment?
         * Reason:
-    * [ ] IF any blocking issue is found, raise it to spell channel
+    * [ ] IF any blocking issue is found, raise it to the current spell signal group
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
