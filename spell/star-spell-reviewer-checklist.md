@@ -255,6 +255,7 @@ EXECUTED_TESTS_LOGS
 - [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
 - [ ] The comment also contains codehash of the deployed mainnet spell.
 - [ ] The codehash matches one produced locally from the reviewed source code.
+  - [ ] IF metadata is present in the bytecode, remove the Solidity CBOR metadata footer from both the deployed bytecode and the local bytecode before computing the hash. The footer length must be read from the last 2 bytes of the bytecode.
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
 - [ ] Every spell code matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
