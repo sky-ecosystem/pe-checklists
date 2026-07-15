@@ -380,11 +380,22 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
+* Octane Review
+  * [ ] Check if there is an existing Octane analysis on the latest commit on [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23) 
+    * [ ] OTHERWISE, trigger new analysis by pressing "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis"
+    * [ ] List every identified issues (split issues into multiple ones when one issue actually contains multiple issues):
+      1. Issue title [Octane URL]
+        * Link to the relevant code block: [GitHub link or file]
+        * Is this issue blocking spell deployment?
+        * Reason:
+    * [ ] IF any blocking issue is found, raise it to spell channel
 * IF new commits are present in the spell
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+  * [ ] IF actual spell action code has been updated
+    * [ ] Copy over and redo "Octane Review" section from the above
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
