@@ -333,6 +333,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF the test needs to run, it MUST NOT have the `skipped` modifier; OTHERWISE, it MUST have the `skipped` modifier
   * [ ] Ensure each spell action has sufficient test coverage
     _List actions for which coverage was checked here_
+    * IF SafeHarbor registry updates are present
+      * [ ] SafeHarbor registry updates are exempt from Solidity-side test coverage
+      * [ ] Review the approved SafeHarbor source data
+      * [ ] Ensure `scripts/safeharbor` tests cover every supported state-diff operation and snapshot both raw calldata and ABI-decoded calldata
+      * [ ] Verify that the generated SafeHarbor payload exactly matches the payload in the spell
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
     * [ ] Sanity checks of the constructor arguments
@@ -426,8 +431,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
-    * [ ] IF the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
+  * [ ] `make safeharbor-generate` against the testnet returns "no updates" and no validation warnings (⚠️ ❗)
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
