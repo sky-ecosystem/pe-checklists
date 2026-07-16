@@ -335,7 +335,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _List actions for which coverage was checked here_
     * IF SafeHarbor registry updates are present
       * [ ] SafeHarbor registry updates are exempt from Solidity-side test coverage
-      * [ ] Review the approved SafeHarbor source data
+      * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
       * [ ] Ensure `scripts/safeharbor` tests cover every supported state-diff operation and snapshot both raw calldata and ABI-decoded calldata
       * [ ] Verify that the generated SafeHarbor payload exactly matches the payload in the spell
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)

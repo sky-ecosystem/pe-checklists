@@ -131,7 +131,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Review the approved SafeHarbor source data and check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
+    * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) and check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
       * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
       * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
       * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
