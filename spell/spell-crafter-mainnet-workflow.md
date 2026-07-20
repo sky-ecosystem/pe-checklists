@@ -131,7 +131,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
+    * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) and check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
       * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
       * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
       * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
@@ -162,8 +162,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
-  * IF bug bounty updates are present
-    * [ ] Test that all bug bounty registry calls execute successfully
+  * IF SafeHarbor registry updates are present
+    * [ ] SafeHarbor registry updates are exempt from Solidity-side test coverage
+    * [ ] Ensure `scripts/safeharbor` tests cover every supported state-diff operation and snapshot both raw calldata and ABI-decoded calldata
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -232,7 +233,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
+* SafeHarbor registry post-cast reconciliation
+  * [ ] Set `ETH_RPC_URL` to the Tenderly Testnet RPC URL
+  * [ ] Run `make safeharbor-generate` in the Tenderly Testnet environment after the spell is cast
+  * [ ] Ensure it returns "no updates" and no validation warnings (⚠️ ❗)
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
