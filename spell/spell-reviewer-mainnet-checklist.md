@@ -431,6 +431,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
+  * [ ] Set `ETH_RPC_URL` to the Tenderly Testnet RPC URL
   * [ ] `make safeharbor-generate` against the testnet returns "no updates" and no validation warnings (⚠️ ❗)
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
