@@ -202,14 +202,21 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Exec hash is correct (use `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"` where `wget` doesn't work)
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
 * Octane Review
-  * [ ] Check if there is an existing Octane analysis on the latest commit on [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23) 
-    * [ ] OTHERWISE, trigger new analysis by pressing "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis"
-    * [ ] List every reported findings (split into separate items when one findings contains multiple issues):
-      1. Title [Octane URL]
-        * Link to the relevant code block: [GitHub permalink]
-        * Is this issue blocking spell deployment?
-        * Reason:
-    * [ ] IF any blocking issue is found, raise it to the current spell signal group
+  * [ ] IF no Octane analysis exists on the latest commit from [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23), trigger a new one (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
+  * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
+  * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
+  * [ ] List every reported vulnerability and warning (split into separate items when one finding contains multiple different issues):
+    1. Title [Octane URL]
+      * Link to the relevant code block: [GitHub permalink]
+      * Is this issue blocking spell deployment?
+      * Required reason (explain why it can be a problem or can't be):
+  * [ ] IF any blocking issue is found, raise it to the current spell signal group
+* IF new commits are present in the spell
+  * [ ] Copy relevant checklist items from the above and redo them
+  * [ ] Ensure newly added code is covered by tests
+  * [ ] Check if chainlog needs to be updated
+  * [ ] Copy over and redo "Tests" section from the above
+  * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
