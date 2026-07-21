@@ -201,6 +201,17 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
   * [ ] Exec hash is correct (use `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"` where `wget` doesn't work)
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
+* Octane Review
+  * [ ] IF no Octane analysis exists on the latest commit from [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23), trigger a new one (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
+  * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
+  * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
+  * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
+  * [ ] List every reported vulnerability and warning (split into separate items when one finding contains multiple different issues):
+    1. Title [Octane URL]
+      * Link to the relevant code block: [GitHub permalink]
+      * Is this issue blocking spell deployment?
+      * Required reason (explain why it can be a problem or can't be):
+  * [ ] IF any blocking issue is found, raise it to the current spell signal group
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
