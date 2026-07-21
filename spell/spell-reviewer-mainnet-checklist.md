@@ -5,43 +5,44 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Verify Foundry tooling
-  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and verify the Foundry binaries currently in PATH
+  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md)
+  * [ ] IF using the normal release policy, verify the Foundry binaries currently in PATH
     ```bash
     make verify-foundry
     ```
-  * [ ] Confirm the verifier exit status before continuing
-    * Exit `0`: verification completed successfully using the newest immutable stable release published at least 14 days ago
-    * Any nonzero exit: verification failed. Use one of the installation paths below before continuing
-  * IF verification failed
-    * Choose one installation path
-      * Default path
-        * [ ] Install and verify the eligible Foundry release
-          ```bash
-          make install-foundry
-          ```
-      * Urgent security-release exception
-        * [ ] Confirm that the release fixes a security issue that cannot wait for the 14-day cooling period
-        * [ ] Record the upstream security advisory or incident reference, the explicit spell-team approval, and the exact release tag
-          ```text
-          Upstream reference:
-          Spell-team approval:
-          Release: vMAJOR.MINOR.PATCH
-          ```
-        * [ ] Install and verify the approved release
-          ```bash
-          make install-foundry release=vMAJOR.MINOR.PATCH
-          ```
-    * [ ] Confirm the installer exit status
-      * Exit `0`: installation and verification completed successfully
-      * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
-      * Any other nonzero exit: installation or verification failed. Resolve the failure before continuing
-    * [ ] Record the installer output as evidence
-      ```
-      _Insert the complete installer output here_
-      ```
-    * [ ] Run the verifier matching the selected installation path and confirm that it exits `0`
-      * Default path: `make verify-foundry`
-      * Urgent exception: `make verify-foundry release=vMAJOR.MINOR.PATCH`
+  * [ ] IF using a force release that cannot wait for the 14-day cooling period, confirm that it fixes an urgent security issue and record the upstream reference, explicit spell-team approval, and exact release tag
+    ```text
+    Upstream reference:
+    Spell-team approval:
+    Release: vMAJOR.MINOR.PATCH
+    ```
+  * [ ] IF using a force release, verify the approved release instead of running the normal verifier command
+    ```bash
+    make verify-foundry release=vMAJOR.MINOR.PATCH force=1
+    ```
+  * [ ] Confirm the verifier exit status. Exit `0` means the installed release matches the desired release and no installation checks are required. Any nonzero exit means verification failed; continue only if the output reports a desired release and exact installation command, otherwise resolve the failure before continuing
+  * [ ] IF verification failed, record the desired release and installation command reported by the verifier
+    ```text
+    Desired install version:
+    Published at:
+    Release URL:
+    Installation command:
+    ```
+  * [ ] IF verification failed, check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the desired release's official notes, and any official incident notice linked from those sources for unresolved security issues affecting that release
+  * [ ] IF verification failed, record the version-specific security check as evidence
+    ```text
+    Checked at (UTC):
+    Sources checked:
+    Outstanding issues affecting the desired version: None found / _Insert references_
+    ```
+  * [ ] IF an unresolved security issue affects the desired release, stop, notify the spell team, and do not install or use that release
+  * [ ] IF verification failed and no unresolved security issue affects the desired release, run the exact installation command reported by the verifier
+  * [ ] IF installation ran, confirm the installer exit status: exit `0` means installation and verification completed successfully; exit `2` means installation and verification completed successfully but PATH setup is incomplete, so follow the exact export/profile instruction printed by the installer and start or use a shell with that PATH before continuing; any other nonzero exit means installation or verification failed and must be resolved before continuing
+  * [ ] IF installation ran, record the installer output as evidence
+    ```
+    _Insert the complete installer output here_
+    ```
+  * [ ] IF installation ran, rerun the same verifier command and confirm that it exits `0`
   * [ ] Record the final verifier output as evidence
     ```
     _Insert the complete verifier output here_
