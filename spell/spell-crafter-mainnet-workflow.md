@@ -42,7 +42,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert the complete verifier output here_
     ```
   * OTHERWISE
-    * [ ] Confirm that the latest verifier reports both the desired release and exact installation command; stop and diagnose any other failure
+    * [ ] Confirm that the latest verifier reports `Required action: install`, the desired release, and the exact installation command; stop and diagnose any other failure
     * [ ] Record the desired release reported by the verifier and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
       ```text
       Desired release:
@@ -58,10 +58,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         Release: vMAJOR.MINOR.PATCH
         ```
     * [ ] IF no unresolved issue affects the release to install, run the exact installation command reported by the latest verifier
-    * IF the installer exits `2`
-      * [ ] Follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
-    * [ ] IF the installer exits with any other nonzero status, stop and resolve the failure
-    * [ ] IF installation was performed, rerun the same verifier command, confirm that it exits `0`, and record the complete verifier and installer outputs
+    * [ ] Confirm that the installer succeeds; stop and resolve any failure
+    * [ ] IF the installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
+    * [ ] IF installation was performed, rerun the same verifier command, confirm that it succeeds, and record the complete verifier and installer outputs
       ```text
       Installer output:
       _Insert the complete installer output here_
