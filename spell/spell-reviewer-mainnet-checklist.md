@@ -6,24 +6,26 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 * Verify Foundry tooling
   * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and run `make verify-foundry`
-  * [ ] IF using a force release, record the upstream reference, explicit spell-team approval, and exact release tag, then run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1` instead
-    ```text
-    Upstream reference:
-    Spell-team approval:
-    Release: vMAJOR.MINOR.PATCH
-    ```
   * [ ] IF verification exits `0`, record the complete verifier output
     ```text
     _Insert the complete verifier output here_
     ```
   * OTHERWISE
-    * [ ] Record the desired release reported by the verifier and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice; stop and notify the spell team if an unresolved issue affects that release
+    * [ ] Record the desired release reported by the verifier and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
       ```text
       Desired release:
       Security sources checked:
       Outstanding issues: None found / _Insert references_
       ```
-    * [ ] IF no unresolved issue affects the desired release, run the exact installation command reported by the verifier
+    * IF an unresolved issue affects the desired release
+      * [ ] Stop and notify the spell team
+      * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, record the upstream reference and explicit spell-team approval, then run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`
+        ```text
+        Upstream reference:
+        Spell-team approval:
+        Release: vMAJOR.MINOR.PATCH
+        ```
+    * [ ] IF no unresolved issue affects the release to install, run the exact installation command reported by the applicable verifier
     * [ ] Rerun the same verifier command, confirm that it exits `0`, and record the complete verifier and installer outputs
       ```text
       Installer output:
