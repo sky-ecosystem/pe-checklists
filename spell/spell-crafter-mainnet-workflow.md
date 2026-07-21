@@ -212,12 +212,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Is this issue blocking spell deployment?
       * Required reason (explain why it can be a problem or can't be):
   * [ ] IF any blocking issue is found, raise it to the current spell signal group
-* IF new commits are present in the spell
-  * [ ] Copy relevant checklist items from the above and redo them
-  * [ ] Ensure newly added code is covered by tests
-  * [ ] Check if chainlog needs to be updated
-  * [ ] Copy over and redo "Tests" section from the above
-  * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
