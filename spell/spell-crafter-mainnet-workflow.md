@@ -36,48 +36,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Verify Foundry tooling
-  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md)
-  * [ ] IF using the normal release policy, verify the Foundry binaries currently in PATH
-    ```bash
-    make verify-foundry
-    ```
-  * [ ] IF using a force release that cannot wait for the 14-day cooling period, confirm that it fixes an urgent security issue and record the upstream reference, explicit spell-team approval, and exact release tag
-    ```text
-    Upstream reference:
-    Spell-team approval:
-    Release: vMAJOR.MINOR.PATCH
-    ```
-  * [ ] IF using a force release, verify the approved release instead of running the normal verifier command
-    ```bash
-    make verify-foundry release=vMAJOR.MINOR.PATCH force=1
-    ```
-  * [ ] Confirm the verifier exit status. Exit `0` means the installed release matches the desired release and no installation checks are required. Any nonzero exit means verification failed; continue only if the output reports a desired release and exact installation command, otherwise resolve the failure before continuing
-  * [ ] IF verification failed, record the desired release and installation command reported by the verifier
-    ```text
-    Desired install version:
-    Published at:
-    Release URL:
-    Installation command:
-    ```
-  * [ ] IF verification failed, check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the desired release's official notes, and any official incident notice linked from those sources for unresolved security issues affecting that release
-  * [ ] IF verification failed, record the version-specific security check as evidence
-    ```text
-    Checked at (UTC):
-    Sources checked:
-    Outstanding issues affecting the desired version: None found / _Insert references_
-    ```
-  * [ ] IF an unresolved security issue affects the desired release, stop, notify the spell team, and do not install or use that release
-  * [ ] IF verification failed and no unresolved security issue affects the desired release, run the exact installation command reported by the verifier
-  * [ ] IF installation ran, confirm the installer exit status: exit `0` means installation and verification completed successfully; exit `2` means installation and verification completed successfully but PATH setup is incomplete, so follow the exact export/profile instruction printed by the installer and start or use a shell with that PATH before continuing; any other nonzero exit means installation or verification failed and must be resolved before continuing
-  * [ ] IF installation ran, record the installer output as evidence
-    ```
-    _Insert the complete installer output here_
-    ```
-  * [ ] IF installation ran, rerun the same verifier command and confirm that it exits `0`
-  * [ ] Record the final verifier output as evidence
-    ```
-    _Insert the complete verifier output here_
-    ```
+  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and run `make verify-foundry`
+  * [ ] IF using a force release, record the upstream reference, explicit spell-team approval, and exact release tag, then run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1` instead
+  * [ ] IF verification reports a different desired release, check and record Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice; stop and notify the spell team if an unresolved issue affects that release
+  * [ ] IF verification reports a different desired release and no unresolved issue affects it, run the exact installation command reported by the verifier, then rerun the same verifier command
+  * [ ] Confirm that final verification exits `0` and record the complete verifier output plus installer output IF installation ran
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
