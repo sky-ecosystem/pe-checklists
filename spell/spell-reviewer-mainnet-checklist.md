@@ -383,6 +383,7 @@ _Insert your local test logs here_
 * Octane Review
   * [ ] IF no Octane analysis exists on the latest commit from [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23), trigger a new one (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
+  * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
   * [ ] List every reported vulnerability and warning (split into separate items when one finding contains multiple different issues):
     1. Title [Octane URL]
