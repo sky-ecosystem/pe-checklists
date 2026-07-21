@@ -404,7 +404,7 @@ _Insert your local test logs here_
   * [ ] Contains the final verifier output
   * IF installation was performed
     * [ ] Contains the installer output
-    * [ ] Contains the release asset attestation (from above)
+    * [ ] Contains the release asset attestation
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
