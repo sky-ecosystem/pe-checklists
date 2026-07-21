@@ -36,18 +36,32 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Verify Foundry tooling
-  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, verify the Foundry binaries currently in PATH
+  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and verify the Foundry binaries currently in PATH
     ```bash
     make verify-foundry
     ```
   * [ ] Confirm the verifier exit status before continuing
-    * Exit `0`: verification completed successfully using the newest stable release published at least seven days ago
-    * Any nonzero exit: verification failed. Install the eligible release before continuing
+    * Exit `0`: verification completed successfully using the newest immutable stable release published at least 14 days ago
+    * Any nonzero exit: verification failed. Use one of the installation paths below before continuing
   * IF verification failed
-    * [ ] Install and verify the eligible Foundry release
-      ```bash
-      make install-foundry
-      ```
+    * Choose one installation path
+      * Default path
+        * [ ] Install and verify the eligible Foundry release
+          ```bash
+          make install-foundry
+          ```
+      * Urgent security-release exception
+        * [ ] Confirm that the release fixes a security issue that cannot wait for the 14-day cooling period
+        * [ ] Record the upstream security advisory or incident reference, the explicit spell-team approval, and the exact release tag
+          ```text
+          Upstream reference:
+          Spell-team approval:
+          Release: vMAJOR.MINOR.PATCH
+          ```
+        * [ ] Install and verify the approved release
+          ```bash
+          make install-foundry release=vMAJOR.MINOR.PATCH
+          ```
     * [ ] Confirm the installer exit status
       * Exit `0`: installation and verification completed successfully
       * Exit `2`: installation and verification completed successfully, but PATH setup is incomplete. Follow the exact export/profile instruction printed by the installer, then start or use a shell with that PATH before continuing
@@ -56,7 +70,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
       _Insert the complete installer output here_
       ```
-    * [ ] Run `make verify-foundry` again and confirm that it exits `0`
+    * [ ] Run the verifier matching the selected installation path and confirm that it exits `0`
+      * Default path: `make verify-foundry`
+      * Urgent exception: `make verify-foundry release=vMAJOR.MINOR.PATCH`
   * [ ] Record the final verifier output as evidence
     ```
     _Insert the complete verifier output here_
