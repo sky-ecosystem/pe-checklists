@@ -401,7 +401,10 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains the final verifier output and, IF installation was performed, the installer output including the release asset attestation (from above)
+  * [ ] Contains the final verifier output
+  * IF installation was performed
+    * [ ] Contains the installer output
+    * [ ] Contains the release asset attestation (from above)
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet

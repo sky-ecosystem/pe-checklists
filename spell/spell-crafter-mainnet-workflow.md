@@ -257,7 +257,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * The final verifier output and, IF installation was performed, the installer output including the release asset attestation (from above)
+  * [ ] The final verifier output
+  * IF installation was performed
+    * [ ] The installer output
+    * [ ] The release asset attestation (from above)
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
