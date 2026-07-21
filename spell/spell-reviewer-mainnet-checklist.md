@@ -6,11 +6,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 * Verify Foundry tooling
   * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and run `make verify-foundry`
-  * [ ] IF verification exits `0`, record the complete verifier output
+  * [ ] IF the latest verifier exits `0`, record the complete verifier output
     ```text
     _Insert the complete verifier output here_
     ```
   * OTHERWISE
+    * [ ] Confirm that the latest verifier exits `3` and reports both the desired release and exact installation command; stop and diagnose any other result
     * [ ] Record the desired release reported by the verifier and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
       ```text
       Desired release:
@@ -19,14 +20,17 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
     * IF an unresolved issue affects the desired release
       * [ ] Stop and notify the spell team
-      * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, record the upstream reference and explicit spell-team approval, then run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`
+      * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, record the upstream reference, explicit spell-team approval, and exact release, run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, then evaluate its output from the `IF`/`OTHERWISE` decision above
         ```text
         Upstream reference:
         Spell-team approval:
         Release: vMAJOR.MINOR.PATCH
         ```
-    * [ ] IF no unresolved issue affects the release to install, run the exact installation command reported by the applicable verifier
-    * [ ] Rerun the same verifier command, confirm that it exits `0`, and record the complete verifier and installer outputs
+    * [ ] IF no unresolved issue affects the release to install and the latest verifier exits `3`, run the exact installation command it reported
+    * IF the installer exits `2`
+      * [ ] Follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
+    * [ ] IF the installer exits with any other nonzero status, stop and resolve the failure
+    * [ ] IF installation was performed, rerun the same verifier command, confirm that it exits `0`, and record the complete verifier and installer outputs
       ```text
       Installer output:
       _Insert the complete installer output here_
@@ -405,8 +409,7 @@ _Insert your local test logs here_
 * Crafter's comment in the PR
   * [ ] Contains the final verifier output
   * IF installation was performed
-    * [ ] Contains the installer output
-    * [ ] Contains the release asset attestation
+    * [ ] Contains the complete installer output, including the release asset attestation
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
