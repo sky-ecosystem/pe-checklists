@@ -427,9 +427,9 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains the final verifier output
+  * [ ] Contains the output of the last `make verify-foundry` executed
   * IF installation was performed
-    * [ ] Contains the complete installer output, including the release asset attestation
+    * [ ] Contains the complete output of the last `make install-foundry release={vX.Y.Z}` executed
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet

@@ -283,12 +283,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * [ ] The final verifier output
+  * [ ] The output of the last `make verify-foundry` executed
     ```text
     _Insert the complete verifier output here_
     ```
   * IF installation was performed
-    * [ ] The complete installer output, including the release asset attestation
+    * [ ] The complete output of the last `make install-foundry release={vX.Y.Z}` executed
       ```text
       _Insert the complete installer output here_
       ```
