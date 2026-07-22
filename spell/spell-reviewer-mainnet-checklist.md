@@ -13,21 +13,20 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * OTHERWISE
     * IF the latest verifier reports `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
-      * [ ] Record the desired release and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
+      * [ ] Record the desired release
         ```text
         Desired release: vMAJOR.MINOR.PATCH
+        ```
+      * [ ] Check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
+        ```text
         Security sources checked:
         Outstanding issues: None found / _Insert references_
         ```
-      * [ ] Record the complete initial verifier output
-        ```text
-        _Insert the complete initial verifier output here_
-        ```
-    * IF no unresolved issue affects the desired release
-      * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that the installer succeeds, and record the complete installer output
-        ```text
-        _Insert the complete installer output here_
-        ```
+        * [ ] IF no unresolved issue affects the desired release, run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that the installer succeeds, and record the complete installer output
+          ```text
+          _Insert the complete installer output here_
+          ```
+        * [ ] OTHERWISE IF an unresolved issue affects the desired release, continue with Exceptional behavior below
       * [ ] IF the installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
       * [ ] Run `make verify-foundry`, confirm that it exits `0`, and record the complete final verifier output
         ```text
