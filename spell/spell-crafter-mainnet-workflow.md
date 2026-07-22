@@ -54,36 +54,40 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         ```text
         _Insert the complete initial verifier output here_
         ```
-    * [ ] IF no unresolved issue affects the desired release, run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that the installer succeeds, and record the complete installer output
-      ```text
-      _Insert the complete installer output here_
-      ```
-    * [ ] IF the installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
-    * [ ] IF the installer succeeds, run `make verify-foundry`, confirm that it exits `0`, and record the complete final verifier output
-      ```text
-      _Insert the complete final verifier output here_
-      ```
+    * IF no unresolved issue affects the desired release
+      * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that the installer succeeds, and record the complete installer output
+        ```text
+        _Insert the complete installer output here_
+        ```
+      * [ ] IF the installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
+      * [ ] Run `make verify-foundry`, confirm that it exits `0`, and record the complete final verifier output
+        ```text
+        _Insert the complete final verifier output here_
+        ```
     * Exceptional behavior
       * [ ] IF the verifier fails without reporting `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`, stop and diagnose the failure
       * IF an unresolved issue affects the desired release
         * [ ] Stop and notify the spell team
-        * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, record the upstream reference, explicit spell-team approval, and exact release, run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, and confirm that it either exits `0` or reports `Required action: install` and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH force=1`
+        * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, then record the upstream reference, explicit spell-team approval, and exact release
           ```text
           Upstream reference:
           Spell-team approval:
           Release: vMAJOR.MINOR.PATCH
-
+          ```
+        * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that it either exits `0` or reports `Required action: install` and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH force=1`, and record the complete forced verifier output
+          ```text
           _Insert the complete forced verifier output here_
           ```
-        * [ ] IF the forced verifier reports `Required action: install`, run `make install-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that the installer succeeds, and record the complete forced installer output
-          ```text
-          _Insert the complete forced installer output here_
-          ```
-        * [ ] IF the forced installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
-        * [ ] IF forced installation was performed, run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that it exits `0`, and record the complete final forced verifier output
-          ```text
-          _Insert the complete final forced verifier output here_
-          ```
+        * IF the forced verifier reports `Required action: install`
+          * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that the installer succeeds, and record the complete forced installer output
+            ```text
+            _Insert the complete forced installer output here_
+            ```
+          * [ ] IF the forced installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
+          * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that it exits `0`, and record the complete final forced verifier output
+            ```text
+            _Insert the complete final forced verifier output here_
+            ```
       * [ ] IF an installer fails, stop and resolve the failure
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
