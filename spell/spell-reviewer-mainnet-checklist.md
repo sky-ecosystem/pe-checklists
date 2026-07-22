@@ -131,11 +131,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] The instruction to remove from AutoLine (`MCD_IAM_AUTO_LINE`) is present in the Exec Sheet
       * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
-    * IF `AutoLine` parameters are updated
-      * [ ] EITHER is used, depending on the instruction:
-        * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
-        * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648)
-  * IF collateral debt ceiling (`vat.ilk.line`) is updated
+  * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
+    * [ ] EITHER is used, depending on the instruction:
+      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
+      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648)
+    * [ ] Each `DssExecLib` AutoLine setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+    * [ ] AutoLine updates are tested by asserting the configured parameters and the exact resulting per-ilk and global Vat debt ceilings after cast
+  * IF [`DssAutoLine.setIlk(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-auto-line/blob/master/src/DssAutoLine.sol#L81-L85) is called directly instead of using a `DssExecLib` AutoLine setter
+    * [ ] The intended AutoLine configuration and live Vat debt-ceiling states are documented and tested
+  * IF collateral debt ceiling (`vat.ilk.line`) is updated directly rather than through `AutoLine`
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/sky-ecosystem/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] EITHER is used, depending on the instruction:
         * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L621C14-L621C36)
