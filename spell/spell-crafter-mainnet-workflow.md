@@ -36,7 +36,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 ## Development Stage
 
 * Verify Foundry tooling
-  * [ ] From a trusted, up-to-date checkout of `spells-mainnet`, review the [Foundry setup security model](https://github.com/sky-ecosystem/spells-mainnet/blob/master/scripts/setup-foundry/README.md) and run `make verify-foundry`
+  * [ ] Checkout `spells-mainnet` from a trusted, up-to-date source
+  * [ ] Run `make verify-foundry`
   * [ ] IF the latest verifier exits `0`, record the complete verifier output
     ```text
     _Insert the complete verifier output here_
@@ -44,7 +45,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * OTHERWISE
     * [ ] IF the latest verifier reports `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`, record the complete initial verifier output
       ```text
-      Initial verifier output:
       _Insert the complete initial verifier output here_
       ```
     * [ ] IF the latest verifier reports `Required action: install`, record the desired release and check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
@@ -55,13 +55,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
     * [ ] IF no unresolved issue affects the desired release, run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that the installer succeeds, and record the complete installer output
       ```text
-      Installer output:
       _Insert the complete installer output here_
       ```
     * [ ] IF the installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
     * [ ] IF the installer succeeds, run `make verify-foundry`, confirm that it exits `0`, and record the complete final verifier output
       ```text
-      Final verifier output:
       _Insert the complete final verifier output here_
       ```
     * Exceptional behavior
@@ -74,18 +72,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           Spell-team approval:
           Release: vMAJOR.MINOR.PATCH
 
-          Forced verifier output:
           _Insert the complete forced verifier output here_
           ```
         * [ ] IF the forced verifier reports `Required action: install`, run `make install-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that the installer succeeds, and record the complete forced installer output
           ```text
-          Forced installer output:
           _Insert the complete forced installer output here_
           ```
         * [ ] IF the forced installer reports `Required action: update-path`, follow the exact PATH instructions it prints and start or use a shell with the updated PATH before continuing
         * [ ] IF forced installation was performed, run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1`, confirm that it exits `0`, and record the complete final forced verifier output
           ```text
-          Final forced verifier output:
           _Insert the complete final forced verifier output here_
           ```
       * [ ] IF an installer fails, stop and resolve the failure
