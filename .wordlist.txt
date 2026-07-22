@@ -65,7 +65,6 @@ RPC
 RWA
 RWAXXX
 RWAXYZ
-SHA
 Repo
 Solmate
 SPDX
