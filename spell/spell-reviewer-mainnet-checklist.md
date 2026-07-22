@@ -7,6 +7,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Verify Foundry tooling
   * [ ] Checkout `spells-mainnet` from a trusted, up-to-date source
   * [ ] Run `make verify-foundry`
+    ```text
+    _Insert the complete verifier output here_
+    ```
   * IF the verifier reports `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
     * [ ] Record the desired release
       ```text
