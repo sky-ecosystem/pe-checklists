@@ -10,34 +10,74 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```text
     _Insert the complete verifier output here_
     ```
-  * IF the verifier reports `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
-    * [ ] Record the desired release
-      ```text
-      Desired release: vMAJOR.MINOR.PATCH
-      ```
-    * [ ] Check Foundry's official [security advisories](https://github.com/foundry-rs/foundry/security/advisories), the release notes, and any linked official incident notice
-      ```text
-      Security sources checked:
-      Outstanding issues: None found / _Insert references_
-      ```
-    * [ ] IF an unresolved issue affects the desired release, continue with Exceptional behavior below
-    * [ ] OTHERWISE run `make install-foundry release=vMAJOR.MINOR.PATCH`, confirm that it succeeds, and follow any `Required action: update-path` instructions
-    * [ ] Run `make verify-foundry` and confirm that it exits `0`
-  * Exceptional behavior
-    * [ ] IF the verifier fails without reporting `Required action: install`, the desired release, and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`, stop and diagnose the failure
-    * IF an unresolved issue affects the desired release
-      * [ ] Stop and notify the spell team
-      * [ ] Confirm that an exact mitigation release addresses the issue and has no unresolved issue, then record the upstream reference, explicit spell-team approval, and exact release
+  * IF the verifier fails
+    * IF any of these verifier output lines is missing:
+      * `Required action: install`
+      * `Desired Foundry release: vMAJOR.MINOR.PATCH`
+      * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
+      * [ ] Stop the workflow
+      * [ ] Diagnose the verifier failure
+    * OTHERWISE IF the failed verifier requires installation and reports both the desired release and its exact installation command
+      * Review official security sources for the release identified by the verifier
+        * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release
+        * [ ] Read the complete [release notes](https://github.com/foundry-rs/foundry/releases) for the release
+        * [ ] Open every official advisory or incident notice linked from either source
+        * [ ] Read every linked official advisory or incident notice
+        * [ ] Determine whether each advisory or notice affects the release
+        * [ ] IF applicability is unresolved or unclear, treat the release as affected
         ```text
-        Upstream reference:
-        Spell-team approval:
-        Release: vMAJOR.MINOR.PATCH
+        Checked at (UTC):
+        Security advisories: _Insert URL and outcome_
+        Release notes: _Insert exact release URL and outcome_
+        Linked official notices: None / _Insert URLs and outcomes_
         ```
-      * [ ] IF the mitigation release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`
-      * [ ] OTHERWISE confirm that the spell-team approval explicitly waives the 14-day cooling period, then run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
-      * [ ] Confirm that the exact-release verifier exits `0` or reports `Required action: install` and an exact `Installation command`
-      * [ ] IF installation is required, run the exact printed `Installation command`, follow any `Required action: update-path` instructions, rerun the same exact-release verifier, and confirm that it exits `0`
-    * [ ] IF an installer fails, stop and resolve the failure
+      * IF none of the checked sources identifies an unresolved issue affecting the desired release
+        * [ ] Run the exact `Installation command` printed by the verifier
+        * IF the installer fails
+          * [ ] Stop the workflow
+          * [ ] Resolve the installer failure
+        * OTHERWISE IF the installer succeeds
+          * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+          * [ ] Run `make verify-foundry`
+          * [ ] Confirm that the verifier exits `0`
+      * OTHERWISE IF the checked sources identify an unresolved issue affecting the desired release
+        * [ ] Stop the workflow
+        * [ ] Notify the spell team
+        * [ ] Identify an exact mitigation release
+        * [ ] Locate an official upstream reference showing that the mitigation release addresses the issue
+        * Review official security sources for the mitigation release
+          * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the mitigation release
+          * [ ] Read the complete [release notes](https://github.com/foundry-rs/foundry/releases) for the mitigation release
+          * [ ] Open every official advisory or incident notice linked from either source
+          * [ ] Read every linked official advisory or incident notice
+          * [ ] Determine whether each advisory or notice affects the mitigation release
+          * [ ] IF applicability is unresolved or unclear, treat the mitigation release as affected
+        * [ ] Obtain explicit spell-team approval for the mitigation release
+          ```text
+          Upstream reference:
+          Spell-team approval:
+          Release: vMAJOR.MINOR.PATCH
+          ```
+        * [ ] IF the mitigation release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`
+        * OTHERWISE IF the mitigation release is less than 14 days old
+          * [ ] Confirm that the spell-team approval explicitly waives the 14-day cooling period
+          * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
+        * IF the exact-release verifier fails
+          * IF any of these exact-release verifier output requirements is missing:
+            * `Required action: install`
+            * `Desired Foundry release: vMAJOR.MINOR.PATCH`
+            * `Installation command:` matching the mitigation release and including `ignore-age=1` when the cooling period is waived
+            * [ ] Stop the workflow
+            * [ ] Diagnose the verifier failure
+          * OTHERWISE IF the failed exact-release verifier requires installation for the mitigation release and prints a matching installation command
+            * [ ] Run the exact printed `Installation command`
+            * IF the installer fails
+              * [ ] Stop the workflow
+              * [ ] Resolve the installer failure
+            * OTHERWISE IF the installer succeeds
+              * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+              * [ ] Rerun the same exact-release verifier
+              * [ ] Confirm that the verifier exits `0`
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
     _Insert URL to the specific sheet here_
