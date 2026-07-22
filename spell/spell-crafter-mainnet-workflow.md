@@ -64,8 +64,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         Spell-team approval:
         Release: vMAJOR.MINOR.PATCH
         ```
-      * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH force=1` and confirm that it exits `0` or reports `Required action: install` and `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH force=1`
-      * [ ] IF installation is required, run `make install-foundry release=vMAJOR.MINOR.PATCH force=1`, follow any `Required action: update-path` instructions, rerun the forced verifier, and confirm that it exits `0`
+      * [ ] IF the mitigation release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`
+      * [ ] OTHERWISE confirm that the spell-team approval explicitly waives the 14-day cooling period, then run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
+      * [ ] Confirm that the exact-release verifier exits `0` or reports `Required action: install` and an exact `Installation command`
+      * [ ] IF installation is required, run the exact printed `Installation command`, follow any `Required action: update-path` instructions, rerun the same exact-release verifier, and confirm that it exits `0`
     * [ ] IF an installer fails, stop and resolve the failure
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
