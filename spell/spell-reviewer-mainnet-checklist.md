@@ -11,13 +11,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert the complete verifier output here_
     ```
   * IF the verifier fails
-    * IF any of these verifier output lines is missing:
+    * IF the failed verifier requires installation and reports all of:
       * `Required action: install`
       * `Desired Foundry release: vMAJOR.MINOR.PATCH`
       * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
-      * [ ] Stop the workflow
-      * [ ] Diagnose the verifier failure
-    * OTHERWISE IF the failed verifier requires installation and reports both the desired release and its exact installation command
       * Review official security sources for the release identified by the verifier
         * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release
         * [ ] Read the complete [release notes](https://github.com/foundry-rs/foundry/releases) for the release
@@ -33,13 +30,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         ```
       * IF none of the checked sources identifies an unresolved issue affecting the desired release
         * [ ] Run the exact `Installation command` printed by the verifier
-        * IF the installer fails
-          * [ ] Stop the workflow
-          * [ ] Resolve the installer failure
-        * OTHERWISE IF the installer succeeds
+        * IF the installer succeeds
           * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
           * [ ] Run `make verify-foundry`
           * [ ] Confirm that the verifier exits `0`
+        * OTHERWISE IF the installer fails
+          * [ ] Stop the workflow
+          * [ ] Resolve the installer failure
       * OTHERWISE IF the checked sources identify an unresolved issue affecting the desired release
         * [ ] Stop the workflow
         * [ ] Notify the spell team
@@ -63,21 +60,24 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           * [ ] Confirm that the spell-team approval explicitly waives the 14-day cooling period
           * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
         * IF the exact-release verifier fails
-          * IF any of these exact-release verifier output requirements is missing:
+          * IF the failed exact-release verifier requires installation for the mitigation release and reports all of:
             * `Required action: install`
             * `Desired Foundry release: vMAJOR.MINOR.PATCH`
             * `Installation command:` matching the mitigation release and including `ignore-age=1` when the cooling period is waived
-            * [ ] Stop the workflow
-            * [ ] Diagnose the verifier failure
-          * OTHERWISE IF the failed exact-release verifier requires installation for the mitigation release and prints a matching installation command
             * [ ] Run the exact printed `Installation command`
-            * IF the installer fails
-              * [ ] Stop the workflow
-              * [ ] Resolve the installer failure
-            * OTHERWISE IF the installer succeeds
+            * IF the installer succeeds
               * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
               * [ ] Rerun the same exact-release verifier
               * [ ] Confirm that the verifier exits `0`
+            * OTHERWISE IF the installer fails
+              * [ ] Stop the workflow
+              * [ ] Resolve the installer failure
+          * OTHERWISE IF the exact-release verifier fails for any other reason
+            * [ ] Stop the workflow
+            * [ ] Diagnose the verifier failure
+    * OTHERWISE IF the verifier fails for any other reason
+      * [ ] Stop the workflow
+      * [ ] Diagnose the verifier failure
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
     _Insert URL to the specific sheet here_
