@@ -65,9 +65,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
           * [ ] Run `make verify-foundry`
           * [ ] Confirm that the verifier exits `0`
-        * OTHERWISE IF the installer fails
-          * [ ] Stop the workflow
-          * [ ] Resolve the installer failure
       * OTHERWISE IF the checked sources identify an unresolved issue affecting the desired release
         * [ ] Stop the workflow
         * [ ] Notify the spell team
@@ -100,15 +97,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
               * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
               * [ ] Rerun the same exact-release verifier
               * [ ] Confirm that the verifier exits `0`
-            * OTHERWISE IF the installer fails
-              * [ ] Stop the workflow
-              * [ ] Resolve the installer failure
-          * OTHERWISE IF the exact-release verifier fails for any other reason
-            * [ ] Stop the workflow
-            * [ ] Diagnose the verifier failure
-    * OTHERWISE IF the verifier fails for any other reason
-      * [ ] Stop the workflow
-      * [ ] Diagnose the verifier failure
+  * IF any `setup-foundry.sh` invocation exits nonzero without printing all of:
+    * `Required action: install`
+    * `Desired Foundry release: vMAJOR.MINOR.PATCH`
+    * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when the cooling period is waived
+    * [ ] Stop the workflow
+    * [ ] Diagnose the failure
+    * [ ] Resolve the failure
 * Create new branch
   * [ ] Pull `master` branch of the `spells-mainnet` repo locally
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
