@@ -4,8 +4,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Verify Foundry tooling
-  * [ ] Checkout `spells-mainnet` from a trusted, up-to-date source
+* Prepare the `spells-mainnet` checkout
+  * [ ] Checkout the spell PR from a trusted local copy of the [`sky-ecosystem/spells-mainnet` repository](https://github.com/sky-ecosystem/spells-mainnet)
+* Verify and Install Foundry toolkit
+  * [ ] Record the exact Foundry release and optional age waiver used by both `make install-foundry` and `make verify-foundry` in `.github/workflows/tests.yaml`
+    ```text
+    CI Foundry release: vMAJOR.MINOR.PATCH
+    CI age waiver: None / ignore-age=1
+    ```
   * [ ] Run `make verify-foundry`
     ```text
     _Insert the complete verifier output here_

@@ -35,8 +35,19 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Verify Foundry tooling
-  * [ ] Checkout `spells-mainnet` from a trusted, up-to-date source
+* Prepare the `spells-mainnet` checkout
+  * [ ] Pull the `master` branch of a trusted local copy of the [`sky-ecosystem/spells-mainnet` repository](https://github.com/sky-ecosystem/spells-mainnet)
+    ```bash
+    git switch master
+    git pull --ff-only origin master
+    ```
+  * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
+* Verify and Install Foundry toolkit
+  * [ ] Record the exact Foundry release and optional age waiver used by both `make install-foundry` and `make verify-foundry` in `.github/workflows/tests.yaml`
+    ```text
+    CI Foundry release: vMAJOR.MINOR.PATCH
+    CI age waiver: None / ignore-age=1
+    ```
   * [ ] Run `make verify-foundry`
     ```text
     _Insert the complete verifier output here_
@@ -134,9 +145,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Stop the workflow
     * [ ] Diagnose the failure
     * [ ] Resolve the failure
-* Create new branch
-  * [ ] Pull `master` branch of the `spells-mainnet` repo locally
-  * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
 * Cleanup previous spell's actions
   * [ ] Check previous pull requests for the cleanup patterns
   * [ ] Delete unused dependencies in the `src/dependencies` folder IF applicable
