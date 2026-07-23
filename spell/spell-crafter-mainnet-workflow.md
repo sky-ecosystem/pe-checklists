@@ -313,6 +313,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Check local env
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
+* Verify the CI-pinned Foundry release
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when it is present in CI
+    ```text
+    _Insert the complete verifier output here_
+    ```
+  * [ ] Confirm that the verifier exits `0`
+  * [ ] Confirm that the desired and installed releases match the release pinned in CI
+  * [ ] Post the exact command and complete output in the spell PR before deployment
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
@@ -332,14 +340,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * [ ] The output of the last `make verify-foundry` executed
-    ```text
-    _Insert the complete verifier output here_
-    ```
-  * [ ] IF installation was performed, include the complete output from the last execution of the exact `Installation command` printed by the verifier
-    ```text
-    _Insert the complete installer output here_
-    ```
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")

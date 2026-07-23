@@ -469,13 +469,23 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+* Crafter's pre-deployment Foundry evidence in the spell PR
+  * [ ] Contains the exact `make verify-foundry release=vMAJOR.MINOR.PATCH` command, including `ignore-age=1` when it is present in CI
+  * [ ] Contains the complete verifier output
+  * [ ] Shows that the verifier exited `0`
+  * [ ] Shows that the desired and installed releases match the release pinned in CI
+* Independently verify the CI-pinned Foundry release
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when it is present in CI
+    ```text
+    _Insert the complete verifier output here_
+    ```
+  * [ ] Confirm that the verifier exits `0`
+  * [ ] Confirm that the desired and installed releases match the release pinned in CI
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains the output of the last `make verify-foundry` executed
-  * [ ] IF installation was performed, the comment contains the complete output from an execution of the exact `Installation command` printed by the verifier
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
