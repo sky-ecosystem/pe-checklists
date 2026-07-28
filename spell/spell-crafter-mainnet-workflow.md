@@ -97,7 +97,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Repeat the exact release review above for the alternative
   * IF an alternative release is selected
     * [ ] Post a spell PR comment containing its exact version and upstream reference before publishing the completed checklist
-    * [ ] Obtain explicit spell-team approval in a reply to that comment or another spell PR comment
+    * [ ] Both spell reviewers reply to that comment with explicit approval
   * [ ] Confirm that the selected release has an `Acceptable` review outcome
   * [ ] Compare the selected release with the current CI Foundry release
   * [ ] IF the selected release differs from the CI release, update both Foundry commands in `.github/workflows/tests.yaml` to use `release=vMAJOR.MINOR.PATCH`
@@ -310,7 +310,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * [ ] Confirm that the verifier exits `0`
   * [ ] Confirm that the desired and installed releases match the release pinned in CI
-  * [ ] Post the exact command and complete output in the spell PR before deployment
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
@@ -330,6 +329,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
+  * The exact pre-deployment Foundry verification command
+  * The complete verifier output
+  * Confirmation that the verifier exited `0`
+  * Confirmation that the desired and installed releases match the release pinned in CI
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
@@ -337,7 +340,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Handover and Merge Stage
 
-* [ ] Wait for at least two "good to handover" comments (containing local tests) from the official reviewers
+* [ ] Wait for explicit "good to handover" approval replies from both official reviewers on the deployment-information comment
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in [`new-spells` discord channel](https://discord.com/channels/893112320329396265/897483518316265553)
   * [ ] Tag Responsible Governance Facilitator in the message with the address

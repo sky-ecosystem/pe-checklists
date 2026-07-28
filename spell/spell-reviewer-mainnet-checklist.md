@@ -64,7 +64,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Repeat the exact release review above for the alternative
   * IF an alternative release is selected
     * [ ] Post a spell PR comment containing its exact version and upstream reference before publishing the completed checklist
-    * [ ] Obtain explicit spell-team approval in a reply to that comment or another spell PR comment
+    * [ ] Both spell reviewers reply to that comment with explicit approval
   * [ ] Confirm that the selected release has an `Acceptable` review outcome
   * [ ] Compare the selected release with the current CI Foundry release
   * [ ] IF the selected release differs from the CI release, update both Foundry commands in `.github/workflows/tests.yaml` to use `release=vMAJOR.MINOR.PATCH`
@@ -462,11 +462,6 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
-* Crafter's pre-deployment Foundry evidence in the spell PR
-  * [ ] Contains the exact `make verify-foundry release=vMAJOR.MINOR.PATCH` command, including `ignore-age=1` when it is present in CI
-  * [ ] Contains the complete verifier output
-  * [ ] Shows that the verifier exited `0`
-  * [ ] Shows that the desired and installed releases match the release pinned in CI
 * Independently verify the CI-pinned Foundry release
   * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when it is present in CI
     ```text
@@ -479,6 +474,10 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
+  * [ ] Contains the exact pre-deployment `make verify-foundry release=vMAJOR.MINOR.PATCH` command, including `ignore-age=1` when it is present in CI
+  * [ ] Contains the complete verifier output
+  * [ ] Shows that the verifier exited `0`
+  * [ ] Shows that the desired and installed releases match the release pinned in CI
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
@@ -525,7 +524,8 @@ _Insert your local test logs here_
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * [ ] Check all tests are passing locally using `make test`
-* [ ] Publish an explicit "good to handover" comment
+* [ ] Reply to the crafter's deployment-information comment with an explicit "good to handover" approval
+* [ ] Confirm that the deployment-information comment has explicit "good to handover" approval replies from both official reviewers
 
 ```
 _Insert your local test logs here_
