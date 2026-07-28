@@ -43,10 +43,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
 * Verify and Install Foundry toolkit
-  * [ ] Record the exact Foundry release and optional age waiver used by both `make install-foundry` and `make verify-foundry` in `.github/workflows/tests.yaml`
+  * [ ] Record the workflow-level Foundry settings from `.github/workflows/tests.yaml`
     ```text
-    CI Foundry release: vMAJOR.MINOR.PATCH
-    CI age waiver: None / ignore-age=1
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
     ```
   * [ ] Run `make select-foundry`
     ```text
@@ -92,13 +92,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Post a spell PR comment containing its exact version and upstream reference before publishing the completed checklist
     * [ ] Obtain explicit spell-team approval in a reply to that comment or another spell PR comment
   * [ ] Confirm that the selected candidate has an `Acceptable` review outcome
-  * [ ] Compare the selected candidate with the current CI Foundry release
-  * [ ] IF the selected candidate differs from the CI release, update both Foundry commands in `.github/workflows/tests.yaml` to use `release=vMAJOR.MINOR.PATCH`
+  * [ ] Compare the selected candidate with the current `FOUNDRY_RELEASE`
+  * [ ] IF the selected candidate differs from the CI release, update `FOUNDRY_RELEASE` in `.github/workflows/tests.yaml`
   * [ ] IF the selected candidate is less than 14 days old, obtain an explicit cooling-period waiver in the spell PR
-  * [ ] IF the cooling-period waiver applies, add `ignore-age=1` to both Foundry commands in `.github/workflows/tests.yaml`
-  * [ ] IF no cooling-period waiver applies, remove `ignore-age=1` from both Foundry commands in `.github/workflows/tests.yaml`
-  * [ ] Confirm that both CI commands use the same release and age-waiver arguments
-  * The CI release remains pinned until a later approved release replaces it
+  * [ ] IF the cooling-period waiver applies, set `FOUNDRY_IGNORE_AGE` to `"1"` in `.github/workflows/tests.yaml`
+  * [ ] IF no cooling-period waiver applies, set `FOUNDRY_IGNORE_AGE` to `"0"` in `.github/workflows/tests.yaml`
+  * [ ] Confirm that `make install-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
+  * [ ] Confirm that `make verify-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
+  * The CI release and age-waiver setting remain pinned until a later approved change replaces them
   * [ ] IF the selected candidate is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`
     ```text
     _Insert the complete verifier output here_
@@ -311,7 +312,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
 * Verify the CI-pinned Foundry release
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when it is present in CI
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when `FOUNDRY_IGNORE_AGE` is `"1"` in CI
     ```text
     _Insert the complete verifier output here_
     ```
