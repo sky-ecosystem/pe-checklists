@@ -10,7 +10,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     gh pr checkout PR_NUMBER
     ```
 * Verify and Install Foundry toolkit
-  * [ ] Record the exact Foundry release and optional age waiver used by both `make install-foundry` and `make verify-foundry` in `.github/workflows/tests.yaml`
+  * [ ] Record the exact Foundry release and optional age waiver used by both `make install-foundry` and `make verify-foundry` in [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml)
     ```text
     CI Foundry release: vMAJOR.MINOR.PATCH
     CI age waiver: None / ignore-age=1
@@ -67,9 +67,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Both spell reviewers reply to that comment with explicit approval
   * [ ] Confirm that the selected release has an `Acceptable` review outcome
   * [ ] Compare the selected release with the current CI Foundry release
-  * [ ] IF the selected release differs from the CI release, update both Foundry commands in `.github/workflows/tests.yaml` to use `release=vMAJOR.MINOR.PATCH`
+  * [ ] IF the selected release differs from the CI release, update both Foundry commands in [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml) to use `release=vMAJOR.MINOR.PATCH`
   * [ ] IF the selected release is less than 14 days old, obtain an explicit cooling-period waiver in the spell PR
-  * [ ] IF the cooling-period waiver applies, add `ignore-age=1` to both Foundry commands in `.github/workflows/tests.yaml`; OTHERWISE remove `ignore-age=1`
+  * [ ] IF the cooling-period waiver applies, add `ignore-age=1` to both Foundry commands in [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml); OTHERWISE remove `ignore-age=1`
   * [ ] Confirm that both CI commands use the same release and age-waiver arguments
   * [ ] IF the selected release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
     ```text
