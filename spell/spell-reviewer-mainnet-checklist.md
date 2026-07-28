@@ -6,14 +6,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 * Verify Foundry tooling
   * [ ] Checkout `spells-mainnet` from a trusted, up-to-date source
-  * [ ] Run `make verify-foundry`
+  * [ ] Run `make select-foundry`
     ```text
-    _Insert the complete verifier output here_
+    _Insert the complete selector output here_
     ```
-  * IF the verifier fails with `Required action: install` and reports:
+  * IF the selector succeeds and reports:
     * `Desired Foundry release: vMAJOR.MINOR.PATCH`
-    * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
-    * Review official security sources for the release identified by the verifier
+    * Review official security sources for the release identified by the selector
       * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release
         ```text
         Checked at (UTC):
@@ -31,17 +30,25 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         ```
       * [ ] IF applicability is unresolved or unclear, treat the release as affected
     * IF the security review finds no unresolved issue affecting the desired release
-      * [ ] Run the exact `Installation command` printed by the verifier
+      * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`
         ```text
-        _Insert the complete installer output here_
+        _Insert the complete verifier output here_
         ```
-      * IF the installer succeeds
-        * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
-        * [ ] Run `make verify-foundry`
+      * [ ] IF the verifier succeeds, confirm that it exits `0`
+      * OTHERWISE IF the verifier fails with `Required action: install` and reports:
+        * `Desired Foundry release: vMAJOR.MINOR.PATCH`
+        * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
+        * [ ] Run the exact `Installation command` printed by the verifier
           ```text
-          _Insert the complete verifier output here_
+          _Insert the complete installer output here_
           ```
-        * [ ] Confirm that the verifier exits `0`
+        * IF the installer succeeds
+          * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+          * [ ] Rerun `make verify-foundry release=vMAJOR.MINOR.PATCH`
+            ```text
+            _Insert the complete verifier output here_
+            ```
+          * [ ] Confirm that the verifier exits `0`
     * OTHERWISE IF the security review finds an unresolved issue or unclear applicability for the desired release
       * [ ] Notify the spell team
       * [ ] Identify an exact mitigation release
@@ -96,7 +103,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
             * [ ] Confirm that the verifier exits `0`
       * OTHERWISE IF the security review finds an unresolved issue or unclear applicability for the mitigation release
         * [ ] Stop the workflow
-  * IF either `make verify-foundry` or `make install-foundry` exits nonzero without printing all of:
+  * IF `make select-foundry` exits nonzero or does not report `Desired Foundry release: vMAJOR.MINOR.PATCH`
+    * [ ] Stop the workflow
+    * [ ] Diagnose the failure
+    * [ ] Resolve the failure
+  * OTHERWISE IF either `make verify-foundry` or `make install-foundry` exits nonzero without printing all of:
     * `Required action: install`
     * `Desired Foundry release: vMAJOR.MINOR.PATCH`
     * `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when the cooling period is waived
