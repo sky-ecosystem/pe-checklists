@@ -48,15 +48,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     CI Foundry release: vMAJOR.MINOR.PATCH
     CI age waiver: None / ignore-age=1
     ```
-  * [ ] Run `make verify-foundry`
+  * [ ] Run `make select-foundry`
     ```text
     _Insert the complete selector output here_
     ```
-  * IF the verifier exits nonzero, confirm that it reports:
-    * [ ] `Required action: install`
-    * [ ] `Desired Foundry release: vMAJOR.MINOR.PATCH`
-    * [ ] `Installation command: make install-foundry release=vMAJOR.MINOR.PATCH`
-  * [ ] Record the verifier's `Desired Foundry release: vMAJOR.MINOR.PATCH` as the first candidate release
+  * [ ] Record the selector's `Desired Foundry release: vMAJOR.MINOR.PATCH` as the first candidate release
   * Review each exact candidate release
     * Confirm from the candidate's exact Foundry [release metadata](https://github.com/foundry-rs/foundry/releases):
       * [ ] The release is not a draft
@@ -126,7 +122,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         _Insert the complete verifier output here_
         ```
       * [ ] Confirm that the verifier exits `0`
-  * IF either unexpected Foundry setup failure occurs:
+  * IF any unexpected Foundry setup failure occurs:
+    * A `make select-foundry` invocation exits nonzero or does not report `Desired Foundry release: vMAJOR.MINOR.PATCH`
     * A `make verify-foundry` invocation exits nonzero without:
       * `Required action: install`
       * `Desired Foundry release: vMAJOR.MINOR.PATCH`
