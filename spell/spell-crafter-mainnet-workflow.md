@@ -42,7 +42,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     git pull --ff-only origin master
     ```
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
-* Verify and Install Foundry toolkit
+* Verify and install the Foundry toolkit
+  * **Phase 1 — Mandatory release acceptance**
   * [ ] Run `make select-foundry`
     ```text
     _Insert the complete selector output here_
@@ -58,7 +59,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     Security review: Unaffected / Affected / Applicability unclear
     Sources and rationale: None affecting the release / _Insert URLs and outcome_
     ```
-  * [ ] IF adopting the release under review changes `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+  * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
     ```text
     Release notes: _Insert exact release URL_
     Compatibility: Compatible / Incompatible — _Insert rationale_
@@ -78,27 +79,28 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF the required release is less than 14 days old
     * [ ] Post a spell PR comment requesting an explicit cooling-period waiver
     * [ ] Obtain explicit approval from both spell reviewers in follow-up comments
-  * [ ] IF either CI setting differs, set `FOUNDRY_RELEASE` to the required release and `FOUNDRY_IGNORE_AGE` to `"1"` when the cooling period is waived or `"0"` otherwise
-  * [ ] IF the Foundry workflow changes, confirm that `make install-foundry` and `make verify-foundry` use both CI settings
-  * [ ] IF the required release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
+  * **Phase 2 — Conditional CI synchronization**
+  * IF the required release differs from the recorded `FOUNDRY_RELEASE`
+    * [ ] Set `FOUNDRY_RELEASE` to the required release
+    * [ ] Set `FOUNDRY_IGNORE_AGE` to `"1"` only for an approved cooling-period waiver or `"0"` otherwise
+    * [ ] Confirm that `make install-foundry` and `make verify-foundry` use both CI settings
+  * **Phase 3 — Mandatory developer installation and verification**
+  * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; include `ignore-age=1` only for an approved required release that is less than 14 days old
+    ```text
+    _Insert the complete installer output here_
+    ```
+  * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; include `ignore-age=1` only for an approved required release that is less than 14 days old
     ```text
     _Insert the complete verifier output here_
     ```
-  * IF the verifier exits nonzero with `Required action: install`, the required release, and a matching `Installation command`
-    * [ ] Run the exact `Installation command` printed by the verifier
-      ```text
-      _Insert the complete installer output here_
-      ```
-    * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
-    * [ ] Rerun the same exact-release verifier
-      ```text
-      _Insert the complete verifier output here_
-      ```
   * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
-  * IF any Foundry setup command exits nonzero other than the expected install response above
+  * **Phase 4 — Conditional failure handling**
+  * IF any Foundry setup command in Phases 1–3 exits nonzero, apply this recovery branch immediately
     * [ ] Stop Foundry setup
     * [ ] Record the failed command and complete output in the spell PR
     * [ ] Diagnose and resolve the failure
+    * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`; the failure does not authorize another automatic installation
     * [ ] Rerun the exact failed command
       ```text
       _Insert the complete command output here_
