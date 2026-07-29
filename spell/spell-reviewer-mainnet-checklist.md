@@ -380,12 +380,15 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
-* IF new commits are present in the spell
+* IF new commits are present after the previous review
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+  * [ ] IF a "Good to deploy" comment was already published, publish a new checklist comment with an explicit "Good to deploy" for the latest commit
+* [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
+* [ ] Ensure the checklist comment remains unedited after posting
 
 ## Deployed Stage
 
