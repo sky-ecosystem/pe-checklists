@@ -15,17 +15,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert the complete selector output here_
     ```
   * [ ] Record the selector's `Desired Foundry release: vMAJOR.MINOR.PATCH` as the selector release
+  * [ ] Record the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` ([upstream file](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml))
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
   * Review the selector release and each alternative candidate release selected below
-    * Confirm from the release's exact Foundry [release metadata](https://github.com/foundry-rs/foundry/releases):
-      * [ ] The release is not a draft
-      * [ ] The release is not a prerelease
-      * [ ] The release is marked immutable
-      ```text
-      Release metadata URL: _Insert exact release URL_
-      Draft: Yes / No
-      Prerelease: Yes / No
-      Immutable: Yes / No
-      ```
     * Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories)
       * [ ] Confirm that no affected version range includes the release
         ```text
@@ -37,16 +32,27 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         ```text
         Linked official notices: None / _Insert URLs and applicability or remediation outcomes_
         ```
-    * Read the release's complete Foundry [release notes](https://github.com/foundry-rs/foundry/releases)
-      * [ ] Identify every breaking change
+    * IF the candidate differs from `FOUNDRY_RELEASE` on the spell PR's base branch, review it as a CI release update
+      * Confirm from the release's exact Foundry [release metadata](https://github.com/foundry-rs/foundry/releases):
+        * [ ] The release is not a draft
+        * [ ] The release is not a prerelease
+        * [ ] The release is marked immutable
         ```text
-        Release notes: _Insert exact release URL_
-        Breaking changes: None / _Insert breaking changes_
+        Release metadata URL: _Insert exact release URL_
+        Draft: Yes / No
+        Prerelease: Yes / No
+        Immutable: Yes / No
         ```
-      * [ ] IF breaking changes exist, determine whether they are compatible with spell building, testing, and deployment
-        ```text
-        Compatibility outcome: Compatible / Incompatible
-        ```
+      * Read the release's complete Foundry [release notes](https://github.com/foundry-rs/foundry/releases)
+        * [ ] Identify every breaking change
+          ```text
+          Release notes: _Insert exact release URL_
+          Breaking changes: None / _Insert breaking changes_
+          ```
+        * [ ] IF breaking changes exist, determine whether they are compatible with spell building, testing, and deployment
+          ```text
+          Compatibility outcome: Compatible / Incompatible
+          ```
     * [ ] Record whether the release is acceptable
       ```text
       Candidate release: vMAJOR.MINOR.PATCH
@@ -63,11 +69,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Record the selector release as the required release, or the explicitly approved alternative when one was selected
   * [ ] Confirm that the required release has an `Acceptable` review outcome
   * [ ] IF the required release is less than 14 days old, confirm that the spell PR contains an explicit cooling-period waiver
-  * [ ] Record the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` ([upstream file](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml))
-    ```text
-    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-    FOUNDRY_IGNORE_AGE: 0 / 1
-    ```
   * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
   * [ ] Confirm that `FOUNDRY_IGNORE_AGE` is `"1"` when the cooling period is waived and `"0"` otherwise
   * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, confirm that the change matches the required release
