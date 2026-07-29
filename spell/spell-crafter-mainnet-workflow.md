@@ -43,17 +43,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
 * Verify and Install Foundry toolkit
-  * [ ] Record the workflow-level Foundry settings from [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
-    ```text
-    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-    FOUNDRY_IGNORE_AGE: 0 / 1
-    ```
   * [ ] Run `make select-foundry`
     ```text
     _Insert the complete selector output here_
     ```
-  * [ ] Record the selector's `Desired Foundry release: vMAJOR.MINOR.PATCH` as the desired release
-  * Review the desired release and each alternative candidate release selected below
+  * [ ] Record the selector's `Desired Foundry release: vMAJOR.MINOR.PATCH` as the selector release
+  * Review the selector release and each alternative candidate release selected below
     * Confirm from the release's exact Foundry [release metadata](https://github.com/foundry-rs/foundry/releases):
       * [ ] The release is not a draft
       * [ ] The release is not a prerelease
@@ -98,21 +93,26 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF an alternative release is selected
     * [ ] Post a spell PR comment containing its exact version and upstream reference before publishing the completed checklist
     * [ ] Both spell reviewers reply to that comment with explicit approval
-  * [ ] Confirm that the selected release has an `Acceptable` review outcome
-  * [ ] Compare the selected release with the current `FOUNDRY_RELEASE`
-  * [ ] IF the selected release differs from the CI release, update `FOUNDRY_RELEASE` in [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
-  * [ ] IF the selected release is less than 14 days old, obtain an explicit cooling-period waiver in the spell PR
-  * [ ] IF the cooling-period waiver applies, set `FOUNDRY_IGNORE_AGE` to `"1"` in [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml); OTHERWISE set it to `"0"`
+  * [ ] Record the selector release as the required release, or the explicitly approved alternative when one was selected
+  * [ ] Confirm that the required release has an `Acceptable` review outcome
+  * [ ] IF the required release is less than 14 days old, obtain an explicit cooling-period waiver in the spell PR
+  * [ ] Record the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` ([upstream file](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml))
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
+  * [ ] IF `FOUNDRY_RELEASE` does not match the required release, update it in the local `.github/workflows/tests.yaml`
+  * [ ] IF `FOUNDRY_IGNORE_AGE` is not `"1"` when the cooling period is waived or `"0"` otherwise, update it in the local `.github/workflows/tests.yaml`
   * [ ] Confirm that `make install-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
   * [ ] Confirm that `make verify-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
-  * [ ] IF the selected release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
+  * [ ] IF the required release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
     ```text
     _Insert the complete verifier output here_
     ```
-  * [ ] IF the exact-release verifier exits `0`, confirm that the installed release matches the selected release
+  * [ ] IF the exact-release verifier exits `0`, confirm that the installed release matches the required release
   * [ ] OTHERWISE IF the exact-release verifier fails with `Required action: install`, confirm that it reports:
-    * [ ] `Desired Foundry release: vMAJOR.MINOR.PATCH` matching the selected release
-    * [ ] `Installation command:` matching the selected release and including `ignore-age=1` when the cooling period is waived
+    * [ ] `Desired Foundry release: vMAJOR.MINOR.PATCH` matching the required release
+    * [ ] `Installation command:` matching the required release and including `ignore-age=1` when the cooling period is waived
     * [ ] Run the exact `Installation command` printed by the verifier
       ```text
       _Insert the complete installer output here_
