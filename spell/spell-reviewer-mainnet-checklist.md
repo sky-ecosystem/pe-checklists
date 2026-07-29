@@ -14,32 +14,38 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```text
     _Insert the complete selector output here_
     ```
-  * [ ] Record the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` ([upstream file](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml))
+  * [ ] Record the workflow-level Foundry settings from the checked-out spell PR's [`.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
     ```text
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
-  * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) and every linked official notice for the selector release
+  * Treat the selected release as the release under review
+  * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) and every linked official notice for the release under review
     ```text
     Security review: Unaffected / Affected / Applicability unclear
     Sources and rationale: None affecting the release / _Insert URLs and outcome_
     ```
-  * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, read the CI-pinned release's complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+  * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, read the release under review's complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
     ```text
     Release notes: _Insert exact release URL_
     Compatibility: Compatible / Incompatible — _Insert rationale_
     ```
-  * IF the selector release is affected, its applicability is unclear, or it is incompatible
+  * IF the release under review is affected, its applicability is unclear, or it is incompatible
     * [ ] Stop Foundry setup and notify the spell team
-    * [ ] Select an exact alternative supported by an official upstream reference
-    * [ ] Repeat the advisory and applicable release-note checks for the alternative
+    * Repeat until the release under review is unaffected and, when compatibility is checked, compatible
+      * [ ] Select an exact alternative supported by an official upstream reference
+      * [ ] Treat the alternative as the release under review
+      * [ ] Repeat the security and applicable compatibility checks above
     * [ ] Confirm that the spell PR identifies the alternative and its upstream reference
     * [ ] Confirm that both spell reviewers explicitly approved the alternative
-  * [ ] Record the selector release as the required release, or the explicitly approved alternative
+  * [ ] Record the passing selected release, or the passing explicitly approved alternative, as the required release
     ```text
     Required release: vMAJOR.MINOR.PATCH
     ```
-  * [ ] IF the required release is less than 14 days old, confirm that the spell PR contains an explicit cooling-period waiver
+  * IF the required release is less than 14 days old
+    * [ ] Confirm that the spell PR contains a comment requesting an explicit cooling-period waiver
+    * [ ] Approve the waiver in a follow-up comment
+    * [ ] Confirm that the other spell reviewer approved the waiver in a follow-up comment
   * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release and `FOUNDRY_IGNORE_AGE` is `"1"` when the cooling period is waived or `"0"` otherwise
   * [ ] IF the Foundry workflow changes, confirm that `make install-foundry` and `make verify-foundry` use both CI settings
   * [ ] IF the required release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
@@ -58,7 +64,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
   * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
   * IF any Foundry setup command exits nonzero other than the expected install response above
-    * Stop Foundry setup
+    * [ ] Stop Foundry setup
     * [ ] Record the failed command and complete output in the spell PR
     * [ ] Diagnose and resolve the failure
     * [ ] Rerun the exact failed command
