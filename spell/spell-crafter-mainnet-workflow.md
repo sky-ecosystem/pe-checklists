@@ -43,7 +43,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
 * Verify and Install Foundry toolkit
-  * [ ] Record the workflow-level Foundry settings from [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml)
+  * [ ] Record the workflow-level Foundry settings from [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
     ```text
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
@@ -100,9 +100,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Both spell reviewers reply to that comment with explicit approval
   * [ ] Confirm that the selected release has an `Acceptable` review outcome
   * [ ] Compare the selected release with the current `FOUNDRY_RELEASE`
-  * [ ] IF the selected release differs from the CI release, update `FOUNDRY_RELEASE` in [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml)
+  * [ ] IF the selected release differs from the CI release, update `FOUNDRY_RELEASE` in [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
   * [ ] IF the selected release is less than 14 days old, obtain an explicit cooling-period waiver in the spell PR
-  * [ ] IF the cooling-period waiver applies, set `FOUNDRY_IGNORE_AGE` to `"1"` in [`.github/workflows/tests.yaml`](../.github/workflows/tests.yaml); OTHERWISE set it to `"0"`
+  * [ ] IF the cooling-period waiver applies, set `FOUNDRY_IGNORE_AGE` to `"1"` in [`sky-ecosystem/spells-mainnet/.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml); OTHERWISE set it to `"0"`
   * [ ] Confirm that `make install-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
   * [ ] Confirm that `make verify-foundry` uses `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`
   * [ ] IF the selected release is at least 14 days old, run `make verify-foundry release=vMAJOR.MINOR.PATCH`; OTHERWISE run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=1`
