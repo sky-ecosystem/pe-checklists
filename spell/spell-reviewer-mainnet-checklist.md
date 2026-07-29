@@ -15,7 +15,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```text
       _Insert the complete selector output here_
       ```
-    * [ ] Record the workflow-level Foundry settings from the checked-out spell PR's [`.github/workflows/tests.yaml`](https://github.com/sky-ecosystem/spells-mainnet/blob/master/.github/workflows/tests.yaml)
+    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
       FOUNDRY_IGNORE_AGE: 0 / 1
@@ -39,7 +39,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Repeat the security and applicable compatibility checks above
       * [ ] Confirm that the spell PR identifies the alternative and its upstream reference
       * [ ] Confirm that both spell reviewers explicitly approved the alternative
-    * [ ] Record the passing selected release, or the passing explicitly approved alternative, as the required release
+    * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
       ```
@@ -51,7 +51,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * IF the spell PR changes `FOUNDRY_RELEASE`
       * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
       * [ ] Confirm that `FOUNDRY_IGNORE_AGE` is `"1"` only for an approved cooling-period waiver or `"0"` otherwise
-      * [ ] Confirm that `make install-foundry` and `make verify-foundry` use both CI settings
+      * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+      * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
     * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; include `ignore-age=1` only for an approved required release that is less than 14 days old
       ```text
@@ -63,8 +64,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete verifier output here_
       ```
     * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
-  * Phase 4 — Conditional failure handling
-    * IF any Foundry setup command in Phases 1–3 exits nonzero, apply this recovery branch immediately
+  * Failure handling — applies throughout Phases 1–3
+    * IF any Foundry setup command above exits nonzero, apply this recovery branch immediately
       * [ ] Stop Foundry setup
       * [ ] Record the failed command and complete output in the spell PR
       * [ ] Diagnose and resolve the failure
