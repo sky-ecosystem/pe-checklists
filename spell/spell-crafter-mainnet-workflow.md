@@ -52,7 +52,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
-  * Treat the selected release as the release under review
+  * [ ] Treat the selected release as the release under review
   * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) and every linked official notice for the release under review
     ```text
     Security review: Unaffected / Affected / Applicability unclear
