@@ -33,7 +33,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
-- Set up the spell-specific Signal group after content and roles are agreed in the `YYYY-MM-DD Executive Spell Coordination` Slack Thread
+- Set up the spell Signal group after content and roles are agreed in the `YYYY-MM-DD Executive Spell Coordination` Slack Thread
   - [ ] Create the group named `YYYY-MM-DD Spell`
   - [ ] Add both official reviewers
   - IF other team members are involved in the spell

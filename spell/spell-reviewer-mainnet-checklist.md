@@ -404,7 +404,7 @@ _Insert your local test logs here_
   * [ ] GNU AGPLv3 license
 * Source code validity
   * [ ] Deployed spell code matches source on github. (can be checked via `make diff-deployed-spell` or manually)
-  * [ ] No new changes are made after previously given "good to deploy"
+  * [ ] No changes were made to the spell source code after the latest commit approved as "good to deploy" by both official reviewers
 * Deployed spell Etherscan checks
   * [ ] Ensure local code is up-to-date with the remote branch (e.g. `git pull`)
   * Automated checks via `make check-deployed-spell`
