@@ -33,9 +33,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
-* Create the spell-specific Signal group after content and roles are agreed
-  * [ ] Name the group `YYYY-MM-DD Spell`, where `YYYY-MM-DD` is the initial target date of the spell
-  * [ ] Add the assigned crafter and both official reviewers
+- Set up the spell-specific Signal group after content and roles are agreed in the `YYYY-MM-DD Executive Spell Coordination` Slack Thread
+  - [ ] Create the group named `YYYY-MM-DD Spell`
+  - [ ] Add both official reviewers
+  - IF other team members are involved in the spell
+    - [ ] Add them to the group
 
 ## Development Stage
 
@@ -258,8 +260,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
   * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
   * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
-* IF the crafter owns the Exec Sheet update and has edit permission
-  * [ ] Fill the remaining Spell Crafter-related boxes in the Exec Sheet
+* IF there are remaining Spell Crafter-related fields in the Exec Sheet and the crafter is responsible for updating them
+  * [ ] Fill the remaining fields
 * Pre-Merge target branch pull attack checks
   * IF within last THREE commits (or last 6 weeks) spells-mainnet repo contains a maintenance PR
     * [ ] Ensure the PR actions match description and look safe
