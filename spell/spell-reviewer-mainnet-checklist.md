@@ -385,7 +385,6 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
-  * [ ] IF a "Good to deploy" comment was already published, publish a new checklist comment with an explicit "Good to deploy" for the latest commit
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 * [ ] Ensure the checklist comment remains unedited after posting
@@ -404,7 +403,7 @@ _Insert your local test logs here_
   * [ ] GNU AGPLv3 license
 * Source code validity
   * [ ] Deployed spell code matches source on github. (can be checked via `make diff-deployed-spell` or manually)
-  * [ ] No changes were made to the spell source code after the latest commit approved as "good to deploy" by both official reviewers
+  * [ ] Spell source code is unchanged from the pre-deployment commit approved as "good to deploy" by both official reviewers
 * Deployed spell Etherscan checks
   * [ ] Ensure local code is up-to-date with the remote branch (e.g. `git pull`)
   * Automated checks via `make check-deployed-spell`

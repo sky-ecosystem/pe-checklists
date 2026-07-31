@@ -213,10 +213,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Deployment Stage
 
-* [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
-* IF new commits are pushed after either "good to deploy" comment
-  * [ ] Notify both official reviewers
-  * [ ] Wait for both official reviewers to re-review the latest commit and publish new "good to deploy" comments before deployment
+* [ ] Before deploying, ensure both official reviewers have posted "good to deploy" comments (containing local tests) for the current pre-deployment commit
 * Pre-deploy setup and checks (currently via Foundry)
   * Set local environment variables
     * [ ] Avoid using the same deployer for different chains (to avoid deploying contracts with the same address but different source code)
