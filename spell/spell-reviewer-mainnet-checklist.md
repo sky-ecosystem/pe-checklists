@@ -387,7 +387,6 @@ _Insert your local test logs here_
   * [ ] Copy over and redo "Tests" section from the above
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
-* [ ] Ensure the checklist comment remains unedited after posting
 
 ## Deployed Stage
 
