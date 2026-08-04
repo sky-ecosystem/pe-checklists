@@ -202,16 +202,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Exec hash is correct (use `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"` where `wget` doesn't work)
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
 * Octane Review
-  * [ ] IF no Octane analysis exists on the latest commit from [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23), trigger a new one (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
+  * [ ] Find the most recent `Sky Ecosystem: Spells mainnet` Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
+  * [ ] IF no Octane analysis exists on the latest commit for `Sky Ecosystem: Spells mainnet`, trigger a new analysis (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
   * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] List every reported vulnerability and warning (split into separate items when one finding contains multiple different issues):
-    1. Title [Octane URL]
-      * Link to the relevant code block: [GitHub permalink]
-      * Is this issue blocking spell deployment?
-      * Required reason (explain why it can be a problem or can't be):
-  * [ ] IF any blocking issue is found, raise it to the current spell signal group
+  * [ ] Check every finding and leave `feedback` per finding whether the findings matter or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details => Press "Leave feedback" => Write comment => Press "Share feedback")
+    * [ ] All findings either have your `feedback` or are already resolved
+    * [ ] IF any blocking issue was found, raise it to the current spell signal group
+  * [ ] IF there is any findings that were resolved in the PR, the findings can be marked resolved. (Press "Finding Acknowledged" on the right-upper side of Finding details -> Select "Resolved" -> Leave comment "The finding was addressed from [commit](link)" => Press "Acknowledge")
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")

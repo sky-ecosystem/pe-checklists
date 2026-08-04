@@ -381,16 +381,14 @@ _Insert your local test logs here_
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
 * Octane Review
-  * [ ] IF no Octane analysis exists on the latest commit from [Sky Ecosystem: Spells mainnet](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/23), trigger a new one (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
+  * [ ] Find the most recent `Sky Ecosystem: Spells mainnet` Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
+  * [ ] IF no Octane analysis exists on the latest commit for `Sky Ecosystem: Spells mainnet`, trigger a new analysis (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
   * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] List every reported vulnerability and warning (split into separate items when one finding contains multiple different issues):
-    1. Title [Octane URL]
-      * Link to the relevant code block: [GitHub permalink]
-      * Is this issue blocking spell deployment?
-      * Required reason (explain why it can be a problem or can't be):
-  * [ ] IF any blocking issue is found, raise it to the current spell signal group
+  * [ ] Check every finding and leave `feedback` per finding whether the findings matter or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details => Press "Leave feedback" => Write comment => Press "Share feedback")
+    * [ ] All findings either have your `feedback` or are already resolved
+    * [ ] IF any blocking issue was found, raise it to the current spell signal group
 * IF new commits are present in the spell
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
