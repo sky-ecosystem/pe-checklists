@@ -176,7 +176,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] Expected admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
       - [ ] Contract deployer address has no access (e.g. `wards(deployer)` is `0`).
       - [ ] No other addresses has access to this contract.
-    - [ ] IF the contract is a vault, each vault role that can have access to the funds has to be validated against trusted external sources (i.e. docs listing contracts which have that role in the vault) or against other verifiable sources.
+    - [ ] IF the contract is a vault, ensure technical scope validates each vault role that can have access to the funds against trusted external sources (i.e. docs listing contracts which have that role in the vault) or against other verifiable sources.
 
 #### Dependency checks
 - LIST every submodule or any other imported code used in this spell:
@@ -284,7 +284,9 @@ EXECUTED_TESTS_LOGS
 #### Confirmed Handover
 - [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
-- [ ] The spell address, the codehash and the direct execution are posted by the crafter in the `#govops` in the `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` format.
+- [ ] The spell address, the codehash and the direct execution are posted by the crafter in the existing spell thread in the `#govops` slack channel using one of the following formats:
+    - `Whitelist <StarName> spell with address 0x… and codehash 0x… in <STARGUARD>, direct execution: No`
+    - `Execute the <StarName> Proxy Spell at 0x…`
 - [ ] Posted spell address matches spell address approved for handover.
 - [ ] Posted spell codehash matches codehash that you verified locally.
 - [ ] Posted direct execution value matches the forum post.
