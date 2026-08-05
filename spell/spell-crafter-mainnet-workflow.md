@@ -311,7 +311,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * The exact pre-deployment Foundry verification command
   * The complete verifier output
   * Confirmation that the verifier exited `0`
-  * Confirmation that the desired and installed releases match the release pinned in CI
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
