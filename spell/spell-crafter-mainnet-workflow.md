@@ -67,7 +67,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Compatibility: Compatible / Incompatible — _Insert rationale_
       ```
     * IF the release under review does not pass the security review or applicable compatibility check
-      * [ ] Stop Foundry setup and notify the spell team
+      * [ ] Stop Foundry setup
+      * [ ] Notify the spell team that the release under review failed the security review or applicable compatibility check
       * Repeat until the release under review passes the security review and any required compatibility check
         * [ ] Select an exact alternative supported by an official upstream reference
         * [ ] Treat the alternative as the release under review
