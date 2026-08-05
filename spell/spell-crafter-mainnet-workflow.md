@@ -89,12 +89,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
       * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
-    * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; include `ignore-age=1` only for an approved required release that is less than 14 days old
+    * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
       _Insert the complete installer output here_
       ```
     * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
-    * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; include `ignore-age=1` only for an approved required release that is less than 14 days old
+    * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
       _Insert the complete verifier output here_
       ```
