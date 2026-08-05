@@ -48,11 +48,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```text
       _Insert the complete selector output here_
       ```
-    * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
-      ```text
-      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-      FOUNDRY_IGNORE_AGE: 0 / 1
-      ```
     * [ ] Treat the selected release as the release under review
     * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release under review
     * [ ] IF an applicable advisory links an official Foundry incident notice, review that notice for unresolved issues affecting the release
@@ -60,6 +55,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Security review: Unaffected / Affected / Applicability unclear
       Security advisories: _Insert URLs and outcome_
       Linked incident notices: None / _Insert URLs and outcome_
+      ```
+    * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
+      ```text
+      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE: 0 / 1
       ```
     * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
