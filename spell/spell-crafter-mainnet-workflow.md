@@ -318,7 +318,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Handover and Merge Stage
 
-* [ ] Wait for explicit "good to handover" approval replies from both official reviewers on the deployment-information comment
+* [ ] Wait for explicit "good to handover" comments from both official reviewers confirming the deployment information
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in [`new-spells` discord channel](https://discord.com/channels/893112320329396265/897483518316265553)
   * [ ] Tag Responsible Governance Facilitator in the message with the address

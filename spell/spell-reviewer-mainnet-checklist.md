@@ -504,8 +504,8 @@ _Insert your local test logs here_
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * [ ] Check all tests are passing locally using `make test`
-* [ ] Reply to the crafter's deployment-information comment with an explicit "good to handover" approval
-* [ ] Confirm that the deployment-information comment has explicit "good to handover" approval replies from both official reviewers
+* [ ] Publish an explicit "good to handover" comment confirming the crafter's deployment information
+* [ ] Confirm that both official reviewers published explicit "good to handover" comments
 
 ```
 _Insert your local test logs here_
