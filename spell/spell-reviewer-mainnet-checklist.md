@@ -41,15 +41,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Treat the alternative as the release under review
         * [ ] Repeat the security and applicable compatibility checks above
       * [ ] Confirm that the spell PR identifies the alternative and its upstream reference
-      * [ ] Confirm that both spell reviewers explicitly approved the alternative in follow-up comments
+      * [ ] IF the alternative is less than 14 days old, confirm that the same comment requests an explicit cooling-period waiver
+      * [ ] Approve the alternative and, IF applicable, its cooling-period waiver in a follow-up comment
+      * [ ] Confirm that the other spell reviewer approved the alternative and, IF applicable, its cooling-period waiver in a follow-up comment
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
       ```
-    * IF the required release is less than 14 days old
-      * [ ] Confirm that the spell PR contains a comment requesting an explicit cooling-period waiver
-      * [ ] Approve the waiver in a follow-up comment
-      * [ ] Confirm that the other spell reviewer approved the waiver in a follow-up comment
   * Phase 2 — Conditional CI synchronization
     * IF the spell PR changes `FOUNDRY_RELEASE`
       * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
