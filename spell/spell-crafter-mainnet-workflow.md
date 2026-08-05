@@ -66,7 +66,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Release notes: _Insert exact release URL_
       Compatibility: Compatible / Incompatible — _Insert rationale_
       ```
-    * IF the release under review is affected, its applicability is unclear, or it is incompatible
+    * IF the release under review does not pass the security review or applicable compatibility check
       * [ ] Stop Foundry setup and notify the spell team
       * Repeat until the release under review is unaffected and, when compatibility is checked, compatible
         * [ ] Select an exact alternative supported by an official upstream reference
