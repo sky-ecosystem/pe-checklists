@@ -21,10 +21,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       FOUNDRY_IGNORE_AGE: 0 / 1
       ```
     * [ ] Treat the selected release as the release under review
-    * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) and every linked official notice for the release under review
+    * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release under review
+    * [ ] IF an applicable advisory links an official Foundry incident notice, review that notice for unresolved issues affecting the release
       ```text
       Security review: Unaffected / Affected / Applicability unclear
-      Sources and rationale: None affecting the release / _Insert URLs and outcome_
+      Security advisories: _Insert URLs and outcome_
+      Linked incident notices: None / _Insert URLs and outcome_
       ```
     * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, read the release under review's complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
