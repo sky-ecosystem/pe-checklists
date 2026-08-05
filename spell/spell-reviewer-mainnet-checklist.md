@@ -41,7 +41,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Treat the alternative as the release under review
         * [ ] Repeat the security and applicable compatibility checks above
       * [ ] Confirm that the spell PR identifies the alternative and its upstream reference
-      * [ ] Confirm that both spell reviewers explicitly approved the alternative
+      * [ ] Confirm that both spell reviewers explicitly approved the alternative in follow-up comments
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
