@@ -382,11 +382,12 @@ _Insert your local test logs here_
   * [ ] Every action in the Exec Doc is present in the spell code
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
-  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
+  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", notify spell crafter
+    * [ ] Wait until Octane analysis is triggered by crafter
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
   * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] Check every finding and ensure the crafter left feedback on each finding specifying whether the finding matters or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details)
+  * [ ] Once Octane analysis is finished on the latest commit, check every finding and ensure the crafter left feedback on each finding specifying whether the finding matters or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details)
     * [ ] All findings either have crafter's feedback or are already resolved ELSE notify the crafter
     * [ ] Ensure the crafter's feedback comments are correct, ELSE raise it to the signal group
 * IF new commits are present in the spell
