@@ -157,6 +157,7 @@ setLiquidationBreakerPriceTolerance
 setStairstepExponentialDecrease
 solc
 startingPriceFactor
+strikethroughs
 structs
 submodule
 submodules
