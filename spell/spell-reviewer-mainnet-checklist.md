@@ -380,12 +380,15 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
+* [ ] Latest remote spell commit matches the commit reviewed in this checklist
+  _Insert latest reviewed remote commit hash_
 * IF new commits are present after the previous review
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
+* [ ] Check the rendered checklist comment before posting to ensure all checkboxes and strikethroughs display correctly
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
