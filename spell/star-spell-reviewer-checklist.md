@@ -176,7 +176,6 @@ This section outlines the review process and provides concrete action items for 
       - [ ] Expected admin address for this chain has full access (`SubProxy` on mainnet, `Executor` on other chains).
       - [ ] Contract deployer address has no access (e.g. `wards(deployer)` is `0`).
       - [ ] No other addresses has access to this contract.
-    - [ ] IF the contract is a vault, ensure technical scope validates each vault role that can have access to the funds against trusted external sources (i.e. docs listing contracts which have that role in the vault) or against other verifiable sources.
 
 #### Dependency checks
 - LIST every submodule or any other imported code used in this spell:
