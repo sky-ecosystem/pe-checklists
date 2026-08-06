@@ -130,7 +130,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
   * IF [`DssAutoLine.setIlk(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-auto-line/blob/master/src/DssAutoLine.sol#L81-L85) is called directly instead of using a `DssExecLib` `AutoLine` setter
     * [ ] The intended `AutoLine` configuration and live `Vat` debt-ceiling states are documented
   * [ ] Ensure every spell variable is declared as public/internal

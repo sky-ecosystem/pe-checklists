@@ -133,8 +133,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
     * [ ] EITHER is used, depending on the instruction:
-      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
-      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648)
+      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670)
+      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659)
     * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
     * [ ] `AutoLine` updates are tested by asserting the configured parameters and the exact resulting per-ilk and global `Vat` debt ceilings after cast
   * IF [`DssAutoLine.setIlk(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-auto-line/blob/master/src/DssAutoLine.sol#L81-L85) is called directly instead of using a `DssExecLib` AutoLine setter
