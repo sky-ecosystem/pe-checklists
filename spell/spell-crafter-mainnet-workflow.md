@@ -207,10 +207,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
   * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] Once Octane analysis is finished on the latest commit, check every finding and leave feedback per finding whether the findings matter or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details => Press "Leave feedback" => Write comment => Press "Share feedback")
+  * [ ] Once Octane analysis is finished on the latest commit, review every finding and leave feedback per finding whether the findings matter or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details -> Press "Leave feedback" -> Write comment -> Press "Share feedback")
     * [ ] All findings either have your feedback or are already resolved
     * [ ] IF any blocking issue was found, raise it to the current spell signal group
-  * [ ] IF there is any findings that were resolved in the PR, the findings can be marked resolved. (Press "Finding Acknowledged" on the right-upper side of Finding details -> Select "Resolved" -> Leave comment "The finding was addressed from [commit](link)" => Press "Acknowledge")
+  * [ ] IF there are any findings that were resolved in the PR, they can be marked resolved. (Press "Finding Acknowledged" on the upper-right corner of the Finding details panel -> Select "Resolved" -> Leave comment "The finding was addressed from [commit](link)" -> Press "Acknowledge")
+  * [ ] Notify reviewers once you finish the review of the recent analysis
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")

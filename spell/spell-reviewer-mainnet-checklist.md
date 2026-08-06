@@ -387,7 +387,7 @@ _Insert your local test logs here_
   * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
   * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
   * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] Once Octane analysis is finished on the latest commit, check every finding and ensure the crafter left feedback on each finding specifying whether the finding matters or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details)
+  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left feedback on each finding specifying whether the finding matters or not, and the reasoning. (Press "Feedback" on the upper-right corner of the Finding details panel)
     * [ ] All findings either have crafter's feedback or are already resolved ELSE notify the crafter
     * [ ] Ensure the crafter's feedback comments are correct, ELSE raise it to the signal group
 * IF new commits are present in the spell
