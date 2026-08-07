@@ -98,6 +98,7 @@ CalcFab
 calldata
 casted
 checksummed
+checkboxes
 codehash
 collateralization
 collaterals

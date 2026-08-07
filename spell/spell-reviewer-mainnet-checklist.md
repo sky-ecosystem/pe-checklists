@@ -388,7 +388,7 @@ _Insert your local test logs here_
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
-* [ ] Check the rendered checklist comment before posting to ensure all check boxes and strikethroughs display correctly
+* [ ] Verify that all checkboxes and strikethroughs display correctly in the rendered checklist comment before posting
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
