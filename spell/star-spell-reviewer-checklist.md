@@ -283,12 +283,12 @@ EXECUTED_TESTS_LOGS
 #### Confirmed Handover
 - [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
-- [ ] The spell address, the codehash and the direct execution are posted by the crafter in the existing spell thread in the `#govops` slack channel using one of the following formats:
-    - `Whitelist <StarName> spell with address 0x… and codehash 0x… in <STARGUARD>, direct execution: No`
-    - `Execute the <StarName> Proxy Spell at 0x…`
+- [ ] The spell handover message is posted by the crafter in the existing spell thread in the `#govops` Slack channel using the applicable format: 
+    - [ ] IF direct execution is no: `Whitelist <StarName> spell with address 0x… and codehash 0x… in <STARGUARD>, direct execution: No`
+    - [ ] IF direct execution is yes: `Execute the <StarName> Proxy Spell at 0x…`
 - [ ] Posted spell address matches spell address approved for handover.
-- [ ] Posted spell codehash matches codehash that you verified locally.
-- [ ] Posted direct execution value matches the forum post.
+- [ ] IF the message includes a codehash, it matches the codehash verified locally.
+- [ ] The selected message format matches the direct execution value in the forum post.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Confirm that no changes have been made to the code since the "Good to deploy" comment was posted, EXCEPT for changes related to deployment. (i.e. adding the deployed spell payload, updating test code to use the deployed contract for testing).
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
