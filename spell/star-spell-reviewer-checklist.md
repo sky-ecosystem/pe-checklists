@@ -241,7 +241,7 @@ EXECUTED_TESTS_LOGS
 - [ ] Actions taken in the spell match the scope approved through the governance process applicable to this Prime Agent:
   - [ ] IF Sky-governed, matches the corresponding [Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal) and, where required, governance poll.
   - [ ] IF Self-governed, matches the proposal forum post (often the technical scope forum post) and Snapshot vote, for changes to the Prime Agent's own artifact. Changes to the Sky Core Atlas still follow the same Atlas edit weekly proposal and governance poll process as Sky-governed Prime Agents.
-- [ ] Every _Instruction text_ from the governance record applicable to this Prime Agent is copied to the spell code as a comment.
+- [ ] Every _Action Item_ from the governance record applicable to this Prime Agent Spell is copied to the spell code as a comment.
 - [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
 - [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
 - [ ] All actions present in the spell code are present in the governance record applicable to this Prime Agent.
