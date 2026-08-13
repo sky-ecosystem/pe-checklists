@@ -217,7 +217,7 @@ This section outlines the review process and provides concrete action items for 
 #### Parameter Changes & Protocol Integration
 - [ ] Prime Agent protocol invariants are maintained after spell execution.
 - [ ] All parameter changes use the appropriate helper functions IF available.
-- [ ] Parameter changes match the governance record applicable to this Prime Agent exactly (see [Pre-Deployment checks](#pre-deployment-checks)).
+- [ ] Parameter changes match the governance record applicable to this Prime Agent Spell exactly: the corresponding Atlas edit weekly proposal (Sky-governed), or the proposal forum post and Snapshot vote (self-governed, for changes to the Prime Agent's own artifact).
 - [ ] Spell interacts correctly with existing protocol components.
 - [ ] Proper error handling for all external interactions.
 
