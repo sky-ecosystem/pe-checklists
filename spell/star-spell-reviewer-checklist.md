@@ -244,7 +244,7 @@ EXECUTED_TESTS_LOGS
 - [ ] Every _Action Item_ from the governance record applicable to this Prime Agent Spell is copied to the spell code as a comment.
 - [ ] IF an instruction cannot be taken, it should have an explanation under the instruction prefixed with `// Note:`.
 - [ ] IF an action in the spell doesn't have a relevant instruction, its necessity is explained in a comment prefixed with `// Note:`.
-- [ ] All actions present in the spell code are present in the governance record applicable to this Prime Agent.
+- [ ] All actions present in the spell code are present in the governance record applicable to this Prime Agent Spell.
 - [ ] IF new commits were added after the initial review, the relevant checklist items have been re-verified.
 - [ ] IF no blockers were found, post the completed "Development Stage" checklist stage with the explicit "Good to deploy" note on top.
 
