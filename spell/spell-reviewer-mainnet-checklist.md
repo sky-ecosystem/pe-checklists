@@ -380,8 +380,8 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
-* [ ] Latest remote spell commit matches the commit reviewed in this checklist
-  _Insert latest reviewed remote commit hash_
+* [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
+  _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
