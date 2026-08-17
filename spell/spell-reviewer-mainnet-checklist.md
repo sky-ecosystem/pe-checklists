@@ -386,7 +386,7 @@ _Insert your local test logs here_
     * [ ] Wait until Octane analysis is triggered by crafter
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
-    * [ ] IF any contract shows "Source unverified", investigate the address (eg. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
     * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, notify spell crafter
   * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
     * [ ] "Project Name" and "Repository Name" are correctly set
@@ -396,8 +396,8 @@ _Insert your local test logs here_
   * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
     * [ ] "SCOPE" includes:
-      * [ ] "src/DssSpell.sol"
-      * [ ] IF "src/dependencies" is present, ensure all files in the dependencies folder are included
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, ensure all files in the dependencies folder are included
     * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
   * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Feedback" on each finding specifying whether the finding matters or not, and the reasoning.
     * [ ] All findings either have crafter's "Feedback" or are already resolved ELSE notify the crafter

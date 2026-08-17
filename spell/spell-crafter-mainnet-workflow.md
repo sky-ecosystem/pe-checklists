@@ -208,7 +208,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Run "PR-only" PR analysis mode
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
-    * [ ] IF any contract shows "Source unverified", investigate the address (eg. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
     * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> "Save overrides" and rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
   * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
     * [ ] "Project Name" and "Repository Name" are correctly set
@@ -218,8 +218,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
     * [ ] "SCOPE" includes:
-      * [ ] "src/DssSpell.sol"
-      * [ ] IF "src/dependencies" is present, ensure all files in the dependencies folder are included
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, ensure all files in the dependencies folder are included
     * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
   * [ ] Once Octane analysis is finished on the latest commit, review every finding and leave "Feedback" per finding whether it matter or not, and the reasoning
     * [ ] All findings either have your feedback or are already resolved
