@@ -384,12 +384,24 @@ _Insert your local test logs here_
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
   * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", notify spell crafter
     * [ ] Wait until Octane analysis is triggered by crafter
-  * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
-  * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
-  * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left feedback on each finding specifying whether the finding matters or not, and the reasoning. (Press "Feedback" on the upper-right corner of the Finding details panel)
-    * [ ] All findings either have crafter's feedback or are already resolved ELSE notify the crafter
-    * [ ] Ensure the crafter's feedback comments are correct, ELSE raise it to the signal group
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
+    * [ ] IF any contract shows "Source unverified", investigate the address (eg. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, notify spell crafter
+  * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
+    * [ ] "Project Name" and "Repository Name" are correctly set
+    * [ ] "Branch Name" is set to "master"
+    * [ ] "Install dependencies" is enabled
+    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
+  * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
+    * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] "SCOPE" includes:
+      * [ ] "src/DssSpell.sol"
+      * [ ] IF "src/dependencies" is present, ensure all files in the dependencies folder are included
+    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
+  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Feedback" on each finding specifying whether the finding matters or not, and the reasoning.
+    * [ ] All findings either have crafter's "Feedback" or are already resolved ELSE notify the crafter
+    * [ ] Ensure the crafter's "Feedback" comments are correct, ELSE raise it to the signal group
 * IF new commits are present in the spell
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests

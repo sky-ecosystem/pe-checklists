@@ -203,14 +203,28 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
-  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis (Press "Run new analysis" in the top right corner -> Select correct PR -> Select "PR-only" for the "PR analysis mode" field -> Click "Run analysis")
-  * [ ] Ensure no filters are applied to the Octane results (press "All filters" -> set "All" for each filter group)
-  * [ ] Ensure all onchain dependencies are correctly fetched (Click on the "On Chain dependencies" tab -> inspect "Contracts" table). In case "Source skipped" contracts are present, select correct chain for each contract -> "Save overrides" and rerun the analysis
-  * [ ] Thoroughly inspect analysis settings for signs of manipulation (Click on the "Settings" tab -> check "Analysis Scope", "Install dependencies", and other relevant sections)
-  * [ ] Once Octane analysis is finished on the latest commit, review every finding and leave feedback per finding whether the findings matter or not, and the reasoning. (Press "Feedback" on the right-upper side of Finding details -> Press "Leave feedback" -> Write comment -> Press "Share feedback")
+  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
+    * [ ] Select the correct Pull Request
+    * [ ] Run "PR-only" PR analysis mode
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
+    * [ ] IF any contract shows "Source unverified", investigate the address (eg. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> "Save overrides" and rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
+  * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
+    * [ ] "Project Name" and "Repository Name" are correctly set
+    * [ ] "Branch Name" is set to "master"
+    * [ ] "Install dependencies" is enabled
+    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
+  * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
+    * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] "SCOPE" includes:
+      * [ ] "src/DssSpell.sol"
+      * [ ] IF "src/dependencies" is present, ensure all files in the dependencies folder are included
+    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
+  * [ ] Once Octane analysis is finished on the latest commit, review every finding and leave "Feedback" per finding whether it matter or not, and the reasoning
     * [ ] All findings either have your feedback or are already resolved
     * [ ] IF any blocking issue was found, raise it to the current spell signal group
-  * [ ] IF there are any findings that were resolved in the PR, they can be marked resolved. (Press "Finding Acknowledged" on the upper-right corner of the Finding details panel -> Select "Resolved" -> Leave comment "The finding was addressed from [commit](link)" -> Press "Acknowledge")
+    * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
   * [ ] Notify reviewers once you finish the review of the recent analysis
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
