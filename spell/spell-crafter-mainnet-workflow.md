@@ -33,6 +33,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
+- Set up the spell Signal group after the content and roles have been agreed upon in the private GovOps Slack coordination thread
+  - [ ] Create the group named `YYYY-MM-DD Spell`
+  - [ ] Add both official reviewers
+  - IF other team members are involved in the spell
+    - [ ] Add them to the group
+
 ## Development Stage
 
 * Install stable Foundry version
@@ -207,7 +213,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Deployment Stage
 
-* [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
+* [ ] Before deploying, ensure both official reviewers have posted "good to deploy" comments (containing local tests) for the current pre-deployment commit
 * Pre-deploy setup and checks (currently via Foundry)
   * Set local environment variables
     * [ ] Avoid using the same deployer for different chains (to avoid deploying contracts with the same address but different source code)
@@ -251,7 +257,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
   * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
   * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
-* [ ] Fill the rest of the Spell Crafter-related boxes in the Exec Sheet
+* IF there are remaining Spell Crafter-related fields in the Exec Sheet and the crafter is responsible for updating them
+  * [ ] Fill the remaining fields
 * Pre-Merge target branch pull attack checks
   * IF within last THREE commits (or last 6 weeks) spells-mainnet repo contains a maintenance PR
     * [ ] Ensure the PR actions match description and look safe

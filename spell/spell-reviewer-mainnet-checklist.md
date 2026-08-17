@@ -380,11 +380,15 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
-* IF new commits are present in the spell
+* [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
+  _Insert latest reviewed commit hash_
+* IF new commits are present after the previous review
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+* [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
+* [ ] Verify that all checkboxes and strikethroughs display correctly in the rendered checklist comment before posting
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
@@ -401,7 +405,7 @@ _Insert your local test logs here_
   * [ ] GNU AGPLv3 license
 * Source code validity
   * [ ] Deployed spell code matches source on github. (can be checked via `make diff-deployed-spell` or manually)
-  * [ ] No new changes are made after previously given "good to deploy"
+  * [ ] No new changes are made after the previously given "good to deploy" comments from both official reviewers, EXCEPT for archival and deployed-spell values in config
 * Deployed spell Etherscan checks
   * [ ] Ensure local code is up-to-date with the remote branch (e.g. `git pull`)
   * Automated checks via `make check-deployed-spell`
