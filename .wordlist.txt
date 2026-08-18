@@ -99,6 +99,7 @@ CalcFab
 calldata
 casted
 checksummed
+checkboxes
 codehash
 collateralization
 collaterals
@@ -158,6 +159,7 @@ setLiquidationBreakerPriceTolerance
 setStairstepExponentialDecrease
 solc
 startingPriceFactor
+strikethroughs
 structs
 submodule
 submodules
