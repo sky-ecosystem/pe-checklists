@@ -31,6 +31,7 @@ Fileable
 GSM
 Getter
 Goerli
+GovOps
 IAM
 IPFS
 Integrations
@@ -97,6 +98,7 @@ CalcFab
 calldata
 casted
 checksummed
+checkboxes
 codehash
 collateralization
 collaterals
@@ -157,6 +159,7 @@ setLiquidationBreakerPriceTolerance
 setStairstepExponentialDecrease
 solc
 startingPriceFactor
+strikethroughs
 structs
 submodule
 submodules

@@ -121,10 +121,13 @@ This section outlines the review process and provides concrete action items for 
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
 - [ ] Verify solc version matches the Prime Agent protocol standard based on prior contracts.
+- [ ] Specify the correct spell target data: `YYYY-MM-DD`
 
 #### Spell Description & Comments
-- [ ] Spell PR has clear description.
+- [ ] Spell PR has a clear description.
+- [ ] Spell PR has a correct spell target date.
 - [ ] Spell contract has a clear description.
+- [ ] Spell contract has a correct spell target date.
 - [ ] Every significant action and parameter change are clearly commented in the code.
 - [ ] Every significant action has valid source url (forum post, poll, atlas).
 - [ ] Every parameter change is clearly commented with before/after values.
@@ -132,7 +135,7 @@ This section outlines the review process and provides concrete action items for 
 #### Proposed changes
 - LIST every forum post proposing changes for this particular Prime Agent, particular target date:
   - FORUM_POST_TITLE, FORUM_POST_URL
-    - [ ] Forum post follows the [known template](https://docs.google.com/document/d/1vLqeP-zXmxKo2OpoxnL2z0ZczPe4nWN49-3URx-iKVA/edit?tab=t.nkz4n7by2dnh).
+    - [ ] Forum post follows the [known template](https://github.com/Atlas-Axis/ecosystem-operational-references/blob/main/templates/technical-scope-template.md).
 - [ ] Verify spell content matches the combined scope of the forum posts listed above.
 - [ ] Verify forum posts contain all new addresses directly or indirectly used in the spell, their constructor arguments and rate limits.
 - [ ] IF the Prime Agent spell introduces a major change that can affect external parties, suggest Governance Facilitators to set Core Spell office hours to `true`.
@@ -165,6 +168,7 @@ This section outlines the review process and provides concrete action items for 
       - [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
     - [ ] Compilation optimizations match deployment settings defined in the source code repo.
     - [ ] Consistent license.
+    - [ ] Deployer address was not used on other chains that star is onboarded UNLESS there is a valid reason for it (e.g., external contract, the same deployer was used to keep addresses the same across chains, etc).
     - LIST every constructor argument:
       - `CONSTRUCTOR_ARGUMENT_NAME` being `CONSTRUCTOR_ARGUMENT_VALUE` from EXTERNAL_SOURCE_URL
         - [ ] The value has valid external source.
@@ -279,10 +283,12 @@ EXECUTED_TESTS_LOGS
 #### Confirmed Handover
 - [ ] Both reviewers gave explicit "Good to handover".
 - [ ] All review comments have been addressed or resolved.
-- [ ] The spell address, the codehash and the direct execution are posted by the crafter in the `#govops` in the `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` format.
+- [ ] The spell handover message is posted by the crafter in the existing spell thread in the `#govops` Slack channel using the applicable format: 
+    - [ ] IF direct execution is no: `Whitelist <StarName> spell with address 0x… and codehash 0x… in <STARGUARD>, direct execution: No`
+    - [ ] IF direct execution is yes: `Execute the <StarName> Proxy Spell at 0x…`
 - [ ] Posted spell address matches spell address approved for handover.
-- [ ] Posted spell codehash matches codehash that you verified locally.
-- [ ] Posted direct execution value matches the forum post.
+- [ ] IF the message includes a codehash, it matches the codehash verified locally.
+- [ ] The selected message format matches the direct execution value in the forum post.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
-- [ ] Ensure that no changes were made to the code since the spell was deployed and archived.
+- [ ] Confirm that no changes have been made to the code since the "Good to deploy" comment was posted, EXCEPT for changes related to deployment. (i.e. adding the deployed spell payload, updating test code to use the deployed contract for testing).
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.

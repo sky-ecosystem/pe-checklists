@@ -110,10 +110,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Has the `https` scheme
     * [ ] Has prefix derived from the url itself
       * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
-      * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
+      * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
       * `// Forum:` if URL starts with `https://forum.sky.money/t/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
-      * `// Atlas:` if URL starts with `https://sky-atlas.powerhouse.io/`
+      * `// Atlas:` if URL starts with `https://sky-atlas.io/`
 * Dependency checks
   * [ ] Reinstall libraries by running `rm -rf ./lib && git submodule update --init --recursive`
     ```bash
@@ -284,6 +284,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all USDS transfers tested in `testPayments` matches number in the Exec Sheet
+  * IF `SUBPROXY_METHODS` transfers are present
+    * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
+    * [ ] `SUBPROXY_METHODS` is fetched from chainlog
+    * [ ] `XXX_SUBPROXY` is fetched from chainlog
+    * [ ] `XXX_SUBPROXY` matches the SubProxy named in the Exec Sheet
+    * [ ] `AMOUNT` has `TOKEN.decimals()` precision
+    * [ ] Token transferred matches Exec Sheet
+    * [ ] Recipient address in the instruction is in the checksummed format
+    * [ ] Recipient address matches Exec Sheet
+    * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
+    * [ ] Transfer amount matches Exec Sheet
+    * [ ] Transfers from `XXX_SUBPROXY` are tested via pre-cast token balance checks and exact `XXX_SUBPROXY`/recipient balance deltas
   * IF `DAI` / `SKY` / `USDS` / `SPK` streams (`DssVest`) are created
     * [ ] `VestAbstract` interface is imported from `dss-interfaces/dss/VestAbstract.sol`
     * [ ] `restrict` is used for each stream, UNLESS otherwise explicitly stated in the Exec Sheet
@@ -442,7 +454,9 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
-* IF new commits are present in the spell
+* [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
+  _Insert latest reviewed commit hash_
+* IF new commits are present after the previous review
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
@@ -454,6 +468,8 @@ _Insert your local test logs here_
     ```
   * [ ] Confirm that the verifier exits `0`
   * [ ] Confirm that the desired and installed releases match the release pinned in CI
+* [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
+* [ ] Verify that all checkboxes and strikethroughs display correctly in the rendered checklist comment before posting
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
 
 ## Deployed Stage
@@ -473,7 +489,7 @@ _Insert your local test logs here_
   * [ ] GNU AGPLv3 license
 * Source code validity
   * [ ] Deployed spell code matches source on github. (can be checked via `make diff-deployed-spell` or manually)
-  * [ ] No new changes are made after previously given "good to deploy"
+  * [ ] No new changes are made after the previously given "good to deploy" comments from both official reviewers, EXCEPT for archival and deployed-spell values in config
 * Deployed spell Etherscan checks
   * [ ] Ensure local code is up-to-date with the remote branch (e.g. `git pull`)
   * Automated checks via `make check-deployed-spell`
@@ -518,8 +534,10 @@ _Insert your local test logs here_
 
 ## Handover and Merge Stage
 
-* [ ] Check that the spell address posted by the crafter in [`new-spells`](https://discord.com/channels/893112320329396265/897483518316265553) is correct
-* [ ] Confirm the address in the [`new-spells`](https://discord.com/channels/893112320329396265/897483518316265553) channel (via a separate "reply to" message, restating the address to avoid edits)
-  * [ ] Wait until responsible governance facilitator confirms handover in `new-spells`
+* [ ] Check that the spell address posted by the crafter in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995) is correct
+* [ ] Confirm the address in the thread – via the forum "Reply" button on the post containing the current spell address, restating the address to make later edits detectable
+  * Example: ``Confirming {YYYY-MM-DD} Core Spell at [`{SPELL_ADDRESS}`]({BLOCK_EXPLORER_URL}).``
+  * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
+  * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
 * [ ] Ensure that no changes were made to the code since the spell was deployed and archived
 * [ ] Approve spell PR for merge via 'Approve' review option

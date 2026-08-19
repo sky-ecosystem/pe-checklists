@@ -33,6 +33,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
+- Set up the spell Signal group after the content and roles have been agreed upon in the private GovOps Slack coordination thread
+  - [ ] Create the group named `YYYY-MM-DD Spell`
+  - [ ] Add both official reviewers
+  - IF other team members are involved in the spell
+    - [ ] Add them to the group
+
 ## Development Stage
 
 * Prepare the `spells-mainnet` checkout
@@ -141,10 +147,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Copy every `Reasoning URL` and `Authority URL` from the Exec Sheet as a comment under relevant section or instruction in the spell code (depending on the row the link is present)
   * [ ] For every `Reasoning URL` and `Authority URL`, add prefix derived from the url itself:
     * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
-    * `// Poll:` if URL starts with `https://vote.sky.money/polling/`
+    * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
     * `// Forum:` if URL starts with `https://forum.sky.money/t/`
     * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
-    * `// Atlas:` if URL starts with `https://sky-atlas.powerhouse.io/`
+    * `// Atlas:` if URL starts with `https://sky-atlas.io/`
   * [ ] IF an action in the spell doesn't have relevant instruction (e.g.: ChainLog version bump), add the explanation below prefixed with `// Note:`
   * [ ] IF an instruction can not be directly taken, add a comment below prefixed with `// Note:` (e.g.: `// Note: see dao_resolutions variable declared above`)
 * Open draft PR
@@ -190,6 +196,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * Minor -> Core Module (DSS) Update (e.g. Flapper) (0.++.0)
       * Patch -> Collateral addition or addition/modification (0.0.++)
     * [ ] New addresses are added to the `addresses_mainnet.sol`
+    * [ ] Deployer addresses are added to `addresses_deployers.sol`
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
@@ -210,6 +217,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF `direct execution` is `yes`
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
       * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+  * IF `SUBPROXY_METHODS` transfers are present
+    * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
@@ -269,7 +278,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Deployment Stage
 
-* [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
+* [ ] Before deploying, ensure both official reviewers have posted "good to deploy" comments (containing local tests) for the current pre-deployment commit
 * Pre-deploy setup and checks (currently via Foundry)
   * Set local environment variables
     * [ ] Avoid using the same deployer for different chains (to avoid deploying contracts with the same address but different source code)
@@ -318,10 +327,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 * [ ] Wait for explicit "good to handover" comments from both official reviewers confirming the deployment information
 * Communicate deployed address to governance
-  * [ ] Write a message with Deployed Address in [`new-spells` discord channel](https://discord.com/channels/893112320329396265/897483518316265553)
-  * [ ] Tag Responsible Governance Facilitator in the message with the address
-  * [ ] Wait until Responsible Governance Facilitator confirms handover in `new-spells`
-* [ ] Fill the rest of the Spell Crafter-related boxes in the Exec Sheet
+  * [ ] Write a message with Deployed Address in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995)
+  * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
+  * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
+  * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
+* IF there are remaining Spell Crafter-related fields in the Exec Sheet and the crafter is responsible for updating them
+  * [ ] Fill the remaining fields
 * Pre-Merge target branch pull attack checks
   * IF within last THREE commits (or last 6 weeks) spells-mainnet repo contains a maintenance PR
     * [ ] Ensure the PR actions match description and look safe
