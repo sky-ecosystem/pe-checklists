@@ -9,6 +9,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
+* Review Foundry setup changes before execution
+  * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
+    * [ ] Confirm that the spell PR documents the purpose of the changes
+    * [ ] Inspect the complete diff for those changes before running any Foundry setup command
+    * IF the purpose is undocumented or any concern remains unresolved
+      * [ ] Stop Foundry setup
+      * [ ] Notify the spell team
 * Verify and install the Foundry toolkit
   * Phase 1 — Mandatory release acceptance
     * [ ] Run `make select-foundry`
