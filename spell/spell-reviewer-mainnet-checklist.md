@@ -140,7 +140,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
     * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
-    * [ ] Tests assert the intermediate and final `AutoLine` configuration and exact per-ilk and global `Vat` debt ceilings
+    * [ ] `AutoLine` values are tested via `testGeneral`
+    * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
   * IF collateral debt ceiling (`vat.ilk.line`) is updated directly rather than through `AutoLine`
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/sky-ecosystem/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] EITHER is used, depending on the instruction:
