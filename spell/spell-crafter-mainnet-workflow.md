@@ -55,13 +55,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release under review
-    * [ ] IF an applicable advisory links an official Foundry incident notice, review that notice for unresolved issues affecting the release
-      ```text
-      Security review: Unaffected / Affected / Applicability unclear
-      Security advisories: _Insert URLs and outcome_
-      Linked incident notices: None / _Insert URLs and outcome_
-      ```
+    * Review the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * [ ] Read each potentially applicable advisory and determine whether its affected version range includes the release
+      * [ ] Review every official upstream advisory or incident notice linked from an applicable advisory for unresolved issues affecting the release
+      * [ ] Record the security review evidence
+        ```text
+        Security review: Unaffected / Affected / Applicability unclear
+        Security advisories: None affecting the release / _Insert URLs and outcome_
+        Linked official sources: None / _Insert URLs and outcome_
+        ```
     * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
@@ -79,9 +81,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Select an exact alternative supported by an official upstream reference
         * [ ] Treat the alternative as the release under review
         * [ ] Repeat the security and applicable compatibility checks above
-      * [ ] Post the alternative version and upstream reference in the spell PR
-      * [ ] IF the alternative is less than 14 days old, include an explicit cooling-period waiver request in the same comment
-      * [ ] Obtain explicit approval from both spell reviewers for the alternative and, IF applicable, its cooling-period waiver in follow-up comments
+      * [ ] Post a spell PR comment containing the exact alternative release to install and its upstream reference
+        * [ ] IF the alternative is less than 14 days old, include an explicit cooling-period waiver request in the same comment
+      * [ ] Obtain explicit approval from both spell reviewers in replies to that comment
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
@@ -108,7 +110,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Stop Foundry setup
       * [ ] Record the failed command and complete output in the spell PR
       * [ ] Diagnose and resolve the failure
-      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`; the failure does not authorize another automatic installation
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
       * [ ] Rerun the exact failed command
         ```text
         _Insert the complete command output here_
@@ -315,9 +317,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * The exact pre-deployment Foundry verification command
+  * The exact Foundry verification command run before deployment, with its release and age-waiver arguments matching CI
   * The complete verifier output
   * Confirmation that the verifier exited `0`
+  * Confirmation that the desired and installed releases match the release pinned in CI
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")

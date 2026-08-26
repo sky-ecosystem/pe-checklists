@@ -9,13 +9,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* Review Foundry setup changes before execution
+* Confirm that Foundry setup changes are handled separately
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
-    * [ ] Confirm that the spell PR documents the purpose of the changes
-    * [ ] Inspect the complete diff for those changes before running any Foundry setup command
-    * IF the purpose is undocumented or any concern remains unresolved
-      * [ ] Stop Foundry setup
-      * [ ] Notify the spell team
+    * [ ] Stop Foundry setup
+    * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
+    * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
 * Verify and install the Foundry toolkit
   * Phase 1 — Mandatory release acceptance
     * [ ] Run `make select-foundry`
@@ -23,13 +21,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * [ ] Check the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for an affected version range that includes the release under review
-    * [ ] IF an applicable advisory links an official Foundry incident notice, review that notice for unresolved issues affecting the release
-      ```text
-      Security review: Unaffected / Affected / Applicability unclear
-      Security advisories: _Insert URLs and outcome_
-      Linked incident notices: None / _Insert URLs and outcome_
-      ```
+    * Review the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * [ ] Read each potentially applicable advisory and determine whether its affected version range includes the release
+      * [ ] Review every official upstream advisory or incident notice linked from an applicable advisory for unresolved issues affecting the release
+      * [ ] Record the security review evidence
+        ```text
+        Security review: Unaffected / Affected / Applicability unclear
+        Security advisories: None affecting the release / _Insert URLs and outcome_
+        Linked official sources: None / _Insert URLs and outcome_
+        ```
     * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
@@ -47,10 +47,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Select an exact alternative supported by an official upstream reference
         * [ ] Treat the alternative as the release under review
         * [ ] Repeat the security and applicable compatibility checks above
-      * [ ] Confirm that the spell PR identifies the alternative and its upstream reference
-      * [ ] IF the alternative is less than 14 days old, confirm that the same comment requests an explicit cooling-period waiver
-      * [ ] Approve the alternative and, IF applicable, its cooling-period waiver in a follow-up comment
-      * [ ] Confirm that the other spell reviewer approved the alternative and, IF applicable, its cooling-period waiver in a follow-up comment
+      * Crafter's alternative-release comment
+        * [ ] Contains the exact alternative release to install and its upstream reference
+        * [ ] IF the alternative is less than 14 days old, contains an explicit cooling-period waiver request
+      * [ ] Approve the alternative and, IF applicable, its cooling-period waiver in a reply to that comment
+      * [ ] Confirm that the other spell reviewer approved the alternative and, IF applicable, its cooling-period waiver in a reply to that comment
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
@@ -77,7 +78,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Stop Foundry setup
       * [ ] Record the failed command and complete output in the spell PR
       * [ ] Diagnose and resolve the failure
-      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`; the failure does not authorize another automatic installation
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
       * [ ] Rerun the exact failed command
         ```text
         _Insert the complete command output here_
@@ -475,7 +476,9 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains the exact pre-deployment `make verify-foundry release=vMAJOR.MINOR.PATCH` command, including `ignore-age=1` when `FOUNDRY_IGNORE_AGE` is `"1"` in CI
+  * [ ] Contains the exact Foundry verification command run before deployment
+  * [ ] The command's `release=vMAJOR.MINOR.PATCH` argument matches `FOUNDRY_RELEASE` in CI
+  * [ ] The command includes `ignore-age=1` if and only if `FOUNDRY_IGNORE_AGE` is `"1"` in CI
   * [ ] Contains the complete verifier output
   * [ ] Shows that the verifier exited `0`
   * [ ] Shows that the desired and installed releases match the release pinned in CI
@@ -526,7 +529,6 @@ _Insert your local test logs here_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * [ ] Check all tests are passing locally using `make test`
 * [ ] Publish an explicit "good to handover" comment confirming the crafter's deployment information
-* [ ] Confirm that both official reviewers published explicit "good to handover" comments
 
 ```
 _Insert your local test logs here_
