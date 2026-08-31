@@ -19,8 +19,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* [ ] `make safeharbor-generate` output matches the instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) as the source of truth for the desired registry state
+  * [ ] Run `make safeharbor-generate` and ensure the generated updates implement the spreadsheet state relative to the current agreement
+  * [ ] IF there is a mismatch or validation warning, run `make safeharbor-inspect` to review the structured updates and warnings, then notify Governance Facilitators
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -307,10 +308,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
 * IF bug bounty registry updates are present
+  * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) as the source of truth for the desired registry state
   * [ ] Run `make safeharbor-generate`
     * [ ] Verify that the generated code exactly matches the code in the spell
-    * [ ] Verify that output matches the instructions provided by Governance Facilitators
-    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
+    * [ ] Verify that the generated payload implements the spreadsheet state relative to the current agreement
+    * [ ] Review all validation warnings
+    * [ ] IF there is a mismatch or validation warning, run `make safeharbor-inspect` to review the structured updates and warnings, then notify Governance Facilitators
   * [ ] Ensure that agreement address is fetched from the Chainlog
   * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
 * IF spell interacts with ChainLog
@@ -335,8 +338,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _List actions for which coverage was checked here_
     * IF SafeHarbor registry updates are present
       * [ ] SafeHarbor registry updates are exempt from Solidity-side test coverage
-      * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
-      * [ ] Ensure `scripts/safeharbor` tests cover every supported state-diff operation and snapshot both raw calldata and ABI-decoded calldata
+      * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) as the source of truth for the desired registry state
+      * [ ] Ensure `scripts/safeharbor` generator tests are case-complete for valid and invalid state transitions, including executable add/remove ordering
+      * [ ] Ensure the tests cover structured validation warnings and CLI status behavior
+      * [ ] Ensure the tests snapshot both raw calldata and ABI-decoded calldata
       * [ ] Verify that the generated SafeHarbor payload exactly matches the payload in the spell
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
@@ -432,7 +437,10 @@ _Insert your local test logs here_
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
   * [ ] Set `ETH_RPC_URL` to the Tenderly Testnet RPC URL
-  * [ ] `make safeharbor-generate` against the testnet returns "no updates" and no validation warnings (⚠️ ❗)
+  * [ ] Run `make safeharbor-verify` against the Tenderly Testnet after the spell is cast
+  * [ ] Ensure the verification succeeds
+  * IF verification fails
+    * [ ] Run `make safeharbor-inspect` to review the structured updates and validation warnings before escalating the mismatch
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

@@ -66,8 +66,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
-* [ ] Run `make safeharbor-generate` to ensure that updates match the bug bounty updates instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) as the source of truth for the desired registry state
+  * [ ] Run `make safeharbor-generate` and ensure the generated updates implement the spreadsheet state relative to the current agreement
+  * [ ] IF there is a mismatch or validation warning, run `make safeharbor-inspect` to review the structured updates and warnings, then notify Governance Facilitators
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -131,12 +132,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
-    * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) and check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
-      * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
-      * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
-      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
-      * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
+    * [ ] Review the approved [SafeHarbor source spreadsheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) as the source of truth for the desired registry state
+      * [ ] Run `make safeharbor-generate` and verify that the generated payload implements the spreadsheet state relative to the current agreement
+      * [ ] Review all validation warnings
+      * [ ] IF there is a mismatch or validation warning, run `make safeharbor-inspect` to review the structured updates and warnings, then notify Governance Facilitators
+      * [ ] IF the generated Solidity snippet is required by the spreadsheet state:
         * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
+        * [ ] Verify that the generated SafeHarbor payload exactly matches the payload in the spell
         * [ ] Fetch the agreement address from the `ChainLog`
         * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
   * IF Prime Agent spell is provided
@@ -164,7 +166,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] End-to-end "happy path" interaction with the module
   * IF SafeHarbor registry updates are present
     * [ ] SafeHarbor registry updates are exempt from Solidity-side test coverage
-    * [ ] Ensure `scripts/safeharbor` tests cover every supported state-diff operation and snapshot both raw calldata and ABI-decoded calldata
+    * [ ] Ensure `scripts/safeharbor` generator tests are case-complete for valid and invalid state transitions, including executable add/remove ordering
+    * [ ] Ensure the tests cover structured validation warnings and CLI status behavior
+    * [ ] Ensure the tests snapshot both raw calldata and ABI-decoded calldata
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -235,8 +239,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
 * SafeHarbor registry post-cast reconciliation
   * [ ] Set `ETH_RPC_URL` to the Tenderly Testnet RPC URL
-  * [ ] Run `make safeharbor-generate` in the Tenderly Testnet environment after the spell is cast
-  * [ ] Ensure it returns "no updates" and no validation warnings (⚠️ ❗)
+  * [ ] Run `make safeharbor-verify` in the Tenderly Testnet environment after the spell is cast
+  * [ ] Ensure the verification succeeds
+  * IF verification fails
+    * [ ] Run `make safeharbor-inspect` to review the structured updates and validation warnings before escalating the mismatch
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
