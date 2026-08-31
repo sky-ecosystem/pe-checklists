@@ -6,6 +6,7 @@ AutoLine
 Calc
 CalcFab
 ChainLog
+CLI
 Cleanup
 ClipFab
 Crafter
