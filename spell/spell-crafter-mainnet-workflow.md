@@ -211,8 +211,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
   * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
     * [ ] Ensure the "SCOPE" for "project" is standardized to include:
-      * [ ] src/DssSpell.sol
-      * [ ] Every file under src/dependencies, if present
+      * [ ] `src/DssSpell.sol`
+      * [ ] Every file under `src/dependencies`, if present
       * [ ] No other files are included
     * [ ] Select the correct Pull Request
     * [ ] Run "PR-only" PR analysis mode
