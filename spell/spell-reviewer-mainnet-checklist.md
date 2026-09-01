@@ -31,9 +31,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * [ ] Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
-      * [ ] IF no advisories are published, strike through this item and remove the evidence block below
-      * OTHERWISE, for each advisory
+    * IF there are any published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * For each advisory
         * [ ] Compare its affected version range with the release under review
         * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
         * [ ] Record the evidence below
