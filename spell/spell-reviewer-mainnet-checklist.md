@@ -384,6 +384,11 @@ _Insert your local test logs here_
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
   * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", notify spell crafter
     * [ ] Wait until Octane analysis is triggered by crafter
+  * [ ] Use the most recent analysis for the review
+    ```
+    Analysis number: _Insert analysis number used_ 
+    Commit hash analysis ran against: _Insert commit hash used for analysis_ 
+    ```
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
@@ -392,16 +397,17 @@ _Insert your local test logs here_
     * [ ] "Project Name" and "Repository Name" are correctly set
     * [ ] "Branch Name" is set to "master"
     * [ ] "Install dependencies" is enabled
-    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
+    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
-    * [ ] "SCOPE" includes:
-      * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` is present, ensure all files in the dependencies folder are included
-    * [ ] Raise to spell group IF any malicious or unexpected setting is found including all setup that is not listed above
-  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Feedback" on each finding specifying whether the finding matters or not, and the reasoning.
-    * [ ] All findings either have crafter's "Feedback" or are already resolved ELSE notify the crafter
-    * [ ] Ensure the crafter's "Feedback" comments are correct, ELSE raise it to the signal group
+    * [ ] "SCOPE" for "current analysis" is set to `Targeted review`
+    * [ ] "SCOPE" for "current analysis" only includes:
+      * [ ]`src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present in spell repo, ensure all files in the dependencies folder are included
+    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
+  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Acknowledge finding" on each one specifying whether the finding matters or not, and the reasoning.
+    * [ ] All findings marked with "Finding Acknowledged" and have crafter's "Feedback" ELSE notify the crafter
+    * [ ] Ensure the crafter's "Feedback" comments are reasonable, ELSE raise it to the signal group
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review
