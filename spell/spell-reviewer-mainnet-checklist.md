@@ -31,15 +31,17 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
-      * [ ] For each advisory, compare its affected version range with the release under review
-      * [ ] For each advisory that affects the release or whose applicability is unclear, review every linked official upstream advisory or incident notice for unresolved issues affecting the release
-      * [ ] Record one evidence entry per advisory; IF no advisories are published, record `None published`
-        ```text
-        Foundry advisory: None published / _Insert URL_
-        Affects release under review: N/A / Yes / No / Unclear — _Insert rationale_
-        Linked official sources: N/A / None / _Insert URLs and outcome_
-        ```
+    * [ ] Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * [ ] IF no advisories are published, strike through this item and remove the evidence block below
+      * OTHERWISE, for each advisory
+        * [ ] Compare its affected version range with the release under review
+        * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
+        * [ ] Record the evidence below
+          ```text
+          Foundry advisory: _Insert URL_
+          Affects release under review: Yes / No / Unclear — _Insert rationale_
+          Linked official sources: None / _Insert URLs and outcome_
+          ```
     * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
@@ -57,8 +59,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Select an exact alternative supported by an official upstream reference
         * [ ] Treat the alternative as the release under review
         * [ ] Repeat the security and applicable compatibility checks above
-      * [ ] Confirm that the crafter's alternative-release comment identifies the passing alternative reviewed above, cites its supporting official upstream reference, and requests a cooling-period waiver IF AND ONLY IF the alternative is less than 14 days old
-      * [ ] IF the alternative is less than 14 days old, reply using `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: approved.`; OTHERWISE use `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: not required.`
+      * [ ] Review the crafter's alternative-release comment and confirm that it identifies the passing alternative reviewed above, cites its supporting official upstream reference, and requests a cooling-period waiver IF AND ONLY IF the alternative is less than 14 days old
+      * [ ] IF the comment does not match the passing alternative, upstream reference, or applicable cooling-period waiver requirement, stop approval and notify the spell team
+      * IF the comment matches
+        * [ ] IF the alternative is less than 14 days old, reply using `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: approved.`
+        * [ ] OTHERWISE, reply using `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: not required.`
       * [ ] Confirm that the other spell reviewer replied with equivalent approval naming the same release and waiver outcome
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
@@ -465,12 +470,12 @@ _Insert your local test logs here_
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` with those exact values, matching the `Verify Foundry` CI step
+  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
     ```text
     _Insert the complete verifier output here_
     ```
-  * [ ] Confirm that the verifier exits `0`
-  * [ ] Confirm that the desired and installed releases match the release pinned in CI
+  * [ ] Confirm that the verifier exits `0` and reports the recorded `FOUNDRY_RELEASE` as both the desired and installed release
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
 * [ ] Verify that all checkboxes and strikethroughs display correctly in the rendered checklist comment before posting
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment

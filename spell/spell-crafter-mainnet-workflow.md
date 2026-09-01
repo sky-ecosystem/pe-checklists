@@ -66,15 +66,17 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
-      * [ ] For each advisory, compare its affected version range with the release under review
-      * [ ] For each advisory that affects the release or whose applicability is unclear, review every linked official upstream advisory or incident notice for unresolved issues affecting the release
-      * [ ] Record one evidence entry per advisory; IF no advisories are published, record `None published`
-        ```text
-        Foundry advisory: None published / _Insert URL_
-        Affects release under review: N/A / Yes / No / Unclear — _Insert rationale_
-        Linked official sources: N/A / None / _Insert URLs and outcome_
-        ```
+    * [ ] Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * [ ] IF no advisories are published, strike through this item and remove the evidence block below
+      * OTHERWISE, for each advisory
+        * [ ] Compare its affected version range with the release under review
+        * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
+        * [ ] Record the evidence below
+          ```text
+          Foundry advisory: _Insert URL_
+          Affects release under review: Yes / No / Unclear — _Insert rationale_
+          Linked official sources: None / _Insert URLs and outcome_
+          ```
     * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
@@ -297,12 +299,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` with those exact values, matching the `Verify Foundry` CI step
+  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
     ```text
     _Insert the complete verifier output here_
     ```
-  * [ ] Confirm that the verifier exits `0`
-  * [ ] Confirm that the desired and installed releases match the release pinned in CI
+  * [ ] Confirm that the verifier exits `0` and reports the recorded `FOUNDRY_RELEASE` as both the desired and installed release
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
