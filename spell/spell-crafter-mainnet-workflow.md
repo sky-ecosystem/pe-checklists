@@ -49,20 +49,31 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
 * Verify and install the Foundry toolkit
+  * Failure handling — applies throughout Phases 1–3
+    * IF any Foundry setup command below exits nonzero, apply this recovery branch immediately
+      * [ ] Stop Foundry setup
+      * [ ] Record the failed command and complete output in the spell PR
+      * [ ] Diagnose and resolve the failure
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
+      * [ ] Rerun the exact failed command
+        ```text
+        _Insert the complete command output here_
+        ```
+      * [ ] IF the failure cannot be resolved, notify the spell team
   * Phase 1 — Mandatory release acceptance
     * [ ] Run `make select-foundry`
       ```text
       _Insert the complete selector output here_
       ```
     * [ ] Treat the selected release as the release under review
-    * Review the published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
-      * [ ] Read each potentially applicable advisory and determine whether its affected version range includes the release
-      * [ ] Review every official upstream advisory or incident notice linked from an applicable advisory for unresolved issues affecting the release
-      * [ ] Record the security review evidence
+    * Review every published Foundry [security advisory](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * [ ] For each advisory, compare its affected version range with the release under review
+      * [ ] For each advisory that affects the release or whose applicability is unclear, review every linked official upstream advisory or incident notice for unresolved issues affecting the release
+      * [ ] Record one evidence entry per advisory; IF no advisories are published, record `None published`
         ```text
-        Security review: Unaffected / Affected / Applicability unclear
-        Security advisories: None affecting the release / _Insert URLs and outcome_
-        Linked official sources: None / _Insert URLs and outcome_
+        Foundry advisory: None published / _Insert URL_
+        Affects release under review: N/A / Yes / No / Unclear — _Insert rationale_
+        Linked official sources: N/A / None / _Insert URLs and outcome_
         ```
     * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
       ```text
@@ -83,7 +94,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Repeat the security and applicable compatibility checks above
       * [ ] Post a spell PR comment containing the exact alternative release to install and its upstream reference
         * [ ] IF the alternative is less than 14 days old, include an explicit cooling-period waiver request in the same comment
-      * [ ] Obtain explicit approval from both spell reviewers in replies to that comment
+      * [ ] Obtain explicit approval from both spell reviewers in replies; each reply must name the exact alternative release and state whether the cooling-period waiver is approved or not required
     * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
       ```text
       Required release: vMAJOR.MINOR.PATCH
@@ -105,17 +116,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       _Insert the complete verifier output here_
       ```
     * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
-  * Failure handling — applies throughout Phases 1–3
-    * IF any Foundry setup command above exits nonzero, apply this recovery branch immediately
-      * [ ] Stop Foundry setup
-      * [ ] Record the failed command and complete output in the spell PR
-      * [ ] Diagnose and resolve the failure
-      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
-      * [ ] Rerun the exact failed command
-        ```text
-        _Insert the complete command output here_
-        ```
-      * [ ] IF the failure cannot be resolved, notify the spell team
 * Cleanup previous spell's actions
   * [ ] Check previous pull requests for the cleanup patterns
   * [ ] Delete unused dependencies in the `src/dependencies` folder IF applicable
@@ -292,7 +292,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
 * Verify the CI-pinned Foundry release
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`, including `ignore-age=1` when `FOUNDRY_IGNORE_AGE` is `"1"` in CI
+  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` with those exact values, matching the `Verify Foundry` CI step
     ```text
     _Insert the complete verifier output here_
     ```
