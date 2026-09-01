@@ -68,12 +68,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```text
       Required release: vMAJOR.MINOR.PATCH
       ```
-  * Phase 2 — Conditional CI synchronization
-    * IF the spell PR changes `FOUNDRY_RELEASE`
-      * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
-      * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `"1"`; OTHERWISE confirm that it is `"0"`
-      * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
-      * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+  * Phase 2 — Independent CI synchronization review
+    * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
+    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `"1"`
+    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `"0"`
+    * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
     * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
