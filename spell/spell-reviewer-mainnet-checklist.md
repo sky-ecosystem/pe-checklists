@@ -136,7 +136,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670)
       * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659)
     * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
-    * [ ] `AutoLine` updates are tested by asserting the configured parameters and the exact resulting per-ilk and global `Vat` debt ceilings after cast
+    * [ ] `AutoLine` values are tested via `testGeneral`
+    * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
   * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
     * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
