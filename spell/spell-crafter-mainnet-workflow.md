@@ -234,7 +234,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
     * [ ] "SCOPE" for "current analysis" is set to `Targeted review`
     * [ ] "SCOPE" for "current analysis" only includes:
-      * [ ]`src/DssSpell.sol`
+      * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present in spell repo, ensure all files in the dependencies folder are included
     * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Once Octane analysis is finished on the latest commit, review every finding and use "Acknowledge finding" to select the applicable classification and provide the reasoning

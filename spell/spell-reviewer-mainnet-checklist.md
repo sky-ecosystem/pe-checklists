@@ -402,7 +402,7 @@ _Insert your local test logs here_
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
     * [ ] "SCOPE" for "current analysis" is set to `Targeted review`
     * [ ] "SCOPE" for "current analysis" only includes:
-      * [ ]`src/DssSpell.sol`
+      * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present in spell repo, ensure all files in the dependencies folder are included
     * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Acknowledge finding" on each one specifying whether the finding matters or not, and the reasoning.
