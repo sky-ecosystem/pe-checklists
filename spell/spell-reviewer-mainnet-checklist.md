@@ -4,11 +4,87 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Install stable Foundry version
-  * [ ] Install the stable version of Foundry via `foundryup --install stable`
+* Prepare the `spells-mainnet` checkout
+  * [ ] Checkout the spell PR from a trusted local copy of the [`sky-ecosystem/spells-mainnet` repository](https://github.com/sky-ecosystem/spells-mainnet)
+    ```bash
+    gh pr checkout PR_NUMBER
     ```
-    Document the installation logs containing installed versions below:
-    ```
+* Confirm that Foundry setup changes are handled separately
+  * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
+    * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
+    * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
+* Verify and install the Foundry toolkit
+  * Failure handling — applies throughout Phases 1–3
+    * IF any Foundry setup command below exits nonzero, apply this recovery branch immediately
+      * [ ] Stop Foundry setup
+      * [ ] Record the failed command and complete output in the spell PR
+      * [ ] Diagnose and resolve the failure
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
+      * [ ] Rerun the exact failed command
+        ```text
+        _Insert the complete command output here_
+        ```
+      * [ ] IF the failure cannot be resolved, notify the spell team
+  * Phase 1 — Mandatory release acceptance
+    * [ ] Run `make select-foundry`
+      ```text
+      _Insert the complete selector output here_
+      ```
+    * [ ] Treat the selected release as the release under review
+    * IF there are any published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * For each advisory
+        * [ ] Compare its affected version range with the release under review
+        * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
+        * [ ] Record the evidence below
+          ```text
+          Foundry advisory: _Insert URL_
+          Affects release under review: Yes / No / Unclear — _Insert rationale_
+          Linked official sources: None / _Insert URLs and outcome_
+          ```
+    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
+      ```text
+      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE: 0 / 1
+      ```
+    * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, read the release under review's complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+      ```text
+      Release notes: _Insert exact release URL_
+      Compatibility: Compatible / Incompatible — _Insert rationale_
+      ```
+    * IF the release under review does not pass the security review or applicable compatibility check
+      * [ ] Stop Foundry setup
+      * [ ] Notify the spell team that the release under review failed the security review or applicable compatibility check
+      * Repeat until the release under review passes the security review and any required compatibility check
+        * [ ] Select an exact alternative supported by an official upstream reference
+        * [ ] Treat the alternative as the release under review
+        * [ ] Repeat the security and applicable compatibility checks above
+      * [ ] Review the crafter's alternative-release comment and confirm that it identifies the passing alternative reviewed above, cites its supporting official upstream reference, and requests a cooling-period waiver IF AND ONLY IF the alternative is less than 14 days old
+      * [ ] IF the comment does not match the passing alternative, upstream reference, or applicable cooling-period waiver requirement, stop approval and notify the spell team
+      * IF the comment matches
+        * [ ] IF the alternative is less than 14 days old, reply using `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: approved.`
+        * [ ] OTHERWISE, reply using `Approved alternative Foundry release: vMAJOR.MINOR.PATCH; cooling-period waiver: not required.`
+      * [ ] Confirm that the other spell reviewer replied with equivalent approval naming the same release and waiver outcome
+    * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
+      ```text
+      Required release: vMAJOR.MINOR.PATCH
+      ```
+  * Phase 2 — Independent CI synchronization review
+    * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
+    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `"1"`
+    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `"0"`
+    * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+  * Phase 3 — Mandatory developer installation and verification
+    * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete installer output here_
+      ```
+    * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+    * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete verifier output here_
+      ```
+    * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
 * Preparation
   * [ ] Exec Sheet for the specified date is found in the ["Executive Vote Implementation Process" google sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
     _Insert URL to the specific sheet here_
@@ -395,6 +471,18 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+* Independently verify the CI-pinned Foundry release
+  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
+  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+    ```text
+    _Insert the complete verifier output here_
+    ```
+  * [ ] Confirm that the verifier exits `0` and reports the recorded `FOUNDRY_RELEASE` as both the desired and installed release
 * [ ] Do a final review of the checklist comment before posting to ensure all checks are correct and complete
 * [ ] Verify that all checkboxes and strikethroughs display correctly in the rendered checklist comment before posting
 * [ ] IF all checks pass, make sure to include explicit "Good to deploy" comment
@@ -402,7 +490,12 @@ _Insert your local test logs here_
 ## Deployed Stage
 
 * Crafter's comment in the PR
-  * [ ] Contains relevant Foundry installation logs
+  * [ ] Contains the exact Foundry verification command run before deployment
+  * [ ] The command's `release=vMAJOR.MINOR.PATCH` argument matches `FOUNDRY_RELEASE` in CI
+  * [ ] The command's `ignore-age=0/1` argument matches `FOUNDRY_IGNORE_AGE` in CI
+  * [ ] Contains the complete verifier output
+  * [ ] Shows that the verifier exited `0`
+  * [ ] Shows that the desired and installed releases match the release pinned in CI
   * [ ] Contains a URL to the deployed spell
     * [ ] URL matches the spell address declared in `config.sol`
   * [ ] Contains a URL to the Tenderly Testnet
@@ -449,7 +542,7 @@ _Insert your local test logs here_
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * [ ] Check all tests are passing locally using `make test`
-* [ ] Publish an explicit "good to handover" comment
+* [ ] Publish an explicit "good to handover" comment confirming the crafter's deployment information
 
 ```
 _Insert your local test logs here_
