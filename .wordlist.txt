@@ -141,6 +141,7 @@ permissioning
 permittedDrop
 precomputed
 prepended
+prerelease
 redemptions
 repos
 RPC
@@ -170,6 +171,7 @@ unaudited
 untrusted
 upgradability
 upgradable
+verifier
 vnet
 vscode
 whitespace

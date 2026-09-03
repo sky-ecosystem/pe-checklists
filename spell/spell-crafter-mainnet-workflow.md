@@ -41,14 +41,82 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Development Stage
 
-* Install stable Foundry version
-  * [ ] Install the stable version of Foundry via `foundryup --install stable`
+* Prepare the `spells-mainnet` checkout
+  * [ ] Pull the `master` branch of a trusted local copy of the [`sky-ecosystem/spells-mainnet` repository](https://github.com/sky-ecosystem/spells-mainnet)
+    ```bash
+    git switch master
+    git pull --ff-only origin master
     ```
-    Document the installation logs containing installed versions below:
-    ```
-* Create new branch
-  * [ ] Pull `master` branch of the `spells-mainnet` repo locally
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
+* Verify and install the Foundry toolkit
+  * Failure handling — applies throughout Phases 1–3
+    * IF any Foundry setup command below exits nonzero, apply this recovery branch immediately
+      * [ ] Stop Foundry setup
+      * [ ] Record the failed command and complete output in the spell PR
+      * [ ] Diagnose and resolve the failure
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
+      * [ ] Rerun the exact failed command
+        ```text
+        _Insert the complete command output here_
+        ```
+      * [ ] IF the failure cannot be resolved, notify the spell team
+  * Phase 1 — Mandatory release acceptance
+    * [ ] Run `make select-foundry`
+      ```text
+      _Insert the complete selector output here_
+      ```
+    * [ ] Treat the selected release as the release under review
+    * IF there are any published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * For each advisory
+        * [ ] Compare its affected version range with the release under review
+        * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
+        * [ ] Record the evidence below
+          ```text
+          Foundry advisory: _Insert URL_
+          Affects release under review: Yes / No / Unclear — _Insert rationale_
+          Linked official sources: None / _Insert URLs and outcome_
+          ```
+    * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
+      ```text
+      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE: 0 / 1
+      ```
+    * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+      ```text
+      Release notes: _Insert exact release URL_
+      Compatibility: Compatible / Incompatible — _Insert rationale_
+      ```
+    * IF the release under review does not pass the security review or applicable compatibility check
+      * [ ] Stop Foundry setup
+      * [ ] Notify the spell team that the release under review failed the security review or applicable compatibility check
+      * Repeat until the release under review passes the security review and any required compatibility check
+        * [ ] Select an exact alternative supported by an official upstream reference
+        * [ ] Treat the alternative as the release under review
+        * [ ] Repeat the security and applicable compatibility checks above
+      * [ ] Post a spell PR comment containing the exact alternative release to install and its upstream reference
+        * [ ] IF the alternative is less than 14 days old, include an explicit cooling-period waiver request in the same comment
+      * [ ] Obtain explicit approval from both spell reviewers in replies; each reply must name the exact alternative release and state whether the cooling-period waiver is approved or not required
+    * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
+      ```text
+      Required release: vMAJOR.MINOR.PATCH
+      ```
+  * Phase 2 — CI synchronization
+    * [ ] Ensure `FOUNDRY_RELEASE` matches the required release, updating it if necessary
+    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `"1"`, updating it if necessary
+    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `"0"`, updating it if necessary
+    * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+  * Phase 3 — Mandatory developer installation and verification
+    * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete installer output here_
+      ```
+    * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+    * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete verifier output here_
+      ```
+    * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
 * Cleanup previous spell's actions
   * [ ] Check previous pull requests for the cleanup patterns
   * [ ] Delete unused dependencies in the `src/dependencies` folder IF applicable
@@ -135,6 +203,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
+  * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
+    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+  * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
+    * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
+    * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
+    * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
   * [ ] Ensure every spell variable is declared as public/internal
   * Bug Bounty Registry Updates
     * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
@@ -260,6 +334,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Check local env
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
+* Verify the CI-pinned Foundry release
+  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
+  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+    ```text
+    _Insert the complete verifier output here_
+    ```
+  * [ ] Confirm that the verifier exits `0` and reports the recorded `FOUNDRY_RELEASE` as both the desired and installed release
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
@@ -279,7 +365,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * Foundry installation logs containing installed versions (from above)
+  * The exact Foundry verification command run before deployment, with its release and age-waiver arguments matching CI
+  * The complete verifier output
+  * Confirmation that the verifier exited `0`
+  * Confirmation that the desired and installed releases match the release pinned in CI
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
@@ -287,7 +376,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Handover and Merge Stage
 
-* [ ] Wait for at least two "good to handover" comments (containing local tests) from the official reviewers
+* [ ] Wait for explicit "good to handover" comments from both official reviewers confirming the deployment information
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995)
   * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
