@@ -483,9 +483,10 @@ _Insert your local test logs here_
     * [ ] "Install dependencies" is enabled
   * [ ] Thoroughly inspect the analysis "Scope" for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
-    * [ ] Scope of the current analysis is set to `Targeted review` and includes only:
+    * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` present, every file under the directory
+      * [ ] No other files are included
   * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, address and re-run the analysis
     * [ ] IF addressing is not possible, raise it to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
