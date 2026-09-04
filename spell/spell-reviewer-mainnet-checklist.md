@@ -490,7 +490,7 @@ _Insert your local test logs here_
   * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, address and re-run the analysis
     * [ ] IF addressing is not possible, raise it to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
-    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to the signal group
+    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review

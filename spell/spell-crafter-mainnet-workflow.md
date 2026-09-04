@@ -318,6 +318,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
+* [ ] IF there is new commit with spell code update, redo the "Octane Review" section above
 
 ## Deployment Stage
 
