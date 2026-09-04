@@ -281,9 +281,45 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
   * [ ] Exec hash is correct (use `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"` where `wget` doesn't work)
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
+* Octane Review
+  * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
+  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
+    * [ ] Ensure the project scope is standardized to only include:
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, every file under the directory
+      * [ ] No other files are included
+    * [ ] Select the correct Pull Request
+    * [ ] Run "PR-only" PR analysis mode
+  * [ ] Use the most recent analysis for the review
+    ```
+    Analysis number: _Insert analysis number used_ 
+    Commit hash analysis ran against: _Insert commit hash used for analysis_ 
+    ```
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
+    * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> save -> rerun the analysis 
+  * [ ] Thoroughly inspect the analysis settings for signs of manipulation
+    * [ ] Project name and repository name are correctly set
+    * [ ] Branch name is set to "master"
+    * [ ] Dependency installation is enabled
+  * [ ] Thoroughly inspect the analysis scope for signs of manipulation
+    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, every file under the directory
+      * [ ] No other files are included
+  * [ ] IF any malicious or unexpected setting is found, including any configuration not listed above, address it, re-run the analysis, and redo the "Octane Review" section
+    * [ ] IF it cannot be addressed, raise it to the current spell group
+  * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
+    * [ ] IF any blocking issue was found, raise it to the current spell group
+    * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
+  * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL using:
+  `https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/<ANALYSIS_NUMBER>/vulnerabilities?visibility=ALL`
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
+* [ ] IF there is new commit with spell code update, redo the "Octane Review" section above
 
 ## Deployment Stage
 

@@ -464,6 +464,32 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
+* Octane Review
+  * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
+  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", notify spell crafter
+    * [ ] Wait until Octane analysis is triggered by crafter
+  * [ ] Use the most recent analysis for the review
+    ```
+    Analysis number: _Insert analysis number used_ 
+    Commit hash analysis ran against: _Insert commit hash used for analysis_ 
+    ```
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
+    * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, notify spell crafter
+  * [ ] Thoroughly inspect the analysis settings for signs of manipulation
+    * [ ] Project name and repository name are correctly set
+    * [ ] Branch name is set to "master"
+    * [ ] Dependency installation is enabled
+  * [ ] Thoroughly inspect the analysis scope for signs of manipulation
+    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, every file under the directory
+      * [ ] No other files are included
+  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
+  * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
+    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review
@@ -471,6 +497,7 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
+  * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
 * Independently verify the CI-pinned Foundry release
   * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
     ```text
