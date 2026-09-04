@@ -477,21 +477,19 @@ _Insert your local test logs here_
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
     * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, notify spell crafter
-  * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
+  * [ ] Thoroughly inspect the analysis "Settings" for signs of manipulation
     * [ ] "Project Name" and "Repository Name" are correctly set
     * [ ] "Branch Name" is set to "master"
     * [ ] "Install dependencies" is enabled
-    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
-  * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
+  * [ ] Thoroughly inspect the analysis "Scope" for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
-    * [ ] "SCOPE" for "current analysis" is set to `Targeted review`
-    * [ ] "SCOPE" for "current analysis" only includes:
+    * [ ] Scope of the current analysis is set to `Targeted review` and includes only:
       * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` is present in spell repo, ensure all files in the dependencies folder are included
-    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
-  * [ ] Once the crafter has finished reviewing the most recent analysis, check every finding and ensure the crafter left "Acknowledge finding" on each one specifying whether the finding matters or not, and the reasoning.
-    * [ ] All findings marked with "Finding Acknowledged" and have crafter's "Feedback" ELSE notify the crafter
-    * [ ] Ensure the crafter's "Feedback" comments are reasonable, ELSE raise it to the signal group
+      * [ ] IF `src/dependencies` present, every file under the directory
+  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, address and re-run the analysis
+    * [ ] IF addressing is not possible, raise it to spell group
+  * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
+    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to the signal group
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review

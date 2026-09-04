@@ -284,10 +284,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
   * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
-    * [ ] Ensure the "SCOPE" for "project" is standardized to include:
+    * [ ] Ensure the project scope is standardized to only include:
       * [ ] `src/DssSpell.sol`
-      * [ ] Every file under `src/dependencies`, if present
-      * [ ] No other files are included
+      * [ ] IF `src/dependencies` present, every file under the directory
     * [ ] Select the correct Pull Request
     * [ ] Run "PR-only" PR analysis mode
   * [ ] Use the most recent analysis for the review
@@ -298,21 +297,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
-    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> "Save overrides" and rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
-  * [ ] Thoroughly inspect the analysis "Settings" tab for signs of manipulation
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> `Save` overwrite -> rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
+  * [ ] Thoroughly inspect the analysis "Settings" for signs of manipulation
     * [ ] "Project Name" and "Repository Name" are correctly set
     * [ ] "Branch Name" is set to "master"
     * [ ] "Install dependencies" is enabled
-    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
-  * [ ] Thoroughly inspect the analysis "Scope" tab for signs of manipulation
+  * [ ] Thoroughly inspect the analysis "Scope" for signs of manipulation
     * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
-    * [ ] "SCOPE" for "current analysis" is set to `Targeted review`
-    * [ ] "SCOPE" for "current analysis" only includes:
+    * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` is present in spell repo, ensure all files in the dependencies folder are included
-    * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
-  * [ ] Once Octane analysis is finished on the latest commit, review every finding and use "Acknowledge finding" to select the applicable classification and provide the reasoning
-    * [ ] All findings either have an acknowledgement classification and reasoning or are already resolved
+      * [ ] IF `src/dependencies` present, every file under the directory
+  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
+  * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
     * [ ] IF any blocking issue was found, raise it to the current spell signal group
     * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
   * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL using:
