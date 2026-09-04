@@ -477,17 +477,17 @@ _Insert your local test logs here_
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
     * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, notify spell crafter
-  * [ ] Thoroughly inspect the analysis "Settings" for signs of manipulation
-    * [ ] "Project Name" and "Repository Name" are correctly set
-    * [ ] "Branch Name" is set to "master"
-    * [ ] "Install dependencies" is enabled
-  * [ ] Thoroughly inspect the analysis "Scope" for signs of manipulation
-    * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
+  * [ ] Thoroughly inspect the analysis settings for signs of manipulation
+    * [ ] Project name and repository name are correctly set
+    * [ ] Branch name is set to "master"
+    * [ ] Dependency installation is enabled
+  * [ ] Thoroughly inspect the analysis scope for signs of manipulation
+    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
     * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` present, every file under the directory
+      * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
-  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, address and re-run the analysis
+  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
     * [ ] IF addressing is not possible, raise it to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
     * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group

@@ -286,7 +286,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
     * [ ] Ensure the project scope is standardized to only include:
       * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` present, every file under the directory
+      * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
     * [ ] Select the correct Pull Request
     * [ ] Run "PR-only" PR analysis mode
@@ -298,16 +298,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
-    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> "Save" -> rerun the analysis 
-  * [ ] Thoroughly inspect the analysis "Settings" for signs of manipulation
-    * [ ] "Project Name" and "Repository Name" are correctly set
-    * [ ] "Branch Name" is set to "master"
-    * [ ] "Install dependencies" is enabled
-  * [ ] Thoroughly inspect the analysis "Scope" for signs of manipulation
-    * [ ] "Project type", "Target", "Languages" are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> save -> rerun the analysis 
+  * [ ] Thoroughly inspect the analysis settings for signs of manipulation
+    * [ ] Project name and repository name are correctly set
+    * [ ] Branch name is set to "master"
+    * [ ] Dependency installation is enabled
+  * [ ] Thoroughly inspect the analysis scope for signs of manipulation
+    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
     * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
-      * [ ] IF `src/dependencies` present, every file under the directory
+      * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
   * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
