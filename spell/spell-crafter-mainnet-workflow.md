@@ -297,7 +297,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure no filters are applied to the analysis results
   * [ ] By inspecting the "Contracts" table in the "On Chain dependencies" tab, ensure every contract has its source and ABI fetched from the correct chain
     * [ ] IF any contract shows "Source unverified", investigate the address (e.g. the source cannot be verified as the address is an EOA)
-    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> `Save` overwrite -> rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
+    * [ ] IF any contract shows "Source skipped" or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> `Save` -> rerun the analysis (In case, this action is blocked due to lack of authority, raise it to spell group)
   * [ ] Thoroughly inspect the analysis "Settings" for signs of manipulation
     * [ ] "Project Name" and "Repository Name" are correctly set
     * [ ] "Branch Name" is set to "master"
