@@ -309,9 +309,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
-  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
+  * [ ] IF any malicious or unexpected setting is found, including any configuration not listed above, address it, re-run the analysis, and redo the "Octane Review" section
+    * [ ] IF it cannot be addressed, raise it to the current spell group
   * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
-    * [ ] IF any blocking issue was found, raise it to the current spell signal group
+    * [ ] IF any blocking issue was found, raise it to the current spell group
     * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
   * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL using:
   `https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/<ANALYSIS_NUMBER>/vulnerabilities?visibility=ALL`
