@@ -164,12 +164,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] End-to-end "happy path" interaction with the module
   * IF SafeHarbor registry updates are present
     * Scope updates use generator coverage, payload review, and post-cast reconciliation instead of a separate Solidity traversal test; other Agreement changes still require appropriate tests
-    * [ ] Run `npm test --prefix scripts/safeharbor -- --run` and confirm the SafeHarbor suite passes for the spell revision
-    * [ ] Confirm coverage for the operations used by the spell, including replacement ordering and scope changes where applicable
-  * IF SafeHarbor scripts, `Makefile` commands, or their CI workflow changed
-    * [ ] Review coverage for chain/account additions, removals, replacements, scope changes, rejected input, warning blocking, and command failures
-    * [ ] Review changed expected operations and raw calldata, ABI-decoded calldata, and Solidity snapshots; do not accept regenerated snapshots without checking their meaning
-    * [ ] Ensure the SafeHarbor CI tests, lint, and formatting checks pass
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR

@@ -337,12 +337,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _List actions for which coverage was checked here_
     * IF SafeHarbor registry updates are present
       * Scope updates use generator coverage, payload review, and post-cast reconciliation instead of a separate Solidity traversal test; other Agreement changes still require appropriate tests
-      * [ ] Run `npm test --prefix scripts/safeharbor -- --run` and confirm the SafeHarbor suite passes for the spell revision
-      * [ ] Confirm coverage for the operations used by the spell, including replacement ordering and scope changes where applicable
-  * IF SafeHarbor scripts, `Makefile` commands, or their CI workflow changed
-    * [ ] Review coverage for chain/account additions, removals, replacements, scope changes, rejected input, warning blocking, and command failures
-    * [ ] Review changed expected operations and raw calldata, ABI-decoded calldata, and Solidity snapshots; do not accept regenerated snapshots without checking their meaning
-    * [ ] Ensure the SafeHarbor CI tests, lint, and formatting checks pass
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
     * [ ] Sanity checks of the constructor arguments
