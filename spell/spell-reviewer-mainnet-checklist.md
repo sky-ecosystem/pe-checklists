@@ -335,8 +335,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF the test needs to run, it MUST NOT have the `skipped` modifier; OTHERWISE, it MUST have the `skipped` modifier
   * [ ] Ensure each spell action has sufficient test coverage
     _List actions for which coverage was checked here_
-    * IF SafeHarbor registry updates are present
-      * Scope updates use generator coverage, payload review, and post-cast reconciliation instead of a separate Solidity traversal test; other Agreement changes still require appropriate tests
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
     * [ ] Sanity checks of the constructor arguments

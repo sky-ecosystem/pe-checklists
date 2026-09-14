@@ -148,7 +148,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
-* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action, except SafeHarbor scope updates covered below
+* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action, except SafeHarbor scope updates
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
@@ -162,8 +162,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
-  * IF SafeHarbor registry updates are present
-    * Scope updates use generator coverage, payload review, and post-cast reconciliation instead of a separate Solidity traversal test; other Agreement changes still require appropriate tests
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
