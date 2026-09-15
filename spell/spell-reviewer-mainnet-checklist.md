@@ -424,7 +424,8 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Tenderly Testnet where the exact deployed spell was cast, even if the spell contains no SafeHarbor updates; require the Agreement to match the approved Sheet with no updates or validation warnings
+  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Tenderly Testnet where the exact deployed spell was cast, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
