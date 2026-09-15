@@ -227,7 +227,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
 * SafeHarbor registry post-cast reconciliation
-  * [ ] After casting the exact deployed spell on a Tenderly Testnet, run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates; require the Agreement to match the approved Sheet with no updates or validation warnings
+  * [ ] After casting the exact deployed spell on a Tenderly Testnet, run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates. Require the Agreement to match the approved Sheet with no updates or validation warnings
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
