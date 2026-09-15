@@ -22,7 +22,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * SafeHarbor source and proposed updates
   * [ ] Independently review the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U), including intended accounts, scopes, and recovery addresses
   * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
-    * [ ] The command reports no validation warnings, and the proposed changes, including removals, implement the approved Sheet relative to the current Agreement
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
+    * [ ] The proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -427,6 +430,8 @@ _Insert your local test logs here_
   * [ ] No out-of-gas errors are present
   * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
     * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

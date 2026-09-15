@@ -69,7 +69,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * SafeHarbor source and proposed updates
   * [ ] Confirm the [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) is reviewed and approved for this spell, including intended accounts, scopes, and recovery addresses
   * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
-    * [ ] The command reports no validation warnings, and the proposed changes, including removals, implement the approved Sheet relative to the current Agreement
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
+    * [ ] The proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -230,6 +233,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * SafeHarbor registry post-cast reconciliation
   * [ ] Run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
     * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
