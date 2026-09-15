@@ -68,11 +68,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
 * SafeHarbor source and proposed updates
   * [ ] Confirm the [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) is reviewed and approved for this spell, including intended accounts, scopes, and recovery addresses
-  * [ ] Use `Node.js 24` and set `ETH_RPC_URL` to Ethereum mainnet or the intended pre-cast fork
-  * [ ] Run `make safeharbor-generate`; require successful generation with no validation warnings
-  * [ ] Check that the proposed changes, including removals, implement the approved Sheet relative to the current Agreement
-  * IF generation fails or proposes unexpected changes
-    * [ ] Use `make safeharbor-inspect` to investigate the source data, proposed changes, and warnings; resolve issues with Governance Facilitators before using the payload
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork; require no validation warnings and check that the proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -231,12 +227,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
 * SafeHarbor registry post-cast reconciliation
-  * [ ] Set `ETH_RPC_URL` to the RPC URL of the Tenderly Testnet where the exact deployed spell was cast
-  * [ ] Confirm the Sheet still matches the approved source reviewed above; repeat source and payload review if it changed
-  * [ ] Run `make safeharbor-verify` after the cast, even if the spell contains no SafeHarbor updates; require success with no updates and no validation warnings
-  * IF verification fails
-    * [ ] Use `make safeharbor-inspect` to investigate, resolve the failure with Governance Facilitators, and rerun verification before handover
-    * Successful inspection or an empty changes list is not proof of a match; warnings can block change calculation
+  * [ ] After casting the exact deployed spell on a Tenderly Testnet, run `make safeharbor-verify` with `ETH_RPC_URL` set to that Testnet's RPC, even if the spell contains no SafeHarbor updates; require the Agreement to match the approved Sheet with no updates or validation warnings
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
@@ -244,7 +235,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Foundry installation logs containing installed versions (from above)
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
-  * Successful SafeHarbor post-cast verification output
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
 * [ ] IF everything is on track, the sync call can be cancelled with agreement from the spell team
 

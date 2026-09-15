@@ -1,12 +1,10 @@
 AGPLv
-ABI
 ALM
 Antipatterns
 AutoLine
 Calc
 CalcFab
 ChainLog
-CLI
 Cleanup
 ClipFab
 Crafter

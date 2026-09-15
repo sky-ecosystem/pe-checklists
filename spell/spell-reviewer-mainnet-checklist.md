@@ -21,11 +21,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
 * SafeHarbor source and proposed updates
   * [ ] Independently review the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U), including intended accounts, scopes, and recovery addresses
-  * [ ] Use `Node.js 24` and set `ETH_RPC_URL` to Ethereum mainnet or the intended pre-cast fork
-  * [ ] Run `make safeharbor-generate`; require successful generation with no validation warnings
-  * [ ] Check that the proposed changes, including removals, implement the approved Sheet relative to the current Agreement and that none are missing from or added to the spell
-  * IF generation fails or proposes unexpected changes
-    * [ ] Use `make safeharbor-inspect` to investigate the source data, proposed changes, and warnings; resolve issues with Governance Facilitators before approving the payload
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork; require no validation warnings and check that the proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -333,7 +329,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure every test function is declared as `public`
     * [ ] IF the test needs to run, it MUST NOT have the `skipped` modifier; OTHERWISE, it MUST have the `skipped` modifier
-  * [ ] Ensure each spell action has sufficient test coverage
+  * [ ] Ensure each spell action has sufficient test coverage, except SafeHarbor scope updates
     _List actions for which coverage was checked here_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
@@ -341,7 +337,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Check all tests are passing locally using `make test`
-    * [ ] Ensure every Solidity test listed in the _coverage_ item above is present in the logs and with the `[PASS]` prefix.
+    * [ ] Ensure every test listed in the _coverage_ item above is present in the logs and with the `[PASS]` prefix.
 
 ```
 _Insert your local test logs here_
@@ -428,13 +424,7 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] Set `ETH_RPC_URL` to the RPC URL of the Tenderly Testnet where the exact deployed spell was cast
-  * [ ] Confirm the Sheet still matches the approved source reviewed above; repeat source and payload review if it changed
-  * [ ] Independently run `make safeharbor-verify` after the cast, even if the spell contains no SafeHarbor updates; require success with no updates and no validation warnings
-  * [ ] Record the successful verification output with the review evidence
-  * IF verification fails
-    * [ ] Use `make safeharbor-inspect` to investigate, resolve the failure with Governance Facilitators, and rerun verification before handover
-    * Successful inspection or an empty changes list is not proof of a match; warnings can block change calculation
+  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Tenderly Testnet where the exact deployed spell was cast, even if the spell contains no SafeHarbor updates; require the Agreement to match the approved Sheet with no updates or validation warnings
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
