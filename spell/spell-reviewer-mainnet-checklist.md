@@ -95,8 +95,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* [ ] `make safeharbor-generate` output matches the instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* SafeHarbor source and proposed updates
+  * [ ] Independently review the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U), including intended accounts, scopes, and recovery addresses
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
+    * [ ] The proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -390,13 +395,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
-* IF bug bounty registry updates are present
-  * [ ] Run `make safeharbor-generate`
-    * [ ] Verify that the generated code exactly matches the code in the spell
-    * [ ] Verify that output matches the instructions provided by Governance Facilitators
-    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
-  * [ ] Ensure that agreement address is fetched from the Chainlog
-  * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
+* IF SafeHarbor registry updates are present
+  * [ ] Verify the spell matches the generated snippet, except for formatting, including every calldata entry and its order
+  * [ ] Ensure the Agreement address is fetched from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
+  * [ ] Ensure the helper follows the established archive pattern, executing calls in order and reverting on any failed call
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -415,7 +417,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure every test function is declared as `public`
     * [ ] IF the test needs to run, it MUST NOT have the `skipped` modifier; OTHERWISE, it MUST have the `skipped` modifier
-  * [ ] Ensure each spell action has sufficient test coverage
+  * [ ] Ensure each spell action has sufficient test coverage, except SafeHarbor scope updates
     _List actions for which coverage was checked here_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
@@ -558,8 +560,10 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
-    * [ ] IF the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
+  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date

@@ -140,8 +140,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
-* [ ] Run `make safeharbor-generate` to ensure that updates match the bug bounty updates instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* SafeHarbor source and proposed updates
+  * [ ] Confirm the [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) is reviewed and approved for this spell, including intended accounts, scopes, and recovery addresses
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
+    * [ ] The proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -210,15 +215,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
     * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
   * [ ] Ensure every spell variable is declared as public/internal
-  * Bug Bounty Registry Updates
-    * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
-      * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
-      * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
-      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
-      * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
-        * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
-        * [ ] Fetch the agreement address from the `ChainLog`
-        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
+  * IF SafeHarbor registry updates are present
+    * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
+    * [ ] Fetch the Agreement address from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
+    * [ ] Use the established archive helper pattern to execute calls in order and revert on any failed call
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
@@ -228,7 +228,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
-* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
+* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action, except SafeHarbor scope updates
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
@@ -242,8 +242,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
-  * IF bug bounty updates are present
-    * [ ] Test that all bug bounty registry calls execute successfully
   * [ ] Tests PASS via `make test`
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
@@ -360,7 +358,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
+* SafeHarbor registry post-cast reconciliation
+  * [ ] Run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
