@@ -9,7 +9,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* Keep Foundry setup command implementation changes out of spell PRs
+* Keep Foundry setup command implementation changes out of spell pull requests
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
