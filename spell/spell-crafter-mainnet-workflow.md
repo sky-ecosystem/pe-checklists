@@ -101,10 +101,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Required release: vMAJOR.MINOR.PATCH
       ```
   * Phase 2 — CI synchronization
-    * `.github/workflows/tests.yaml` is the only CI pin for `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`. The separate `.github/workflows/setup-foundry.yaml` reads those values, tests the setup scripts, and installs and verifies that release on Linux and macOS when setup-related files change; a pin-only spell change does not trigger that workflow or require an edit to it.
-    * [ ] Ensure `FOUNDRY_RELEASE` in `.github/workflows/tests.yaml` matches the required release, updating it if necessary
-    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `"1"`, updating it if necessary
-    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `"0"`, updating it if necessary
+    * `.github/foundry-ci.env` is the only CI pin for `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`. Both `.github/workflows/tests.yaml` and `.github/workflows/setup-foundry.yaml` validate and load it. The setup workflow tests the setup scripts and installs and verifies that release on Linux and macOS when setup-related files change; a pin-only spell change does not trigger it or require workflow edits.
+    * [ ] Ensure `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release, updating it if necessary
+    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `1`, updating it if necessary
+    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `0`, updating it if necessary
+    * [ ] Confirm that the `Load Foundry settings` step in `.github/workflows/tests.yaml` reads `.github/foundry-ci.env` before installation
     * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
     * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
