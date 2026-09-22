@@ -9,7 +9,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* Confirm that Foundry setup changes are handled separately
+* Keep Foundry setup command implementation changes out of spell pull requests
+  * A pin-only edit to `.github/foundry-ci.env` is not a setup command implementation change
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
@@ -41,7 +42,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           Affects release under review: Yes / No / Unclear — _Insert rationale_
           Linked official sources: None / _Insert URLs and outcome_
           ```
-    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
+    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/foundry-ci.env` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
       FOUNDRY_IGNORE_AGE: 0 / 1
@@ -69,9 +70,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Required release: vMAJOR.MINOR.PATCH
       ```
   * Phase 2 — Independent CI synchronization review
-    * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
-    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `"1"`
-    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `"0"`
+    * [ ] Confirm that `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release
+    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `1`
+    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `0`
+    * [ ] Confirm that the `Load Foundry settings` step in `.github/workflows/tests.yaml` reads `.github/foundry-ci.env` before installation
     * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
     * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
