@@ -101,7 +101,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Required release: vMAJOR.MINOR.PATCH
       ```
   * Phase 2 — CI synchronization
-    * `.github/foundry-ci.env` is the only CI pin for `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE`. Both `.github/workflows/tests.yaml` and `.github/workflows/setup-foundry.yaml` validate and load it. The setup workflow tests the setup scripts and installs and verifies that release on Linux and macOS when setup-related files change; a pin-only spell change does not trigger it or require workflow edits.
     * [ ] Ensure `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release, updating it if necessary
     * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `1`, updating it if necessary
     * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `0`, updating it if necessary
