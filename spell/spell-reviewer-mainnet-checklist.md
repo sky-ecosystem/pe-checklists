@@ -42,7 +42,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           Affects release under review: Yes / No / Unclear — _Insert rationale_
           Linked official sources: None / _Insert URLs and outcome_
           ```
-    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
+    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/foundry-ci.env` into the block below
       ```text
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
       FOUNDRY_IGNORE_AGE: 0 / 1
