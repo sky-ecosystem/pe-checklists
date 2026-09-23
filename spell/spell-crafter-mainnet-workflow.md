@@ -245,6 +245,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF bug bounty updates are present
     * [ ] Test that all bug bounty registry calls execute successfully
   * [ ] Tests PASS via `make test`
+* IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
+  * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
+  * [ ] Each `TODO` describes or references the relevant context
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
