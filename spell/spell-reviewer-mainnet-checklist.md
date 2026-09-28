@@ -382,6 +382,17 @@ _Insert your local test logs here_
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
   * [ ] Every action present in the spell code is present in the Exec Doc
   * [ ] Every action in the Exec Doc is present in the spell code
+* SafeHarbor pre-deployment check
+  * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
+    * [ ] The command passes with no SafeHarbor updates or validation warnings
+    * [ ] The command exit code is `0`
+    * [ ] The reported commit matches the latest reviewed spell commit
+    * [ ] Paste the full command output below
+      ```
+      _Insert the full `make safeharbor-test-spell` output here_
+      ```
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * IF new commits are present in the spell
   * [ ] Copy relevant checklist items from the above and redo them
   * [ ] Ensure newly added code is covered by tests
