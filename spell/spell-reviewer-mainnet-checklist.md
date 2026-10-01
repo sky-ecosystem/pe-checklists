@@ -501,13 +501,13 @@ _Insert your local test logs here_
   * [ ] Copy over and redo "Tests" section from the above
   * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
 * Independently verify the CI-pinned Foundry release
-  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+  * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
   * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_
     ```

@@ -81,7 +81,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
       FOUNDRY_IGNORE_AGE: 0 / 1
       ```
-    * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+    * [ ] IF adopting the release under review changes `FOUNDRY_RELEASE` in `.github/foundry-ci.env`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
       Release notes: _Insert exact release URL_
       Compatibility: Compatible / Incompatible — _Insert rationale_
@@ -336,13 +336,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
 * Verify the CI-pinned Foundry release
-  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+  * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
     FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE: 0 / 1
     ```
   * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_
     ```
