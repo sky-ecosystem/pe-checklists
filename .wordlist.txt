@@ -1,3 +1,4 @@
+ABI
 AGPLv
 ALM
 Antipatterns
@@ -21,6 +22,7 @@ EOA
 EOAs
 ERC
 EVM
+Ethereum
 Etherscan
 EthTx
 ExecLib
@@ -30,6 +32,7 @@ Fileable
 GSM
 Getter
 Goerli
+GovOps
 IAM
 IPFS
 Integrations
@@ -91,8 +94,12 @@ auth
 authed
 authing
 bytecode
+Calc
+CalcFab
+calldata
 casted
 checksummed
+checkboxes
 codehash
 collateralization
 collaterals
@@ -118,6 +125,7 @@ https
 immutable
 immutables
 invariants
+keystore
 kprFlatReward
 kprPctReward
 liquidationPenalty
@@ -133,8 +141,14 @@ permissioning
 permittedDrop
 precomputed
 prepended
+prerelease
 redemptions
 repos
+RPC
+RWA
+RWAXXX
+RWAXYZ
+safeharbor
 setIlkAutoLineDebtCeiling
 setIlkAutoLineParameters
 setIlkDebtCeiling
@@ -146,6 +160,7 @@ setLiquidationBreakerPriceTolerance
 setStairstepExponentialDecrease
 solc
 startingPriceFactor
+strikethroughs
 structs
 submodule
 submodules
@@ -156,6 +171,7 @@ unaudited
 untrusted
 upgradability
 upgradable
+verifier
 vnet
 vscode
 whitespace
