@@ -176,27 +176,27 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
     * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
-    * IF new contract have concept of `wards` or access control
+    * IF the new contract has a concept of `wards` or access control
       * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
       * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
       * [ ] Ensure that there are no other `Rely` events except for `PAUSE_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
-    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via vscode `code --diff etherscan.sol github.sol`)
-      * [ ] IF source code was audited, LIST audit links on auditor's website
+    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
         * AUDITOR, AUDIT_URL
-      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
-    * [ ] Deployer address is included into `addresses_deployers.sol`
+      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+    * [ ] Deployer address is included in `addresses_deployers.sol`
 * LIST all new L2 contracts present in the spell:
   * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
-    * [ ] Source code is verified on a primary block explorer for this chain
+    * [ ] Source code is verified on the primary block explorer for this chain
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
-    * IF new contract have concept of `wards` or access control
-      * [ ] Ensure admin address for the chain was `relied` (`wards(PAUSE_PROXY)` is `1`)
+    * IF the new contract has a concept of `wards` or access control
+      * [ ] Ensure the admin address for the chain was `relied` (`wards(L2_GOV_RELAY)` is `1`)
       * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
       * [ ] Ensure that there are no other `Rely` events except for the admin address (using a block explorer like [etherscan](https://etherscan.io))
-    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via vscode `code --diff etherscan.sol github.sol`)
-      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (i.e.: reusing unaudited contracts with lots of Lindy effect).
-    * [ ] Contract address is included into `addresses_[CHAIN_NAME].sol`
+    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
+      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+    * [ ] Contract address is included in `addresses_[CHAIN_NAME].sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
     * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L792)) is used
@@ -250,10 +250,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
 * LIST additional dependencies (i.e. `./src/dependencies/` directory) present in the spell:
   * `DEPENDENCY_NAME`, LINK_TO_THE_DEPENDENCY_REPO
-    * [ ] IF the dependencies contracts/libraries have been audited
-      * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
-    * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (i.e. Gov Facilitators)
-      * [ ] Each contract/library exactly matches (i.e. diff check) the source code from the permalink
+    * [ ] IF the dependency contracts/libraries have been audited
+      * [ ] Each contract/library exactly matches the source code of the latest audited version
+    * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
+      * [ ] Each contract/library exactly matches the source code from the permalink
 * IF onboarding is present
   * [ ] Insert and follow the relevant checklists below:
     * [Collateral Onboarding](./collateral-onboarding-checklist.md)
@@ -383,7 +383,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Tested via `testVestedRewardsDist`
 * LIST Prime Agent spells present in the spell:
   * `PRIME_AGENT_NAME`
-    * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
+    * [ ] Handover message is shared in the existing spell thread in the `#govops` Slack channel
+    * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
       * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent

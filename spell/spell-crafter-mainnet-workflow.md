@@ -222,7 +222,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Fetch the agreement address from the `ChainLog`
         * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
   * IF Prime Agent spell is provided
-    * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
+    * [ ] Handover message is shared in the existing spell thread in the `#govops` Slack channel
+    * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
     * [ ] IF `direct execution` is `yes`
