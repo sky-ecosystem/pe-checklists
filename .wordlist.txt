@@ -130,6 +130,7 @@ kprFlatReward
 kprPctReward
 liquidationPenalty
 liquidationRatio
+macOS
 makerdao
 medianizer
 multisig
