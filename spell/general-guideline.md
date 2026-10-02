@@ -1,6 +1,6 @@
 # General Guideline for checklist
 
-## How to follow the checklist
+## How to complete the checklist
 
 * **Do not remove** any checklist item. If an item does not apply to the current spell, cross it out as `[ ] ~~checklist item~~`.
 * If a checklist item cannot be completed, add a comment explaining why and mark it as either `blocking ❌` or `non-blocking ⚠️`.
