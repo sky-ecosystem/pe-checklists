@@ -135,10 +135,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * [ ] Ensure every spell variable is declared as public/internal
-  * IF SafeHarbor registry updates are present
+  * IF SafeHarbor Agreement updates are present
     * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
     * [ ] Fetch the Agreement address from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
-    * [ ] Use the established archive helper pattern to execute calls in order and revert on any failed call
+    * [ ] Use the selector-enforcing `_updateSafeHarbor` helper documented in `scripts/safeharbor/README.md`; execute calls in order and revert on unsupported functions or failed calls
+    * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
@@ -148,7 +149,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
-* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action, except SafeHarbor scope updates
+* Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
   * [ ] Test new collaterals
   * [ ] Test new ilk registry values
   * [ ] Test new ChainLog values
@@ -230,7 +231,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* SafeHarbor registry post-cast reconciliation
+* SafeHarbor Agreement post-cast reconciliation
   * [ ] Run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
     * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
     * IF validation warnings are reported

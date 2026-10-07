@@ -311,10 +311,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
-* IF SafeHarbor registry updates are present
+* IF SafeHarbor Agreement updates are present
   * [ ] Verify the spell matches the generated snippet, except for formatting, including every calldata entry and its order
   * [ ] Ensure the Agreement address is fetched from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
-  * [ ] Ensure the helper follows the established archive pattern, executing calls in order and reverting on any failed call
+  * [ ] Ensure the spell uses the selector-enforcing `_updateSafeHarbor` helper documented in `scripts/safeharbor/README.md`, executing calls in order and reverting on unsupported functions or failed calls
+  * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -333,7 +334,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     _Insert most recent commit hash where CI was passing_
   * [ ] Ensure every test function is declared as `public`
     * [ ] IF the test needs to run, it MUST NOT have the `skipped` modifier; OTHERWISE, it MUST have the `skipped` modifier
-  * [ ] Ensure each spell action has sufficient test coverage, except SafeHarbor scope updates
+  * [ ] Ensure each spell action has sufficient test coverage
     _List actions for which coverage was checked here_
   * [ ] Ensure that any other env variable does not affect execution of the tests (for example, by inspecting the output of `printenv | grep "FOUNDRY_\|DAPP_"`)
   * IF a new module is initialized via the spell, the tests must include
