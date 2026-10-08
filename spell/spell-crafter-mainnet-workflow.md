@@ -202,6 +202,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
+* SafeHarbor pre-deployment check
+  * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
+    * [ ] The command passes with no SafeHarbor updates or validation warnings
+    * [ ] The command exit code is `0`
+    * [ ] The reported commit matches the latest spell commit in the PR
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
 
 ## Deployment Stage
