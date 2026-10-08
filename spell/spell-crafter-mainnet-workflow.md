@@ -78,8 +78,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           ```
     * [ ] Copy the workflow-level Foundry settings from the local `.github/foundry-ci.env` into the block below
       ```text
-      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-      FOUNDRY_IGNORE_AGE: 0 / 1
+      FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE=0/1
       ```
     * [ ] IF adopting the release under review changes `FOUNDRY_RELEASE` in `.github/foundry-ci.env`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
@@ -338,8 +338,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Verify the CI-pinned Foundry release
   * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
-    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-    FOUNDRY_IGNORE_AGE: 0 / 1
+    FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE=0/1
     ```
   * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
   * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
