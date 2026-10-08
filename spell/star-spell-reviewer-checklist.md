@@ -116,8 +116,8 @@ This section outlines the review process and provides concrete action items for 
 ### Development Stage
 
 #### Preparation
-- [ ] Spell branch is up to date with the latest base branch (i.e. `git rev-list --count <SPELL_BRANCH>..origin/<BASE_BRANCH>` prints `0` after `git fetch`).
-- LIST every commit on the base branch since the last externally reviewed spell (i.e. `git log <PREVIOUS_SPELL_LAST_REVIEWED_COMMIT>..<BASE_BRANCH>`):
+- [ ] Spell branch is up to date with the latest base branch (i.e. `git rev-list --count origin/<SPELL_BRANCH>..origin/<BASE_BRANCH>` prints `0` after `git fetch`).
+- LIST every commit on the base branch since the last externally reviewed spell (i.e. `git log <PREVIOUS_SPELL_LAST_REVIEWED_COMMIT>..origin/<BASE_BRANCH>`):
   - `COMMIT_TITLE`, URL_TO_THE_PR_OR_THE_COMMIT
     - [ ] Content matches description: no unrelated changes.
     - [ ] No security-related changes are present in this commit.
