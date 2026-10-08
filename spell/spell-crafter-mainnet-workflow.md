@@ -138,7 +138,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF SafeHarbor Agreement updates are present
     * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
     * [ ] Fetch the Agreement address from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
-    * [ ] Use the selector-enforcing `_updateSafeHarbor` helper documented in `scripts/safeharbor/README.md`; execute calls in order and revert on unsupported functions or failed calls
+    * [ ] Use the established archive helper pattern to execute calls in order and revert on any failed call
     * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template

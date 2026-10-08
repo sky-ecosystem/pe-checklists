@@ -314,7 +314,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * IF SafeHarbor Agreement updates are present
   * [ ] Verify the spell matches the generated snippet, except for formatting, including every calldata entry and its order
   * [ ] Ensure the Agreement address is fetched from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
-  * [ ] Ensure the spell uses the selector-enforcing `_updateSafeHarbor` helper documented in `scripts/safeharbor/README.md`, executing calls in order and reverting on unsupported functions or failed calls
+  * [ ] Ensure the helper follows the established archive pattern, executing calls in order and reverting on any failed call
   * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
