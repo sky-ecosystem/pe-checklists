@@ -95,8 +95,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* [ ] `make safeharbor-generate` output matches the instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* SafeHarbor source and proposed updates
+  * [ ] Independently review the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U), including intended accounts, scopes, and recovery addresses
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
+    * [ ] The proposed changes, including removals, implement the approved Sheet relative to the current Agreement
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -390,13 +395,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
-* IF bug bounty registry updates are present
-  * [ ] Run `make safeharbor-generate`
-    * [ ] Verify that the generated code exactly matches the code in the spell
-    * [ ] Verify that output matches the instructions provided by Governance Facilitators
-    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
-  * [ ] Ensure that agreement address is fetched from the Chainlog
-  * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
+* IF SafeHarbor Agreement updates are present
+  * [ ] Verify the spell matches the generated snippet, except for formatting, including every calldata entry and its order
+  * [ ] Ensure the Agreement address is fetched from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
+  * [ ] Ensure the helper follows the established archive pattern, executing calls in order and reverting on any failed call
+  * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -493,6 +496,17 @@ _Insert your local test logs here_
   * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
     * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group
+* SafeHarbor pre-deployment check
+  * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
+    * [ ] The command passes with no SafeHarbor updates or validation warnings
+    * [ ] The command exit code is `0`
+    * [ ] The reported commit matches the latest reviewed spell commit
+    * [ ] Paste the full command output below
+      ```
+      _Insert the full `make safeharbor-test-spell` output here_
+      ```
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review
@@ -561,8 +575,10 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
-    * [ ] IF the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
+  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
