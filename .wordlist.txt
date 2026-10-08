@@ -1,3 +1,4 @@
+ABI
 AGPLv
 ALM
 Antipatterns
@@ -98,6 +99,7 @@ CalcFab
 calldata
 casted
 checksummed
+checkboxes
 codehash
 collateralization
 collaterals
@@ -139,6 +141,7 @@ permissioning
 permittedDrop
 precomputed
 prepended
+prerelease
 redemptions
 repos
 RPC
@@ -157,6 +160,7 @@ setLiquidationBreakerPriceTolerance
 setStairstepExponentialDecrease
 solc
 startingPriceFactor
+strikethroughs
 structs
 submodule
 submodules
@@ -167,6 +171,7 @@ unaudited
 untrusted
 upgradability
 upgradable
+verifier
 vnet
 vscode
 whitespace

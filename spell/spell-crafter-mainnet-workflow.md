@@ -33,16 +33,90 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
+- Set up the spell Signal group after the content and roles have been agreed upon in the private GovOps Slack coordination thread
+  - [ ] Create the group named `YYYY-MM-DD Spell`
+  - [ ] Add both official reviewers
+  - IF other team members are involved in the spell
+    - [ ] Add them to the group
+
 ## Development Stage
 
-* Install stable Foundry version
-  * [ ] Install the stable version of Foundry via `foundryup --install stable`
+* Prepare the `spells-mainnet` checkout
+  * [ ] Pull the `master` branch of a trusted local copy of the [`sky-ecosystem/spells-mainnet` repository](https://github.com/sky-ecosystem/spells-mainnet)
+    ```bash
+    git switch master
+    git pull --ff-only origin master
     ```
-    Document the installation logs containing installed versions below:
-    ```
-* Create new branch
-  * [ ] Pull `master` branch of the `spells-mainnet` repo locally
   * [ ] Create a new branch named `YYYY-MM-DD` using the _initial_ target date of the spell
+* Verify and install the Foundry toolkit
+  * Failure handling — applies throughout Phases 1–3
+    * IF any Foundry setup command below exits nonzero, apply this recovery branch immediately
+      * [ ] Stop Foundry setup
+      * [ ] Record the failed command and complete output in the spell PR
+      * [ ] Diagnose and resolve the failure
+      * [ ] IF verification fails after a successful mandatory installation, diagnose the verifier failure, including `PATH`
+      * [ ] Rerun the exact failed command
+        ```text
+        _Insert the complete command output here_
+        ```
+      * [ ] IF the failure cannot be resolved, notify the spell team
+  * Phase 1 — Mandatory release acceptance
+    * [ ] Run `make select-foundry`
+      ```text
+      _Insert the complete selector output here_
+      ```
+    * [ ] Treat the selected release as the release under review
+    * IF there are any published Foundry [security advisories](https://github.com/foundry-rs/foundry/security/advisories) for the release under review
+      * For each advisory
+        * [ ] Compare its affected version range with the release under review
+        * [ ] IF the release is affected or applicability is unclear, review every linked official upstream source
+        * [ ] Record the evidence below
+          ```text
+          Foundry advisory: _Insert URL_
+          Affects release under review: Yes / No / Unclear — _Insert rationale_
+          Linked official sources: None / _Insert URLs and outcome_
+          ```
+    * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
+      ```text
+      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE: 0 / 1
+      ```
+    * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+      ```text
+      Release notes: _Insert exact release URL_
+      Compatibility: Compatible / Incompatible — _Insert rationale_
+      ```
+    * IF the release under review does not pass the security review or applicable compatibility check
+      * [ ] Stop Foundry setup
+      * [ ] Notify the spell team that the release under review failed the security review or applicable compatibility check
+      * Repeat until the release under review passes the security review and any required compatibility check
+        * [ ] Select an exact alternative supported by an official upstream reference
+        * [ ] Treat the alternative as the release under review
+        * [ ] Repeat the security and applicable compatibility checks above
+      * [ ] Post a spell PR comment containing the exact alternative release to install and its upstream reference
+        * [ ] IF the alternative is less than 14 days old, include an explicit cooling-period waiver request in the same comment
+      * [ ] Obtain explicit approval from both spell reviewers in replies; each reply must name the exact alternative release and state whether the cooling-period waiver is approved or not required
+    * [ ] Record the passing selected release or passing explicitly approved alternative as the required release
+      ```text
+      Required release: vMAJOR.MINOR.PATCH
+      ```
+  * Phase 2 — CI synchronization
+    * [ ] Ensure `FOUNDRY_RELEASE` matches the required release, updating it if necessary
+    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `"1"`, updating it if necessary
+    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `"0"`, updating it if necessary
+    * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+  * Phase 3 — Mandatory developer installation and verification
+    * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete installer output here_
+      ```
+    * [ ] IF the installer reports `Required action: update-path`, apply the printed `PATH` instructions
+    * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
+      ```text
+      _Insert the complete verifier output here_
+      ```
+    * [ ] Confirm that the final verifier exits `0` and reports the required release as both desired and installed
 * Cleanup previous spell's actions
   * [ ] Check previous pull requests for the cleanup patterns
   * [ ] Delete unused dependencies in the `src/dependencies` folder IF applicable
@@ -134,6 +208,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
+  * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
+    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+  * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
+    * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
+    * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
+    * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
   * [ ] Ensure every spell variable is declared as public/internal
   * IF SafeHarbor Agreement updates are present
     * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
@@ -164,6 +244,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Tests PASS via `make test`
+* IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
+  * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
+  * [ ] Each `TODO` describes or references the relevant context
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
@@ -200,6 +283,41 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       ```
   * [ ] Exec hash is correct (use `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"` where `wget` doesn't work)
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
+* Octane Review
+  * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
+  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
+    * [ ] Ensure the project scope is standardized to only include:
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, every file under the directory
+      * [ ] No other files are included
+    * [ ] Select the correct Pull Request
+    * [ ] Run "PR-only" PR analysis mode
+  * [ ] Use the most recent analysis for the review
+    ```
+    Analysis number: _Insert analysis number used_ 
+    Commit hash analysis ran against: _Insert commit hash used for analysis_ 
+    ```
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] Ensure every contract listed in on-chain dependencies has its source and ABI fetched from the correct chain
+    * [ ] IF any contract has an unverified source, investigate the address (e.g. the source cannot be verified as the address is an EOA)
+    * [ ] IF any contract has its source skipped or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> save -> rerun the analysis
+  * [ ] Thoroughly inspect the analysis settings for signs of manipulation
+    * [ ] Project name and repository name are correctly set
+    * [ ] Branch name is set to "master"
+    * [ ] Dependency installation is enabled
+  * [ ] Thoroughly inspect the analysis scope for signs of manipulation
+    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
+      * [ ] `src/DssSpell.sol`
+      * [ ] IF `src/dependencies` is present, every file under the directory
+      * [ ] No other files are included
+  * [ ] IF any malicious or unexpected setting is found, including any configuration not listed above, address it, re-run the analysis, and redo the "Octane Review" section
+    * [ ] IF it cannot be addressed, raise it to the current spell group
+  * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
+    * [ ] IF any blocking issue was found, raise it to the current spell group
+    * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
+  * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL using:
+  `https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/<ANALYSIS_NUMBER>/vulnerabilities?visibility=ALL`
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
 * SafeHarbor pre-deployment check
@@ -210,10 +328,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * IF validation warnings are reported
       * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
+* [ ] IF there is new commit with spell code update, redo the "Octane Review" section above
 
 ## Deployment Stage
 
-* [ ] Wait for at least two "good to deploy" comments (containing local tests) from the official reviewers
+* [ ] Before deploying, ensure both official reviewers have posted "good to deploy" comments (containing local tests) for the current pre-deployment commit
 * Pre-deploy setup and checks (currently via Foundry)
   * Set local environment variables
     * [ ] Avoid using the same deployer for different chains (to avoid deploying contracts with the same address but different source code)
@@ -224,6 +343,18 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Check local env
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
+* Verify the CI-pinned Foundry release
+  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+    ```text
+    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE: 0 / 1
+    ```
+  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+    ```text
+    _Insert the complete verifier output here_
+    ```
+  * [ ] Confirm that the verifier exits `0` and reports the recorded `FOUNDRY_RELEASE` as both the desired and installed release
 * Deploy spell on mainnet
   * [ ] `make deploy`
   * Ensure `src/test/config.sol` is edited correctly
@@ -247,7 +378,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
-  * Foundry installation logs containing installed versions (from above)
+  * The exact Foundry verification command run before deployment, with its release and age-waiver arguments matching CI
+  * The complete verifier output
+  * Confirmation that the verifier exited `0`
+  * Confirmation that the desired and installed releases match the release pinned in CI
   * A link to the deployed spell
   * A link to the created Tenderly Testnet
 * [ ] Notify the reviewers (e.g. "the spell was deployed")
@@ -255,13 +389,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 
 ## Handover and Merge Stage
 
-* [ ] Wait for at least two "good to handover" comments (containing local tests) from the official reviewers
+* [ ] Wait for explicit "good to handover" comments from both official reviewers confirming the deployment information
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995)
   * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
   * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
   * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
-* [ ] Fill the rest of the Spell Crafter-related boxes in the Exec Sheet
+* IF there are remaining Spell Crafter-related fields in the Exec Sheet and the crafter is responsible for updating them
+  * [ ] Fill the remaining fields
 * Pre-Merge target branch pull attack checks
   * IF within last THREE commits (or last 6 weeks) spells-mainnet repo contains a maintenance PR
     * [ ] Ensure the PR actions match description and look safe
