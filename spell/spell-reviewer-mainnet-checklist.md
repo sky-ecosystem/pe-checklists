@@ -177,7 +177,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `GNU AGPLv3` license
     * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
     * IF the new contract has a concept of `wards` or access control
-      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor or initializer
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor
         _List all addresses granted access here_
       * [ ] Ensure `PAUSE_PROXY` currently holds the admin access (e.g. `wards(PAUSE_PROXY)` is `1`)
       * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
@@ -192,7 +192,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
     * IF the new contract has a concept of `wards` or access control
-      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor or initializer
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor
         _List all addresses granted access here_
       * [ ] Ensure the admin address for the chain currently holds the admin access (e.g. `wards(L2_GOV_RELAY)` is `1`)
       * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
