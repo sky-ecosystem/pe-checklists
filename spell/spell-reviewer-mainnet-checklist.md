@@ -96,12 +96,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
 * SafeHarbor source and proposed updates
-  * [ ] Independently review each SafeHarbor change in the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) against the Exec Sheet instructions and their linked sources, including added or removed accounts, scopes, and recovery addresses
+  * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+    * [ ] Recovery addresses for affected chains match the linked sources
+    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
   * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
     * [ ] The command reports no validation warnings
     * IF validation warnings are reported
       * [ ] Stop the review process and notify Governance Facilitators
-    * [ ] All generated changes, including removals, are expected from the approved Sheet relative to the current Agreement
+    * [ ] All generated changes are expected, including removals
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date

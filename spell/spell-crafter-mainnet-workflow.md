@@ -141,12 +141,15 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
 * SafeHarbor source and proposed updates
-  * [ ] Review each SafeHarbor change in the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U) against the Exec Sheet instructions and their linked sources, including added or removed accounts, scopes, and recovery addresses
+  * [ ] Verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+    * [ ] Recovery addresses for affected chains match the linked sources
+    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
   * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
     * [ ] The command reports no validation warnings
     * IF validation warnings are reported
       * [ ] Stop the crafting process and notify Governance Facilitators
-    * [ ] All generated changes, including removals, are expected from the approved Sheet relative to the current Agreement
+    * [ ] All generated changes are expected, including removals
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
