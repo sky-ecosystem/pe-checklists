@@ -170,30 +170,32 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Time of day makes logical sense in the context of timestamp usage (i.e. `23:59:59 UTC` for the final day of something, `00:00:00 UTC` for the first day of something)
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
-* LIST all new contracts present in the spell (not yet on chainlog or new to chainlog):
+* IF new Ethereum mainnet contracts (not yet on chainlog or new to chainlog) are present in the spell, LIST each contract:
   * `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
     * [ ] Source code is verified on etherscan
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
     * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
     * IF the new contract has a concept of `wards` or access control
-      * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
-      * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
-      * [ ] Ensure that there are no other `Rely` events except for `PAUSE_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor or initializer
+        _List all addresses granted access here_
+      * [ ] Ensure `PAUSE_PROXY` currently holds the admin access (e.g. `wards(PAUSE_PROXY)` is `1`)
+      * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
     * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
       * [ ] IF source code was audited, LIST audit links on the auditor's website
         * AUDITOR, AUDIT_URL
       * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
     * [ ] Deployer address is included in `addresses_deployers.sol`
-* LIST all new L2 contracts present in the spell:
+* IF new L2 contracts are present in the spell, LIST each contract:
   * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
     * [ ] Source code is verified on the primary block explorer for this chain
     * [ ] Compilation optimizations match deployment settings defined in the source code repo
     * [ ] `GNU AGPLv3` license
     * IF the new contract has a concept of `wards` or access control
-      * [ ] Ensure the admin address for the chain was `relied` (`wards(L2_GOV_RELAY)` is `1`)
-      * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
-      * [ ] Ensure that there are no other `Rely` events except for the admin address (using a block explorer like [etherscan](https://etherscan.io))
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor or initializer
+        _List all addresses granted access here_
+      * [ ] Ensure the admin address for the chain currently holds the admin access (e.g. `wards(L2_GOV_RELAY)` is `1`)
+      * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
     * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
       * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
     * [ ] Contract address is included in `addresses_[CHAIN_NAME].sol`
@@ -248,7 +250,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L428)
         * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L436)
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
-* LIST additional dependencies (i.e. `./src/dependencies/` directory) present in the spell:
+* IF additional dependencies are present in the spell (e.g. under `./src/dependencies/`), LIST each dependency:
   * `DEPENDENCY_NAME`, LINK_TO_THE_DEPENDENCY_REPO
     * [ ] IF the dependency contracts/libraries have been audited
       * [ ] Each contract/library exactly matches the source code of the latest audited version
@@ -381,7 +383,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Rewards distribution contract address matches Exec Sheet
     * [ ] To prevent front-running DoS, the `distribute()` call is placed inside `if` block that checks whether the vesting stream’s unpaid amount is greater than 0
     * [ ] Tested via `testVestedRewardsDist`
-* LIST Prime Agent spells present in the spell:
+* IF Prime Agent spells are present in the spell, LIST each Prime Agent spell:
   * `PRIME_AGENT_NAME`
     * [ ] Handover message is shared in the existing spell thread in the `#govops` Slack channel
     * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`

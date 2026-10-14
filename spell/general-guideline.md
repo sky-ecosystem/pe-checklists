@@ -2,8 +2,7 @@
 
 ## How to complete the checklist
 
-* **Do not remove** any checklist item. If an item does not apply to the current spell, cross it out as `[ ] ~~checklist item~~`.
-* If a checklist item cannot be completed, add a comment explaining why and mark it as either `blocking ❌` or `non-blocking ⚠️`.
-* Only tick checklist items that are **fully completed**. If an item is skipped, leave it unchecked.
-* Only checklist items with the `IF` prefix can be crossed out. Otherwise, a relevant comment explaining the reason for skipping should be provided.
+* **Do not remove** any checklist item. Only items with the `IF` prefix can be skipped. If such an item does not apply to the current spell, cross it out as `[ ] ~~checklist item~~`. If it has nested sub-items, cross those out as well.
+* If an applicable checklist item cannot be completed or must be skipped, leave it unchecked and add a comment explaining why, marking it as either `blocking ❌` or `non-blocking ⚠️`.
+* Only tick checklist items that are **fully completed**.
 * For items marked as `LIST`, copy and fill in the relevant checklist for each applicable case.
