@@ -85,9 +85,8 @@
         * [ ] `pip` matches token pip address
         * [ ] `isLiquidatable` set to true if liquidations are on
         * [ ] `isOSM` set to true IF `pip` is `OSM`
-        * [ ] [`checkWhitelistedOSM`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/CollateralOpts.sol#L31) set to true IF `isOSM` is true AND the `OSM`'s `src` has a whitelist
-          * [ ] The `OSM` is already whitelisted on its `src` (`bud(pip)` returns `1` on-chain)
-          * [ ] `checkWhitelistedOSM` is NOT set to false to bypass the assertion
+        * [ ] [`checkWhitelistedOSM`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/CollateralOpts.sol#L31) set to `true` IF `isOSM` is true AND the `OSM`'s `src` has a whitelist, OTHERWISE explicitly set to `false`
+          * [ ] The `OSM` is already whitelisted on its `src` (`bud(pip)` returns `1` on-chain) and `checkWhitelistedOSM` is NOT set to `false` to bypass the assertion
         * [ ] `ilkDebtCeiling` (`vat.ilk.line`) in DAI (e.g. 1 * MILLION)
           * [ ] IF autoline is enabled, `vat.ilk.line` should be set to DC-IAM `gap` value
         * [ ] `minVaultAmount` (`vat.ilk.dust`) in DAI (e.g. 15_000)
@@ -109,8 +108,7 @@
         * [ ] `StairstepExponentialDecrease`
           * [ ] `calc.step` in seconds (e.g. 120 seconds)
           * [ ] `calc.cut` in basis points (e.g. 99% = 99_00)
-      * [ ] set Ilk Autoline Parameters (IF Autoline is enabled)
-        * [ ] 4-argument [`setIlkAutoLineParameters(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777) is used
+      * [ ] IF Autoline is enabled, set Ilk Autoline Parameters using 4-argument [`setIlkAutoLineParameters(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777)
         * [ ] `ilk` follows the ilk format `TOKEN-A`
         * [ ] `line`in DAI (e.g. 10 * MILLION)
         * [ ] `gap` in DAI (e.g. 1 * MILLION)
