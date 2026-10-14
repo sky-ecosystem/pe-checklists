@@ -226,7 +226,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1210)
     * [ ] IF `direct execution` is `yes`
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
-      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1187)
+      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1187), UNLESS the Exec Sheet explicitly requires non-reverting execution
+      * [ ] IF the Exec Sheet explicitly requires non-reverting execution, the Prime Agent spell is executed via [`DssExecLib.tryExecuteStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1198) and the `ok == false` branch is handled
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action

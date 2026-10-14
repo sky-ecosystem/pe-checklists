@@ -209,11 +209,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L728)
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] EITHER is used, depending on the instruction:
-      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L800)
-      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777)
-      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L788) (keeps the existing `ttl`)
-    * [ ] IF the 3-argument `DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)` overload is used, the ilk is already configured in `AutoLine` (the overload reverts when `ttl == 0`)
+    * IF the ilk is being added to `AutoLine` OR `amount`, `gap` and `ttl` are all being updated
+      * [ ] [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777) is used
+    * OTHERWISE IF `amount` and `gap` are being updated but `ttl` must remain the same
+      * [ ] [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L788) is used
+    * OTHERWISE IF only `amount` is being updated
+      * [ ] [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L800) is used
     * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
     * [ ] `AutoLine` values are tested via `testGeneral`
     * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
@@ -378,8 +379,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
-      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1187)
-      * [ ] [`tryExecuteStarSpell`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1198) is NOT used UNLESS the Exec Sheet explicitly requires non-reverting execution and the `ok == false` branch is handled
+      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1187), UNLESS the Exec Sheet explicitly requires non-reverting execution
+      * [ ] IF the Exec Sheet explicitly requires non-reverting execution, the Prime Agent spell is executed via [`DssExecLib.tryExecuteStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1198) and the `ok == false` branch is handled
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
     * [ ] Prime Agent spell address (`XXX_SPELL`) matches Exec Sheet
