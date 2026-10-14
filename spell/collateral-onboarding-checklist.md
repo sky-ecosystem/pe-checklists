@@ -50,32 +50,32 @@
         * [ ] parameters are correct
           * [ ] `owner` matches MCD Pause Proxy
     * [ ] Risk Parameters
-      * [ ] `vat.ilk.line` ([setIlkDebtCeiling](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L728))
-      * [ ] `dog.ilk.hole` ([setIlkMaxLiquidationAmount](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L837))
-      * [ ] `vat.ilk.dust`([setIlkMinVaultAmount](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L816))
-      * [ ] `dog.ilk.chop` ([liquidationPenalty](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L828))
-      * [ ] `jug.ilk.duty` ([setIlkStabilityFee](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L919))
-      * [ ] `spotter.ilk.mat`  ([liquidationRatio](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L848))
-      * [ ] `clip.buf`  ([startingPriceFactor](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L858))
-      * [ ] `clipperMom.clip.tolerance` ([setLiquidationBreakerPriceTolerance](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L901))
-      * [ ] `clip.tail` ([auctionDuration](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L867))
-      * [ ] `clip.cusp` ([permittedDrop](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L874))
-      * [ ] `clip.chip` ([kprPctReward](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L882))
-      * [ ] `clip.tip`([kprFlatReward](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L890))
+      * [ ] `vat.ilk.line` ([setIlkDebtCeiling](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `dog.ilk.hole` ([setIlkMaxLiquidationAmount](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `vat.ilk.dust`([setIlkMinVaultAmount](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `dog.ilk.chop` ([liquidationPenalty](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `jug.ilk.duty` ([setIlkStabilityFee](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `spotter.ilk.mat`  ([liquidationRatio](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clip.buf`  ([startingPriceFactor](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clipperMom.clip.tolerance` ([setLiquidationBreakerPriceTolerance](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clip.tail` ([auctionDuration](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clip.cusp` ([permittedDrop](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clip.chip` ([kprPctReward](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
+      * [ ] `clip.tip`([kprFlatReward](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
       * [ ] `abaci`
         * [ ] [LinearDecrease](https://github.com/makerdao/dss/blob/v0.0.9/src/abaci.sol#L29)
-          * [ ] `calc.tau` ([setLinearDecrease](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L933))
+          * [ ] `calc.tau` ([setLinearDecrease](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
         * [ ] [StairstepExponentialDecrease](https://github.com/makerdao/dss/blob/v0.0.9/src/abaci.sol#L91)
-          * [ ] [setStairstepExponentialDecrease](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L942)
+          * [ ] [setStairstepExponentialDecrease](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
           * [ ] `calc.cut`
           * [ ] `calc.step`
-    * [ ] Autoline ([setIlkAutoLineParameters](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777))
+    * [ ] Autoline ([setIlkAutoLineParameters](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
       * [ ] `ilk`
       * [ ] `line`
       * [ ] `gap`
       * [ ] `ttl`
     * [ ] Onboarding Actions
-      * [ ] ensure [`DssExecLib.addNewCollateral`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L1053) is used
+      * [ ] ensure [`DssExecLib.addNewCollateral`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) is used
       * [ ] ensure [`CollateralOpts`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/CollateralOpts.sol) is used
         * [ ] `ilk` follows the ilk format `TOKEN-A`
         * [ ] `gem` matches token address
@@ -85,7 +85,7 @@
         * [ ] `pip` matches token pip address
         * [ ] `isLiquidatable` set to true if liquidations are on
         * [ ] `isOSM` set to true IF `pip` is `OSM`
-        * [ ] [`checkWhitelistedOSM`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/CollateralOpts.sol#L31) set to `true` IF `isOSM` is true AND the `OSM`'s `src` has a whitelist, OTHERWISE explicitly set to `false`
+        * [ ] [`checkWhitelistedOSM`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/CollateralOpts.sol) set to `true` IF `isOSM` is true AND the `OSM`'s `src` has a whitelist, OTHERWISE explicitly set to `false`
           * [ ] The `OSM` is already whitelisted on its `src` (`bud(pip)` returns `1` on-chain) and `checkWhitelistedOSM` is NOT set to `false` to bypass the assertion
         * [ ] `ilkDebtCeiling` (`vat.ilk.line`) in DAI (e.g. 1 * MILLION)
           * [ ] IF autoline is enabled, `vat.ilk.line` should be set to DC-IAM `gap` value
@@ -108,7 +108,7 @@
         * [ ] `StairstepExponentialDecrease`
           * [ ] `calc.step` in seconds (e.g. 120 seconds)
           * [ ] `calc.cut` in basis points (e.g. 99% = 99_00)
-      * [ ] IF Autoline is enabled, set Ilk Autoline Parameters using 4-argument [`setIlkAutoLineParameters(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777)
+      * [ ] IF Autoline is enabled, set Ilk Autoline Parameters using 4-argument [`setIlkAutoLineParameters(ilk, line, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
         * [ ] `ilk` follows the ilk format `TOKEN-A`
         * [ ] `line`in DAI (e.g. 10 * MILLION)
         * [ ] `gap` in DAI (e.g. 1 * MILLION)

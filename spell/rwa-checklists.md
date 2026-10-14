@@ -149,25 +149,25 @@
 * IF debt ceiling is updated
   * IF AutoLine update is requested by the Exec Sheet
     * IF the ilk is already in `AutoLine` AND only `amount` is being updated
-      * [ ] Debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L800)
+      * [ ] Debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * OTHERWISE IF the ilk is already in `AutoLine` AND `ttl` remains unchanged (`gap`, or `amount` and `gap`, are being updated)
-      * [ ] Parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L788), passing the current value of any parameter that remains unchanged
+      * [ ] Parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
     * OTHERWISE (the ilk is being added to `AutoLine` OR `ttl` is being updated)
-      * [ ] Parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L777), passing the current value of any parameter that remains unchanged
+      * [ ] Parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
     * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
   * IF regular debt ceiling (`vat.ilk.line`) update is requested by the Exec Sheet
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/makerdao/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] Debt ceiling (`vat.ilk.line`) is updated, via EITHER:
-        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L737)
-        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L749)
-        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L728)
-        * [`DssExecLib.setRWAIlkDebtCeiling(ilk, ceiling, price)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L765) (also bumps the liquidation oracle to `price * WAD` and pokes the `spotter`)
+        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.setRWAIlkDebtCeiling(ilk, ceiling, price)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) (also bumps the liquidation oracle to `price * WAD` and pokes the `spotter`)
     * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to, via EITHER:
         * `global` set to `true` in `increaseIlkDebtCeiling`/`decreaseIlkDebtCeiling`
-        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L575)
-        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L582)
-        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L590)
-  * [ ] Liquidation oracle price is bumped via EITHER `RwaLiquidationOracleLike(MIP21_LIQUIDATION_ORACLE).bump(ilk, val)` OR [`DssExecLib.setRWAIlkDebtCeiling(ilk, ceiling, price)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L765)
+        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+  * [ ] Liquidation oracle price is bumped via EITHER `RwaLiquidationOracleLike(MIP21_LIQUIDATION_ORACLE).bump(ilk, val)` OR [`DssExecLib.setRWAIlkDebtCeiling(ilk, ceiling, price)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] IF `setRWAIlkDebtCeiling` is used, `AutoLine` is disabled for the ilk (previously or in the spell)
     * [ ] Comment above function call explains liquidation oracle value computation via `// Note: the formula is: "debt_ceiling * [ (1 + rwa_stability_fee ) ^ (minimum_deal_duration_in_years) ] * liquidation_ratio"`
     * [ ] Comment above function call provides locally executable formula (e.g. `// bc -l <<< 'scale=18; 50000000 * e(l(1.07) * (3342/365)) * 1.00' | cast --to-wei`)
@@ -181,7 +181,7 @@
         * [ ] IF the formula result is not a whole-token amount, `bump(ilk, val)` is used instead, UNLESS the Exec Sheet documents the rounding to whole tokens
     * [ ] `val` makes sense in context of the [rate mechanism](https://github.com/makerdao/developerguides/blob/master/mcd/intro-rate-mechanism/intro-rate-mechanism.md)
   * [ ] IF multiple RWA ilks are being combined into one, `val` calculation is done once per ilk and added to make the total, with separate executable formulas provided in comments. The existing `val` value can be retrieved by calling `read()` on `PIP_RWAXYZ` and converting the result into decimal
-  * [ ] IF `bump` is used, oracle price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol#L531) (`setRWAIlkDebtCeiling` pokes the `spotter` internally)
+  * [ ] IF `bump` is used, oracle price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) (`setRWAIlkDebtCeiling` pokes the `spotter` internally)
   * IF soft liquidation explicitly requested to be triggered (via `.tell(ilk)`) AND debt ceiling (`vat.ilks(ilk).line`) is `0` (OR is being set to `0` in the current spell)
       * [ ] `RwaLiquidationOracle.tell(ilk)` call is present
       * [ ] IF `RWAXYZ_A_INPUT_CONDUIT` is an instance of [`TinlakeMgr`](https://github.com/centrifuge/tinlake-maker-lib/blob/master/src/mgr.sol) (it is a Centrifuge integration), additional `TinlakeMgr.tell()` call is present (in order to prevent further `TIN` redemptions in the Centrifuge pool)
