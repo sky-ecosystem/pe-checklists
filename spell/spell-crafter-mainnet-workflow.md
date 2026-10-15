@@ -35,7 +35,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 - If a delay is expected, responsible party should provide new realistic time estimation
   - A delay in one stage completion shifts deadlines for all subsequent stages to the same amount of hours, unless spell team agrees otherwise
 
-- Set up the spell Signal group after the content and roles have been agreed upon in the private GovOps Slack coordination thread
+- Set up the spell Signal group after the content and roles have been agreed upon in the existing spell thread in the `#govops` Slack channel
   - [ ] Create the group named `YYYY-MM-DD Spell`
   - [ ] Add both official reviewers
   - IF other team members are involved in the spell
@@ -386,7 +386,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Communicate deployed address to governance
   * [ ] Write a message with Deployed Address in the [Sky Core Executive Vote Address Handover Thread](https://forum.skyeco.com/t/sky-core-executive-vote-address-handover-thread/27995)
   * [ ] Wait until both spell reviewers confirm the spell address in the Handover Thread
-  * [ ] Tag Responsible Governance Facilitator in the private GovOps Slack coordination thread with the link to the handover message
+  * [ ] Tag Responsible Governance Facilitator in the existing spell thread in the `#govops` Slack channel with the link to the handover message
   * [ ] Wait until Responsible Governance Facilitator confirms handover in the Handover Thread
 * IF there are remaining Spell Crafter-related fields in the Exec Sheet and the crafter is responsible for updating them
   * [ ] Fill the remaining fields
@@ -404,7 +404,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Squash & Merge
 
 ## Next Steps
-* [ ] Initiate spell retrospective (inside existing spell thread in the `#govops` discord channel)
+* [ ] Initiate spell retrospective (inside the existing spell thread in the `#govops` Slack channel)
   * Collect any problems noticed during the spell, propose concrete improvements to make it constructive
   * Prefix your message with `Initiating retro:` for clarity
   * IF there is nothing to discuss, post `Initiating retro: nothing to discuss from my side`
