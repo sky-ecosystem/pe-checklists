@@ -197,6 +197,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Ensure the admin address for the chain currently holds the admin access (e.g. `wards(L2_GOV_RELAY)` is `1`)
       * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
     * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
+        * AUDITOR, AUDIT_URL
       * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
     * [ ] Contract address is included in `addresses_[CHAIN_NAME].sol`
 * IF core system parameter changes are present in the instructions
@@ -252,10 +254,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
 * IF additional dependencies are present in the spell (e.g. under `./src/dependencies/`), LIST each dependency:
   * `DEPENDENCY_NAME`, LINK_TO_THE_DEPENDENCY_REPO
-    * [ ] IF the dependency contracts/libraries have been audited
-      * [ ] Each contract/library exactly matches the source code of the latest audited version
-    * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
-      * [ ] Each contract/library exactly matches the source code from the permalink
+    * [ ] The dependency contracts/libraries source code matches corresponding audited GitHub source code
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
+        * AUDITOR, AUDIT_URL
+      * [ ] IF source code is not audited, obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
 * IF onboarding is present
   * [ ] Insert and follow the relevant checklists below:
     * [Collateral Onboarding](./collateral-onboarding-checklist.md)
