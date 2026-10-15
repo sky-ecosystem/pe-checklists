@@ -184,7 +184,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
       * [ ] IF source code was audited, LIST audit links on the auditor's website
         * AUDITOR, AUDIT_URL
-      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+      * [ ] IF source code was not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
     * [ ] Deployer address is included in `addresses_deployers.sol`
 * IF new L2 contracts are present in the spell, LIST each contract:
   * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
@@ -199,7 +199,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
       * [ ] IF source code was audited, LIST audit links on the auditor's website
         * AUDITOR, AUDIT_URL
-      * [ ] IF source code is not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+      * [ ] IF source code was not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
     * [ ] Contract address is included in `addresses_[CHAIN_NAME].sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
@@ -257,7 +257,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] The dependency contracts/libraries source code matches corresponding audited GitHub source code
       * [ ] IF source code was audited, LIST audit links on the auditor's website
         * AUDITOR, AUDIT_URL
-      * [ ] IF source code is not audited, obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
+      * [ ] IF source code was not audited, obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
 * IF onboarding is present
   * [ ] Insert and follow the relevant checklists below:
     * [Collateral Onboarding](./collateral-onboarding-checklist.md)
