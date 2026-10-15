@@ -134,7 +134,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Declared static interface not present in the `dss-interfaces`, OTHERWISE should be imported from there
     * [ ] Interface matches deployed contract using `cast interface <contract_address>` command
     * [ ] Interface naming style should match with `Like` suffix (e.g. `VatLike`)
-      * EXCEPTION: [known interface naming exceptions](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L24-L52)
+      * EXCEPTION: [known interface naming exceptions](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] Each static interface declare only functions actually used in the spell code
 * IF variable declarations are present in the spell
   * IF precision units are present
@@ -182,36 +182,46 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Deployer address is included into `addresses_deployers.sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
-    * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L792)) is used
+    * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
     * [ ] Comment matches pattern `// Increase ILK-A Stability Fee by X.XX% from X.XX% to X.XX%`
   * IF Dai Savings Rate (`pot.dsr`) is updated
-    * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L455)) is used
+    * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
-  * [ ] IF `spotter.ilk.mat` is updated, ([`DssExecLib.setIlkLiquidationRatio(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L709)) is used
-  * [ ] IF `dog.ilk.hole` is updated, ([`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699)) is used
-  * [ ] IF `vat.ilk.dust` is updated, ([`DssExecLib.setIlkMinVaultAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L676)) is used
-  * [ ] IF `dog.ilk.chop` is updated, ([`DssExecLib.setIlkLiquidationPenalty(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L689)) is used
-  * [ ] IF `clip.buf` is updated, ([`DssExecLib.setStartingPriceMultiplicativeFactor(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L720)) is used
-  * [ ] IF `clipperMom.clip.tolerance` is updated, ([`DssExecLib.setLiquidationBreakerPriceTolerance(clip, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L772)) is used
-  * [ ] IF `clip.tail` is updated, ([`DssExecLib.setAuctionTimeBeforeReset(ilk, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L731)) is used
-  * [ ] IF `clip.cusp` is updated, ([`DssExecLib.setAuctionPermittedDrop(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L740)) is used
-  * [ ] IF `clip.chip` is updated, ([`DssExecLib.setKeeperIncentivePercent(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L750)) is used
-  * [ ] IF `clip.tip` is updated, ([`DssExecLib.setKeeperIncentiveFlatRate(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L760)) is used
-  * [ ] IF `calc.tau` is updated, ([`DssExecLib.setLinearDecrease(calc, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L811)) is used
-  * [ ] IF `calc.cut` or `calc.step` are updated, [`DssExecLib.setStairstepExponentialDecrease(calc, duration, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L822) is used
-* IF debt ceiling changes are present in the instructions
+  * IF Sky Savings Rate (`susds.ssr`) is updated
+    * [ ] ([`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+    * [ ] `doDrip` is `true`, OTHERWISE `SUsdsLike(SUSDS).drip()` is called in the same spell before the change (`susds.file("ssr", …)` reverts unless `rho == block.timestamp`)
+    * [ ] Comment matches pattern `// Increase SSR by X.XX% from X.XX% to X.XX%`
+    * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
+    * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
+    * [ ] The resulting `susds.ssr()` is asserted in a spell-specific test
+  * [ ] IF `spotter.ilk.mat` is updated, ([`DssExecLib.setIlkLiquidationRatio(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `dog.ilk.hole` is updated, ([`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `vat.ilk.dust` is updated, ([`DssExecLib.setIlkMinVaultAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `dog.ilk.hole` or `vat.ilk.dust` is updated, `hole >= dust` holds after each call (the setters revert otherwise)
+    * [ ] IF both increase for the same `ilk`, `setIlkMaxLiquidationAmount` goes first
+    * [ ] IF both decrease for the same `ilk`, `setIlkMinVaultAmount` goes first
+  * [ ] IF `dog.ilk.chop` is updated, ([`DssExecLib.setIlkLiquidationPenalty(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clip.buf` is updated, ([`DssExecLib.setStartingPriceMultiplicativeFactor(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clipperMom.clip.tolerance` is updated, ([`DssExecLib.setLiquidationBreakerPriceTolerance(clip, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clip.tail` is updated, ([`DssExecLib.setAuctionTimeBeforeReset(ilk, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clip.cusp` is updated, ([`DssExecLib.setAuctionPermittedDrop(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clip.chip` is updated, ([`DssExecLib.setKeeperIncentivePercent(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `clip.tip` is updated, ([`DssExecLib.setKeeperIncentiveFlatRate(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `calc.tau` is updated, ([`DssExecLib.setLinearDecrease(calc, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+  * [ ] IF `calc.cut` or `calc.step` are updated, [`DssExecLib.setStairstepExponentialDecrease(calc, duration, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) is used
+* IF debt ceiling or `AutoLine` configuration changes are present in the instructions
   * IF adjusted collateral type (`ilk`) have [AutoLine](https://github.com/sky-ecosystem/dss-auto-line/tree/master) enabled (`MCD_IAM_AUTO_LINE`)
     * IF collateral debt ceiling requested to be `0`
-      * [ ] Collateral is removed from AutoLine (`MCD_IAM_AUTO_LINE`) via [`DssExecLib.removeIlkFromAutoLine(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L668)
+      * [ ] Collateral is removed from AutoLine (`MCD_IAM_AUTO_LINE`) via [`DssExecLib.removeIlkFromAutoLine(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
       * [ ] The instruction to remove from AutoLine (`MCD_IAM_AUTO_LINE`) is present in the Exec Sheet
-      * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
+      * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] EITHER is used, depending on the instruction:
-      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670)
-      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659)
+    * [ ] IF the ilk is already in `AutoLine` AND only `amount` is being updated, debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+    * [ ] OTHERWISE IF the ilk is already in `AutoLine` AND only `gap`, or `amount` and `gap`, are being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] OTHERWISE IF the ilk is being added to `AutoLine` OR `ttl` is being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
     * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
     * [ ] `AutoLine` values are tested via `testGeneral`
     * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
@@ -223,14 +233,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF collateral debt ceiling (`vat.ilk.line`) is updated directly rather than through `AutoLine`
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/sky-ecosystem/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] EITHER is used, depending on the instruction:
-        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L621C14-L621C36)
-        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L634)
-        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
+        * [`DssExecLib.increaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.decreaseIlkDebtCeiling(ilk, amount, global)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to, via EITHER:
         * `global` set to `true` in `increaseIlkDebtCeiling`/`decreaseIlkDebtCeiling`
-        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L428)
-        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L436)
-        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L445C14-L445C39)
+        * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
 * IF additional dependencies (i.e. `./src/dependencies/` directory) are present:
   * [ ] IF the dependencies contracts/libraries have been audited
     * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
@@ -255,11 +265,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Collateral liquidation penalty (`chop`) is set to `0` IF requested by governance
     * [ ] Flat keeper incentive (`tip`) is set to `0` IF requested by governance
     * [ ] Relative keeper incentive (`chip`) is set to `0` IF requested by governance
-    * [ ] Max liquidation amount (`hole`) is adjusted via [`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L699) IF requested by governance
+    * [ ] Max liquidation amount (`hole`) is adjusted via [`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) IF requested by governance
     * [ ] Relevant clipper contract (`MCD_CLIP_`) is active (i.e. [`stopped`](https://github.com/sky-ecosystem/dss/blob/fa4f6630afb0624d04a003e920b0d71a00331d98/src/clip.sol#L97) is `0`)
     * [ ] Liquidations are triggered via (depending on governance instruction):
       * EITHER liquidation ratio (`spotter.ilk.mat`) being set very high in the spell (using `DssExecLib.setValue(DssExecLib.spotter(), ilk, "mat", ratio)`)
-      * OR via enabling linear interpolation ([`DssExecLib.linearInterpolation(name, target, ilk, what, startTime, start, end, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L1096-L1112))
+      * OR via enabling linear interpolation ([`DssExecLib.linearInterpolation(name, target, ilk, what, startTime, start, end, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol))
         * [ ] Ensure `name` format matches "XXX-X Offboarding"
         * [ ] Ensure `target` matches `DssExecLib.spotter()` address
         * [ ] Ensure `ilk` format matches collateral type (`ilk`) name (`"XXX-X"`)
@@ -271,7 +281,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] Ensure `end` value matches the instruction
         * [ ] Ensure `end` allows liquidation of all remaining vaults (`end` is bigger than `collateral_type_collateralization_ratio * risk_multiplier_factor`)
         * [ ] Ensure `duration` matches the instruction
-    * [ ] Spotter price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L374) IF collateral have no running oracle (i.e. relevant `PIP_` contract have outdated `zzz` value)
+    * [ ] Spotter price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) IF collateral have no running oracle (i.e. relevant `PIP_` contract have outdated `zzz` value)
     * [ ] Spotter price is updated after all other actions
     * [ ] Offboarding is tested at least via [`_checkIlkClipper` helper](https://github.com/sky-ecosystem/spells-mainnet/blob/7400e91c4f211fc24bd4d3a95a86416afc4df9d1/src/DssSpell.t.base.sol#L856)
 * IF RWA updates are present
@@ -288,7 +298,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Transfer amount matches Exec Sheet
     * [ ] The transfers are tested via `testPayments` test
     * [ ] Sum of all SKY transfers tested in `testPayments` matches number in the Exec Sheet
+  * IF `DAI` surplus buffer transfers are present
+    * [ ] Each transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.daiJoin()` and `AMOUNT` in whole token units
+    * [ ] Recipient address in the instruction is in the checksummed format
+    * [ ] Recipient address matches Exec Sheet
+    * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
+    * [ ] Transfer amount matches Exec Sheet
+    * [ ] The transfers are tested via `testPayments` test
+    * [ ] Sum of all DAI transfers tested in `testPayments` matches number in the Exec Sheet
   * IF `USDS` surplus buffer transfers are present
+    * [ ] Each transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.usdsJoin()` and `AMOUNT` in whole token units
     * [ ] Recipient address in the instruction is in the checksummed format
     * [ ] Recipient address matches Exec Sheet
     * [ ] Recipient address variable name matches one found in `addresses_wallets.sol`
@@ -367,19 +386,32 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
-      * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
-      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
-      * [ ] `XXX_STARGUARD` is fetched from chainlog
-      * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
-      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified
+      * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
-      * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+      * [ ] IF the Exec Sheet does not require non-reverting execution, the Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+      * [ ] OTHERWISE, the Prime Agent spell is executed via [`DssExecLib.tryExecuteStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+        * [ ] The Exec Sheet states whether a failed Prime Agent execution is an accepted final outcome or requires a follow-up, and names the party responsible for the follow-up
+        * [ ] The `ok == false` branch does exactly what the Exec Sheet states (e.g. no further action, or a fallback `DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`)
+        * [ ] A spell-specific test forces the failure (e.g. `vm.mockCallRevert` on `XXX_SPELL`) and asserts that the Core spell completes and the agreed fallback happens
+      * [ ] `directExecutionEnabled` is `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
+    * IF `DssExecLib.plotStarSpell` is used, including in the `ok == false` branch
+      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+      * [ ] `XXX_STARGUARD` is fetched from chainlog
+      * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] Prime Agent spell address (`XXX_SPELL`) matches Exec Sheet
     * [ ] Prime Agent spell hash (`XXX_SPELL_HASH`) matches Exec Sheet
+  * IF a plotted Prime Agent spell is cancelled
+    * [ ] The instruction names the Prime Agent spell to cancel and the Exec Sheet confirms it
+    * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+    * [ ] `XXX_STARGUARD` is fetched from chainlog
+    * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel (`dropStarSpell` does nothing when nothing is plotted and drops whatever is plotted)
+    * [ ] The cancellation is executed via [`DssExecLib.dropStarSpell(XXX_STARGUARD)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+    * [ ] A test asserts `spellData.addr == address(0)` and `prob() == false` on `XXX_STARGUARD` after the cast
 * IF external contracts calls are present (Not Prime Agents, e.g. Starknet)
   * [ ] Target Contract doesn't block spell execution
   * [ ] External call is NOT `delegatecall`
@@ -408,7 +440,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Ensure every spell variable is declared as `public`/`internal`
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
-  * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L166) where possible (e.g. `DssExecLib.vat()`)
+  * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
   * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
   * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
@@ -554,7 +586,7 @@ _Insert your local test logs here_
       * [ ] `deployed_spell_block` block number
     * [ ] Check again that the PR did not modify the `DssExecLib` address inside `foundry.toml`
     * [ ] Ensure Etherscan `Libraries Used` matches DssExecLib [Latest Release](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
-    * [ ] (For your tests to be accurate) git submodule hash matches [dss-exec-lib](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest) latest release's tag commit and inspect diffs if doesn't match to ensure expected behaviour (Currently Non-Critical pending the next DssExecLib release, double check that the ExecLib used by the contract matches the latest release)
+    * [ ] (For your tests to be accurate) git submodule hash matches [dss-exec-lib](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest) latest release's tag commit and inspect diffs if doesn't match to ensure expected behaviour
 * Tenderly Testnet checks
   * [ ] A testnet with the name matching spell description is found at [maker dashboard](https://dashboard.tenderly.co/maker/virtual-networks)
   * [ ] The testnet name is unique (previous testnets does not have the same name)
