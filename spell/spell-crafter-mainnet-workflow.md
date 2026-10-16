@@ -76,12 +76,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           Affects release under review: Yes / No / Unclear — _Insert rationale_
           Linked official sources: None / _Insert URLs and outcome_
           ```
-    * [ ] Copy the workflow-level Foundry settings from the local `.github/workflows/tests.yaml` into the block below
+    * [ ] Copy the workflow-level Foundry settings from the local `.github/foundry-ci.env` into the block below
       ```text
-      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-      FOUNDRY_IGNORE_AGE: 0 / 1
+      FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE=0/1
       ```
-    * [ ] IF adopting the release under review changes the workflow-level `FOUNDRY_RELEASE`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
+    * [ ] IF adopting the release under review changes `FOUNDRY_RELEASE` in `.github/foundry-ci.env`, read its complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
       Release notes: _Insert exact release URL_
       Compatibility: Compatible / Incompatible — _Insert rationale_
@@ -101,9 +101,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Required release: vMAJOR.MINOR.PATCH
       ```
   * Phase 2 — CI synchronization
-    * [ ] Ensure `FOUNDRY_RELEASE` matches the required release, updating it if necessary
-    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `"1"`, updating it if necessary
-    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `"0"`, updating it if necessary
+    * [ ] Ensure `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release, updating it if necessary
+    * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `1`, updating it if necessary
+    * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `0`, updating it if necessary
+    * [ ] Confirm that the `Load Foundry settings` step in `.github/workflows/tests.yaml` reads `.github/foundry-ci.env` before installation
     * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
     * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
@@ -140,8 +141,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
-* [ ] Run `make safeharbor-generate` to ensure that updates match the bug bounty updates instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* SafeHarbor source and proposed updates
+  * [ ] Verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+    * [ ] Recovery addresses for affected chains match the linked sources
+    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
+    * [ ] All generated changes are expected, including removals
 * Add comments to the spell based on the relevant [Exec Sheet](https://docs.google.com/spreadsheets/d/1w_z5WpqxzwreCcaveB2Ye1PP5B8QAHDglzyxKHG3CHw)
   * [ ] Copy every _Section text_ from the Exec Sheet as comment to the spell code
   * [ ] Surround the comment by the set of dashes (e.g. `// ----- Section text -----`)
@@ -210,15 +219,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
     * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
   * [ ] Ensure every spell variable is declared as public/internal
-  * Bug Bounty Registry Updates
-    * [ ] Check that output of `make safeharbor-generate` matches the instructions provided by Governance Facilitators
-      * [ ] IF no instructions were provided and script produces "no changes", then no further action is required
-      * [ ] IF there is a mismatch, crafter should notify Governance Facilitators
-      * [ ] IF the scripts outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
-      * [ ] IF the command outputs a solidity snippet that matches the instructions provided by Governance Facilitators:
-        * [ ] Paste the generated code into the spell as is. The code should not be modified. You may adjust formatting
-        * [ ] Fetch the agreement address from the `ChainLog`
-        * [ ] IF not already present, add the helper function to perform the call, using the established archive pattern
+  * IF SafeHarbor Agreement updates are present
+    * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
+    * [ ] Fetch the Agreement address from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
+    * [ ] Use the established archive helper pattern to execute calls in order and revert on any failed call
+    * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
   * IF Prime Agent spell is provided
     * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
     * [ ] IF `direct execution` is `no`
@@ -242,9 +247,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of the constructor arguments
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
-  * IF bug bounty updates are present
-    * [ ] Test that all bug bounty registry calls execute successfully
   * [ ] Tests PASS via `make test`
+* IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
+  * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
+  * [ ] Each `TODO` describes or references the relevant context
 * [ ] Ensure `DssExecLib` address used in current spell (`libraries` inside `foundry.toml`) matches `dss-exec-lib` [Latest Release Tag](https://github.com/sky-ecosystem/dss-exec-lib/releases/latest)
 * [ ] Push committed content to already opened PR
 * [ ] Make sure CI PASS
@@ -318,6 +324,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   `https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/<ANALYSIS_NUMBER>/vulnerabilities?visibility=ALL`
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
+* SafeHarbor pre-deployment check
+  * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
+    * [ ] The command passes with no SafeHarbor updates or validation warnings
+    * [ ] The command exit code is `0`
+    * [ ] The reported commit matches the latest spell commit in the PR
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
 * [ ] IF there is new commit with spell code update, redo the "Octane Review" section above
 
@@ -335,13 +348,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `cast wallet address --keystore $ETH_KEYSTORE` shows the deployer address
     * [ ] `cast chain-id` shows `1` for Mainnet
 * Verify the CI-pinned Foundry release
-  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+  * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
-    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-    FOUNDRY_IGNORE_AGE: 0 / 1
+    FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE=0/1
     ```
   * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_
     ```
@@ -360,7 +373,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Create testnet and cast deployed spell there using `make cast-on-tenderly spell=0x...` command
   * [ ] Check that returned `public explorer url` is publicly accessible (e.g. using incognito browser mode)
   * [ ] IF `cast-on-tenderly` command is executed several times for the same spell, delete all testnets of the same name except the last one
-* [ ] `make safeharbor-generate` returns "no updates" in the testnet environment after spell was cast
+* SafeHarbor Agreement post-cast reconciliation
+  * [ ] Run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
