@@ -390,15 +390,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
-      * [ ] IF the Exec Sheet does not require non-reverting execution, the Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
-      * [ ] OTHERWISE, the Prime Agent spell is executed via [`DssExecLib.tryExecuteStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
-        * [ ] The Exec Sheet states whether a failed Prime Agent execution is an accepted final outcome or requires a follow-up, and names the party responsible for the follow-up
-        * [ ] The `ok == false` branch does exactly what the Exec Sheet states (e.g. no further action, or a fallback `DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`)
-        * [ ] A spell-specific test forces the failure (e.g. `vm.mockCallRevert` on `XXX_SPELL`) and asserts that the Core spell completes and the agreed fallback happens
+      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
       * [ ] `directExecutionEnabled` is `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
-    * IF `DssExecLib.plotStarSpell` is used, including in the `ok == false` branch
+    * IF `DssExecLib.plotStarSpell` is used
       * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
       * [ ] `XXX_STARGUARD` is fetched from chainlog
       * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
