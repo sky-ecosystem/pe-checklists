@@ -215,7 +215,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * IF Dai Savings Rate (`pot.dsr`) or Sky Savings Rate (`susds.ssr`) is updated
-    * [ ] Use [`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) or [`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) with `doDrip` set to `true`, OTHERWISE call `PotAbstract(MCD_POT).drip()` or `SUsdsLike(SUSDS).drip()` in the same spell before the change (`pot.file("dsr", …)` and `susds.file("ssr", …)` revert unless `rho == block.timestamp`)
+    * [ ] Use [`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) or [`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) with `doDrip` set to `true`, OTHERWISE call `PotAbstract(MCD_POT).drip()` or `SUsdsLike(SUSDS).drip()` in the same spell before the change
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%` or `// Increase SSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
@@ -241,17 +241,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+      * [ ] `XXX_STARGUARD` is fetched from chainlog
+      * [ ] Add a test ensuring the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] IF `direct execution` is `yes`
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
       * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
       * [ ] Set `directExecutionEnabled` to `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
-    * IF `DssExecLib.plotStarSpell` is used
-      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
-      * [ ] `XXX_STARGUARD` is fetched from chainlog
-      * [ ] Add a test ensuring the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
-      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
   * IF a plotted Prime Agent spell is cancelled
     * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
     * [ ] `XXX_STARGUARD` is fetched from chainlog
