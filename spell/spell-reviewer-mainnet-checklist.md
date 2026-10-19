@@ -185,6 +185,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Comment matches pattern `// Increase ILK-A Stability Fee by X.XX% from X.XX% to X.XX%`
   * IF Dai Savings Rate (`pot.dsr`) is updated
     * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+    * [ ] `doDrip` is `true`, OTHERWISE `PotAbstract(MCD_POT).drip()` is called in the same spell before the change (`pot.file("dsr", …)` reverts unless `rho == block.timestamp`)
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document

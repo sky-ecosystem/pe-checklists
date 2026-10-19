@@ -204,7 +204,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * IF Dai Savings Rate (`pot.dsr`) or Sky Savings Rate (`susds.ssr`) is updated
-    * [ ] Use [`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) or [`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) with `doDrip` set to `true`
+    * [ ] Use [`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) or [`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) with `doDrip` set to `true`, OTHERWISE call `PotAbstract(MCD_POT).drip()` or `SUsdsLike(SUSDS).drip()` in the same spell before the change (`pot.file("dsr", …)` and `susds.file("ssr", …)` revert unless `rho == block.timestamp`)
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%` or `// Increase SSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
