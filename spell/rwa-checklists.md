@@ -166,6 +166,7 @@
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
   * [ ] Liquidation oracle price is bumped via EITHER `RwaLiquidationOracleLike(MIP21_LIQUIDATION_ORACLE).bump(ilk, val)` OR [`DssExecLib.setRWAIlkDebtCeiling(ilk, ceiling, price)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] IF `setRWAIlkDebtCeiling` is used, `AutoLine` is disabled for the ilk (previously or in the current spell)
+    * [ ] New oracle value (`bump`: `val`, `setRWAIlkDebtCeiling`: `price * WAD`) is not lower than the current `pip.read()`
     * [ ] Comment above function call explains liquidation oracle value computation via `// Note: the formula is: "debt_ceiling * [ (1 + rwa_stability_fee ) ^ (minimum_deal_duration_in_years) ] * liquidation_ratio"`
     * [ ] Comment above function call provides locally executable formula (e.g. `// bc -l <<< 'scale=18; 50000000 * e(l(1.07) * (3342/365)) * 1.00' | cast --to-wei`)
       * [ ] The formula matches the example provided above
@@ -178,10 +179,9 @@
       * IF `setRWAIlkDebtCeiling` is used
         * [ ] The executable formula applies any rounding to whole tokens documented in the Exec Sheet before conversion to WAD
         * [ ] Executing the formula locally provides an integer that matches `price * WAD` in the spell
-        * [ ] `price * WAD` is not lower than the current `pip.read()`
     * [ ] `val` makes sense in context of the [rate mechanism](https://github.com/makerdao/developerguides/blob/master/mcd/intro-rate-mechanism/intro-rate-mechanism.md)
-  * [ ] IF multiple RWA ilks are being combined into one, `val` calculation is done once per ilk and added to make the total, with separate executable formulas provided in comments. The existing `val` value can be retrieved by calling `read()` on `PIP_RWAXYZ` and converting the result into decimal
-  * [ ] IF `bump` is used, oracle price is updated via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) (`setRWAIlkDebtCeiling` pokes the `spotter` internally)
+    * [ ] IF multiple RWA ilks are being combined into one, `val` calculation is done once per ilk and added to make the total, with separate executable formulas provided in comments. The existing `val` value can be retrieved by calling `read()` on `PIP_RWAXYZ` and converting the result into decimal
+    * [ ] IF `bump` is used, the `spotter` is poked via [`DssExecLib.updateCollateralPrice(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) to propagate the new price to the `Vat`
   * IF soft liquidation explicitly requested to be triggered (via `.tell(ilk)`) AND debt ceiling (`vat.ilks(ilk).line`) is `0` (OR is being set to `0` in the current spell)
       * [ ] `RwaLiquidationOracle.tell(ilk)` call is present
       * [ ] IF `RWAXYZ_A_INPUT_CONDUIT` is an instance of [`TinlakeMgr`](https://github.com/centrifuge/tinlake-maker-lib/blob/master/src/mgr.sol) (it is a Centrifuge integration), additional `TinlakeMgr.tell()` call is present (in order to prevent further `TIN` redemptions in the Centrifuge pool)
