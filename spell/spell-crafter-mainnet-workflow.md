@@ -240,6 +240,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [ ] The `ok == false` branch does exactly what the Exec Sheet states (e.g. no further action, or a fallback `DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`)
         * [ ] Add a spell-specific test that forces the failure (e.g. `vm.mockCallRevert` on `XXX_SPELL`) and asserts that the Core spell completes and the agreed fallback happens
       * [ ] Set `directExecutionEnabled` to `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
+      * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
+      * [ ] `XXX_PROXY` is fetched from chainlog
     * IF `DssExecLib.plotStarSpell` is used, including in the `ok == false` branch
       * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
       * [ ] `XXX_STARGUARD` is fetched from chainlog
