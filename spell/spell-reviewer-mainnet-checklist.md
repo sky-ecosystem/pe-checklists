@@ -216,13 +216,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Comment matches pattern `// Increase ILK-A Stability Fee by X.XX% from X.XX% to X.XX%`
   * IF Dai Savings Rate (`pot.dsr`) is updated
     * [ ] ([`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
-    * [ ] `doDrip` is `true`, OTHERWISE `PotAbstract(MCD_POT).drip()` is called in the same spell before the change (`pot.file("dsr", …)` reverts unless `rho == block.timestamp`)
+    * [ ] `doDrip` is `true`, OTHERWISE `PotAbstract(MCD_POT).drip()` is called in the same spell before the change
     * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
   * IF Sky Savings Rate (`susds.ssr`) is updated
     * [ ] ([`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
-    * [ ] `doDrip` is `true`, OTHERWISE `SUsdsLike(SUSDS).drip()` is called in the same spell before the change (`susds.file("ssr", …)` reverts unless `rho == block.timestamp`)
+    * [ ] `doDrip` is `true`, OTHERWISE `SUsdsLike(SUSDS).drip()` is called in the same spell before the change
     * [ ] Comment matches pattern `// Increase SSR by X.XX% from X.XX% to X.XX%`
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
@@ -420,6 +420,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+      * [ ] `XXX_STARGUARD` is fetched from chainlog
+      * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
@@ -427,11 +431,6 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] `directExecutionEnabled` is `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
       * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
       * [ ] `XXX_PROXY` is fetched from chainlog
-    * IF `DssExecLib.plotStarSpell` is used
-      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
-      * [ ] `XXX_STARGUARD` is fetched from chainlog
-      * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
-      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] Prime Agent spell address (`XXX_SPELL`) matches Exec Sheet
     * [ ] Prime Agent spell hash (`XXX_SPELL_HASH`) matches Exec Sheet
 * IF a plotted Prime Agent spell is cancelled
