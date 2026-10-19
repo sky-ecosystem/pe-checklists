@@ -32,7 +32,6 @@ Fileable
 GSM
 Getter
 Goerli
-GovOps
 IAM
 IPFS
 Integrations

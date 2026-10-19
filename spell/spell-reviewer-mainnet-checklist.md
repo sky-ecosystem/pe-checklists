@@ -2,6 +2,8 @@
 
 Repo: https://github.com/sky-ecosystem/spells-mainnet
 
+[General guidelines](./general-guideline.md)
+
 ## Development Stage
 
 * Prepare the `spells-mainnet` checkout
@@ -9,7 +11,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* Confirm that Foundry setup changes are handled separately
+* [ ] Confirm that Foundry setup changes are handled separately. Changing pins in `.github/foundry-ci.env` is allowed.
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
@@ -41,10 +43,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
           Affects release under review: Yes / No / Unclear — _Insert rationale_
           Linked official sources: None / _Insert URLs and outcome_
           ```
-    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/workflows/tests.yaml` into the block below
+    * [ ] Copy the workflow-level Foundry settings from the checked-out spell PR's `.github/foundry-ci.env` into the block below
       ```text
-      FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-      FOUNDRY_IGNORE_AGE: 0 / 1
+      FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+      FOUNDRY_IGNORE_AGE=0/1
       ```
     * [ ] IF the spell PR changes `FOUNDRY_RELEASE`, read the release under review's complete [release notes](https://github.com/foundry-rs/foundry/releases) and confirm that no breaking change prevents spell building, testing, or deployment
       ```text
@@ -69,9 +71,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       Required release: vMAJOR.MINOR.PATCH
       ```
   * Phase 2 — Independent CI synchronization review
-    * [ ] Confirm that `FOUNDRY_RELEASE` matches the required release
-    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `"1"`
-    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `"0"`
+    * [ ] Confirm that `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release
+    * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `1`
+    * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `0`
+    * [ ] Confirm that the `Load Foundry settings` step in `.github/workflows/tests.yaml` reads `.github/foundry-ci.env` before installation
     * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
     * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
@@ -95,8 +98,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* [ ] `make safeharbor-generate` output matches the instructions on the Exec Sheet
-  * [ ] IF there is a mismatch, notify Governance Facilitators
+* SafeHarbor source and proposed updates
+  * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+    * [ ] Recovery addresses for affected chains match the linked sources
+    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+    * [ ] The command reports no validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
+    * [ ] All generated changes are expected, including removals
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -168,17 +179,37 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Time of day makes logical sense in the context of timestamp usage (i.e. `23:59:59 UTC` for the final day of something, `00:00:00 UTC` for the first day of something)
     * [ ] Each variable visibility is declared as `internal`
     * [ ] Each variable state mutability is declared as `constant`
-* IF new contract is present in the spell (not yet on chainlog or new to chainlog)
-  * [ ] Source code is verified on etherscan
-  * [ ] Compilation optimizations match deployment settings defined in the source code repo
-  * [ ] `GNU AGPLv3` license
-  * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
-  * IF new contract have concept of `wards` or access control
-    * [ ] Ensure `PAUSE_PROXY` address was `relied` (`wards(PAUSE_PROXY)` is `1`)
-    * [ ] Ensure that contract deployer address was `denied` (`wards(deployer)` is `0`)
-    * [ ] Ensure that there are no other `Rely` events except for `PAUSE_PROXY` (using a block explorer like [etherscan](https://etherscan.io))
-  * [ ] Source code matches corresponding github source code (e.g. diffcheck via vscode `code --diff etherscan.sol github.sol`)
-  * [ ] Deployer address is included into `addresses_deployers.sol`
+* IF new Ethereum mainnet contracts (not yet on chainlog or new to chainlog) are present in the spell, LIST each contract:
+  * `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
+    * [ ] Source code is verified on etherscan
+    * [ ] Compilation optimizations match deployment settings defined in the source code repo
+    * [ ] `GNU AGPLv3` license
+    * [ ] Every protocol-related constructor argument matches chainlog (e.g. `vat`, `dai`, `dog`, ...)
+    * IF the new contract has a concept of `wards` or access control
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor
+        _List all addresses granted access here_
+      * [ ] Ensure `PAUSE_PROXY` currently holds the admin access (e.g. `wards(PAUSE_PROXY)` is `1`)
+      * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
+    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
+        * AUDITOR, AUDIT_URL
+      * [ ] IF source code was not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+    * [ ] Deployer address is included in `addresses_deployers.sol`
+* IF new L2 contracts are present in the spell, LIST each contract:
+  * [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT, LINK_TO_GITHUB_SOURCE
+    * [ ] Source code is verified on the primary block explorer for this chain
+    * [ ] Compilation optimizations match deployment settings defined in the source code repo
+    * [ ] `GNU AGPLv3` license
+    * IF the new contract has a concept of `wards` or access control
+      * [ ] LIST every address granted access, from both the events emitted since deployment (e.g. via a block explorer or `cast logs`) and the assignments in the constructor
+        _List all addresses granted access here_
+      * [ ] Ensure the admin address for the chain currently holds the admin access (e.g. `wards(L2_GOV_RELAY)` is `1`)
+      * [ ] Ensure every other listed address, including the deployer, currently holds no access (e.g. `wards(addr)` is `0`)
+    * [ ] Source code matches corresponding audited GitHub source code (e.g. diff check via `git diff --no-index etherscan.sol github.sol`)
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
+        * AUDITOR, AUDIT_URL
+      * [ ] IF source code was not audited, there is a clear explanation that was agreed upon by governance beforehand (e.g. reusing unaudited contracts with lots of Lindy effect).
+    * [ ] Contract address is included in `addresses_[CHAIN_NAME].sol`
 * IF core system parameter changes are present in the instructions
   * IF stability fee (`jug.ilk.duty`) is updated
     * [ ] ([`DssExecLib.setIlkStabilityFee(ilk, rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
@@ -241,11 +272,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
         * [`DssExecLib.setGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
         * [`DssExecLib.increaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
         * [`DssExecLib.decreaseGlobalDebtCeiling(amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
-* IF additional dependencies (i.e. `./src/dependencies/` directory) are present:
-  * [ ] IF the dependencies contracts/libraries have been audited
-    * [ ] Each contract/library exactly matches (i.e. diff check) the source code of the latest audited version
-  * [ ] OTHERWISE obtain the permalink to the relevant repository from a trusted party (i.e. Gov Facilitators)
-    * [ ] Each contract/library exactly matches (i.e. diff check) the source code from the permalink
+* IF additional dependencies are present in the spell (e.g. under `./src/dependencies/`), LIST each dependency:
+  * `DEPENDENCY_NAME`, LINK_TO_THE_DEPENDENCY_REPO
+    * [ ] The dependency contracts/libraries source code matches corresponding audited GitHub source code
+      * [ ] IF source code was audited, LIST audit links on the auditor's website
+        * AUDITOR, AUDIT_URL
+      * [ ] IF source code was not audited, obtain the permalink to the relevant repository from a trusted party (e.g. Gov Facilitators)
 * IF onboarding is present
   * [ ] Insert and follow the relevant checklists below:
     * [Collateral Onboarding](./collateral-onboarding-checklist.md)
@@ -382,9 +414,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Rewards distribution contract address matches Exec Sheet
     * [ ] To prevent front-running DoS, the `distribute()` call is placed inside `if` block that checks whether the vesting stream’s unpaid amount is greater than 0
     * [ ] Tested via `testVestedRewardsDist`
-* IF content related to a Prime Agent is present
-  * IF Prime Agent spell is provided
-    * [ ] Handover message matches `XXX spell YYYY-MM-DD deployed to 0x… with hash 0x…, direct execution: yes / no` template
+* IF Prime Agent spells are present in the spell, LIST each Prime Agent spell:
+  * `PRIME_AGENT_NAME`
+    * [ ] Handover message is shared in the existing spell thread in the `#govops` Slack channel
+    * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
       * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
     * [ ] IF `direct execution` is `yes`
@@ -401,13 +434,13 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] Prime Agent spell address (`XXX_SPELL`) matches Exec Sheet
     * [ ] Prime Agent spell hash (`XXX_SPELL_HASH`) matches Exec Sheet
-  * IF a plotted Prime Agent spell is cancelled
-    * [ ] The instruction names the Prime Agent spell to cancel and the Exec Sheet confirms it
-    * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
-    * [ ] `XXX_STARGUARD` is fetched from chainlog
-    * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel (`dropStarSpell` does nothing when nothing is plotted and drops whatever is plotted)
-    * [ ] The cancellation is executed via [`DssExecLib.dropStarSpell(XXX_STARGUARD)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
-    * [ ] A test asserts `spellData.addr == address(0)` and `prob() == false` on `XXX_STARGUARD` after the cast
+* IF a plotted Prime Agent spell is cancelled
+  * [ ] The instruction names the Prime Agent spell to cancel and the Exec Sheet confirms it
+  * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+  * [ ] `XXX_STARGUARD` is fetched from chainlog
+  * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel (`dropStarSpell` does nothing when nothing is plotted and drops whatever is plotted)
+  * [ ] The cancellation is executed via [`DssExecLib.dropStarSpell(XXX_STARGUARD)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+  * [ ] A test asserts `spellData.addr == address(0)` and `prob() == false` on `XXX_STARGUARD` after the cast
 * IF external contracts calls are present (Not Prime Agents, e.g. Starknet)
   * [ ] Target Contract doesn't block spell execution
   * [ ] External call is NOT `delegatecall`
@@ -419,13 +452,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Target contract is not upgradable
   * [ ] Target Contract is included in the ChainLog
   * [ ] Test Coverage is comprehensive
-* IF bug bounty registry updates are present
-  * [ ] Run `make safeharbor-generate`
-    * [ ] Verify that the generated code exactly matches the code in the spell
-    * [ ] Verify that output matches the instructions provided by Governance Facilitators
-    * [ ] Ensure that the script does not output any warnings, which are indicated by ⚠️ ❗
-  * [ ] Ensure that agreement address is fetched from the Chainlog
-  * [ ] Ensure that the helper function to perform the call is present and is implemented using the established archive pattern
+* IF SafeHarbor Agreement updates are present
+  * [ ] Verify the spell matches the generated snippet, except for formatting, including every calldata entry and its order
+  * [ ] Ensure the Agreement address is fetched from the `SAFE_HARBOR_AGREEMENT` Chainlog entry
+  * [ ] Ensure the helper follows the established archive pattern, executing calls in order and reverting on any failed call
+  * [ ] Confirm `testSafeHarborUpdateSelectors` passes rather than being skipped
 * IF spell interacts with ChainLog
   * [ ] ChainLog version is incremented based on update type
     * Major -> New Vat (++.0.0)
@@ -522,6 +553,17 @@ _Insert your local test logs here_
   * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
   * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
     * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group
+* SafeHarbor pre-deployment check
+  * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
+    * [ ] The command passes with no SafeHarbor updates or validation warnings
+    * [ ] The command exit code is `0`
+    * [ ] The reported commit matches the latest reviewed spell commit
+    * [ ] Paste the full command output below
+      ```
+      _Insert the full `make safeharbor-test-spell` output here_
+      ```
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * [ ] The commit reviewed in this checklist matches the latest commit in the spell PR
   _Insert latest reviewed commit hash_
 * IF new commits are present after the previous review
@@ -531,13 +573,13 @@ _Insert your local test logs here_
   * [ ] Copy over and redo "Tests" section from the above
   * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
 * Independently verify the CI-pinned Foundry release
-  * [ ] Copy the current workflow-level Foundry settings from the local `.github/workflows/tests.yaml`
+  * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
-    FOUNDRY_RELEASE: vMAJOR.MINOR.PATCH
-    FOUNDRY_IGNORE_AGE: 0 / 1
+    FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
+    FOUNDRY_IGNORE_AGE=0/1
     ```
   * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
-  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact workflow-level values recorded above
+  * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_
     ```
@@ -590,8 +632,10 @@ _Insert your local test logs here_
   * [ ] All actions are executed in the transaction trace
   * [ ] No reverts are present that block execution
   * [ ] No out-of-gas errors are present
-  * [ ] `make safeharbor-generate` against the testnet returns "no updates"
-    * [ ] IF the script outputs a warning indicated by ⚠️ ❗, notify Governance Facilitators
+  * [ ] Independently run `make safeharbor-verify` with `ETH_RPC_URL` set to the Testnet RPC, even if the spell contains no SafeHarbor updates
+    * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
+    * IF validation warnings are reported
+      * [ ] Stop the review process and notify Governance Facilitators
 * Archive checks
   * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
   * [ ] Ensure date corresponds to target Exec Doc date
