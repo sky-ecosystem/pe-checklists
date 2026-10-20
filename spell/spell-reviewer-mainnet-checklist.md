@@ -467,6 +467,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
+  * [ ] `govGuard()`, `setGlobalStabilityFee`, `setSurplusBuffer` and `setSurplusAuctionAmount` are NOT used (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
   * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
   * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
