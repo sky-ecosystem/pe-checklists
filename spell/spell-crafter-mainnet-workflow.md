@@ -202,7 +202,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
     * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT where the archive pattern differs from this pattern (e.g. SKY)
     * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
-    * [ ] Do NOT use `govGuard()`, `setGlobalStabilityFee`, `setSurplusBuffer` or `setSurplusAuctionAmount` (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
+    * [ ] Do NOT use `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer` or `setSurplusAuctionAmount` (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
     * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
