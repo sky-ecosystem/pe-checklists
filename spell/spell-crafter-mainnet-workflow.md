@@ -201,7 +201,8 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF addresses are used in the spell
     * [ ] Use `immutable` visibility when declaring addresses using `DssExecLib.getChangelogAddress`, OTHERWISE use `constant` for statically defined addresses
     * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT where the archive pattern differs from this pattern (e.g. SKY)
-    * [ ] Use the [DssExecLib address helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/master/src/DssExecLib.sol#L192) where possible (e.g. `DssExecLib.vat()`)
+    * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
+    * [ ] Do NOT use `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer` or `setSurplusAuctionAmount` (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
     * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
@@ -214,12 +215,22 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Additions are tested via `testAddedChainlogKeys`
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
+  * IF Dai Savings Rate (`pot.dsr`) or Sky Savings Rate (`susds.ssr`) is updated
+    * [ ] Use [`DssExecLib.setDSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) or [`DssExecLib.setSSR(rate, doDrip)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) with `doDrip` set to `true`, OTHERWISE call `PotAbstract(MCD_POT).drip()` or `SUsdsLike(SUSDS).drip()` in the same spell before the change
+    * [ ] Comment matches pattern `// Increase DSR by X.XX% from X.XX% to X.XX%` or `// Increase SSR by X.XX% from X.XX% to X.XX%`
+    * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+    * [ ] IF the ilk is already in `AutoLine` AND only `amount` is being updated, debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+    * [ ] OTHERWISE IF the ilk is already in `AutoLine` AND only `gap`, or `amount` and `gap`, are being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] OTHERWISE IF the ilk is being added to `AutoLine` OR `ttl` is being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] Each `DssExecLib.setIlkAutoLineDebtCeiling` and `DssExecLib.setIlkAutoLineParameters` call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
   * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
     * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
     * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
+  * [ ] IF `dog.ilk.hole` or `vat.ilk.dust` is updated, `hole >= dust` holds after each call
+    * [ ] IF both increase for the same `ilk`, `setIlkMaxLiquidationAmount` goes first
+    * [ ] IF both decrease for the same `ilk`, `setIlkMinVaultAmount` goes first
   * [ ] Ensure every spell variable is declared as public/internal
   * IF SafeHarbor Agreement updates are present
     * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload
@@ -230,10 +241,27 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Handover message is shared in the existing spell thread in the `#govops` Slack channel
     * [ ] Handover message includes the spell address, the spell hash and `direct execution: yes / no`
     * [ ] IF `direct execution` is `no`
-      * [ ] The Prime Agent spell is plotted using `StarGuardLike(XXX_STARGUARD).plot(XXX_SPELL, XXX_SPELL_HASH)`
+      * [ ] The Prime Agent spell is plotted using [`DssExecLib.plotStarSpell(XXX_STARGUARD, XXX_SPELL, XXX_SPELL_HASH)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+      * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+      * [ ] `XXX_STARGUARD` is fetched from chainlog
+      * [ ] Add a test ensuring the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
+      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
     * [ ] IF `direct execution` is `yes`
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside Core spell
-      * [ ] The Prime Agent spell is executed via `ProxyLike(XXX_PROXY).exec(XXX_SPELL, abi.encodeWithSignature("execute()"));`
+      * [ ] The Prime Agent spell is executed via [`DssExecLib.executeStarSpell(XXX_PROXY, XXX_SPELL)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+      * [ ] Set `directExecutionEnabled` to `true` for `XXX_SPELL` in `testPrimeAgentSpellExecutions`
+      * [ ] `XXX` in `XXX_PROXY` matches the name of the Prime Agent
+      * [ ] `XXX_PROXY` is fetched from chainlog
+  * IF a plotted Prime Agent spell is cancelled
+    * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
+    * [ ] `XXX_STARGUARD` is fetched from chainlog
+    * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel (`dropStarSpell` does nothing when nothing is plotted and drops whatever is plotted)
+    * [ ] The cancellation is executed via [`DssExecLib.dropStarSpell(XXX_STARGUARD)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
+    * [ ] Add a test asserting `spellData.addr == address(0)` and `prob() == false` on `XXX_STARGUARD` after the cast
+  * IF `DAI` surplus buffer transfer is present
+    * [ ] The transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.daiJoin()` and `AMOUNT` in whole token units
+  * IF `USDS` surplus buffer transfer is present
+    * [ ] The transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.usdsJoin()` for USDS and `AMOUNT` in whole token units
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
@@ -242,6 +270,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Test new ChainLog values
   * [ ] Test DAI/USDS/SKY/SPK streams and payments, lerps
   * [ ] Test the sum of all DAI/USDS/SKY/SPK payments matches the Exec Sheet
+  * [ ] Test Dai Savings Rate and Sky Savings Rate changes (resulting `pot.dsr()` and `susds.ssr()`)
 * Run tests via `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Ensure good coverage (every spell action is tested)
   * [ ] Ensure every test function is declared as `public`
