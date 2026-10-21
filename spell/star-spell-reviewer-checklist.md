@@ -260,9 +260,10 @@ EXECUTED_TESTS_LOGS
 - [ ] Both reviewers gave explicit "Good to deploy".
 - [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
 - [ ] The comment also contains codehash of the deployed mainnet spell.
-- [ ] The codehash matches one produced locally from the reviewed source code.
+- [ ] The codehash matches one obtained locally using `cast codehash <deployed_spell_address>`.
+- [ ] Spell bytecode matches using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
-- [ ] Every spell code matches local source code at the "good to deploy" commit.
+- [ ] Every spell source file matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
 - [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
 - [ ] Tests are updated to execute against the deployed spell(s).
@@ -290,7 +291,7 @@ EXECUTED_TESTS_LOGS
     - [ ] IF direct execution is yes: `Execute the <StarName> Proxy Spell at 0x…`
 - [ ] Posted spell address matches spell address approved for handover.
 - [ ] IF the message includes a codehash, it matches the codehash verified locally.
-- [ ] The selected message format matches the direct execution value in the forum post.
+- [ ] The selected message format matches the direct execution value in the forum post, or is `No` when not mentioned there.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Confirm that no changes have been made to the code since the "Good to deploy" comment was posted, EXCEPT for changes related to deployment. (i.e. adding the deployed spell payload, updating test code to use the deployed contract for testing).
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
