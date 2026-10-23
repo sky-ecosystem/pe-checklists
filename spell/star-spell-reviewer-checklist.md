@@ -162,6 +162,8 @@ This section outlines the review process and provides concrete action items for 
   - [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.
 
 #### On-boarding New Contracts
+- [ ] IF deployment verification is required (e.g., enabling allocation to a Morpho vault), reviewed the report, confirmed scope matches the spell, and identified noncompliance was resolved and rechecked.
+  - Report reference: REPORT_URL_OR_REFERENCE
 - LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
     - [ ] Source code is verified on Etherscan or other primary block explorer for this chain.
