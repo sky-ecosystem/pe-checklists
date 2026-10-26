@@ -11,7 +11,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* [ ] Confirm that Foundry setup changes are handled separately. Changing pins in `.github/foundry-ci.env` is allowed.
+* [ ] Before running any Foundry setup command, inspect the spell PR diff and confirm that it contains no Foundry setup code changes. Pin changes in `.github/foundry-ci.env` are allowed.
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
