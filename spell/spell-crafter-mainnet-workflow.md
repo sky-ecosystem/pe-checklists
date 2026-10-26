@@ -143,7 +143,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * Ensure correctness of the cleanup
     * [ ] Run Tests `make test` (or `make test match=<test_name>` to inspect debug traces)
   * [ ] Commit the cleanup (e.g. `git commit -am "Base spell"`)
-* SafeHarbor source and proposed updates
+* IF SafeHarbor updates are requested in the Exec Sheet
   * [ ] Verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
     * [ ] Account additions, removals, and scopes match the instructions and their linked sources
     * [ ] Recovery addresses for affected chains match the linked sources

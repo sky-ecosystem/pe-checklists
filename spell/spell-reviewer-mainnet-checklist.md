@@ -98,7 +98,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* SafeHarbor source and proposed updates
+* IF SafeHarbor updates are requested in the Exec Sheet
   * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
     * [ ] Account additions, removals, and scopes match the instructions and their linked sources
     * [ ] Recovery addresses for affected chains match the linked sources
