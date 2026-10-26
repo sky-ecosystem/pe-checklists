@@ -124,7 +124,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Has prefix derived from the url itself
       * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
       * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
-      * `// Forum:` if URL starts with `https://forum.sky.money/t/`
+      * `// Forum:` if URL starts with `https://forum.skyeco.com/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
       * `// Atlas:` if URL starts with `https://sky-atlas.io/`
 * Dependency checks
