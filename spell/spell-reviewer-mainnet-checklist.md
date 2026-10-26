@@ -485,7 +485,7 @@ _Insert your local test logs here_
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
-  * [ ] Using Exec Doc URL from the above and the `TARGET_DATE`, generate Exec Doc Hash via `make exec-hash date=$TARGET_DATE $URL`
+  * [ ] Generate Exec Doc Hash via `make exec-hash date=YYYY-MM-DD`, replacing `YYYY-MM-DD` with the spell's `TARGET_DATE`
     _Insert your Exec Doc Hash here_
   * [ ] Using Exec Doc URL from the above, generate Exec Doc Hash via `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"`
     _Insert your Exec Doc Hash here_
