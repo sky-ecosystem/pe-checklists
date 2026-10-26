@@ -267,7 +267,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * Exec Doc checks
   * [ ] Check that every action in the spell code is present in the Exec Doc
   * [ ] Check that every action in the Exec Doc is present in the spell code
-  * [ ] Office hours value in the Exec Doc matches the spell
+  * [ ] Office hours value in the Exec Doc matches the spell; IF the value is omitted from the Exec Doc, treat it as `false`
   * [ ] Sum of all payments in the Exec Doc matches the tests
 * Exec Doc Hash
   * [ ] Run `make exec-hash date=YYYY-MM-DD` and update spell code accordingly

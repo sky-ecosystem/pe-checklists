@@ -492,7 +492,7 @@ _Insert your local test logs here_
   * [ ] Make sure that hash above doesn't match `keccak` hash of the empty string (`0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`)
   * [ ] Using Exec Doc URL from the above, read spell instructions from the Exec Doc and list them below
     _List all instructions announced in the Exec Doc_
-  * [ ] Office hours value in the Exec Doc matches the spell
+  * [ ] Office hours value in the Exec Doc matches the spell; IF the value is omitted from the Exec Doc, treat it as `false`
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
