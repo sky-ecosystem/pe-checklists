@@ -263,7 +263,7 @@ EXECUTED_TESTS_LOGS
 - [ ] The codehash matches one obtained locally using `cast codehash <deployed_spell_address>`.
 - [ ] Spell bytecode matches using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
-- [ ] Every spell source file matches local source code at the "good to deploy" commit.
+- [ ] Every spell source file on block scanner matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
 - [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
 - [ ] Tests are updated to execute against the deployed spell(s).
