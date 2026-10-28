@@ -262,7 +262,7 @@ EXECUTED_TESTS_LOGS
 - [ ] The comment also contains codehash of the deployed mainnet spell.
 - [ ] The codehash matches one obtained locally using `cast codehash <deployed_spell_address>`.
 - [ ] The deployed spell bytecode matches the one from the "Good to deploy" commit using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
-- [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
+- [ ] Every spell is verified on the primary block scanner for this chain.
 - [ ] Every spell source file on block scanner matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
 - [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
