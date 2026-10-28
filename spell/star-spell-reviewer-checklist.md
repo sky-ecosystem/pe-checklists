@@ -261,7 +261,7 @@ EXECUTED_TESTS_LOGS
 - [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
 - [ ] The comment also contains codehash of the deployed mainnet spell.
 - [ ] The codehash matches one obtained locally using `cast codehash <deployed_spell_address>`.
-- [ ] Spell bytecode matches using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
+- [ ] The deployed spell bytecode matches the one from the "Good to deploy" commit using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
 - [ ] Every spell is verified on Etherscan or other primary block explorer for this chain.
 - [ ] Every spell source file on block scanner matches local source code at the "good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
