@@ -260,10 +260,10 @@ EXECUTED_TESTS_LOGS
 - [ ] Both reviewers gave explicit "Good to deploy".
 - [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
 - [ ] The comment also contains codehash of the deployed mainnet spell.
-- [ ] The codehash matches one obtained locally using `cast codehash <deployed_spell_address>`.
+- [ ] The codehash matches one obtained using `cast codehash <deployed_spell_address>`.
 - [ ] The deployed spell bytecode matches the one from the "Good to deploy" commit using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
 - [ ] Every spell is verified on the primary block scanner for this chain.
-- [ ] Every spell source file on block scanner matches local source code at the "good to deploy" commit.
+- [ ] Every spell source file on block scanner matches local source code at the "Good to deploy" commit.
 - [ ] Etherscan settings (optimizer, EVM version, license) match local ones.
 - [ ] Every spell is deployed using standard `CREATE` (not `CREATE2`).
 - [ ] Tests are updated to execute against the deployed spell(s).
@@ -291,7 +291,7 @@ EXECUTED_TESTS_LOGS
     - [ ] IF direct execution is yes: `Execute the <StarName> Proxy Spell at 0x…`
 - [ ] Posted spell address matches spell address approved for handover.
 - [ ] IF the message includes a codehash, it matches the codehash verified locally.
-- [ ] IF the forum post mentions the direct execution value, it matches the value from the message ELSE the message specifies direct execution `No`.
+- [ ] IF the forum post mentions the direct execution value, it matches the value from the message, OTHERWISE the message specifies direct execution `No`.
 - [ ] Confirm the address (via a separate "reply to" message, restating the address to avoid edits).
 - [ ] Confirm that no changes have been made to the code since the "Good to deploy" comment was posted, EXCEPT for changes related to deployment. (i.e. adding the deployed spell payload, updating test code to use the deployed contract for testing).
 - [ ] IF no blockers were found, post the completed "Handover Stage" checklist stage with the explicit pull request approval via 'Approve' review option.
