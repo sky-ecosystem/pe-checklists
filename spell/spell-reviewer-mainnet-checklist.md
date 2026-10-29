@@ -11,7 +11,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* [ ] Confirm that Foundry setup changes are handled separately. Changing pins in `.github/foundry-ci.env` is allowed.
+* [ ] Before running any Foundry setup command, inspect the spell PR diff and confirm that it contains no Foundry setup code changes. Pin changes in `.github/foundry-ci.env` are allowed.
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
@@ -98,7 +98,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* SafeHarbor source and proposed updates
+* IF SafeHarbor updates are requested in the Exec Sheet
   * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
     * [ ] Account additions, removals, and scopes match the instructions and their linked sources
     * [ ] Recovery addresses for affected chains match the linked sources
@@ -124,7 +124,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Has prefix derived from the url itself
       * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
       * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
-      * `// Forum:` if URL starts with `https://forum.sky.money/t/`
+      * `// Forum:` if URL starts with `https://forum.skyeco.com/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
       * `// Atlas:` if URL starts with `https://sky-atlas.io/`
 * Dependency checks
@@ -485,14 +485,14 @@ _Insert your local test logs here_
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
-  * [ ] Using Exec Doc URL from the above and the `TARGET_DATE`, generate Exec Doc Hash via `make exec-hash date=$TARGET_DATE $URL`
+  * [ ] Generate Exec Doc Hash via `make exec-hash date=YYYY-MM-DD`, replacing `YYYY-MM-DD` with the spell's `TARGET_DATE`
     _Insert your Exec Doc Hash here_
   * [ ] Using Exec Doc URL from the above, generate Exec Doc Hash via `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"`
     _Insert your Exec Doc Hash here_
   * [ ] Make sure that hash above doesn't match `keccak` hash of the empty string (`0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`)
   * [ ] Using Exec Doc URL from the above, read spell instructions from the Exec Doc and list them below
     _List all instructions announced in the Exec Doc_
-  * [ ] Office hours value in the Exec Doc matches the spell
+  * [ ] Office hours value in the Exec Doc matches the spell; IF the value is omitted from the Exec Doc, treat it as `false`
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
