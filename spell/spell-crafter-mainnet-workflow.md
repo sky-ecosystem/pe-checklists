@@ -261,7 +261,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF `DAI` surplus buffer transfer is present
     * [ ] The transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.daiJoin()` and `AMOUNT` in whole token units
   * IF `USDS` surplus buffer transfer is present
-    * [ ] The transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.usdsJoin()` for USDS and `AMOUNT` in whole token units
+    * [ ] The transfer is executed via [`DssExecLib.sendPaymentFromSurplusBuffer(JOIN, RECIPIENT, AMOUNT)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol), with `JOIN` being `DssExecLib.usdsJoin()` and `AMOUNT` in whole token units
   * IF `SUBPROXY_METHODS` transfers are present
     * [ ] Each transfer is executed via `SubProxyLike(XXX_SUBPROXY).exec(SUBPROXY_METHODS, abi.encodeWithSelector(SubProxyMethodsLike.transfer.selector, TOKEN, RECIPIENT, AMOUNT));`
 * Add specific tests in `DssSpell.t.sol` to have sufficient test coverage for every spell action
