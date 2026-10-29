@@ -113,6 +113,8 @@
         * [ ] `line`in DAI (e.g. 10 * MILLION)
         * [ ] `gap` in DAI (e.g. 1 * MILLION)
         * [ ] `ttl` in seconds (e.g. 8 hours)
+      * [ ] IF Autoline is enabled, the ilk is registered in `LINE_MOM` via `LineMomLike(LINE_MOM).addIlk(ilk)`, since [`addNewCollateral`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) does not register it
+        * [ ] `LINE_MOM` is fetched from chainlog
     * [ ] New Chainlog Entries
         * [ ] `TOKEN`
         * [ ] `PIP_TOKEN`
@@ -125,6 +127,7 @@
       * [ ] `testCollateralIntegrations`
       * [ ] `testNewChainlogValues`
       * [ ] `testNewIlkRegistryValues`
+      * [ ] IF Autoline is enabled, `testNewLineMomIlks`
       * [ ] ensure new chainlog entries are included in `addresses_<mainnet, goerli>.sol`
       * [ ] ensure deployer addresses are included into `addresses_deployers.sol` (**to keep up to date**)
       * [ ] `config.sol`
