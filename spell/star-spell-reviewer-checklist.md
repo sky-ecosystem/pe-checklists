@@ -162,6 +162,11 @@ This section outlines the review process and provides concrete action items for 
   - [ ] The `direct execution` explanation makes sense on the technical level and can not be circumvented by the use of `isExecutable()` interface.
 
 #### On-boarding New Contracts
+- IF the spell enables capital allocation to a vault (e.g. Morpho):
+  - [ ] Obtain the deployment verification report shared by the Prime Agent.
+    - Report reference: REPORT_LINK
+  - [ ] Review the report and confirm its scope matches the spell.
+  - [ ] Verify that any identified noncompliance has been resolved and the affected checks have been rerun.
 - LIST every new contract present in the spell:
   - [CHAIN_NAME] `CONTRACT_NAME`, LINK_TO_THE_DEPLOYED_CONTRACT
     - [ ] Source code is verified on Etherscan or other primary block explorer for this chain.
