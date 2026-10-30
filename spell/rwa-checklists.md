@@ -148,7 +148,9 @@
   * [ ] `_updateDoc(ilk, doc)` is called in the spell
 * IF debt ceiling is updated
   * IF AutoLine update is requested by the Exec Sheet
-    * [ ] Parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648) or [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L658)
+    * [ ] IF the ilk is already in `AutoLine` AND only `amount` is being updated, debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol)
+    * [ ] OTHERWISE IF the ilk is already in `AutoLine` AND only `gap`, or `amount` and `gap`, are being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] OTHERWISE IF the ilk is being added to `AutoLine` OR `ttl` is being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
   * IF regular debt ceiling (`vat.ilk.line`) update is requested by the Exec Sheet
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/makerdao/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] Debt ceiling (`vat.ilk.line`) is updated, via EITHER:
