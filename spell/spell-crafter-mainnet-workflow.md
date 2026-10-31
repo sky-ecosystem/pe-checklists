@@ -251,6 +251,11 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Sanity checks of all values added/updated by the spell function
     * [ ] End-to-end "happy path" interaction with the module
   * [ ] Tests PASS via `make test`
+  * IF a Starknet Core implementation mismatch warning is reported
+    * [ ] Check the available [L2BEAT Starknet updates](https://l2beat.com/layer2s/projects/starknet#updates) for context on each distinct implementation change reported in the test log
+    * [ ] Notify reviewers of the implementation warning with the test log and available L2BEAT context
+    * IF the new implementation has already been reviewed
+      * [ ] Update the expected implementation address in the spell PR
 * IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
   * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
   * [ ] Each `TODO` describes or references the relevant context
