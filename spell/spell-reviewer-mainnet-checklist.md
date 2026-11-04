@@ -459,7 +459,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Check all tests are passing locally using `make test`
     * [ ] Ensure every test listed in the _coverage_ item above is present in the logs and with the `[PASS]` prefix.
   * IF a Starknet Core implementation mismatch warning is reported
-    * [ ] Check the available [L2BEAT Starknet updates](https://l2beat.com/layer2s/projects/starknet#updates) for context on each distinct implementation change reported in the test log
+    * [ ] Check the available [ETHBEAT Starknet updates](https://ethbeat.org/layer2s/projects/starknet#updates) for context on each distinct implementation change reported in the test log
     * [ ] IF the implementation warning has not been reported by the crafter, notify the crafter
   * IF the spell PR updates the expected Starknet Core implementation address
     * [ ] Verify that the new address matches the reviewed implementation
