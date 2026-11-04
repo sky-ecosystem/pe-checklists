@@ -21,6 +21,7 @@ EIP
 EOA
 EOAs
 ERC
+ETHBEAT
 EVM
 Ethereum
 Etherscan
