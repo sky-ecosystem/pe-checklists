@@ -74,9 +74,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Confirm that `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release
     * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `1`
     * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `0`
-    * [ ] Confirm that the `Load Foundry settings` step in the `Tests` workflow (`.github/workflows/tests.yaml`) reads `.github/foundry-ci.env` before installation
-    * [ ] Confirm that the `Install Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
-    * [ ] Confirm that the `Verify Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Tests` workflow (`.github/workflows/tests.yaml`) installs and verifies the pinned Foundry release from `.github/foundry-ci.env`
+      * [ ] Confirm that the `Load Foundry settings` step reads `.github/foundry-ci.env` before the install step
+      * [ ] Confirm that the `Install Foundry` step uses the values from `.github/foundry-ci.env` to run `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+      * [ ] Confirm that the `Verify Foundry` step uses the values from `.github/foundry-ci.env` to run `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
     * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
