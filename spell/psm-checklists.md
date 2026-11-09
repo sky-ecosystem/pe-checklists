@@ -168,10 +168,23 @@
 
 - [ ] ilk is removed from `AutoLine`
 - [ ] ilk `line` is set to `0`
-- [ ] `ink` for the PSM is set to 0 on `MCD_VAT` after execution, UNLESS there has been a donation
 - [ ] Global `Line` is adjusted accordingly
+- [ ] Remaining debt of the PSM urn is wiped via `vat.grab(ilk, psm, MCD_PAUSE_PROXY, MCD_VOW, -ink, -art)`
+    - [ ] `ink` and `art` are read from `vat.urns(ilk, psm)` at execution time
+    - [ ] `ink` for the PSM is set to 0 on `MCD_VAT` after execution, UNLESS there has been a donation
+    - [ ] `art` for the PSM and `Art` for the ilk are set to 0 on `MCD_VAT` after execution
+- [ ] Gems held by the `GemJoin` are recovered via `join.exit(usr, amt)`, UNLESS governance explicitly decided to leave them in place
+    - [ ] `exit` is called before the `GemJoin` is de-authed from `MCD_VAT`
+    - [ ] `usr` matches the Exec Sheet
+    - [ ] `amt` is expressed in gem decimals and matches the `vat.gem(ilk, MCD_PAUSE_PROXY)` balance received from `vat.grab`
+- [ ] OTHERWISE IF gems are left in place, the decision and the remaining amount are confirmed by governance (e.g. by a Core Facilitator in the forum post)
 - [ ] ilk is removed from `ILK_REGISTRY`
-- [ ] PSM contracts (`Psm`, `GemJoin` and others, as applicable) are being removed from the chainlog
-- [ ] Chainlog version is bumped: `{x}.{y+1}.0`
-- [ ] PSM contracts (`Psm`, `GemJoin` and others, as applicable) are being scuttled
-    - [ ] `MCD_PAUSE_PROXY` is de-authed from all applicable contracts
+- [ ] ilk is removed from `LINE_MOM`, IF present
+- [ ] `GemJoin` is caged (`live` is set to `0`)
+- [ ] PSM contracts (`Psm`, `GemJoin`, `Clipper`, `ClipperCalc`, the oracle unless it is still used by another ilk, and others, such as the jar and conduits, as applicable) are being removed from the chainlog
+- [ ] Chainlog version is bumped: `{x}.{y}.{z+1}`
+- [ ] PSM auth on SKY protocol is removed
+    - [ ] `GemJoin` is de-authed from `MCD_VAT`
+    - [ ] `Clipper` is de-authed from `MCD_VAT`
+    - [ ] `Clipper` is de-authed from `MCD_DOG`
+    - [ ] IF PSM contracts hold any other auth, it is removed
