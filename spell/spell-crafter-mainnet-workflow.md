@@ -106,9 +106,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Ensure `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release, updating it if necessary
     * [ ] IF a cooling-period waiver was approved, ensure `FOUNDRY_IGNORE_AGE` is `1`, updating it if necessary
     * [ ] OTHERWISE, ensure `FOUNDRY_IGNORE_AGE` is `0`, updating it if necessary
-    * [ ] Confirm that CI loads `.github/foundry-ci.env` before installing Foundry
-    * [ ] Confirm that the `Install Foundry` CI step uses the values from `.github/foundry-ci.env` to run `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
-    * [ ] Confirm that the `Verify Foundry` CI step uses the values from `.github/foundry-ci.env` to run `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Tests` workflow (`.github/workflows/tests.yaml`) loads `.github/foundry-ci.env` before installing Foundry
+    * [ ] Confirm that the `Install Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) uses the values from `.github/foundry-ci.env` to run `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Verify Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) uses the values from `.github/foundry-ci.env` to run `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
     * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
@@ -356,7 +356,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE=0/1
     ```
-  * [ ] Confirm that the `Verify Foundry` CI step passes the `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE` values loaded from `.github/foundry-ci.env` to `make verify-foundry`
+  * [ ] Confirm that the `Verify Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) passes the `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE` values loaded from `.github/foundry-ci.env` to `make verify-foundry`
   * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_
