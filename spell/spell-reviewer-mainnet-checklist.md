@@ -500,30 +500,40 @@ _Insert your local test logs here_
   * [ ] Every action in the Exec Doc is present in the spell code
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
-  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", notify spell crafter
-    * [ ] Wait until Octane analysis is triggered by crafter
-  * [ ] Use the most recent analysis for the review
+  * [ ] On the spell PR branch, find the latest commit that changes a file in the analysis scope (`src/DssSpell.sol` or `src/dependencies`) or the contracts used by the spell (e.g. the `DssExecLib` address inside `foundry.toml`)
+    ```
+    git log -1 --format=%H -- src/DssSpell.sol src/dependencies foundry.toml
+    ```
+    ```
+    Latest in-scope commit: _Insert commit hash_
+    ```
+  * [ ] IF no "Sky Ecosystem: Spells mainnet" Octane analysis exists on the latest in-scope commit or a later commit in the spell PR, notify the spell crafter
+    * [ ] Wait until the Octane analysis is triggered by the crafter
+  * [ ] Wait until the crafter finishes reviewing the analysis and shares it, then use the shared analysis for this review
     ```
     Analysis number: _Insert analysis number used_ 
     Commit hash analysis ran against: _Insert commit hash used for analysis_ 
     ```
-  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] Ensure the analysis above ran against the latest in-scope commit or a later commit in the spell PR, OTHERWISE notify the crafter
+  * [ ] Thoroughly inspect the project settings for signs of manipulation
+    * [ ] Project type, target, and languages are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] Project name is correctly set
+    * [ ] Dependency installation is enabled
   * [ ] Ensure every contract listed in on-chain dependencies has its source and ABI fetched from the correct chain
     * [ ] IF any contract has an unverified source, investigate the address (e.g. the source cannot be verified as the address is an EOA)
-    * [ ] IF any contract has its source skipped or its selected chain does not match the chain it is deployed on, notify spell crafter
+    * [ ] IF any contract has its source skipped or its selected chain does not match the chain it is deployed on, notify the spell crafter
   * [ ] Thoroughly inspect the analysis settings for signs of manipulation
-    * [ ] Project name and repository name are correctly set
+    * [ ] Repository name and PR number are correctly set
     * [ ] Branch name is set to "master"
-    * [ ] Dependency installation is enabled
   * [ ] Thoroughly inspect the analysis scope for signs of manipulation
-    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
     * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
-  * [ ] IF any malicious or unexpected setting is found including all setup that is not listed above, raise to spell group
-  * [ ] Once the crafter has finished reviewing the most recent analysis, ensure every finding is resolved or acknowledged with the crafter's reasoning, ELSE notify the crafter
-    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, ELSE raise it to spell group
+  * [ ] IF any malicious or unexpected setting is found, including any configuration not listed above, raise it to the current spell group
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] Ensure every finding is resolved or acknowledged with the crafter's reasoning, OTHERWISE notify the crafter
+    * [ ] Ensure the crafter's reasoning explains why the finding does or does not matter, OTHERWISE raise it to the current spell group
 * SafeHarbor pre-deployment check
   * [ ] Run `make safeharbor-test-spell` with `ETH_RPC_URL` set to Ethereum mainnet, even if the spell contains no SafeHarbor updates
     * [ ] The command passes with no SafeHarbor updates or validation warnings
@@ -542,7 +552,7 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
-  * [ ] IF the spell code has been updated, redo the "Octane Review" section from above
+  * [ ] IF any new commit changes a file in the analysis scope or the contracts used by the spell, redo the "Octane Review" section from above
 * Independently verify the CI-pinned Foundry release
   * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
