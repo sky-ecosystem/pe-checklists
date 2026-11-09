@@ -185,6 +185,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Prefer single import layout (e.g. `import {VatAbstract} from "dss-interfaces/dss/VatAbstract.sol";`)
     * [ ] Use static interfaces IF not present in `dss-interfaces` OR present in `dss-interfaces` but outdated OR only a few function interfaces are needed
   * IF new collateral is onboarded
+    * [ ] Follow the [Collateral Onboarding Checklist](./collateral-onboarding-checklist.md)
     * Deploy `Join` contract (check which one is required)
       * [ ] Use [JoinFab](https://github.com/sky-ecosystem/JoinFab) to deploy
       * [ ] Ensure Etherscan Verification
@@ -215,11 +216,16 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Removals are tested via `testRemovedChainlogKeys`
   * [ ] Adjust system values, collateral values inside `config.sol`
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] Each [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670) or [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659) call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+    * [ ] IF the ilk is already in `AutoLine` AND only `amount` is being updated, debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol)
+    * [ ] OTHERWISE IF the ilk is already in `AutoLine` AND only `gap`, or `amount` and `gap`, are being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] OTHERWISE IF the ilk is being added to `AutoLine` OR `ttl` is being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
   * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
     * [ ] `DssAutoLine.setIlk(ilk, line, gap, ttl)` is used directly instead of a `DssExecLib` `AutoLine` setter
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
     * [ ] The intended intermediate and final `AutoLine` configuration and live `Vat` debt-ceiling states are documented
+  * IF the spell directly updates `vat.ilks(ilk).line` or `vat.Line` after an `AutoLine` setter call
+    * [ ] The expected final `vat.ilks(ilk).line` and `vat.Line` values are tested after spell execution
+    * [ ] IF existing tests do not cover these values, add a specific test in `DssSpell.t.sol`
   * [ ] Ensure every spell variable is declared as public/internal
   * IF SafeHarbor Agreement updates are present
     * [ ] Paste the generated snippet into the spell unchanged, except for formatting; verify every calldata entry and its order match the generated payload

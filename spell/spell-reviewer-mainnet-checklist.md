@@ -231,7 +231,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] IF `clip.tip` is updated, ([`DssExecLib.setKeeperIncentiveFlatRate(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L760)) is used
   * [ ] IF `calc.tau` is updated, ([`DssExecLib.setLinearDecrease(calc, duration)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L811)) is used
   * [ ] IF `calc.cut` or `calc.step` are updated, [`DssExecLib.setStairstepExponentialDecrease(calc, duration, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L822) is used
-* IF debt ceiling changes are present in the instructions
+* IF debt ceiling or `AutoLine` configuration changes are present in the instructions
   * IF adjusted collateral type (`ilk`) have [AutoLine](https://github.com/sky-ecosystem/dss-auto-line/tree/master) enabled (`MCD_IAM_AUTO_LINE`)
     * IF collateral debt ceiling requested to be `0`
       * [ ] Collateral is removed from AutoLine (`MCD_IAM_AUTO_LINE`) via [`DssExecLib.removeIlkFromAutoLine(ilk)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L668)
@@ -239,10 +239,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] Collateral debt ceiling is set to `0` via [`DssExecLib.setIlkDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L611)
       * [ ] Global debt ceiling (`vat.Line`) is updated accordingly, UNLESS specifically instructed not to
   * IF an ilk's `AutoLine` configuration is updated via `DssExecLib`
-    * [ ] EITHER is used, depending on the instruction:
-      * [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L665-L670)
-      * [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/69b658f35d8618272cd139dfc18c5713caf6b96b/src/DssExecLib.sol#L655-L659)
-    * [ ] Each `DssExecLib` `AutoLine` setter call is immediately followed by `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)`
+    * [ ] IF the ilk is already in `AutoLine` AND only `amount` is being updated, debt ceiling is set via [`DssExecLib.setIlkAutoLineDebtCeiling(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol)
+    * [ ] OTHERWISE IF the ilk is already in `AutoLine` AND only `gap`, or `amount` and `gap`, are being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
+    * [ ] OTHERWISE IF the ilk is being added to `AutoLine` OR `ttl` is being updated, parameters are set via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), passing the current value of any parameter that remains unchanged
     * [ ] `AutoLine` values are tested via `testGeneral`
     * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
   * IF the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
@@ -250,6 +249,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] `DssAutoLineAbstract(MCD_IAM_AUTO_LINE).exec(ilk)` is called separately at each intended synchronization point
     * [ ] `AutoLine` values are tested via `testGeneral`
     * [ ] `exec` calls are tested via `testAutoLineExecAfterEverySetIlkCall`
+  * IF the spell directly updates `vat.ilks(ilk).line` or `vat.Line` after an `AutoLine` setter call
+    * [ ] The expected final `vat.ilks(ilk).line` and `vat.Line` values are tested after spell execution
+    * [ ] IF existing tests do not cover these values, a specific test in `DssSpell.t.sol` covers them
   * IF collateral debt ceiling (`vat.ilk.line`) is updated directly rather than through `AutoLine`
     * [ ] Collateral type (`ilk`) have [`AutoLine`](https://github.com/sky-ecosystem/dss-auto-line/tree/master) disabled previously or in the spell
     * [ ] EITHER is used, depending on the instruction:

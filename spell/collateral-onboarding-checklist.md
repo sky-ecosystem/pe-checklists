@@ -69,13 +69,14 @@
           * [ ] [setStairstepExponentialDecrease](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L822)
           * [ ] `calc.cut`
           * [ ] `calc.step`
-    * [ ] Autoline ([setIlkAutoLineParameters](https://github.com/makerdao/dss-exec-lib/blob/v0.0.9/src/DssExecLib.sol#L648))
+    * [ ] IF `AutoLine` is configured for the new ilk, check its parameters ([setIlkAutoLineParameters](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol))
       * [ ] `ilk`
       * [ ] `line`
       * [ ] `gap`
       * [ ] `ttl`
     * [ ] Onboarding Actions
       * [ ] ensure `DssExecLib.addNewCollateral` is used
+      * [ ] IF `AutoLine` is configured for the new ilk, `DssExecLib.addNewCollateral` is called before configuring `AutoLine` for that ilk
       * [ ] ensure `CollateralOpts` is used
         * [ ] `ilk` follows the ilk format `TOKEN-A`
         * [ ] `gem` matches token address
@@ -107,7 +108,7 @@
         * [ ] `StairstepExponentialDecrease`
           * [ ] `calc.step` in seconds (e.g. 120 seconds)
           * [ ] `calc.cut` in basis points (e.g. 99% = 99_00)
-      * [ ] set Ilk Autoline Parameters (IF Autoline is enabled)
+      * [ ] IF the new ilk uses `AutoLine`, set its parameters via [`DssExecLib.setIlkAutoLineParameters(ilk, amount, gap, ttl)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/1bc3c3747e562bbbfdfbbc2fdd178aa85665db20/src/DssExecLib.sol), UNLESS the Exec Sheet explicitly requires staged `AutoLine` configuration and live `Vat` debt-ceiling states
         * [ ] `ilk` follows the ilk format `TOKEN-A`
         * [ ] `line`in DAI (e.g. 10 * MILLION)
         * [ ] `gap` in DAI (e.g. 1 * MILLION)
@@ -122,6 +123,9 @@
       * [ ] Patch `x.x.1`
     * [ ] Test Coverage (Follow Previous Test Patterns)
       * [ ] `testCollateralIntegrations`
+      * IF `AutoLine` is configured for the new ilk
+        * [ ] The expected final `vat.ilks(ilk).line` and `vat.Line` values are tested after spell execution
+        * [ ] IF existing tests do not cover these values, add a specific test in `DssSpell.t.sol`
       * [ ] `testNewChainlogValues`
       * [ ] `testNewIlkRegistryValues`
       * [ ] ensure new chainlog entries are included in `addresses_<mainnet, goerli>.sol`
