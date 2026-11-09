@@ -11,7 +11,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     ```bash
     gh pr checkout PR_NUMBER
     ```
-* [ ] Confirm that Foundry setup changes are handled separately. Changing pins in `.github/foundry-ci.env` is allowed.
+* [ ] Before running any Foundry setup command, inspect the spell PR diff and confirm that it contains no Foundry setup code changes. Pin changes in `.github/foundry-ci.env` are allowed.
   * IF the spell PR changes `Makefile` or any repository-controlled file loaded or executed by a Foundry setup target, including files under `scripts/setup-foundry/`
     * [ ] Ask the spell team to move the Foundry setup changes to a separate maintenance PR
     * [ ] Resume only after the maintenance PR is merged and the spell PR is updated
@@ -74,9 +74,10 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Confirm that `FOUNDRY_RELEASE` in `.github/foundry-ci.env` matches the required release
     * [ ] IF a cooling-period waiver was approved, confirm that `FOUNDRY_IGNORE_AGE` is `1`
     * [ ] OTHERWISE, confirm that `FOUNDRY_IGNORE_AGE` is `0`
-    * [ ] Confirm that the `Load Foundry settings` step in `.github/workflows/tests.yaml` reads `.github/foundry-ci.env` before installation
-    * [ ] Confirm that the `Install Foundry` step in `.github/workflows/tests.yaml` runs `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
-    * [ ] Confirm that the `Verify Foundry` step in `.github/workflows/tests.yaml` runs `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+    * [ ] Confirm that the `Tests` workflow (`.github/workflows/tests.yaml`) installs and verifies the pinned Foundry release from `.github/foundry-ci.env`
+      * [ ] Confirm that the `Load Foundry settings` step reads `.github/foundry-ci.env` before the install step
+      * [ ] Confirm that the `Install Foundry` step uses the values from `.github/foundry-ci.env` to run `make install-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
+      * [ ] Confirm that the `Verify Foundry` step uses the values from `.github/foundry-ci.env` to run `make verify-foundry release="${FOUNDRY_RELEASE}" ignore-age="${FOUNDRY_IGNORE_AGE}"`
   * Phase 3 — Mandatory developer installation and verification
     * [ ] Run `make install-foundry release=vMAJOR.MINOR.PATCH`; IF the required release is less than 14 days old and its cooling-period waiver was approved, include `ignore-age=1`
       ```text
@@ -98,16 +99,19 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* SafeHarbor source and proposed updates
-  * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
-    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
-    * [ ] Recovery addresses for affected chains match the linked sources
-    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
-  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+* SafeHarbor update checks
+  * [ ] Check the Exec Sheet to determine whether SafeHarbor updates are requested
+  * IF SafeHarbor updates are requested in the Exec Sheet
+    * [ ] Independently verify the requested updates against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+      * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+      * [ ] Recovery addresses for affected chains match the linked sources
+      * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork, even if no SafeHarbor updates are requested in the Exec Sheet
     * [ ] The command reports no validation warnings
     * IF validation warnings are reported
       * [ ] Stop the review process and notify Governance Facilitators
-    * [ ] All generated changes are expected, including removals
+    * [ ] IF SafeHarbor updates are requested in the Exec Sheet, the generated changes exactly match the requested updates, including removals
+    * [ ] OTHERWISE, the command reports no updates
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
@@ -124,7 +128,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Has prefix derived from the url itself
       * `// Executive Vote:` if URL starts with `https://vote.sky.money/executive/`
       * `// Poll:` if URL starts with `https://vote.sky.money/polling/` or `https://snapshot.org/` or `https://snapshot.box/`
-      * `// Forum:` if URL starts with `https://forum.sky.money/t/`
+      * `// Forum:` if URL starts with `https://forum.skyeco.com/`
       * `// MIP:` if URL starts with `https://mips.makerdao.com/mips/details/`
       * `// Atlas:` if URL starts with `https://sky-atlas.io/`
 * Dependency checks
@@ -485,14 +489,14 @@ _Insert your local test logs here_
       ```
       git log --pretty=oneline -1 -- "<LOCAL_PATH_TO_EXEC_DOC>"
       ```
-  * [ ] Using Exec Doc URL from the above and the `TARGET_DATE`, generate Exec Doc Hash via `make exec-hash date=$TARGET_DATE $URL`
+  * [ ] Generate Exec Doc Hash via `make exec-hash date=YYYY-MM-DD`, replacing `YYYY-MM-DD` with the spell's `TARGET_DATE`
     _Insert your Exec Doc Hash here_
   * [ ] Using Exec Doc URL from the above, generate Exec Doc Hash via `cast keccak -- "$(curl '$URL' -o - 2>/dev/null)"`
     _Insert your Exec Doc Hash here_
   * [ ] Make sure that hash above doesn't match `keccak` hash of the empty string (`0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`)
   * [ ] Using Exec Doc URL from the above, read spell instructions from the Exec Doc and list them below
     _List all instructions announced in the Exec Doc_
-  * [ ] Office hours value in the Exec Doc matches the spell
+  * [ ] Office hours value in the Exec Doc matches the spell; IF the value is omitted from the Exec Doc, treat it as `false`
   * [ ] Sum of all payments in the Exec Doc matches the tests
   * [ ] Exec Doc URL in the spell comment matches your Raw Exec Doc URL above
   * [ ] Exec Doc URL in the spell comment refers to the [https://github.com/sky-ecosystem/executive-votes](https://github.com/sky-ecosystem/executive-votes) repository
@@ -549,7 +553,7 @@ _Insert your local test logs here_
     FOUNDRY_RELEASE=vMAJOR.MINOR.PATCH
     FOUNDRY_IGNORE_AGE=0/1
     ```
-  * [ ] Confirm that the `Verify Foundry` CI step passes `${FOUNDRY_RELEASE}` and `${FOUNDRY_IGNORE_AGE}` to `make verify-foundry`
+  * [ ] Confirm that the `Verify Foundry` step in the `Tests` workflow (`.github/workflows/tests.yaml`) passes the `FOUNDRY_RELEASE` and `FOUNDRY_IGNORE_AGE` values loaded from `.github/foundry-ci.env` to `make verify-foundry`
   * [ ] Run `make verify-foundry release=vMAJOR.MINOR.PATCH ignore-age=0/1` locally with the exact values recorded from `.github/foundry-ci.env` above
     ```text
     _Insert the complete verifier output here_

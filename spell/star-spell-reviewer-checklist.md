@@ -245,7 +245,7 @@ EXECUTED_TESTS_LOGS
 
 #### Pre-Deployment checks
 - [ ] Actions taken in the spell match the scope approved through the governance record applicable to this Prime Agent Spell:
-  - [ ] IF Sky-governed, matches the corresponding [Atlas edit weekly proposal](https://forum.sky.money/tag/atlas-edit-weekly-proposal) and, where required, governance poll.
+  - [ ] IF Sky-governed, matches the corresponding [Atlas edit weekly proposal](https://forum.skyeco.com/tag/atlas-edit-weekly-proposal) and, where required, governance poll.
   - [ ] IF Self-governed, matches the proposal forum post (often the technical scope forum post) and Snapshot vote, for changes to the Prime Agent's own artifact. Changes to the Sky Core Atlas still follow the same Atlas edit weekly proposal and governance poll process as Sky-governed Prime Agents.
   - [ ] Extract the permanent URL to the governance record used for comparison and paste it below:
     _Insert your Governance Record URL here_
