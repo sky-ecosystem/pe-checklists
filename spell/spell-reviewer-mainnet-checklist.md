@@ -99,16 +99,19 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Office hours is `true` IF spell introduces a major change that can affect external parties (e.g.: keepers are affected in case of collateral offboarding) OTHERWISE explicitly set to `false`
   * [ ] Office hours value matches the Exec Sheet
   * [ ] 30 days spell expiry set in the constructor (`block.timestamp + 30 days`)
-* IF SafeHarbor updates are requested in the Exec Sheet
-  * [ ] Independently verify the SafeHarbor updates requested in the Exec Sheet against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
-    * [ ] Account additions, removals, and scopes match the instructions and their linked sources
-    * [ ] Recovery addresses for affected chains match the linked sources
-    * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
-  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork
+* SafeHarbor update checks
+  * [ ] Check the Exec Sheet to determine whether SafeHarbor updates are requested
+  * IF SafeHarbor updates are requested in the Exec Sheet
+    * [ ] Independently verify the requested updates against the approved [SafeHarbor Sheet](https://docs.google.com/spreadsheets/d/1e_KOYOeBGaA5EG3Xqco6lOP_a0zV4Vrm3w5-dqFk00U)
+      * [ ] Account additions, removals, and scopes match the instructions and their linked sources
+      * [ ] Recovery addresses for affected chains match the linked sources
+      * [ ] Relevant `Status`, `Chain`, `Address`, and `isFactory` cells have the intended values
+  * [ ] Run `make safeharbor-generate` with `ETH_RPC_URL` set to Ethereum mainnet or the intended pre-cast fork, even if no SafeHarbor updates are requested in the Exec Sheet
     * [ ] The command reports no validation warnings
     * IF validation warnings are reported
       * [ ] Stop the review process and notify Governance Facilitators
-    * [ ] All generated changes are expected, including removals
+    * [ ] IF SafeHarbor updates are requested in the Exec Sheet, the generated changes exactly match the requested updates, including removals
+    * [ ] OTHERWISE, the command reports no updates
 * Spell description
   * [ ] Description follows the format `TARGET_DATE MakerDAO Executive Spell | Hash: EXEC_DOC_HASH`
   * [ ] `TARGET_DATE` in the description matches the target date
