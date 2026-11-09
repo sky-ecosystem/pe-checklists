@@ -254,7 +254,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * IF a Starknet Core implementation mismatch warning is reported
     * [ ] Check the following sources for available context on each distinct implementation change reported in the test log:
       * [Official Starknet version notes](https://docs.starknet.io/learn/cheatsheets/version-notes)
-      * Upgrade announcements on the [Starknet Community Forum](https://community.starknet.io/c/versions-upgrade/28)
+      * [Starknet Community Forum - Versions Upgrade](https://community.starknet.io/c/versions-upgrade/28)
       * [ETHBEAT Starknet updates](https://ethbeat.org/layer2s/projects/starknet#updates)
     * [ ] Notify reviewers of the implementation warning with the test log and available context
     * IF the new implementation has already been reviewed
