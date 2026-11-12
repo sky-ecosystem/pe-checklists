@@ -227,6 +227,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Double check that rate match `make rates pct=<pct>` (e.g. pct=0.75, for 0.75%)
     * [ ] Double check that rate match [IPFS](https://ipfs.io/ipfs/QmVp4mhhbwWGTfbh2BzwQB9eiBrQBKiqcPRZCaAxNUaar6) document
     * [ ] The resulting `susds.ssr()` is asserted in a spell-specific test
+  * IF the GSM pause delay (`pause.delay`) is updated
+    * [ ] ([`DssExecLib.setGSMDelay(delay)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
+    * [ ] `pause_delay` in `config.sol` is updated and tested via `testGeneral`
+  * IF the surplus auction minimum price threshold (`flap.want`) is updated
+    * [ ] ([`DssExecLib.setSurplusAuctionMinPriceThreshold(pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used, with the value in basis points (e.g. 98% = 98_00)
+    * [ ] `flap_want` in `config.sol` is updated and tested via `testGeneral`
   * [ ] IF `spotter.ilk.mat` is updated, ([`DssExecLib.setIlkLiquidationRatio(ilk, pct_bps)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
   * [ ] IF `dog.ilk.hole` is updated, ([`DssExecLib.setIlkMaxLiquidationAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
   * [ ] IF `vat.ilk.dust` is updated, ([`DssExecLib.setIlkMinVaultAmount(ilk, amount)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)) is used
@@ -423,7 +429,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
       * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
       * [ ] `XXX_STARGUARD` is fetched from chainlog
       * [ ] The test ensures the `XXX_SPELL` Prime Agent spell is executable via `StarGuardLike(XXX_STARGUARD).exec()` before `XXX_STARGUARD.maxDelay`
-      * [ ] IF plotted but not yet executed spell is still present in the `XXX_STARGUARD`, Governance Facilitators are aware or already notified (`plotStarSpell` silently overwrites an existing plot)
+      * [ ] IF a plotted but not yet executed spell is still present in `XXX_STARGUARD`, Governance Facilitators are aware or have been notified
     * [ ] IF `direct execution` is `yes`
       * [ ] Provided mandatory explanation of why direct execution is required makes sense on the technical level
       * [ ] The hash is checked via `require(XXX_SPELL.codehash == XXX_SPELL_HASH, "XXX_SPELL/wrong-codehash");` inside the Core spell
@@ -437,7 +443,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] The instruction names the Prime Agent spell to cancel and the Exec Sheet confirms it
   * [ ] `XXX` in `XXX_STARGUARD` matches the name of the Prime Agent
   * [ ] `XXX_STARGUARD` is fetched from chainlog
-  * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel (`dropStarSpell` does nothing when nothing is plotted and drops whatever is plotted)
+  * [ ] At the fork block, `spellData` on `XXX_STARGUARD` holds the spell to cancel
   * [ ] The cancellation is executed via [`DssExecLib.dropStarSpell(XXX_STARGUARD)`](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol)
   * [ ] A test asserts `spellData.addr == address(0)` and `prob() == false` on `XXX_STARGUARD` after the cast
 * IF external contracts calls are present (Not Prime Agents, e.g. Starknet)
@@ -467,7 +473,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
 * [ ] Ensure `immutable` visibility is only used when fetching addresses from the `ChainLog` via `DssExecLib.getChangelogAddress(key)` and `constant` is used instead for static addresses
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/555d1c158f2ab695e04d6de6e603b118d32214c4/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
-  * [ ] `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer` and `setSurplusAuctionAmount` are NOT used (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
+  * [ ] `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer`, `setSurplusAuctionAmount` and `tryExecuteStarSpell` are NOT used (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
   * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
   * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)
