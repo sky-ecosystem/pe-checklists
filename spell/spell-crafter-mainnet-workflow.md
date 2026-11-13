@@ -292,7 +292,14 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Ensure `description` date in `DssSpell.sol` matches target date inside Exec Doc
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
-  * [ ] IF no Octane analysis exists on the latest commit for "Sky Ecosystem: Spells mainnet", trigger a new analysis
+  * [ ] On the spell PR branch, find the latest commit that changes a file in the analysis scope (`src/DssSpell.sol` or `src/dependencies`) or the contracts used by the spell (e.g. the `DssExecLib` address inside `foundry.toml`)
+    ```
+    git log -1 --format=%H -- src/DssSpell.sol src/dependencies foundry.toml
+    ```
+    ```
+    Latest in-scope commit: _Insert commit hash_
+    ```
+  * [ ] IF no "Sky Ecosystem: Spells mainnet" Octane analysis exists on the latest in-scope commit or a later commit in the spell PR, trigger a new analysis
     * [ ] Ensure the project scope is standardized to only include:
       * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present, every file under the directory
@@ -304,23 +311,26 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     Analysis number: _Insert analysis number used_ 
     Commit hash analysis ran against: _Insert commit hash used for analysis_ 
     ```
-  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] Ensure the analysis above ran against the latest in-scope commit or a later commit in the spell PR
+  * [ ] Thoroughly inspect the project settings for signs of manipulation
+    * [ ] Project type, target, and languages are correctly set as "Smart Contracts" and "Solidity"
+    * [ ] Project name is correctly set
+    * [ ] Dependency installation is enabled
   * [ ] Ensure every contract listed in on-chain dependencies has its source and ABI fetched from the correct chain
     * [ ] IF any contract has an unverified source, investigate the address (e.g. the source cannot be verified as the address is an EOA)
     * [ ] IF any contract has its source skipped or its selected chain does not match the chain it is deployed on, select the correct chain for each contract -> save -> rerun the analysis
   * [ ] Thoroughly inspect the analysis settings for signs of manipulation
-    * [ ] Project name and repository name are correctly set
+    * [ ] Repository name and PR number are correctly set
     * [ ] Branch name is set to "master"
-    * [ ] Dependency installation is enabled
   * [ ] Thoroughly inspect the analysis scope for signs of manipulation
-    * [ ] Project type, target, languages are correctly set as "Smart Contracts" and "Solidity"
     * [ ] Scope of the current analysis is set to `Targeted review` and only includes:
       * [ ] `src/DssSpell.sol`
       * [ ] IF `src/dependencies` is present, every file under the directory
       * [ ] No other files are included
   * [ ] IF any malicious or unexpected setting is found, including any configuration not listed above, address it, re-run the analysis, and redo the "Octane Review" section
     * [ ] IF it cannot be addressed, raise it to the current spell group
-  * [ ] Once Octane analysis is finished on the latest commit, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
+  * [ ] Ensure no filters are applied to the analysis results
+  * [ ] Once the Octane analysis is finished on the latest in-scope commit or a later commit in the spell PR, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
     * [ ] IF any blocking issue was found, raise it to the current spell group
     * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
   * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL using:
@@ -335,7 +345,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * IF validation warnings are reported
       * [ ] Stop the crafting process and notify Governance Facilitators
 * [ ] Notify the reviewers (e.g. "Exec Hash is added, reviews are addressed")
-* [ ] IF there is new commit with spell code update, redo the "Octane Review" section above
+* [ ] IF any new commit changes a file in the analysis scope or the contracts used by the spell, redo the "Octane Review" section above
 
 ## Deployment Stage
 
