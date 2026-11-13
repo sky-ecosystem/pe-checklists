@@ -280,10 +280,15 @@ EXECUTED_TESTS_LOGS
 EXECUTED_TESTS_LOGS
 ```
 
-#### Simulation Checks
-- [ ] The Tenderly simulation shows all actions are executed successfully.
-- [ ] The Tenderly simulation shows no extra actions not present in the spell are executed.
-- [ ] The Tenderly simulation shows no reverts or out-of-gas errors.
+#### Tenderly Vnet Checks
+- LIST every deployed spell with its Tenderly vnet:
+  - [CHAIN_NAME] `0xSPELL_ADDRESS`, LINK_TO_THE_TENDERLY_VNET
+    - [ ] The Tenderly vnet link is publicly accessible (e.g. using incognito browser mode).
+    - [ ] Spell execution transaction is set to the correct "receiver" (matches deployed spell address for this chain).
+    - [ ] All actions are executed successfully in the transaction trace.
+    - [ ] No extra actions not present in the spell are executed.
+    - [ ] No reverts or out-of-gas errors are present.
+
 - [ ] IF no blockers were found, post the completed "Deployment Stage" checklist stage with the explicit "Good to handover" note on top.
 
 ### Handover Stage
