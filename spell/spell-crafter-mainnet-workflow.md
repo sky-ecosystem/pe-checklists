@@ -333,12 +333,12 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Once the Octane analysis is finished on the latest in-scope commit or a later commit in the spell PR, review every finding and either resolve it or mark it as acknowledged with a classification and reasoning
     * [ ] IF any blocking issue was found, raise it to the current spell group
     * [ ] IF any findings were addressed in the PR, the commit of the change should be added in the comment
-  * [ ] Keep a record of every analysis reviewed for this spell PR (including analyses from previous rounds), since acknowledged findings are not reported again in subsequent analyses, while unacknowledged findings are
+  * [ ] Keep a record of every analysis reviewed for this spell PR (including analyses from previous rounds)
     ```
     Reviewed analyses (analysis number - commit hash):
     _Insert analysis number_ - _Insert commit hash_
     ```
-  * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL of every analysis reviewed for this spell PR (not only the final one) using:
+  * [ ] Notify reviewers once the final analysis review is complete by providing the vulnerabilities-view URL of every analysis reviewed for this spell PR using:
   `https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/analysis/<ANALYSIS_NUMBER>/vulnerabilities?visibility=ALL`
 * [ ] Make sure all review comments are either addressed or explicitly answered
 * [ ] Make sure all items in the Exec Sheet are confirmed, OTHERWISE notify Responsible Governance Facilitator
