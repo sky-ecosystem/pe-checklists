@@ -177,9 +177,9 @@
 - [ ] ilk is removed from `LINE_MOM`, IF present
 - [ ] `GemJoin` is caged (`live` is set to `0`)
 - [ ] PSM contracts (`Psm`, `GemJoin`, `Clipper`, `ClipperCalc`, the oracle unless it is still used by another ilk, and others, such as the jar and conduits, as applicable) are removed from the chainlog
-- [ ] Chainlog version is bumped: `{x}.{y}.{z+1}`
 - [ ] PSM auth on Sky Protocol is removed
     - [ ] `GemJoin` is de-authed from `MCD_VAT`
     - [ ] `Clipper` is de-authed from `MCD_VAT`
     - [ ] `Clipper` is de-authed from `MCD_DOG`
-    - [ ] IF the PSM contracts hold any other authorization on Sky Protocol, it is also removed
+    - [ ] IF any other authorization was given to the PSM contracts by the Sky Protocol, it is removed too
+- [ ] Chainlog version is bumped: `{x}.{y}.{z+1}`
