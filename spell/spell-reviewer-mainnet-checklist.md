@@ -554,7 +554,7 @@ _Insert your local test logs here_
   * [ ] Ensure newly added code is covered by tests
   * [ ] Check if chainlog needs to be updated
   * [ ] Copy over and redo "Tests" section from the above
-  * IF any new commit changes a file in the analysis scope or the contracts used by the spell, redo affected items from the "Octane Review" section above
+  * [ ] IF any new commit changes a file in the analysis scope or the contracts used by the spell, redo affected items from the "Octane Review" section above
 * Independently verify the CI-pinned Foundry release
   * [ ] Copy the current Foundry settings from the local `.github/foundry-ci.env`
     ```text
