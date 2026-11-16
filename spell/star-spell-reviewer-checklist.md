@@ -263,7 +263,7 @@ EXECUTED_TESTS_LOGS
 
 #### Deployed Contract
 - [ ] Both reviewers gave explicit "Good to deploy".
-- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly vnet(s).
+- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly Virtual Environments(s).
 - [ ] The comment also contains codehash of the deployed mainnet spell.
 - [ ] The codehash matches one obtained using `cast codehash <deployed_spell_address>`.
 - [ ] The deployed spell bytecode matches the one from the "Good to deploy" commit using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
@@ -280,10 +280,10 @@ EXECUTED_TESTS_LOGS
 EXECUTED_TESTS_LOGS
 ```
 
-#### Tenderly Vnet Checks
-- LIST every deployed spell with its Tenderly vnet:
-  - [CHAIN_NAME] `0xSPELL_ADDRESS`, LINK_TO_THE_TENDERLY_VNET
-    - [ ] The Tenderly vnet link is publicly accessible (e.g. using incognito browser mode).
+#### Tenderly Virtual Environment Checks
+- LIST every deployed spell with its Tenderly Virtual Environment:
+  - [CHAIN_NAME] `0xSPELL_ADDRESS`, LINK_TO_THE_TENDERLY_VIRTUAL_ENVIRONMENT
+    - [ ] The Tenderly virtual environment link is publicly accessible (e.g. using incognito browser mode).
     - [ ] Spell execution transaction is set to the correct "receiver" (matches deployed spell address for this chain).
     - [ ] All actions are executed successfully in the transaction trace.
     - [ ] No extra actions not present in the spell are executed.
