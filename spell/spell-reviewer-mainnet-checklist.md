@@ -500,9 +500,9 @@ _Insert your local test logs here_
   * [ ] Every action in the Exec Doc is present in the spell code
 * Octane Review
   * [ ] Find the most recent "Sky Ecosystem: Spells mainnet" Octane analysis from [projects page](https://app.octane.security/projects) OR check report from [project link](https://app.octane.security/projects/p/fa7414c7-d44a-4a2d-b767-2ed7462547a5/)
-  * [ ] On the spell PR branch, find the latest commit that changes a file in the analysis scope (`src/DssSpell.sol` or `src/dependencies`) or the contracts used by the spell (e.g. the `DssExecLib` address inside `foundry.toml`)
+  * [ ] On the spell PR branch, find the latest commit that changes a file in the analysis scope (`src/DssSpell.sol` or `src/dependencies`)
     ```
-    git log -1 --format=%H -- src/DssSpell.sol src/dependencies foundry.toml
+    git log -1 --format=%H -- src/DssSpell.sol src/dependencies
     ```
     ```
     Latest in-scope commit: _Insert commit hash_
