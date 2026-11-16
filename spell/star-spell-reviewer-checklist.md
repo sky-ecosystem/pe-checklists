@@ -286,7 +286,7 @@ EXECUTED_TESTS_LOGS
     - [ ] The Tenderly virtual environment link is publicly accessible (e.g. using incognito browser mode).
     - [ ] Spell execution transaction is set to the correct "receiver" (matches deployed spell address for this chain).
     - [ ] All actions are executed successfully in the transaction trace.
-    - [ ] No extra actions not present in the spell are executed.
+    - [ ] No extra actions are present in the spell trace.
     - [ ] No reverts or out-of-gas errors are present.
 
 - [ ] IF no blockers were found, post the completed "Deployment Stage" checklist stage with the explicit "Good to handover" note on top.
