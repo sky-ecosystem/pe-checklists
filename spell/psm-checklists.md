@@ -173,18 +173,13 @@
     - [ ] `ink` and `art` are read from `vat.urns(ilk, psm)` at execution time
     - [ ] `ink` for the PSM is set to 0 on `MCD_VAT` after execution, UNLESS there has been a donation
     - [ ] `art` for the PSM and `Art` for the ilk are set to 0 on `MCD_VAT` after execution
-- [ ] Gems held by the `GemJoin` are recovered via `join.exit(usr, amt)`, UNLESS governance explicitly decided to leave them in place
-    - [ ] `exit` is called before the `GemJoin` is de-authed from `MCD_VAT`
-    - [ ] `usr` matches the Exec Sheet
-    - [ ] `amt` is expressed in gem decimals and matches the `vat.gem(ilk, MCD_PAUSE_PROXY)` balance received from `vat.grab`
-- [ ] OTHERWISE IF gems are left in place, the decision and the remaining amount are confirmed by governance (e.g. by a Core Facilitator in the forum post)
 - [ ] ilk is removed from `ILK_REGISTRY`
 - [ ] ilk is removed from `LINE_MOM`, IF present
 - [ ] `GemJoin` is caged (`live` is set to `0`)
-- [ ] PSM contracts (`Psm`, `GemJoin`, `Clipper`, `ClipperCalc`, the oracle unless it is still used by another ilk, and others, such as the jar and conduits, as applicable) are being removed from the chainlog
+- [ ] PSM contracts (`Psm`, `GemJoin`, `Clipper`, `ClipperCalc`, the oracle unless it is still used by another ilk, and others, such as the jar and conduits, as applicable) are removed from the chainlog
 - [ ] Chainlog version is bumped: `{x}.{y}.{z+1}`
-- [ ] PSM auth on SKY protocol is removed
+- [ ] PSM auth on Sky Protocol is removed
     - [ ] `GemJoin` is de-authed from `MCD_VAT`
     - [ ] `Clipper` is de-authed from `MCD_VAT`
     - [ ] `Clipper` is de-authed from `MCD_DOG`
-    - [ ] IF PSM contracts hold any other auth, it is removed
+    - [ ] IF the PSM contracts hold any other authorization on Sky Protocol, it is also removed
