@@ -474,6 +474,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
   * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), UNLESS archive patterns permit otherwise (such as `SKY`)
   * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.1.0/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
   * [ ] `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer`, `setSurplusAuctionAmount` and `tryExecuteStarSpell` are NOT used (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
+  * [ ] `DssExecLib.sky()` is used to fetch the governance token; `DssExecLib.mkr()` is NOT used for it, as it resolves the `MKR` ChainLog key (the legacy MKR token)
   * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`)
 * IF `TODO` comments are added to the spell or tests (other than the Exec Doc URL / Exec Hash placeholders)
   * [ ] Each `TODO` states the prerequisite for its removal (e.g. `// TODO: remove once <X> is enabled`)

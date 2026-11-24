@@ -203,6 +203,7 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] Fetch addresses as type `address` and wrap with `Like` suffix interfaces inline (when making calls), EXCEPT where the archive pattern differs from this pattern (e.g. SKY)
     * [ ] Use the [DssExecLib Core Address Helpers](https://github.com/sky-ecosystem/dss-exec-lib/blob/v0.1.0/src/DssExecLib.sol) where possible (e.g. `DssExecLib.vat()`)
     * [ ] Do NOT use `govGuard`, `setGlobalStabilityFee`, `setSurplusBuffer`, `setSurplusAuctionAmount` or `tryExecuteStarSpell` (helpers retained in `DssExecLib` v0.1.0 with a usage restriction)
+    * [ ] Use `DssExecLib.sky()` to fetch the governance token; do NOT use `DssExecLib.mkr()` for it, as it resolves the `MKR` ChainLog key (the legacy MKR token)
     * [ ] Where addresses are fetched from the ChainLog, the variable name must match the value of the ChainLog key for that address (e.g. `MCD_VAT` rather than `vat`), EXCEPT where the archive pattern differs from this pattern
   * IF new addresses need to be added to the ChainLog
     * [ ] Add new addresses to the ChainLog
