@@ -608,8 +608,9 @@ _Insert your local test logs here_
     * IF validation warnings are reported
       * [ ] Stop the review process and notify Governance Facilitators
 * Archive checks
-  * [ ] `make diff-archive-spell` for current date or `make diff-archive-spell date="YYYY-MM-DD"`
-  * [ ] Ensure date corresponds to target Exec Doc date
+  * [ ] Run `make diff-archive-spell` for the current date or `make diff-archive-spell date="YYYY-MM-DD"` for a specific date
+  * [ ] IF this is an out-of-schedule spell, run `make diff-archive-spell date="YYYY-MM-DD-oos"` instead
+  * [ ] Ensure the date matches the Target Date in the Exec Doc
 * Tests
   * [ ] Ensure that the `DssExecLib` address inside `foundry.toml` is not being modified by the spell PR
   * [ ] Check all CI tests are passing as at the latest commit

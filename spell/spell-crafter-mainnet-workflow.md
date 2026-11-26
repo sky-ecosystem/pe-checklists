@@ -381,7 +381,9 @@ Repo: https://github.com/sky-ecosystem/spells-mainnet
     * [ ] The Agreement matches the approved Sheet with no updates or validation warnings
     * IF validation warnings are reported
       * [ ] Stop the crafting process and notify Governance Facilitators
-* [ ] Archive Spell via `make archive-spell` for the current date (or `make archive-spell date="YYYY-MM-DD"`) using Target Date inside the Exec Doc
+* Archive the spell using the Target Date from the Exec Doc
+  * [ ] Run `make archive-spell` for the current date or `make archive-spell date="YYYY-MM-DD"` for a specific date
+  * [ ] IF this is an out-of-schedule spell, run `make archive-spell date="YYYY-MM-DD-oos"` instead
 * [ ] Commit & push changes for review
 * [ ] Wait for CI to PASS
 * [ ] Post a comment inside the PR containing:
