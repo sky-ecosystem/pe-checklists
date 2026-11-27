@@ -174,7 +174,7 @@
     - [ ] `ink` for the PSM is set to 0 on `MCD_VAT` after execution, UNLESS there has been a donation
     - [ ] `art` for the PSM and `Art` for the ilk are set to 0 on `MCD_VAT` after execution
 - [ ] ilk is removed from `ILK_REGISTRY`
-- [ ] ilk is removed from `LINE_MOM`, IF present
+- [ ] IF ilk is present in `LINE_MOM` (`lineMom.ilks(ilk) == 1`), it is removed
 - [ ] `GemJoin` is caged (`live` is set to `0`)
 - [ ] PSM contracts (`Psm`, `GemJoin`, `Clipper`, `ClipperCalc`, the oracle unless it is still used by another ilk, and others, such as the jar and conduits, as applicable) are removed from the chainlog
 - [ ] PSM auth on Sky Protocol is removed
