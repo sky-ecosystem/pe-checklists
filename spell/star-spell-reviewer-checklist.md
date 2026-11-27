@@ -263,7 +263,7 @@ EXECUTED_TESTS_LOGS
 
 #### Deployed Contract
 - [ ] Both reviewers gave explicit "Good to deploy".
-- [ ] A new comment in the PR contains link to the deployed spell(s) and Tenderly Virtual Environments(s).
+- [ ] A new comment in the PR contains link to the deployed spells and Tenderly Virtual Environments.
 - [ ] The comment also contains codehash of the deployed mainnet spell.
 - [ ] The codehash matches one obtained using `cast codehash <deployed_spell_address>`.
 - [ ] The deployed spell bytecode matches the one from the "Good to deploy" commit using `forge verify-bytecode <deployed_spell_address> <spell_source_contract_file>:<spell_contract_name>`
